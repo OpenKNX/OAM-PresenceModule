@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KNX xmlns:mc="http://github.com/mumpf/multiply-channels" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://knx.org/xml/project/14 ../../../knx.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CreatedBy="KNX MT" ToolVersion="5.1.255.16695" xmlns="http://knx.org/xml/project/14">
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <ApplicationPrograms>
+        <ApplicationProgram Id="M-00FA_A-0001-01-0000" ApplicationNumber="110" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-PM-Logic" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
+          <Dynamic>
+            <ChannelIndependentBlock>
+              <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-1" Name="Init" Text="PM-MaxChannels">
+                <!-- Init, will be moved to parts -->
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-400_R-4001" />
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-400_R-4001" Value="%N%" />
+              </ParameterBlock>
+              <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-2" Name="Hardware" Text="PM-Hardware-Parameter">
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-10" Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-11" Text="Im folgenden wird die verwendete bzw. installierte Hardware angegeben." />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-12" Text="Die hier getroffenen Angaben beeinflussen das Verhalten der Applikation und der Firmware und müssen zur vorhandenen Hardware passen!" />
+
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-402_R-4021" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-5_R-51" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-6_R-61" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-7_R-71" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-7_R-71">
+                  <when test="0">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-13" Text="Ohne EEPROM kann das Logikmodul Werte der Eingänge nicht speichern und nach einem Neustart wieder zur Verfügung stellen. Diese Funktion wird in der Applikation nicht angeboten." UIHint="Information" />
+                  </when>
+                </choose>
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-8_R-81" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-8_R-81">
+                  <when test="0">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-15" Text="Ohne Abschaltmöglichkeit der Zusatzhardware (Sensoren, LED, Buzzer, 1-Wire) kann das Logikmodul Werte der Eingänge nicht speichern und nach einem Neustart wieder zur Verfügung stellen. Diese Funktion wird in der Applikation nicht angeboten." UIHint="Information" />
+                  </when>
+                </choose>
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-2" Text="" UIHint="HorizontalRuler" />
+              </ParameterBlock>
+            </ChannelIndependentBlock>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<KNX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CreatedBy="KNX MT" ToolVersion="5.1.255.16695" xmlns="http://knx.org/xml/project/14">
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <Catalog>
+        <CatalogSection Id="M-00FA_CS-1" Name="Geräte" Number="1" DefaultLanguage="de">
+          <CatalogItem Id="M-00FA_H-1234-1_HP-0001-01-0000_CI-PM001-1" Name="Bewegungsmelder" Number="1" ProductRefId="M-00FA_H-1234-1_P-PM001" Hardware2ProgramRefId="M-00FA_H-1234-1_HP-0001-01-0000" DefaultLanguage="de" />
+        </CatalogSection>
+      </Catalog>
+      <ApplicationPrograms>
+        <ApplicationProgram Id="M-00FA_A-0001-01-0000" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="PM" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
+          <Static>
+            <Code>
+              <RelativeSegment Id="M-00FA_A-0001-01-0000_RS-04-00000" Name="Parameters" Offset="0" Size="4" LoadStateMachine="4" />
+            </Code>
+            <ParameterTypes>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PMChannels" Name="PMChannels">
+                <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="%N%" maxInclusive="%N%" />
+              </ParameterType>
+              <!-- Delay pattern (will be moved to logic in future -->
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-DelayBase" Name="DelayBase">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Sekunde(n)" Value="0" Id="M-00FA_A-0001-01-0000_PT-DelayBase_EN-0" />
+                  <Enumeration Text="Minute(n)" Value="1" Id="M-00FA_A-0001-01-0000_PT-DelayBase_EN-1" />
+                  <Enumeration Text="Stunde(n)" Value="2" Id="M-00FA_A-0001-01-0000_PT-DelayBase_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-DelayBase10" Name="DelayBase10">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="1/10  Sekunde(n)" Value="3" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-3" />
+                  <Enumeration Text="Sekunde(n)" Value="0" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-0" />
+                  <Enumeration Text="Minute(n)" Value="1" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-1" />
+                  <Enumeration Text="Stunde(n)" Value="2" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-DelayTime" Name="DelayTime">
+                <TypeNumber SizeInBit="14" Type="unsignedInt" minInclusive="0" maxInclusive="16000" />
+              </ParameterType>
+              <!-- end of delay pattern -->
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-OffsetLuxPM" Name="OffsetLux">
+                <TypeNumber SizeInBit="8" Type="signedInt" minInclusive="-120" maxInclusive="120" />
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-AbsLux" Name="AbsLux">
+                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="0" maxInclusive="50000" />
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-ActiveInaktive" Name="ActiveInaktive">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-ActiveInaktive_EN-0" />
+                  <Enumeration Text="aktiv" Value="1" Id="M-00FA_A-0001-01-0000_PT-ActiveInaktive_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-OutputType" Name="OutputType">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-OutputType_EN-0" />
+                  <Enumeration Text="Schalten (DPT 1.x)" Value="1" Id="M-00FA_A-0001-01-0000_PT-OutputType_EN-1" />
+                  <Enumeration Text="Wert (DPT 5.x)" Value="2" Id="M-00FA_A-0001-01-0000_PT-OutputType_EN-2" />
+                  <Enumeration Text="Szene (DPT 17.001)" Value="3" Id="M-00FA_A-0001-01-0000_PT-OutputType_EN-3" />
+                  <Enumeration Text="Dimmen absolut (DPT 5.001)" Value="4" Id="M-00FA_A-0001-01-0000_PT-OutputType_EN-4" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Name="OutputFilterPM">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nichts" Value="0" Id="M-00FA_A-0001-01-0000_PT-OutputFilterPM_EN-0" />
+                  <Enumeration Text="nur EIN" Value="1" Id="M-00FA_A-0001-01-0000_PT-OutputFilterPM_EN-1" />
+                  <Enumeration Text="nur AUS" Value="2" Id="M-00FA_A-0001-01-0000_PT-OutputFilterPM_EN-2" />
+                  <Enumeration Text="EIN und AUS" Value="3" Id="M-00FA_A-0001-01-0000_PT-OutputFilterPM_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-OutputSendPM" Name="OutputSendPM">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="Nur bei Änderung" Value="0" Id="M-00FA_A-0001-01-0000_PT-OutputSendPM_EN-0" />
+                  <Enumeration Text="Bei jeder Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-OutputSendPM_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-ChannelActive" Name="ChannelActive">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Inaktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-ChannelActive_EN-0" />
+                  <Enumeration Text="Aktiv" Value="1" Id="M-00FA_A-0001-01-0000_PT-ChannelActive_EN-1" />
+                  <Enumeration Text="Funktionslos" Value="2" Id="M-00FA_A-0001-01-0000_PT-ChannelActive_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-StatusLED" Name="StatusLED">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-0" />
+                  <Enumeration Text="aktiv bei Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-1" />
+                  <Enumeration Text="aktiv bei Bewegung, nur Tagsüber" Value="2" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-2" />
+                  <Enumeration Text="aktiv über externes Objekt" Value="3" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceType" Name="PresenceType">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-0" />
+                  <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-1" />
+                  <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Name="BrightnessAuto">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-BrightnessAuto_EN-0" />
+                  <Enumeration Text="absolute Schwelle" Value="1" Id="M-00FA_A-0001-01-0000_PT-BrightnessAuto_EN-1" />
+                  <Enumeration Text="adaptive Schwelle" Value="2" Id="M-00FA_A-0001-01-0000_PT-BrightnessAuto_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PhaseCount" Name="PhaseCount">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="1" Value="0" Id="M-00FA_A-0001-01-0000_PT-PhaseCount_EN-0" />
+                  <Enumeration Text="2" Value="1" Id="M-00FA_A-0001-01-0000_PT-PhaseCount_EN-1" />
+                  <Enumeration Text="3" Value="2" Id="M-00FA_A-0001-01-0000_PT-PhaseCount_EN-2" />
+                  <Enumeration Text="4" Value="3" Id="M-00FA_A-0001-01-0000_PT-PhaseCount_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PhaseChange" Name="PhaseChange">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="Bei Zustandswechsel am Ausgang" Value="0" Id="M-00FA_A-0001-01-0000_PT-PhaseChange_EN-0" />
+                  <Enumeration Text="Sofort beim Wechsel der Tagesphase" Value="1" Id="M-00FA_A-0001-01-0000_PT-PhaseChange_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LockType" Name="LockType">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-LockType_EN-0" />
+                  <Enumeration Text="Zwangsführung" Value="1" Id="M-00FA_A-0001-01-0000_PT-LockType_EN-1" />
+                  <Enumeration Text="Sperre" Value="2" Id="M-00FA_A-0001-01-0000_PT-LockType_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LockActive" Name="LockActive">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="gesperrt (1) / nicht gesperrt (0)" Value="0" Id="M-00FA_A-0001-01-0000_PT-LockActive_EN-0" />
+                  <Enumeration Text="gesperrt (0) / nicht gesperrt (1)" Value="1" Id="M-00FA_A-0001-01-0000_PT-LockActive_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LockOn" Name="LockOn">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nichts gesendet" Value="0" Id="M-00FA_A-0001-01-0000_PT-LockOn_EN-0" />
+                  <Enumeration Text="AUS gesendet" Value="1" Id="M-00FA_A-0001-01-0000_PT-LockOn_EN-1" />
+                  <Enumeration Text="EIN gesendet" Value="2" Id="M-00FA_A-0001-01-0000_PT-LockOn_EN-2" />
+                  <!-- <Enumeration Text="Aktueller Zustand eingefroren (nichts gesendet)" Value="3" Id="M-00FA_A-0001-01-0000_PT-LockOn_EN-3" /> -->
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LockOff" Name="LockOff">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nichts gesendet" Value="0" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-0" />
+                  <Enumeration Text="AUS gesendet" Value="1" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-1" />
+                  <Enumeration Text="EIN gesendet" Value="2" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-2" />
+                  <Enumeration Text="Aktueller Zustand gesendet" Value="3" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+            </ParameterTypes>
+            <Parameters>
+              <!-- Logic share parameters go from 0 to 29? We leave some space -->
+              <!-- Here we start with non-multiplied parameters -->
+              <Parameter Id="M-00FA_A-0001-01-0000_P-400" Name="PMChannels" ParameterType="M-00FA_A-0001-01-0000_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read">
+                <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="40" BitOffset="0" />
+              </Parameter>
+              <Union SizeInBit="8">
+                <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="41" BitOffset="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-402" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-403" Name="SendPresence" Offset="0" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Präsenzsignal auf den Bus senden?" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-404" Name="LEDRot" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-StatusLED" Text="LED Rot" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-405" Name="LEDOrange" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-StatusLED" Text="LED Gelb" Value="0" />
+                <!-- 3 Bit frei -->
+              </Union>
+              <!-- Brightness related settings (local hardware) -->
+              <Union SizeInBit="24">
+                <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="42" BitOffset="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-410" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-411" Name="LuxSendDelta" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" SuffixText="Lux" Value="0" />
+              </Union>
+              <!-- send cyclic brightness (delay pattern) -->
+              <Union SizeInBit="16">
+                <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="46" BitOffset="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-412" Name="LuxSendCycleDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-413" Name="LuxSendCycleDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
+              </Union>
+            </Parameters>
+            <ParameterRefs>
+              <ParameterRef Id="M-00FA_A-0001-01-0000_P-400_R-4001" RefId="M-00FA_A-0001-01-0000_P-400" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-402_R-4021" RefId="M-00FA_A-0001-01-0000_UP-402" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-403_R-4031" RefId="M-00FA_A-0001-01-0000_UP-403" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-404_R-4041" RefId="M-00FA_A-0001-01-0000_UP-404" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-405_R-4051" RefId="M-00FA_A-0001-01-0000_UP-405" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-410_R-4101" RefId="M-00FA_A-0001-01-0000_UP-410" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-411_R-4111" RefId="M-00FA_A-0001-01-0000_UP-411" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-412_R-4121" RefId="M-00FA_A-0001-01-0000_UP-412" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-413_R-4131" RefId="M-00FA_A-0001-01-0000_UP-413" />
+            </ParameterRefs>
+            <ComObjectTable>
+              <ComObject Id="M-00FA_A-0001-01-0000_O-20" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-21" Name="PresenceOut" Text="Ausgang PIR" Number="21" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-22" Name="LEDRed" Text="Eingang LED Rot" Number="22" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-23" Name="LEDOrange" Text="Eingang LED Orange" Number="23" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+            </ComObjectTable>
+            <ComObjectRefs>
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-20_R-201" RefId="M-00FA_A-0001-01-0000_O-20" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-21_R-211" RefId="M-00FA_A-0001-01-0000_O-21" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-22_R-221" RefId="M-00FA_A-0001-01-0000_O-22" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-23_R-231" RefId="M-00FA_A-0001-01-0000_O-23" />
+            </ComObjectRefs>
+            <AddressTable MaxEntries="65535" />
+            <AssociationTable MaxEntries="65535" />
+            <LoadProcedures>
+              <LoadProcedure MergeId="2">
+                <LdCtrlRelSegment LsmIdx="4" Size="4" Mode="0" Fill="0" AppliesTo="full" />
+              </LoadProcedure>
+              <LoadProcedure MergeId="4">
+                <LdCtrlWriteRelMem ObjIdx="4" Offset="0" Size="4" Verify="true" />
+              </LoadProcedure>
+            </LoadProcedures>
+            <Options />
+          </Static>
+          <Dynamic>
+            <Channel Id="M-00FA_A-0001-01-0000_CH-1" Name="PMChannels" Number="1" Text="PM-Kanäle">
+              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-402_R-4021">
+                <when test="1">
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-3" Name="HardwarePM" Text="PM-Hardware">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="PIR Rohdaten" UIHint="Headline" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-403_R-4031" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Auch wenn das Präsenzsignal nicht auf den Bus gesendet wird, kann es intern für PM-Kanäle genutzt werden." />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (PIR-Sensor) bestimmt." />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                    <!-- KO für Präsenz einschalten -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-403_R-4031">
+                      <when test="!=0">
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-21_R-211" />
+                      </when>
+                    </choose>
+                    <!-- Helligkeit -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-410_R-4101" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-411_R-4111" />
+                    <!-- Lux send cycle -->
+                    <!-- Delay pattern -->
+                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid">
+                      <Columns>
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                      </Columns>
+                      <Rows>
+                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                      </Rows>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeitswert zyklisch senden" Cell="1,1" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-413_R-4131" Cell="1,2" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-412_R-4121" Cell="1,3" />
+                    </ParameterBlock>
+                    <!-- KO für Helligkeit einschalten -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-411_R-4111">
+                      <when test="!=0">
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-20_R-201" />
+                      </when>
+                    </choose>
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-413_R-4131">
+                      <when test="!=0">
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-20_R-201" />
+                      </when>
+                    </choose>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Es wird keine Helligkeit auf den Bus gesendet, wenn beide Sendewerte oben auf 0 stehen." />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                    <!-- LED -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="LED" UIHint="Headline" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-404_R-4041" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-405_R-4051" />
+                    <!-- KO für LED rot einschalten -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-404_R-4041">
+                      <when test="3">
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-22_R-221" />
+                      </when>
+                    </choose>
+                    <!-- KO für LED gelb einschalten -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-405_R-4051">
+                      <when test="3">
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-23_R-231" />
+                      </when>
+                    </choose>
+                  </ParameterBlock>
+                </when>
+              </choose>
+            </Channel>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>
