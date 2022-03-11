@@ -188,7 +188,7 @@ int8_t PresenceChannel::getDayPhaseFromKO()
 {
     // derive day phase from scene number
     int8_t lPhaseCount = paramByte(PM_pPhaseCount, PM_pPhaseCountMask, PM_pPhaseCountShift);
-    if (lPhaseCount == 2 && paramBit(PM_pPhaseBool, PM_pPhaseBoolMask))
+    if (lPhaseCount == 1 && paramBit(PM_pPhaseBool, PM_pPhaseBoolMask)) // PhaseCount is zero based (0 = 1 Phase)
     {
         lPhaseCount = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_1));
     }

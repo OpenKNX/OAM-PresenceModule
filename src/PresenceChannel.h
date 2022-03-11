@@ -51,6 +51,12 @@
 #define VAL_PM_LockOutputOn 2
 #define VAL_PM_LockOutputCurrent 3
 
+// day phases
+#define VAL_PM_DAY 0
+#define VAL_PM_NIGHT 1
+#define VAL_PM_MORNING 2
+#define VAL_PM_EVENING 3
+
 // forward declaration
 class Presence;
 
@@ -117,9 +123,9 @@ class PresenceChannel
     static Presence *sPresence;
     static uint8_t sDayPhaseParameterSize; // memory block size of day phase parameters, calculated in setup
 
-    uint32_t pCurrentState;
-    uint32_t pCurrentValue;
-    uint32_t pOnDelay;
+    uint32_t pCurrentState = 0;
+    uint32_t pCurrentValue = 0;
+    uint32_t pOnDelay = 0;
     uint32_t pPresenceDelayTime = 0;  // Nachlaufzeit
     uint32_t pPresenceShortDelayTime = 0; // Kurze Anwesenheit Nachlaufzeit
     uint32_t pManualFallbackTime = 0; // Rückfallzeit aus Manuellmodus

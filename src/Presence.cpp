@@ -33,9 +33,9 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
     {
         uint8_t lNibbleHigh = (mNumChannels - 1) / 10;
         uint8_t lNibbleLow = (mNumChannels - 1) % 10;
-        if (iBuffer[1] >= '0' && iBuffer[1] < lNibbleHigh + '0' && iBuffer[2] >= '0' && iBuffer[2] <= lNibbleLow + '0') {
-            // this is a channes request
-            uint8_t lIndex = (iBuffer[1] - '0') * 10 + iBuffer[2] - '0' - 1;
+        uint8_t lIndex = (iBuffer[1] - '0') * 10 + iBuffer[2] - '0' - 1;
+        if (lIndex >= 0 && lIndex < mNumChannels) {
+            // this is a channel request
             lOutput = mChannel[lIndex]->processDiagnoseCommand(iBuffer);
         } else { 
             // Command start with p are presence diagnose commands
