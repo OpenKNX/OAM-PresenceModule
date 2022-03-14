@@ -2,6 +2,7 @@
 #include <knx.h>
 
 // Parameter with single occurance
+
 #define LOG_NumChannels                0      // uint8_t
 #define LOG_StartupDelay               1      // int32_t
 #define LOG_Heartbeat                  5      // int32_t
@@ -139,25 +140,41 @@
 #define LOG_LedMapping                29      // 3 Bits, Bit 7-5
 #define     LOG_LedMappingMask 0xE0
 #define     LOG_LedMappingShift 5
-#define LOG_PMChannels                40      // uint8_t
-#define LOG_HardwarePM                41      // 1 Bit, Bit 7
-#define     LOG_HardwarePMMask 0x80
-#define     LOG_HardwarePMShift 7
-#define LOG_SendPresence              41      // 1 Bit, Bit 6
-#define     LOG_SendPresenceMask 0x40
-#define     LOG_SendPresenceShift 6
-#define LOG_LEDRot                    41      // 2 Bits, Bit 5-4
-#define     LOG_LEDRotMask 0x30
-#define     LOG_LEDRotShift 4
-#define LOG_LEDOrange                 41      // 2 Bits, Bit 3-2
-#define     LOG_LEDOrangeMask 0x0C
-#define     LOG_LEDOrangeShift 2
-#define LOG_LuxOffsetPM               42      // int8_t
-#define LOG_LuxSendDelta              43      // uint16_t
-#define LOG_LuxSendCycleDelayBase     46      // 2 Bits, Bit 7-6
-#define     LOG_LuxSendCycleDelayBaseMask 0xC0
-#define     LOG_LuxSendCycleDelayBaseShift 6
-#define LOG_LuxSendCycleDelayTime     46      // uint14_t
+
+#define LOG_KoHeartbeat 1
+#define LOG_KoTime 2
+#define LOG_KoDate 3
+#define LOG_KoVacation 4
+#define LOG_KoHoliday1 5
+#define LOG_KoHoliday2 6
+#define LOG_KoDiagnose 7
+#define LOG_KoLedLock 8
+#define LOG_KoBuzzerLock 9
+
+#define PM_PMChannels                40      // uint8_t
+#define PM_HardwarePM                41      // 1 Bit, Bit 7
+#define     PM_HardwarePMMask 0x80
+#define     PM_HardwarePMShift 7
+#define PM_SendPresence              41      // 1 Bit, Bit 6
+#define     PM_SendPresenceMask 0x40
+#define     PM_SendPresenceShift 6
+#define PM_LEDRot                    41      // 2 Bits, Bit 5-4
+#define     PM_LEDRotMask 0x30
+#define     PM_LEDRotShift 4
+#define PM_LEDOrange                 41      // 2 Bits, Bit 3-2
+#define     PM_LEDOrangeMask 0x0C
+#define     PM_LEDOrangeShift 2
+#define PM_LuxOffsetPM               42      // int8_t
+#define PM_LuxSendDelta              43      // uint16_t
+#define PM_LuxSendCycleDelayBase     46      // 2 Bits, Bit 7-6
+#define     PM_LuxSendCycleDelayBaseMask 0xC0
+#define     PM_LuxSendCycleDelayBaseShift 6
+#define PM_LuxSendCycleDelayTime     46      // uint14_t
+
+#define PM_KoLuxOut 20
+#define PM_KoPresenceOut 21
+#define PM_KoLEDRed 22
+#define PM_KoLEDOrange 23
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 48
@@ -1119,19 +1136,4 @@
 #define PM_KoKOpManualDimAbs 17
 #define PM_KoKOpManualDimScene 18
 #define PM_KoKOpReserve 19
-
-// Communication objects with single occurance
-#define LOG_KoHeartbeat 1
-#define LOG_KoTime 2
-#define LOG_KoDate 3
-#define LOG_KoVacation 4
-#define LOG_KoHoliday1 5
-#define LOG_KoHoliday2 6
-#define LOG_KoDiagnose 7
-#define LOG_KoLedLock 8
-#define LOG_KoBuzzerLock 9
-#define LOG_KoLuxOut 20
-#define LOG_KoPresenceOut 21
-#define LOG_KoLEDRed 22
-#define LOG_KoLEDOrange 23
 

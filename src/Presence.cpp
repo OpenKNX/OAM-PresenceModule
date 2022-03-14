@@ -106,7 +106,7 @@ void Presence::loop()
     if (!knx.configured())
         return;
 
-    if (knx.paramByte(LOG_HardwarePM) && LOG_HardwarePMMask)
+    if (knx.paramByte(PM_HardwarePM) && PM_HardwarePMMask)
         processHardwarePresence();
 
     // we loop on all channels and execute state logic
@@ -125,7 +125,7 @@ void Presence::setup()
     {
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
-        mNumChannels = knx.paramByte(LOG_PMChannels);
+        mNumChannels = knx.paramByte(PM_PMChannels);
         if (COUNT_PM_CHANNEL < mNumChannels)
         {
             char lErrorText[80];

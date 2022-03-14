@@ -253,7 +253,7 @@ bool PresenceChannel::getRawPresence()
 {
     bool lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1)) || getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
     // if hardware presence sensor is available, we evaluate its value
-    if (paramBit(LOG_HardwarePM, LOG_HardwarePMMask))
+    if (paramBit(PM_HardwarePM, PM_HardwarePMMask))
     {
         lPresence |= sPresence->getHardwarePresence();
     }
