@@ -8,14 +8,15 @@
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <ApplicationProgram Id="M-00FA_A-0001-01-0000" ApplicationNumber="40960" ApplicationVersion="1" ReplacesVersions="0" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
+        <mc:version OpenKnxId="0xA0" ApplicationNumber="1" ApplicationVersion="3" ApplicationRevision="0" ReplacesVersions="1" />
+        <ApplicationProgram Id="M-00FA_A-0001-01-0000" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
           <Static>
             <Code>
               <RelativeSegment Id="M-00FA_A-0001-01-0000_RS-04-00000" Name="Parameters" Offset="0" Size="0" LoadStateMachine="4" />
             </Code>
             <!-- 80 Kanäle klappen nicht, Abbruch bei 72 -->
-            <mc:define prefix="LOG" header="PMmodul.h" NumChannels="5" KoOffset="450" />
-            <mc:define prefix="PM" header="PMmodul.h" NumChannels="2" KoOffset="50" />
+            <mc:define prefix="LOG" header="PMmodul.h" NumChannels="50" KoOffset="450" ModuleType="1" />
+            <mc:define prefix="PM" header="PMmodul.h" NumChannels="20" KoOffset="50" ModuleType="2" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <mc:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />
@@ -51,7 +52,7 @@
             <AssociationTable MaxEntries="2048" />
             <LoadProcedures>
               <LoadProcedure MergeId="1">
-                <LdCtrlCompareProp InlineData="0000A0000100" ObjIdx="0" PropId="78">
+                <LdCtrlCompareProp InlineData="000099999900" ObjIdx="0" PropId="78">
                   <OnError Cause="CompareMismatch" MessageRef="M-00FA_A-0001-01-0000_M-1" />
                 </LdCtrlCompareProp>
               </LoadProcedure>

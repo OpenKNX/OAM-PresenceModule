@@ -176,6 +176,8 @@
 #define PM_KoLEDRed 22
 #define PM_KoLEDOrange 23
 
+#define LOG_ChannelCount 50
+
 // Parameter per channel
 #define LOG_ParamBlockOffset 48
 #define LOG_ParamBlockSize 104
@@ -802,8 +804,10 @@
 #define LOG_KoKOfE2 1
 #define LOG_KoKOfO 2
 
+#define PM_ChannelCount 20
+
 // Parameter per channel
-#define PM_ParamBlockOffset 568
+#define PM_ParamBlockOffset 5248
 #define PM_ParamBlockSize 94
 #define PM_pPresence1Type             0      // 2 Bits, Bit 7-6
 #define     PM_pPresence1TypeMask 0xC0
@@ -1137,3 +1141,6 @@
 #define PM_KoKOpManualDimScene 18
 #define PM_KoKOpReserve 19
 
+#define MAIN_OpenKnxId 0xA0
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 3

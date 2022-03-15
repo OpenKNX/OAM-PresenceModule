@@ -8,25 +8,25 @@
             <ChannelIndependentBlock>
               <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-1" Name="Init" Text="PM-MaxChannels">
                 <!-- Init, will be moved to parts -->
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-400_R-4001" />
-                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-400_R-4001" Value="%N%" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%000001_R-%T%00000101" />
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%000001_R-%T%00000101" Value="%N%" />
               </ParameterBlock>
               <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-2" Name="Hardware" Text="PM-Hardware-Parameter">
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-10" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-11" Text="Im folgenden wird die verwendete bzw. installierte Hardware angegeben." />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-12" Text="Die hier getroffenen Angaben beeinflussen das Verhalten der Applikation und der Firmware und müssen zur vorhandenen Hardware passen!" />
 
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-402_R-4021" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-5_R-51" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-6_R-61" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-7_R-71" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-7_R-71">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000005_R-100000501" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000006_R-100000601" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000007_R-100000701" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-1000007_R-100000701">
                   <when test="0">
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-13" Text="Ohne EEPROM kann das Logikmodul Werte der Eingänge nicht speichern und nach einem Neustart wieder zur Verfügung stellen. Diese Funktion wird in der Applikation nicht angeboten." UIHint="Information" />
                   </when>
                 </choose>
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-8_R-81" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-8_R-81">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000008_R-100000801" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-1000008_R-100000801">
                   <when test="0">
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-15" Text="Ohne Abschaltmöglichkeit der Zusatzhardware (Sensoren, LED, Buzzer, 1-Wire) kann das Logikmodul Werte der Eingänge nicht speichern und nach einem Neustart wieder zur Verfügung stellen. Diese Funktion wird in der Applikation nicht angeboten." UIHint="Information" />
                   </when>

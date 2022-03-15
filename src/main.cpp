@@ -1,4 +1,5 @@
 #include <OpenKNX.h>
+#include "PMmodul.h"
 #include "Hardware.h"
 
 void appSetup(bool iSaveSupported);
@@ -26,7 +27,7 @@ void setup()
   // moved to checkBoard!!!
   // Wire.begin();
   // initialize knx-stack and check versions
-  OpenKNX::knxRead(0xA0, 0x00, 1, 0);
+  OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, 0);
 
   // pin or GPIO the programming led is connected to. Default is LED_BUILDIN
   knx.ledPin(PROG_LED_PIN);
