@@ -126,10 +126,10 @@ void Presence::setup()
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
         mNumChannels = knx.paramByte(PM_PMChannels);
-        if (COUNT_PM_CHANNEL < mNumChannels)
+        if (PM_ChannelCount < mNumChannels)
         {
             char lErrorText[80];
-            sprintf(lErrorText, "FATAL: Firmware compiled for %d PresenceChannels, but knxprod needs %d!\n", COUNT_PM_CHANNEL, mNumChannels);
+            sprintf(lErrorText, "FATAL: Firmware compiled for %d PresenceChannels, but knxprod needs %d!\n", PM_ChannelCount, mNumChannels);
             fatalError(FATAL_LOG_WRONG_CHANNEL_COUNT, lErrorText);
         }
         // set back reference
