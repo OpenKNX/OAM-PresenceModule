@@ -101,8 +101,14 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
                     snprintf(iBuffer + 8, 7, "D %01d:%02d", (-lPresence / 60) % 60, -lPresence % 60);
                 }
             }
-        } else {
+        }
+        else if (pCurrentState & STATE_RUNNING)
+        {
             sprintf(iBuffer, "no presence");
+        } 
+        else 
+        {
+            sprintf(iBuffer, "inactive");
         }
         lResult = true;
     }

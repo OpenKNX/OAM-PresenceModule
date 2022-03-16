@@ -31,8 +31,6 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
     bool lOutput = false;
     if (iBuffer[0] == 'p')
     {
-        uint8_t lNibbleHigh = (mNumChannels - 1) / 10;
-        uint8_t lNibbleLow = (mNumChannels - 1) % 10;
         uint8_t lIndex = (iBuffer[1] - '0') * 10 + iBuffer[2] - '0' - 1;
         if (lIndex >= 0 && lIndex < mNumChannels) {
             // this is a channel request
