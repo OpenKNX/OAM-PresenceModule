@@ -3,19 +3,19 @@
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
       <Catalog>
-        <CatalogSection Id="M-00FA_CS-1" Name="OpenKNX-Geräte" Number="1" DefaultLanguage="de">
+        <CatalogSection Id="M-00FA_CS-99" Name="OpenKNX-Geräte" Number="99" DefaultLanguage="de">
           <CatalogItem Id="M-00FA_H-OpenKNXWPA000-1_HP-0001-01-0000_CI-OpenKNXPresence-1" Name="OpenKNX: Generic Presence Application" Number="1" ProductRefId="M-00FA_H-OpenKNXWPA000-1_P-OpenKNXPresence" Hardware2ProgramRefId="M-00FA_H-OpenKNXWPA000-1_HP-0001-01-0000" DefaultLanguage="de" />
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <mc:version OpenKnxId="0xA0" ApplicationNumber="1" ApplicationVersion="3" ApplicationRevision="0" ReplacesVersions="1" />
+        <mc:version OpenKnxId="0xA0" ApplicationNumber="1" ApplicationVersion="5" ReplacesVersions="1 3" ApplicationRevision="0" />
         <ApplicationProgram Id="M-00FA_A-0001-01-0000" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0">
           <Static>
             <Code>
               <RelativeSegment Id="M-00FA_A-0001-01-0000_RS-04-00000" Name="Parameters" Offset="0" Size="0" LoadStateMachine="4" />
             </Code>
             <!-- 80 Kanäle klappen nicht, Abbruch bei 72 -->
-            <mc:define prefix="LOG" header="PMmodul.h" NumChannels="50" KoOffset="450" ModuleType="1" />
+            <mc:define prefix="LOG" header="PMmodul.h" NumChannels="30" KoOffset="450" ModuleType="1" />
             <mc:define prefix="PM" header="PMmodul.h" NumChannels="20" KoOffset="50" ModuleType="2" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
@@ -48,9 +48,12 @@
               <mc:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="LOG" />
               <mc:include href="PMmodul.templ.xml" xpath="//ComObjectRefs/ComObjectRef" type="template" prefix="PM" />
             </ComObjectRefs>
-            <AddressTable MaxEntries="2048" />
-            <AssociationTable MaxEntries="2048" />
-            <LoadProcedures>
+            <AddressTable MaxEntries="2047" />
+            <AssociationTable MaxEntries="2047" />
+            <Messages>
+              <Message Id="M-00FA_A-0001-01-0000_M-1" Name="VersionMismatch" Text="Diese Applikaiton kann nur für die Firmware ab Version [3] 9.0 genutzt werden" />
+            </Messages>
+           <LoadProcedures>
               <LoadProcedure MergeId="1">
                 <LdCtrlCompareProp InlineData="000099999900" ObjIdx="0" PropId="78">
                   <OnError Cause="CompareMismatch" MessageRef="M-00FA_A-0001-01-0000_M-1" />
