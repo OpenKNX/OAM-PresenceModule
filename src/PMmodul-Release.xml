@@ -8,15 +8,15 @@
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <op:version OpenKnxId="0xA0" ApplicationNumber="1" ApplicationVersion="6" ReplacesVersions="5" ApplicationRevision="0" />
-        <ApplicationProgram Id="M-00FA_A-0001-01-0000" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+        <op:version OpenKnxId="0xA0" ApplicationNumber="0" ApplicationVersion="1" ReplacesVersions="0" ApplicationRevision="0" />
+        <ApplicationProgram Id="M-00FA_A-0001-01-0000" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
               <RelativeSegment Id="M-00FA_A-0001-01-0000_RS-04-00000" Name="Parameters" Offset="0" Size="0" LoadStateMachine="4" />
             </Code>
             <!-- 80 Kanäle klappen nicht, Abbruch bei 72 -->
-            <op:define prefix="LOG" header="PMmodul.h" NumChannels="2" KoOffset="450" ModuleType="1" />
-            <op:define prefix="PM" header="PMmodul.h" NumChannels="2" KoOffset="50" ModuleType="2" />
+            <op:define prefix="LOG" header="PMmodul.h" NumChannels="30" KoOffset="450" ModuleType="1" />
+            <op:define prefix="PM" header="PMmodul.h" NumChannels="20" KoOffset="50" ModuleType="2" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />

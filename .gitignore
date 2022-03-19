@@ -3,5 +3,6 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
-src/PMmodul.knxprod
-src/PMmodul.debug.xml
+**/*.knxprod
+**/*.debug.xml
+doc/TP_Radar_Sensor/*

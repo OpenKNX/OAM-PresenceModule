@@ -58,13 +58,27 @@
             "problemMatcher": []
         },
         {
-            "label": "MultiplyChannels",
+            "label": "OpenKNXproducer-Develop",
             "type": "shell",
-            "command": "${env:USERPROFILE}\\bin\\MultiplyChannels.exe",
+            "command": "${env:USERPROFILE}\\bin\\OpenKNXproducer.exe",
             "args": [
                 "create",
                 "--Debug",
                 "src/PMmodul.xml"
+            ],
+            "problemMatcher": [],
+            "group": "test"
+        },
+        {
+            "label": "OpenKNXproducer-Release",
+            "type": "shell",
+            "command": "${env:USERPROFILE}\\bin\\OpenKNXproducer.exe",
+            "args": [
+                "create",
+                "--Debug",
+                "--Output=src/PresenceModule.knxprod",
+                "--HeaderFileName=src/PMmodul.h",
+                "src/PMmodul-Release"
             ],
             "problemMatcher": [],
             "group": "test"
