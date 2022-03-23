@@ -1,6 +1,5 @@
 #ifdef PMMODULE
 #include "Helper.h"
-#include "Hardware.h"
 
 #include "IncludeManager.h"
 
@@ -9,9 +8,9 @@
 #include "Logic.h"
 #include "KnxHelper.h"
 
-const uint8_t cFirmwareMajor = 0;    // 0-31
-const uint8_t cFirmwareMinor = 0;    // 0-31
-const uint8_t cFirmwareRevision = 1; // 0-63
+// const uint8_t cFirmwareMajor = 0;    // 0-31
+// const uint8_t cFirmwareMinor = 0;    // 0-31
+// const uint8_t cFirmwareRevision = 1; // 0-63
 
 struct sRuntimeInfo
 {
@@ -63,7 +62,7 @@ bool processDiagnoseCommand()
     {
         // Command v: retrun fimware version, do not forward this to logic,
         // because it means firmware version of the outermost module
-        sprintf(lBuffer, "VER [%d] %d.%d", cFirmwareMajor, cFirmwareMinor, cFirmwareRevision);
+        // sprintf(lBuffer, "VER [%d] %d.%d", cFirmwareMajor, cFirmwareMinor, cFirmwareRevision);
         lOutput = true;
     }
     else
@@ -142,7 +141,7 @@ void appSetup(bool iSaveSupported)
     if (knx.configured())
     {
         // 5 bit major, 5 bit minor, 6 bit revision
-        knx.bau().deviceObject().version(cFirmwareMajor << 11 | cFirmwareMinor << 6 | cFirmwareRevision);
+        // knx.bau().deviceObject().version(cFirmwareMajor << 11 | cFirmwareMinor << 6 | cFirmwareRevision);
 
         if (GroupObject::classCallback() == 0)
             GroupObject::classCallback(ProcessKoCallback);

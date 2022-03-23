@@ -1,5 +1,4 @@
 #include "Helper.h"
-#include "Hardware.h"
 
 #include "IncludeManager.h"
 
@@ -7,6 +6,8 @@
 #include "Logic.h"
 #include "KnxHelper.h"
 #include "Presence.h"
+#include "Sensor.h"
+#include "SensorMR24xxB1.h"
 
 Presence::Presence()
 {
@@ -46,12 +47,18 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
 }
 
 void Presence::processInputKo(GroupObject &iKo){
-    if (iKo.asap() >= PM_KoOffset && iKo.asap() < PM_KoOffset + mNumChannels * PM_KoBlockSize) {
+    if (iKo.asap() == PM_KoSensitivity) {
+        mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, iKo.value(getDPT(VAL_DPT_5)));
+    } else if (iKo.asap() == PM_KoScenario) {
+        mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
+    } else if (iKo.asap() == PM_KoHfReset) {
+        mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
+    } else if (iKo.asap() >= PM_KoOffset && iKo.asap() < PM_KoOffset + mNumChannels * PM_KoBlockSize) {
         // we are in the Range of presence KOs
         uint8_t lChannelIndex = (iKo.asap() - PM_KoOffset) / PM_KoBlockSize;
         PresenceChannel *lChannel = mChannel[lChannelIndex];
         lChannel->processInputKo(iKo);
-    }
+    } 
 }
 
 bool Presence::getHardwarePresence()
@@ -59,8 +66,53 @@ bool Presence::getHardwarePresence()
     return mPresence;
 }
 
+// Starting all required sensors, this call may be blocking (with delay)
+void Presence::startSensor()
+{
+    mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
+    mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
+    // now start all sensors at the correct speed
+    Sensor::beginSensors();
+}
+
 void Presence::processHardwarePresence()
 {
+
+    if (mPresenceSensor != 0) 
+    {
+        float lValue = 0;
+        if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
+        {
+            mPresenceCombined = lValue;
+            bool lPresence = false;
+            uint8_t lMove;
+            uint8_t lFall;
+            uint8_t lAlarm;
+            if (SensorMR24xxB1::decodePresenceResult((uint8_t)lValue, lPresence, lMove, lFall, lAlarm)) 
+            {
+                if (lPresence != mPresence)
+                {
+                    mPresence = lPresence;
+                    digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == mPresence);
+                    knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                }
+                if (lMove != mMove) 
+                {
+                    mMove = lMove;
+                    digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (mMove > 0));
+                    knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
+                }
+            }
+        }
+        if (Sensor::measureValue(MeasureType::Speed, lValue))
+        {
+            GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
+            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue) 
+            {
+                lKo.value(lValue, getDPT(VAL_DPT_5001));
+            }
+        }
+    }
 
 #ifdef PIR_PIN
     uint8_t lPresenceLed = ((knx.paramByte(LOG_LEDRot) & LOG_LEDRotMask) >> LOG_LEDRotShift);
@@ -105,7 +157,10 @@ void Presence::loop()
         return;
 
     if (knx.paramByte(PM_HardwarePM) && PM_HardwarePMMask)
+    {
         processHardwarePresence();
+        Sensor::sensorLoop();
+    }
 
     // we loop on all channels and execute state logic
     for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
@@ -139,5 +194,6 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
+        startSensor();
     }
 }

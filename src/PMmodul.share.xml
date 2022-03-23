@@ -185,15 +185,25 @@
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
-              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000002" Name="PresenceOut" Text="Ausgang PIR" Number="21" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
-              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000003" Name="LEDRed" Text="Eingang LED Rot" Number="22" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000004" Name="LEDOrange" Text="Eingang LED Orange" Number="23" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000005" Name="PresenceOut" Text="Präsenz" Number="21" FunctionText="Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000002" Name="MoveOut" Text="Bewegung (0=keine, 1=radial, 2=nähern, 3=entf.)" Number="22" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000006" Name="MoveSpeedOut" Text="Bewegungsmoment" Number="23" FunctionText="Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000003" Name="LEDPresence" Text="Eingang LED Präsenz" Number="24" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000004" Name="LEDMove" Text="Eingang LED Bewegung" Number="25" FunctionText="Schalten/Status" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000007" Name="Scenario" Text="Eingang Szenario" Number="26" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000008" Name="Sensitivity" Text="Eingang Empfindlichkeit" Number="27" FunctionText="Wert/Status" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-5" />
+              <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000009" Name="HfReset" Text="Reset HF-Sensor" Number="28" FunctionText="Trigger" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
             </ComObjectTable>
             <ComObjectRefs>
               <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000001_R-%T%00000101" RefId="M-00FA_A-0001-01-0000_O-%T%000001" />
               <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000002_R-%T%00000201" RefId="M-00FA_A-0001-01-0000_O-%T%000002" />
               <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000003_R-%T%00000301" RefId="M-00FA_A-0001-01-0000_O-%T%000003" />
               <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000004_R-%T%00000401" RefId="M-00FA_A-0001-01-0000_O-%T%000004" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000005_R-%T%00000501" RefId="M-00FA_A-0001-01-0000_O-%T%000005" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000006_R-%T%00000601" RefId="M-00FA_A-0001-01-0000_O-%T%000006" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000007_R-%T%00000701" RefId="M-00FA_A-0001-01-0000_O-%T%000007" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000008_R-%T%00000801" RefId="M-00FA_A-0001-01-0000_O-%T%000008" />
+              <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%000009_R-%T%00000901" RefId="M-00FA_A-0001-01-0000_O-%T%000009" />
             </ComObjectRefs>
             <AddressTable MaxEntries="65535" />
             <AssociationTable MaxEntries="65535" />
@@ -212,15 +222,20 @@
               <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201">
                 <when test="1">
                   <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-3" Name="HardwarePM" Text="PM-Hardware">
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="PIR Rohdaten" UIHint="Headline" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz-Rohdaten" UIHint="Headline" />
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301" />
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Auch wenn das Präsenzsignal nicht auf den Bus gesendet wird, kann es intern für PM-Kanäle genutzt werden." />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (PIR-Sensor) bestimmt." />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
                     <!-- KO für Präsenz einschalten -->
                     <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301">
                       <when test="!=0">
                         <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000002_R-%T%00000201" />
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000005_R-%T%00000501" />
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000006_R-%T%00000601" />
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000007_R-%T%00000701" />
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000008_R-%T%00000801" />
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000009_R-%T%00000901" />
                       </when>
                     </choose>
                     <!-- Helligkeit -->

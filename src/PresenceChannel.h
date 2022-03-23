@@ -1,6 +1,6 @@
 #pragma once
 #include "knx.h"
-#include "Hardware.h"
+#include "HardwareDevices.h"
 
 // State marker (BITFIELD !!!)
 #define STATE_STARTUP 1 // startup delay for each channel

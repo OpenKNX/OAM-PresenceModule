@@ -22,7 +22,12 @@
 			"PLATFORMIO_CALLER": "vscode"
 		},
 		"files.associations": {
-			"*.yaml": "home-assistant"
+			"*.json": "jsonc",
+			"*.yaml": "home-assistant",
+			"array": "cpp",
+			"string": "cpp",
+			"string_view": "cpp",
+			"ranges": "cpp"
 		}
 	}
 }
