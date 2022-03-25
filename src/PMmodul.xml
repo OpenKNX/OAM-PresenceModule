@@ -8,7 +8,7 @@
         </CatalogSection>
       </Catalog>
       <ApplicationPrograms>
-        <op:version OpenKnxId="0xA0" ApplicationNumber="1" ApplicationVersion="7" ReplacesVersions="4 5 6" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA0" ApplicationNumber="1" ApplicationVersion="8" ReplacesVersions="4 5 6 7" ApplicationRevision="0" />
         <ApplicationProgram Id="M-00FA_A-0001-01-0000" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>

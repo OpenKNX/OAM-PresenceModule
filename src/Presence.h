@@ -33,6 +33,8 @@ private:
   // brightness is missing
   SensorMR24xxB1 *mPresenceSensor;
   Sensor *mBrightnessSensor;
+  uint32_t mHfPowerCycleDelay = 0;
+
   void startSensor();
 
   // channel handling
@@ -42,5 +44,7 @@ private:
   uint8_t getChannelId(PresenceChannel *iChannel);
 
   void processHardwarePresence();
+  void startPowercycleHfSensor();
+  void processPowercycleHfSensor();
   // bool prepareChannels();
 };

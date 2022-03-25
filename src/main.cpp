@@ -12,6 +12,9 @@ void setup()
     Serial1.setTX(KNX_UART_TX_PIN);
     Serial2.setRX(HF_UART_RX_PIN);
     Serial2.setTX(HF_UART_TX_PIN);
+    pinMode(HF_S1_PIN, INPUT);
+    pinMode(HF_S2_PIN, INPUT);
+    pinMode(HF_POWER_PIN, OUTPUT);
 #endif
     SERIAL_DEBUG.begin(115200);
     pinMode(PROG_LED_PIN, OUTPUT);

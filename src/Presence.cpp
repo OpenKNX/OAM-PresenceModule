@@ -52,7 +52,8 @@ void Presence::processInputKo(GroupObject &iKo){
     } else if (iKo.asap() == PM_KoScenario) {
         mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
     } else if (iKo.asap() == PM_KoHfReset) {
-        mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
+        // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
+        startPowercycleHfSensor();
     } else if (iKo.asap() >= PM_KoOffset && iKo.asap() < PM_KoOffset + mNumChannels * PM_KoBlockSize) {
         // we are in the Range of presence KOs
         uint8_t lChannelIndex = (iKo.asap() - PM_KoOffset) / PM_KoBlockSize;
@@ -73,6 +74,21 @@ void Presence::startSensor()
     mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
     // now start all sensors at the correct speed
     Sensor::beginSensors();
+}
+
+void Presence::startPowercycleHfSensor()
+{
+    digitalWrite(HF_POWER_PIN, 0);
+    mHfPowerCycleDelay = millis();
+}
+
+void Presence::processPowercycleHfSensor()
+{
+    if (delayCheck(mHfPowerCycleDelay, 5000))
+    {
+        digitalWrite(HF_POWER_PIN, 1);
+        mHfPowerCycleDelay = 0;
+    }
 }
 
 void Presence::processHardwarePresence()
@@ -159,6 +175,7 @@ void Presence::loop()
     if (knx.paramByte(PM_HardwarePM) && PM_HardwarePMMask)
     {
         processHardwarePresence();
+        processPowercycleHfSensor();
         Sensor::sensorLoop();
     }
 

@@ -17,26 +17,6 @@
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-PMChannels" Name="PMChannels">
                 <TypeNumber SizeInBit="8" Type="unsignedInt" minInclusive="%N%" maxInclusive="%N%" />
               </ParameterType>
-              <!-- Delay pattern (will be moved to logic in future -->
-              <ParameterType Id="M-00FA_A-0001-01-0000_PT-DelayBase" Name="DelayBase">
-                <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="Sekunde(n)" Value="0" Id="M-00FA_A-0001-01-0000_PT-DelayBase_EN-0" />
-                  <Enumeration Text="Minute(n)" Value="1" Id="M-00FA_A-0001-01-0000_PT-DelayBase_EN-1" />
-                  <Enumeration Text="Stunde(n)" Value="2" Id="M-00FA_A-0001-01-0000_PT-DelayBase_EN-2" />
-                </TypeRestriction>
-              </ParameterType>
-              <ParameterType Id="M-00FA_A-0001-01-0000_PT-DelayBase10" Name="DelayBase10">
-                <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="1/10  Sekunde(n)" Value="3" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-3" />
-                  <Enumeration Text="Sekunde(n)" Value="0" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-0" />
-                  <Enumeration Text="Minute(n)" Value="1" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-1" />
-                  <Enumeration Text="Stunde(n)" Value="2" Id="M-00FA_A-0001-01-0000_PT-DelayBase10_EN-2" />
-                </TypeRestriction>
-              </ParameterType>
-              <ParameterType Id="M-00FA_A-0001-01-0000_PT-DelayTime" Name="DelayTime">
-                <TypeNumber SizeInBit="14" Type="unsignedInt" minInclusive="0" maxInclusive="16000" />
-              </ParameterType>
-              <!-- end of delay pattern -->
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-OffsetLuxPM" Name="OffsetLux">
                 <TypeNumber SizeInBit="8" Type="signedInt" minInclusive="-120" maxInclusive="120" />
               </ParameterType>

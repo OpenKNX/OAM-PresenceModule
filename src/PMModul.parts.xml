@@ -17,16 +17,16 @@
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-12" Text="Die hier getroffenen Angaben beeinflussen das Verhalten der Applikation und der Firmware und müssen zur vorhandenen Hardware passen!" />
 
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000005_R-100000501" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000006_R-100000601" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000007_R-100000701" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-1000007_R-100000701">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000035_R-100003501" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000036_R-100003601" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000037_R-100003701" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-1000037_R-100003701">
                   <when test="0">
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-13" Text="Ohne EEPROM kann das Logikmodul Werte der Eingänge nicht speichern und nach einem Neustart wieder zur Verfügung stellen. Diese Funktion wird in der Applikation nicht angeboten." UIHint="Information" />
                   </when>
                 </choose>
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000008_R-100000801" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-1000008_R-100000801">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-1000038_R-100003801" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-1000038_R-100003801">
                   <when test="0">
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-15" Text="Ohne Abschaltmöglichkeit der Zusatzhardware (Sensoren, LED, Buzzer, 1-Wire) kann das Logikmodul Werte der Eingänge nicht speichern und nach einem Neustart wieder zur Verfügung stellen. Diese Funktion wird in der Applikation nicht angeboten." UIHint="Information" />
                   </when>
