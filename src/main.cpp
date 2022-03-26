@@ -2,6 +2,8 @@
 #include "PMmodul.h"
 #include "HardwareDevices.h"
 
+uint8_t mSerial2Active = false;
+
 void appSetup(bool iSaveSupported);
 void appLoop();
 
@@ -58,6 +60,23 @@ void loop()
   knx.loop();
 
   // only run the application code if the device was configured with ETS
-  if (knx.configured())
+  if (knx.configured()) 
+  {
+    if (!mSerial2Active)
+    {
+      // we start HF communication as late as possible
+      mSerial2Active = true;
+      Serial2.begin(9600);
+    }
     appLoop();
+  }
+  else
+  {
+    if (mSerial2Active) 
+    {
+        // during ETS programming, we stop HF communication
+        mSerial2Active = false;
+        Serial2.end();
+    }
+  }
 }

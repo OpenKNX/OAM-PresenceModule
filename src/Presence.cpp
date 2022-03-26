@@ -78,7 +78,7 @@ void Presence::startSensor()
 
 void Presence::startPowercycleHfSensor()
 {
-    digitalWrite(HF_POWER_PIN, 0);
+    digitalWrite(HF_POWER_PIN, LOW);
     mHfPowerCycleDelay = millis();
 }
 
@@ -86,7 +86,7 @@ void Presence::processPowercycleHfSensor()
 {
     if (delayCheck(mHfPowerCycleDelay, 5000))
     {
-        digitalWrite(HF_POWER_PIN, 1);
+        digitalWrite(HF_POWER_PIN, HIGH);
         mHfPowerCycleDelay = 0;
     }
 }
@@ -123,10 +123,20 @@ void Presence::processHardwarePresence()
         if (Sensor::measureValue(MeasureType::Speed, lValue))
         {
             GroupObject &lKo = knx.getGroupObject(PM_KoMoveSpeedOut);
-            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue) 
-            {
+            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5001)) != (uint8_t)lValue)
                 lKo.value(lValue, getDPT(VAL_DPT_5001));
-            }
+        }
+        if (Sensor::measureValue(MeasureType::Scenario, lValue))
+        {
+            GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
+            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5)) != (uint8_t)lValue)
+                lKo.value(lValue, getDPT(VAL_DPT_5));
+        }
+        if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
+        {
+            GroupObject &lKo = knx.getGroupObject(PM_KoSensitivity);
+            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5)) != (uint8_t)lValue)
+                lKo.value(lValue, getDPT(VAL_DPT_5));
         }
     }
 
