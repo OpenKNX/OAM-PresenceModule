@@ -36,7 +36,8 @@ void setup()
   // moved to checkBoard!!!
   // Wire.begin();
   // initialize knx-stack and check versions
-  OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, 0);
+  uint8_t firmwareResivion = 1;
+  OpenKNX::knxRead(MAIN_OpenKnxId, MAIN_ApplicationNumber, MAIN_ApplicationVersion, firmwareResivion);
 
   // pin or GPIO the programming led is connected to. Default is LED_BUILDIN
   knx.ledPin(PROG_LED_PIN);
