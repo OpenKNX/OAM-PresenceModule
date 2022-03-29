@@ -30,6 +30,8 @@ private:
   bool mPresenceLedOn = false;
   bool mInfoLedOn = false;
   bool mPresenceChanged = false;
+  uint8_t mScenario = 0;
+  uint8_t mSensitivity = 0;
   // brightness is missing
   SensorMR24xxB1 *mPresenceSensor;
   Sensor *mBrightnessSensor;

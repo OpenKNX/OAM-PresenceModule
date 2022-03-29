@@ -129,14 +129,19 @@ void Presence::processHardwarePresence()
         if (Sensor::measureValue(MeasureType::Scenario, lValue))
         {
             GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
-            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5)) != (uint8_t)lValue)
-                lKo.value(lValue, getDPT(VAL_DPT_5));
+            if (mScenario != (uint8_t)lValue) {
+                mScenario = (uint8_t)lValue;
+                lKo.value(mScenario, getDPT(VAL_DPT_5));
+            }
         }
         if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
         {
             GroupObject &lKo = knx.getGroupObject(PM_KoSensitivity);
-            if ((uint8_t)lKo.value(getDPT(VAL_DPT_5)) != (uint8_t)lValue)
-                lKo.value(lValue, getDPT(VAL_DPT_5));
+            if (mSensitivity != (uint8_t)lValue)
+            {
+                mSensitivity = (uint8_t)lValue;
+                lKo.value(mSensitivity, getDPT(VAL_DPT_5));
+            }
         }
     }
 
