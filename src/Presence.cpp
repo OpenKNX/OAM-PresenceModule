@@ -48,9 +48,13 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
 
 void Presence::processInputKo(GroupObject &iKo){
     if (iKo.asap() == PM_KoSensitivity) {
+#ifdef PRESENCE_LED_PIN
         mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, iKo.value(getDPT(VAL_DPT_5)));
+#endif
     } else if (iKo.asap() == PM_KoScenario) {
+#ifdef PRESENCE_LED_PIN
         mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
+#endif
     } else if (iKo.asap() == PM_KoHfReset) {
         // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
         startPowercycleHfSensor();
@@ -70,15 +74,19 @@ bool Presence::getHardwarePresence()
 // Starting all required sensors, this call may be blocking (with delay)
 void Presence::startSensor()
 {
+#ifdef PRESENCE_LED_PIN
     mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
     mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
     // now start all sensors at the correct speed
     Sensor::beginSensors();
+#endif
 }
 
 void Presence::startPowercycleHfSensor()
 {
+#ifdef HF_POWER_PIN
     digitalWrite(HF_POWER_PIN, LOW);
+#endif
     mHfPowerCycleDelay = millis();
 }
 
@@ -86,14 +94,16 @@ void Presence::processPowercycleHfSensor()
 {
     if (delayCheck(mHfPowerCycleDelay, 5000))
     {
+#ifdef HF_POWER_PIN
         digitalWrite(HF_POWER_PIN, HIGH);
+#endif
         mHfPowerCycleDelay = 0;
     }
 }
 
 void Presence::processHardwarePresence()
 {
-
+#ifdef PRESENCE_LED_PIN
     if (mPresenceSensor != 0) 
     {
         float lValue = 0;
@@ -144,7 +154,7 @@ void Presence::processHardwarePresence()
             }
         }
     }
-
+#endif
 #ifdef PIR_PIN
     uint8_t lPresenceLed = ((knx.paramByte(LOG_LEDRot) & LOG_LEDRotMask) >> LOG_LEDRotShift);
     uint8_t lInfoLed = ((knx.paramByte(LOG_LEDOrange) & LOG_LEDOrangeMask) >> LOG_LEDOrangeShift);

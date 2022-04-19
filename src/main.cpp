@@ -23,8 +23,10 @@ void setup()
     digitalWrite(PROG_LED_PIN, HIGH);
     delay(DEBUG_DELAY);
     digitalWrite(PROG_LED_PIN, LOW);
+#ifdef PRESENCE_LED_PIN
     pinMode(PRESENCE_LED_PIN, OUTPUT);
     pinMode(MOVE_LED_PIN, OUTPUT);
+#endif
     SERIAL_DEBUG.println("Startup called...");
     ArduinoPlatform::SerialDebug = &SERIAL_DEBUG;
 
@@ -60,6 +62,7 @@ void loop()
   // don't delay here to much. Otherwise you might lose packages or mess up the timing with ETS
   knx.loop();
 
+#ifdef PRESENCE_LED_PIN
   // only run the application code if the device was configured with ETS
   if (knx.configured()) 
   {
@@ -80,4 +83,5 @@ void loop()
         Serial2.end();
     }
   }
+#endif
 }
