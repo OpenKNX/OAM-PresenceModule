@@ -14,18 +14,18 @@ void setup()
     Serial1.setTX(KNX_UART_TX_PIN);
     Serial2.setRX(HF_UART_RX_PIN);
     Serial2.setTX(HF_UART_TX_PIN);
-    pinMode(HF_S1_PIN, INPUT);
-    pinMode(HF_S2_PIN, INPUT);
-    pinMode(HF_POWER_PIN, OUTPUT);
 #endif
     SERIAL_DEBUG.begin(115200);
     pinMode(PROG_LED_PIN, OUTPUT);
     digitalWrite(PROG_LED_PIN, HIGH);
     delay(DEBUG_DELAY);
     digitalWrite(PROG_LED_PIN, LOW);
-#ifdef PRESENCE_LED_PIN
+#ifdef HF_POWER_PIN
     pinMode(PRESENCE_LED_PIN, OUTPUT);
     pinMode(MOVE_LED_PIN, OUTPUT);
+    pinMode(HF_S1_PIN, INPUT);
+    pinMode(HF_S2_PIN, INPUT);
+    pinMode(HF_POWER_PIN, OUTPUT);
 #endif
     SERIAL_DEBUG.println("Startup called...");
     ArduinoPlatform::SerialDebug = &SERIAL_DEBUG;
@@ -62,7 +62,7 @@ void loop()
   // don't delay here to much. Otherwise you might lose packages or mess up the timing with ETS
   knx.loop();
 
-#ifdef PRESENCE_LED_PIN
+#ifdef HF_POWER_PIN
   // only run the application code if the device was configured with ETS
   if (knx.configured()) 
   {
@@ -83,5 +83,7 @@ void loop()
         Serial2.end();
     }
   }
+#else
+  appLoop();
 #endif
 }

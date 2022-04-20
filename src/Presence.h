@@ -33,7 +33,7 @@ private:
   uint8_t mScenario = 0;
   uint8_t mSensitivity = 0;
   // brightness is missing
-  #ifdef PRESENCE_LED_PIN
+  #ifdef HF_POWER_PIN
   SensorMR24xxB1 *mPresenceSensor;
   #endif
   Sensor *mBrightnessSensor;

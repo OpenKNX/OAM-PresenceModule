@@ -352,15 +352,20 @@ void PresenceChannel::startPresenceShort()
 void PresenceChannel::processPresenceShort()
 {
     // short presence is measured immediately
-    if (delayCheck(pPresenceShortDelayTime, paramTimeDelay(PM_pAPresenceShortDurationBase, true))) {
+    if (delayCheck(pPresenceShortDelayTime, paramTimeDelay(PM_pAPresenceShortDurationBase, true))) 
+    {
         // now short presence duration passed, check of also short presence delay passed
-        if (delayCheck(pPresenceShortDelayTime, (paramTimeDelay(PM_pAPresenceShortDurationBase, true) + paramTimeDelay(PM_pAPresenceShortDelayBase, true)))) {
+        if (delayCheck(pPresenceShortDelayTime, (paramTimeDelay(PM_pAPresenceShortDurationBase, true) + paramTimeDelay(PM_pAPresenceShortDelayBase, true) + 300)))
+        {
             // there was no new presence evaluation during short presence delay, so we know, short presence is valid here
             endPresence();
-        } else {
+        } 
+        else 
+        {
             // if we get any further presence information, we stop short presence without ending normal presence
             bool lPresence = getRawPresence();
-            if (lPresence) {
+            if (lPresence) 
+            {
                 pCurrentState &= ~STATE_PRESENCE_SHORT;
                 pPresenceShortDelayTime = 0;
             }
@@ -371,7 +376,8 @@ void PresenceChannel::processPresenceShort()
 void PresenceChannel::onPresenceBrightnessChange(bool iOn)
 {
     // calculate output dependent on brightness and auto mode
-    if (iOn && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask)) {
+    if (iOn && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask)) 
+    {
         // check brightness in case of truning on
         if ((uint32_t)getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9)) <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
             onPresenceChange(iOn);
