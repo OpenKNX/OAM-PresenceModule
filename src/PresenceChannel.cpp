@@ -382,7 +382,7 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
         if ((uint32_t)getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9)) <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
             onPresenceChange(iOn);
     }
-    else // turn off is brightness independent
+    else // turn off if brightness independent
         onPresenceChange(iOn);
 }
 
@@ -582,9 +582,12 @@ void PresenceChannel::processActorState()
 
 void PresenceChannel::startBrightness(GroupObject &iKo)
 {
-    // should we evaluate brightness
+    // should we suppress brightness evaluation?
     bool lEvalBrightness = !(pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS_OFF);
-    lEvalBrightness &= (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask));
+    // or are we working bringhtness independent?
+    lEvalBrightness = lEvalBrightness && (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask));
+    // or are we in manual mode?
+    lEvalBrightness = lEvalBrightness && ((pCurrentState & (STATE_MANUAL | STATE_LOCK)) == 0);
     if (lEvalBrightness) 
     {
         // first check for upper value, if higher, then switch off
