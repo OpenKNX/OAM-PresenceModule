@@ -5,11 +5,12 @@
 // State marker (BITFIELD !!!)
 #define STATE_STARTUP 1 // startup delay for each channel
 #define STATE_RUNNING 2 // this channel is running
-#define STATE_MANUAL 4 // manual mode on
-#define STATE_PRESENCE 8 // there is presence
-#define STATE_PRESENCE_SHORT 16 // short presence evaluation
-#define STATE_LOCK 32 // lock state
-#define STATE_DAY_PHASE_CHANGE 64 // change day phase at desired point of time
+#define STATE_MANUAL 4  // manual mode on
+#define STATE_AUTO 8  // manual mode on
+#define STATE_PRESENCE 16 // there is presence
+#define STATE_PRESENCE_SHORT 32 // short presence evaluation
+#define STATE_LOCK 64 // lock state
+#define STATE_DAY_PHASE_CHANGE 128 // change day phase at desired point of time
 
 // Value marker (BITFIELD)
 #define PM_BIT_OUTPUT_SET 1             // output value to send
