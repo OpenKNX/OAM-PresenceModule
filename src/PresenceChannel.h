@@ -20,6 +20,10 @@
 
 #define PM_VAL_OUTPUT_MASK (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN)
 
+#define PM_VAL_ActiveNo 0
+#define PM_VAL_ActiveYes 1
+#define PM_VAL_ActiveDisabled 2
+
 // and we also define all enum values for PM
 #define VAL_LedOffPM 0
 #define VAL_LedOnPM 1

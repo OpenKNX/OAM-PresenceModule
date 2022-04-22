@@ -711,6 +711,9 @@ void PresenceChannel::loop()
     if (!knx.configured())
         return;
 
+    if (paramByte(PM_pChannelActive, PM_pLockActiveMask, PM_pLockActiveShift) == PM_VAL_ActiveDisabled)
+        return;
+
     // here we do the things after setup, but only once in the loop()
     if ((pCurrentState & (STATE_STARTUP | STATE_RUNNING)) == 0) {
         // currently nothing else to do
