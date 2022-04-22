@@ -332,7 +332,7 @@ void PresenceChannel::processPresence()
 void PresenceChannel::endPresence(bool iSend /* = true */)
 {
     // presence and short presence determination are stopped
-    pCurrentState &= ~(STATE_PRESENCE | STATE_PRESENCE_SHORT);
+    pCurrentState &= ~(STATE_PRESENCE | STATE_PRESENCE_SHORT | STATE_AUTO);
     pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS_OFF;
     pPresenceDelayTime = 0;
     pPresenceShortDelayTime = 0;
@@ -403,6 +403,8 @@ void PresenceChannel::startAuto(bool iOn)
     startPresenceTrigger();
     // and we also start/reset short presence here
     startPresenceShort();
+    // set state
+    pCurrentState |= STATE_AUTO;
     // set output according to input value
     startOutput(iOn);
 }
@@ -438,7 +440,8 @@ void PresenceChannel::processManual()
 void PresenceChannel::onManualChange(bool iOn)
 {
     if (iOn) {
-        pCurrentState |= STATE_MANUAL;
+        pCurrentState |= STATE_MANUAL; // we set manual state
+        pCurrentState &= ~STATE_AUTO;  // and end auto state
         if (paramTimeDelay(PM_pAManualFallbackDelayBase, true) > 0)
             pManualFallbackTime = millis();
     }
@@ -601,7 +604,7 @@ void PresenceChannel::startBrightness(GroupObject &iKo)
         else if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
         {
             // its getting dark, if we are in presence state, we turn light on
-            if (pCurrentState & STATE_PRESENCE) {
+            if ((pCurrentState & STATE_PRESENCE) && !(pCurrentState & STATE_AUTO)) {
                 onPresenceChange(true);
             }
         }
