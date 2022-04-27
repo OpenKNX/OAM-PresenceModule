@@ -71,6 +71,11 @@ bool Presence::getHardwarePresence()
     return mPresence;
 }
 
+bool Presence::getHardwareMove()
+{
+    return mMove;
+}
+
 // Starting all required sensors, this call may be blocking (with delay)
 void Presence::startSensor()
 {
@@ -103,7 +108,7 @@ void Presence::processPowercycleHfSensor()
 
 void Presence::processHardwarePresence()
 {
-#ifdef HF_POWER_PIN
+#ifdef SERIAL_HF
     if (mPresenceSensor != 0) 
     {
         float lValue = 0;
@@ -197,7 +202,7 @@ void Presence::loop()
     if (!knx.configured())
         return;
 
-    if (knx.paramByte(PM_HardwarePM) && PM_HardwarePMMask)
+    if (mDoPresenceHardwareCycle)
     {
         processHardwarePresence();
         processPowercycleHfSensor();
@@ -236,6 +241,7 @@ void Presence::setup()
             mChannel[lIndex] = new PresenceChannel(lIndex);
             mChannel[lIndex]->setup();
         }
+        mDoPresenceHardwareCycle = ((knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) > 0) || ((knx.paramByte(PM_HWLux) & PM_HWLuxMask) > 0);
         startSensor();
     }
 }

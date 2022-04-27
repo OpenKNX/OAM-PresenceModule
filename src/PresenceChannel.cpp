@@ -259,10 +259,10 @@ bool PresenceChannel::getRawPresence()
 {
     bool lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1)) || getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
     // if hardware presence sensor is available, we evaluate its value
-    if (paramBit(PM_HardwarePM, PM_HardwarePMMask))
-    {
-        lPresence |= sPresence->getHardwarePresence();
-    }
+    if (!lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsage, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
+        lPresence = sPresence->getHardwareMove();
+    if (!lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsage, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
+        lPresence = sPresence->getHardwarePresence();
     return lPresence;
 }
 
@@ -747,4 +747,19 @@ void PresenceChannel::loop()
 void PresenceChannel::setup() {
     // at the beginning we are on day phase 1
     onDayPhase(0);
+    // init auto state
+    getKo(PM_KoKOpIsManual)->valueNoSend(false, getDPT(VAL_DPT_1));
+    // init lock state
+    switch (paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift))
+    {
+        case VAL_PM_LockTypePriority:
+            getKo(PM_KoKOpLock)->valueNoSend((uint8_t)0, getDPT(VAL_DPT_2));
+            break;
+        case VAL_PM_LockTypeLock:
+            getKo(PM_KoKOpLock)->valueNoSend((uint8_t)0, getDPT(VAL_DPT_1));
+            break;
+        default:
+            // do nothing
+            break;
+    }
 }

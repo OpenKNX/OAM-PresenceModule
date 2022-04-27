@@ -13,6 +13,7 @@ public:
     // static
     // instance
     bool getHardwarePresence();
+    bool getHardwareMove();
     void processReadRequests();
     void processInputKo(GroupObject &iKo);
     bool processDiagnoseCommand(char *iBuffer);
@@ -38,7 +39,8 @@ private:
   #endif
   Sensor *mBrightnessSensor;
   uint32_t mHfPowerCycleDelay = 0;
-
+  bool mDoPresenceHardwareCycle = 0;
+  
   void startSensor();
 
   // channel handling

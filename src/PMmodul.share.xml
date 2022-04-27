@@ -29,6 +29,20 @@
                   <Enumeration Text="aktiv" Value="1" Id="M-00FA_A-0001-01-0000_PT-ActiveInaktive_EN-1" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceSensor" Name="PresenceSensor">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="kein Sensor" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceSensor_EN-0" />
+                  <Enumeration Text="PIR-Sensor" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceSensor_EN-1" />
+                  <Enumeration Text="(HF) MR24xxB1" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceSensor_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LuxSensor" Name="LuxSensor">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="kein Sensor" Value="0" Id="M-00FA_A-0001-01-0000_PT-LuxSensor_EN-0" />
+                  <Enumeration Text="VEML7700" Value="1" Id="M-00FA_A-0001-01-0000_PT-LuxSensor_EN-1" />
+                  <Enumeration Text="OPT3001" Value="2" Id="M-00FA_A-0001-01-0000_PT-LuxSensor_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-OutputType" Name="OutputType">
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-OutputType_EN-0" />
@@ -72,6 +86,19 @@
                   <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-0" />
                   <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-1" />
                   <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceUsage" Name="PresenceUsage">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht Verwenden" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceUsage_EN-0" />
+                  <Enumeration Text="Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceUsage_EN-1" />
+                  <Enumeration Text="Bewegung und Präsenz" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceUsage_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceUsagePIR" Name="PresenceUsagePIR">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht Verwenden" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceUsagePIR_EN-0" />
+                  <Enumeration Text="Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceUsagePIR_EN-1" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Name="BrightnessAuto">
@@ -131,13 +158,15 @@
               <Parameter Id="M-00FA_A-0001-01-0000_P-%T%000001" Name="PMChannels" ParameterType="M-00FA_A-0001-01-0000_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read">
                 <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="40" BitOffset="0" />
               </Parameter>
-              <Union SizeInBit="8">
+              <Union SizeInBit="16">
                 <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="41" BitOffset="0" />
-                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" />
-                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000003" Name="SendPresence" Offset="0" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Präsenzsignal auf den Bus senden?" Value="0" />
-                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000004" Name="LEDRot" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-StatusLED" Text="LED Rot" Value="0" />
-                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000005" Name="LEDOrange" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-StatusLED" Text="LED Gelb" Value="0" />
-                <!-- 3 Bit frei -->
+                <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" /> -->
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000003" Name="SendRAW" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Rohdaten auf den Bus senden?" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000004" Name="LEDRot" Offset="0" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-StatusLED" Text="LED Präsenz" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000005" Name="LEDOrange" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-StatusLED" Text="LED Bewegung" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000006" Name="HWPresence" Offset="0" BitOffset="5" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceSensor" Text="Präsenz-Sensor" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000007" Name="HWLux" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-LuxSensor" Text="Helligkeits-Sensor" Value="0" />
+                <!-- 6 Bit frei -->
               </Union>
               <!-- Brightness related settings (local hardware) -->
               <Union SizeInBit="24">
@@ -154,10 +183,12 @@
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%000001_R-%T%00000101" RefId="M-00FA_A-0001-01-0000_P-%T%000001" />
-              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201" RefId="M-00FA_A-0001-01-0000_UP-%T%000002" />
+              <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201" RefId="M-00FA_A-0001-01-0000_UP-%T%000002" /> -->
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301" RefId="M-00FA_A-0001-01-0000_UP-%T%000003" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000004_R-%T%00000401" RefId="M-00FA_A-0001-01-0000_UP-%T%000004" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000005_R-%T%00000501" RefId="M-00FA_A-0001-01-0000_UP-%T%000005" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601" RefId="M-00FA_A-0001-01-0000_UP-%T%000006" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000007_R-%T%00000701" RefId="M-00FA_A-0001-01-0000_UP-%T%000007" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000010_R-%T%00001001" RefId="M-00FA_A-0001-01-0000_UP-%T%000010" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" RefId="M-00FA_A-0001-01-0000_UP-%T%000011" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000012_R-%T%00001201" RefId="M-00FA_A-0001-01-0000_UP-%T%000012" />
@@ -199,76 +230,96 @@
           </Static>
           <Dynamic>
             <Channel Id="M-00FA_A-0001-01-0000_CH-1" Name="PMChannels" Number="1" Text="PM-Kanäle">
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201">
-                <when test="1">
+              <!-- <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201"> -->
+                <!-- <when test="1"> -->
                   <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-3" Name="HardwarePM" Text="PM-Hardware">
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz-Rohdaten" UIHint="Headline" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Auch wenn das Präsenzsignal nicht auf den Bus gesendet wird, kann es intern für PM-Kanäle genutzt werden." />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <!-- KO für Präsenz einschalten -->
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz-Hardware" UIHint="Headline" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000007_R-%T%00000701" />
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601">
                       <when test="!=0">
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000002_R-%T%00000201" />
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000005_R-%T%00000501" />
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000006_R-%T%00000601" />
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000007_R-%T%00000701" />
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000008_R-%T%00000801" />
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000009_R-%T%00000901" />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz-Rohdaten" UIHint="Headline" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301" />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
+                        <!-- KO für Präsenz einschalten -->
+                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000003_R-%T%00000301">
+                          <when test="!=0">
+                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000005_R-%T%00000501" />
+                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601">
+                              <when test="2">
+                                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000002_R-%T%00000201" />
+                                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000006_R-%T%00000601" />
+                                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000007_R-%T%00000701" />
+                                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000008_R-%T%00000801" />
+                                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000009_R-%T%00000901" />
+                              </when>
+                            </choose>
+                          </when>
+                        </choose>
                       </when>
                     </choose>
                     <!-- Helligkeit -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000010_R-%T%00001001" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" />
-                    <!-- Lux send cycle -->
-                    <!-- Delay pattern -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeitswert zyklisch senden" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000013_R-%T%00001301" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000012_R-%T%00001201" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- KO für Helligkeit einschalten -->
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101">
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000007_R-%T%00000701">
                       <when test="!=0">
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000001_R-%T%00000101" />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000010_R-%T%00001001" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" />
+                        <!-- Lux send cycle -->
+                        <!-- Delay pattern -->
+                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid">
+                          <Columns>
+                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                          </Columns>
+                          <Rows>
+                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                          </Rows>
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeitswert zyklisch senden" Cell="1,1" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000013_R-%T%00001301" Cell="1,2" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000012_R-%T%00001201" Cell="1,3" />
+                        </ParameterBlock>
+                        <!-- KO für Helligkeit einschalten -->
+                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101">
+                          <when test="!=0">
+                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000001_R-%T%00000101" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000013_R-%T%00001301">
+                          <when test="!=0">
+                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000001_R-%T%00000101" />
+                          </when>
+                        </choose>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Es wird keine Helligkeit auf den Bus gesendet, wenn beide Sendewerte oben auf 0 stehen." />
                       </when>
                     </choose>
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000013_R-%T%00001301">
-                      <when test="!=0">
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000001_R-%T%00000101" />
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Es wird keine Helligkeit auf den Bus gesendet, wenn beide Sendewerte oben auf 0 stehen." />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
                     <!-- LED -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="LED" UIHint="Headline" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000004_R-%T%00000401" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000005_R-%T%00000501" />
-                    <!-- KO für LED rot einschalten -->
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000004_R-%T%00000401">
-                      <when test="3">
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000003_R-%T%00000301" />
-                      </when>
-                    </choose>
-                    <!-- KO für LED gelb einschalten -->
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000005_R-%T%00000501">
-                      <when test="3">
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000004_R-%T%00000401" />
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601">
+                      <when test="!=0">
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="LED" UIHint="Headline" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000004_R-%T%00000401" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000005_R-%T%00000501" />
+                        <!-- KO für LED Präsenz einschalten -->
+                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000004_R-%T%00000401">
+                          <when test="3">
+                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000003_R-%T%00000301" />
+                          </when>
+                        </choose>
+                        <!-- KO für LED Bewegung einschalten -->
+                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000005_R-%T%00000501">
+                          <when test="3">
+                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%000004_R-%T%00000401" />
+                          </when>
+                        </choose>
                       </when>
                     </choose>
                   </ParameterBlock>
-                </when>
-              </choose>
+                <!-- </when> -->
+              <!-- </choose> -->
             </Channel>
           </Dynamic>
         </ApplicationProgram>

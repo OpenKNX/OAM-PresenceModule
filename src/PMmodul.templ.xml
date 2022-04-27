@@ -11,7 +11,7 @@
       <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="0" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%001" Name="p%C%Presence1Type" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceType" Text="Eingang Präsenz A" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%002" Name="p%C%Presence2Type" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceType" Text="Eingang Präsenz B" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%003" Name="p%C%PresenceIntern" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Hardware Präsenz verwenden?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%004" Name="p%C%PhaseBool" Offset="0" BitOffset="5" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Tagesphasen über Tag-/Nacht-Objekt verfügbar machen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%005" Name="p%C%PhaseCount" Offset="0" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-PhaseCount" Text="Anzahl Tagesphasen" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%006" Name="p%C%Output1Type" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OutputType" Text="Ausgang 1 ist vom Typ" Value="1" />
@@ -26,7 +26,9 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%015" Name="p%C%LockOff" Offset="3" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-LockOff" Text="    Beim AUSschalten wird" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%016" Name="p%C%LockFallback" Offset="3" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="    Mit Rückfallzeit?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%017" Name="p%C%PhaseChange" Offset="3" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-PhaseChange" Text="Neue Tagesphase übernehmen" Value="0" />
-      <!-- 7 Bit frei -->
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%035" Name="p%C%PresenceUsage" Offset="4" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceUsage" Text="Eingebauten Präsenzsensor verwenden?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%036" Name="p%C%PresenceUsagePIR" Offset="4" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceUsagePIR" Text="Eingebauten Präsenzsensor verwenden?" Value="0" />
+      <!-- 2 Bit frei -->
     </Union>
     <!-- Delay patterns (once per channel) -->
     <Union SizeInBit="64">
@@ -309,7 +311,7 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%003" />
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%003" /> -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006" />
@@ -340,6 +342,9 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%032_R-%T%%CCC%03201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%032" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%033_R-%T%%CCC%03301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%033" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%034_R-%T%%CCC%03401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%034" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%035_R-%T%%CCC%03501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%035" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%036_R-%T%%CCC%03601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%036" />
     <!-- Phase 1 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101" />
@@ -497,7 +502,7 @@
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%004" Name="KOp%C%SetManual" Number="%K4%" Text="Manuell übersteuern" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%005" Name="KOp%C%AktorState" Number="%K5%" Text="Aktorstatus" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%006" Name="KOp%C%RecalcLuxOff" Number="%K6%" Text="Ausschalthelligkeit neu berechnen" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-    <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%007" Name="KOp%C%Lock" Number="%K7%" Text="Sperre" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+    <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%007" Name="KOp%C%Lock" Number="%K7%" Text="Sperre" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%008" Name="KOp%C%Reset" Number="%K8%" Text="Reset" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%009" Name="KOp%C%DayPhase" Number="%K9%" Text="Tagesphase" ObjectSize="1 Byte" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-17-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%010" Name="KOp%C%LuxOn" Number="%K10%" Text="Helligkeitsschwelle" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -538,1330 +543,1347 @@
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%015_R-%T%%CCC%01501" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%015" Text="{{0:PM %C%}}: Status Manuell(1)/Automatik(0)" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
   </ComObjectRefs>
   <Dynamic>
-    <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%000001_R-%T%00000101">
-      <when test=">=%C%">
-        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001">
-          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
-          <!-- Channel name -->
-          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
-          <!-- Delay pattern: Channel delay -->
-          <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ChannelDelay" Inline="true" Layout="Grid">
-            <Columns>
-              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-            </Columns>
-            <Rows>
-              <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-            </Rows>
-            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Startverzögerung für diesen Kanal" Cell="1,1" />
-            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%019_R-%T%%CCC%01901" Cell="1,2" />
-            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%018_R-%T%%CCC%01801" Cell="1,3" />
-          </ParameterBlock>
-          <!-- end of delay pattern -->
-          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%008_R-%T%%CCC%00801" />
-          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%008_R-%T%%CCC%00801">
-            <when test="2">
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Wenn ein Kanal funktionslos geschaltet wird, bleiben alle Parameter und GA-Zuweisungen erhalten, ohne dass der Kanal etwas macht. Dies kann bei einer Fehlersuche sinnvoll sein." />
-            </when>
-            <when test=">0">
-              <!-- KO which are always visible -->
-              <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%003_R-%T%%CCC%00301" />
-              <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%004_R-%T%%CCC%00401" />
-              <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%005_R-%T%%CCC%00501" />
-              <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%008_R-%T%%CCC%00801" />
-              <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%011_R-%T%%CCC%01101" />
-              <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%015_R-%T%%CCC%01501" />
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-              <!-- lux settings -->
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hellikeit" UIHint="Headline" />
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901" />
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
-                <when test="0">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%000_R-%T%%CCC%00001" />
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%010_R-%T%%CCC%01001" />
-                </when>
-              </choose>
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-              <!-- Presence input settings -->
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeingänge" UIHint="Headline" />
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" />
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" />
-              <!-- is there also presence hardware -->
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000002_R-%T%00000201">
-                <when test="1">
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%003_R-%T%%CCC%00301" />
-                </when>
-              </choose>
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
-                <when test=">0">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" />
-                </when>
-              </choose>
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
-                <when test=">0">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" />
-                </when>
-              </choose>
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-              <!-- General output settings -->
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgänge" UIHint="Headline" />
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier erfolgen die allgemeinen Einstellungen zu den Ausgängen. In den Tagesphasen wird eingestellt, welche konkreten Werte gesendet werden. " />
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601" />
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                <when test="1">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01301" />
-                </when>
-                <when test="2">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01302" />
-                </when>
-                <when test="3">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01303" />
-                </when>
-                <when test="4">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01304" />
-                </when>
-                <when test=">0">
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001" />
-                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001">
-                    <when test="1">
-                      <!-- Delay pattern: Output 1 Cyclic Send -->
-                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output1Cyclic" Inline="true" Layout="Grid">
-                        <Columns>
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                        </Columns>
-                        <Rows>
-                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                        </Rows>
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%021_R-%T%%CCC%02101" Cell="1,2" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%020_R-%T%%CCC%02001" Cell="1,3" />
-                      </ParameterBlock>
-                      <!-- end of delay pattern -->
-                    </when>
-                  </choose>
-                </when>
-              </choose>
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701" />
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                <when test="1">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01401" />
-                </when>
-                <when test="2">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01402" />
-                </when>
-                <when test="3">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01403" />
-                </when>
-                <when test="4">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01404" />
-                </when>
-                <when test=">0">
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101" />
-                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101">
-                    <when test="1">
-                      <!-- Delay pattern: Output 2 Cyclic Send -->
-                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output2Cyclic" Inline="true" Layout="Grid">
-                        <Columns>
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                        </Columns>
-                        <Rows>
-                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                        </Rows>
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%023_R-%T%%CCC%02301" Cell="1,2" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%022_R-%T%%CCC%02201" Cell="1,3" />
-                      </ParameterBlock>
-                      <!-- end of delay pattern -->
-                    </when>
-                  </choose>
-                </when>
-              </choose>
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-              <!-- Lock -->
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Sperre" UIHint="Headline" />
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201" />
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201">
-                <when test="1">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00702" />
-                </when>
-                <when test="2">
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00701" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%013_R-%T%%CCC%01301" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%014_R-%T%%CCC%01401" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%015_R-%T%%CCC%01501" />
-                </when>
-                <when test=">0">
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%016_R-%T%%CCC%01601" />
-                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%016_R-%T%%CCC%01601">
-                    <when test="1">
-                      <!-- Delay pattern: Lock Fallback Delay -->
-                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%LockFallback" Inline="true" Layout="Grid">
-                        <Columns>
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                        </Columns>
-                        <Rows>
-                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                        </Rows>
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    Rückfall nach" Cell="1,1" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%025_R-%T%%CCC%02501" Cell="1,2" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%024_R-%T%%CCC%02401" Cell="1,3" />
-                      </ParameterBlock>
-                      <!-- end of delay pattern -->
-                    </when>
-                  </choose>
-                </when>
-              </choose>
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-              <!-- Day phases -->
-              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tagesphasen" UIHint="Headline" />
-              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501" />
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501">
-                <when test="0">
-                  <!-- 1 Phase -->
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase1Settings" Inline="true" Layout="Grid">
-                    <Columns>
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
-                    </Columns>
-                    <Rows>
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
-                    </Rows>
-                    <!-- Header -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
-                    <!-- Phase 1 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="nicht aktiv" Cell="2,4" />
-                  </ParameterBlock>
-                </when>
-                <when test=">0">
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%017_R-%T%%CCC%01701" />
-                </when>
-                <when test="1">
-                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Bei 2 Tagesphasen könen diese über Szenen oder über ein Tag-/Nacht-Objekt angewählt werden. Bei Tag-/Nacht-Objekt gilt: 0=Phase 1, 1=Phase 2" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401" />
+    <Channel Id="M-00FA_A-0001-01-0000_CH-PM%C%" Name="f%C%PM" Number="PM%C%" Text="PM %CC%: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001">
+      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001">
+        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
+        <!-- Channel name -->
+        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
+        <!-- Delay pattern: Channel delay -->
+        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ChannelDelay" Inline="true" Layout="Grid">
+          <Columns>
+            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+          </Columns>
+          <Rows>
+            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+          </Rows>
+          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Startverzögerung für diesen Kanal" Cell="1,1" />
+          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%019_R-%T%%CCC%01901" Cell="1,2" />
+          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%018_R-%T%%CCC%01801" Cell="1,3" />
+        </ParameterBlock>
+        <!-- end of delay pattern -->
+        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%008_R-%T%%CCC%00801" />
+        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%008_R-%T%%CCC%00801">
+          <when test="2">
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Wenn ein Kanal funktionslos geschaltet wird, bleiben alle Parameter und GA-Zuweisungen erhalten, ohne dass der Kanal etwas macht. Dies kann bei einer Fehlersuche sinnvoll sein." />
+          </when>
+          <when test=">0">
+            <!-- KO which are always visible -->
+            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%003_R-%T%%CCC%00301" />
+            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%004_R-%T%%CCC%00401" />
+            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%005_R-%T%%CCC%00501" />
+            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%008_R-%T%%CCC%00801" />
+            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%011_R-%T%%CCC%01101" />
+            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%015_R-%T%%CCC%01501" />
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+            <!-- lux settings -->
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hellikeit" UIHint="Headline" />
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901" />
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
+              <when test="0">
+                <!-- is lux dependent -->
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%010_R-%T%%CCC%01001" />
+                <!-- check for hardware lux --> 
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000007_R-%T%00000701">
+                  <when test="0">
+                    <!-- there is no hardware sensor, we use external brightness -->
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                  </when>
+                  <when test="!=0">
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%034_R-%T%%CCC%03401" />
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%034_R-%T%%CCC%03401">
+                      <when test="0">
+                        <!-- the user don't want to use hardware sensor, we use external brightness -->
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                      </when>
+                    </choose>
+                  </when>
+                </choose>
+              </when>
+            </choose>
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+            <!-- Presence input settings -->
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeingänge" UIHint="Headline" />
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" />
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" />
+            <!-- is there also presence hardware -->
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601">
+              <when test="1">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%036_R-%T%%CCC%03601" />
+              </when>
+              <when test="2">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%035_R-%T%%CCC%03501" />
+              </when>
+            </choose>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
+              <when test=">0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" />
+              </when>
+            </choose>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
+              <when test=">0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" />
+              </when>
+            </choose>
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+            <!-- General output settings -->
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgänge" UIHint="Headline" />
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier erfolgen die allgemeinen Einstellungen zu den Ausgängen. In den Tagesphasen wird eingestellt, welche konkreten Werte gesendet werden. " />
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601" />
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+              <when test="1">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01301" />
+              </when>
+              <when test="2">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01302" />
+              </when>
+              <when test="3">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01303" />
+              </when>
+              <when test="4">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01304" />
+              </when>
+              <when test=">0">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001">
+                  <when test="1">
+                    <!-- Delay pattern: Output 1 Cyclic Send -->
+                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output1Cyclic" Inline="true" Layout="Grid">
+                      <Columns>
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                      </Columns>
+                      <Rows>
+                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                      </Rows>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%021_R-%T%%CCC%02101" Cell="1,2" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%020_R-%T%%CCC%02001" Cell="1,3" />
+                    </ParameterBlock>
+                    <!-- end of delay pattern -->
+                  </when>
+                </choose>
+              </when>
+            </choose>
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701" />
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+              <when test="1">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01401" />
+              </when>
+              <when test="2">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01402" />
+              </when>
+              <when test="3">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01403" />
+              </when>
+              <when test="4">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01404" />
+              </when>
+              <when test=">0">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101">
+                  <when test="1">
+                    <!-- Delay pattern: Output 2 Cyclic Send -->
+                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output2Cyclic" Inline="true" Layout="Grid">
+                      <Columns>
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                      </Columns>
+                      <Rows>
+                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                      </Rows>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%023_R-%T%%CCC%02301" Cell="1,2" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%022_R-%T%%CCC%02201" Cell="1,3" />
+                    </ParameterBlock>
+                    <!-- end of delay pattern -->
+                  </when>
+                </choose>
+              </when>
+            </choose>
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+            <!-- Lock -->
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Sperre" UIHint="Headline" />
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201" />
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201">
+              <when test="1">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00702" />
+              </when>
+              <when test="2">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00701" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%013_R-%T%%CCC%01301" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%014_R-%T%%CCC%01401" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%015_R-%T%%CCC%01501" />
+              </when>
+              <when test=">0">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%016_R-%T%%CCC%01601" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%016_R-%T%%CCC%01601">
+                  <when test="1">
+                    <!-- Delay pattern: Lock Fallback Delay -->
+                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%LockFallback" Inline="true" Layout="Grid">
+                      <Columns>
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                      </Columns>
+                      <Rows>
+                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                      </Rows>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    Rückfall nach" Cell="1,1" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%025_R-%T%%CCC%02501" Cell="1,2" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%024_R-%T%%CCC%02401" Cell="1,3" />
+                    </ParameterBlock>
+                    <!-- end of delay pattern -->
+                  </when>
+                </choose>
+              </when>
+            </choose>
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+            <!-- Day phases -->
+            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tagesphasen" UIHint="Headline" />
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501" />
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501">
+              <when test="0">
+                <!-- 1 Phase -->
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase1Settings" Inline="true" Layout="Grid">
+                  <Columns>
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
+                  </Columns>
+                  <Rows>
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
+                  </Rows>
+                  <!-- Header -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
+                  <!-- Phase 1 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="nicht aktiv" Cell="2,4" />
+                </ParameterBlock>
+              </when>
+              <when test=">0">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%017_R-%T%%CCC%01701" />
+              </when>
+              <when test="1">
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Bei 2 Tagesphasen könen diese über Szenen oder über ein Tag-/Nacht-Objekt angewählt werden. Bei Tag-/Nacht-Objekt gilt: 0=Phase 1, 1=Phase 2" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
+                  <when test="0">
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
+                  </when>
+                  <when test="1">
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00902" />
+                  </when>
+                </choose>
+                <!-- 2 Phasen -->
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase2Settings" Inline="true" Layout="Grid">
+                  <Columns>
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
+                  </Columns>
+                  <Rows>
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
+                  </Rows>
+                  <!-- Header -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
                   <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
                     <when test="0">
-                      <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
                     </when>
                     <when test="1">
-                      <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00902" />
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tag/Nacht" Cell="1,4" UIHint="Headline" />
                     </when>
                   </choose>
-                  <!-- 2 Phasen -->
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase2Settings" Inline="true" Layout="Grid">
-                    <Columns>
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
-                    </Columns>
-                    <Rows>
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
-                    </Rows>
-                    <!-- Header -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
-                      </when>
-                      <when test="1">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tag/Nacht" Cell="1,4" UIHint="Headline" />
-                      </when>
-                    </choose>
-                    <!-- Phase 1 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
-                      <when test="0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%030_R-%T%%CCC%03001" Cell="2,4" />
-                      </when>
-                      <when test="1">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="AUS (0)" Cell="2,4" />
-                      </when>
-                    </choose>
-                    <!-- Phase 2 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    2" Cell="3,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701" Cell="3,3" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
-                      <when test="0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" Cell="3,4" />
-                      </when>
-                      <when test="1">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="EIN (1)" Cell="3,4" />
-                      </when>
-                    </choose>
-                  </ParameterBlock>
-                </when>
-                <when test=">1">
-                  <!-- 3 oder mehr Phasen -->
-                  <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
-                </when>
-                <when test="2">
-                  <!-- 3 Phasen -->
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase3Settings" Inline="true" Layout="Grid">
-                    <Columns>
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
-                    </Columns>
-                    <Rows>
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-4" Name="Row3" />
-                    </Rows>
-                    <!-- Header -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
-                    <!-- Phase 1 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%030_R-%T%%CCC%03001" Cell="2,4" />
-                    <!-- Phase 2 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    2" Cell="3,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701" Cell="3,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" Cell="3,4" />
-                    <!-- Phase 3 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    3" Cell="4,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%028_R-%T%%CCC%02801" Cell="4,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%032_R-%T%%CCC%03201" Cell="4,4" />
-                  </ParameterBlock>
-                </when>
-                <when test="3">
-                  <!-- 4 Phasen -->
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase4Settings" Inline="true" Layout="Grid">
-                    <Columns>
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
-                    </Columns>
-                    <Rows>
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-4" Name="Row3" />
-                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-5" Name="Row4" />
-                    </Rows>
-                    <!-- Header -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
-                    <!-- Phase 1 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%030_R-%T%%CCC%03001" Cell="2,4" />
-                    <!-- Phase 2 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    2" Cell="3,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701" Cell="3,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" Cell="3,4" />
-                    <!-- Phase 3 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    3" Cell="4,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%028_R-%T%%CCC%02801" Cell="4,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%032_R-%T%%CCC%03201" Cell="4,4" />
-                    <!-- Phase 4 -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    4" Cell="5,2" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%029_R-%T%%CCC%02901" Cell="5,3" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%033_R-%T%%CCC%03301" Cell="5,4" />
-                  </ParameterBlock>
-                </when>
-              </choose>
+                  <!-- Phase 1 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
+                    <when test="0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%030_R-%T%%CCC%03001" Cell="2,4" />
+                    </when>
+                    <when test="1">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="AUS (0)" Cell="2,4" />
+                    </when>
+                  </choose>
+                  <!-- Phase 2 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    2" Cell="3,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701" Cell="3,3" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
+                    <when test="0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" Cell="3,4" />
+                    </when>
+                    <when test="1">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="EIN (1)" Cell="3,4" />
+                    </when>
+                  </choose>
+                </ParameterBlock>
+              </when>
+              <when test=">1">
+                <!-- 3 oder mehr Phasen -->
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
+              </when>
+              <when test="2">
+                <!-- 3 Phasen -->
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase3Settings" Inline="true" Layout="Grid">
+                  <Columns>
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
+                  </Columns>
+                  <Rows>
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-4" Name="Row3" />
+                  </Rows>
+                  <!-- Header -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
+                  <!-- Phase 1 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%030_R-%T%%CCC%03001" Cell="2,4" />
+                  <!-- Phase 2 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    2" Cell="3,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701" Cell="3,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" Cell="3,4" />
+                  <!-- Phase 3 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    3" Cell="4,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%028_R-%T%%CCC%02801" Cell="4,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%032_R-%T%%CCC%03201" Cell="4,4" />
+                </ParameterBlock>
+              </when>
+              <when test="3">
+                <!-- 4 Phasen -->
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Phase4Settings" Inline="true" Layout="Grid">
+                  <Columns>
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="10%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-4" Name="Col4" Width="20%" />
+                  </Columns>
+                  <Rows>
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="RowHeader" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-2" Name="Row1" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-3" Name="Row2" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-4" Name="Row3" />
+                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-5" Name="Row4" />
+                  </Rows>
+                  <!-- Header -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Phase" Cell="1,2" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Name" Cell="1,3" UIHint="Headline" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Szene" Cell="1,4" UIHint="Headline" />
+                  <!-- Phase 1 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    1" Cell="2,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" Cell="2,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%030_R-%T%%CCC%03001" Cell="2,4" />
+                  <!-- Phase 2 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    2" Cell="3,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701" Cell="3,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%031_R-%T%%CCC%03101" Cell="3,4" />
+                  <!-- Phase 3 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    3" Cell="4,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%028_R-%T%%CCC%02801" Cell="4,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%032_R-%T%%CCC%03201" Cell="4,4" />
+                  <!-- Phase 4 -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="    4" Cell="5,2" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%029_R-%T%%CCC%02901" Cell="5,3" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%033_R-%T%%CCC%03301" Cell="5,4" />
+                </ParameterBlock>
+              </when>
+            </choose>
 
-              <!-- Phase 1 -->
-              <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601">
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
-                  <when test="0">
-                    <!-- Lux send cycle -->
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%115_R-%T%%CCC%11501" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001">
-                      <when test="1">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%116_R-%T%%CCC%11601" />
-                      </when>
-                      <when test="2">
-                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%116_R-%T%%CCC%11602" />
-                        <!-- Delay pattern Presence -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%114_R-%T%%CCC%11401" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%113_R-%T%%CCC%11301" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%104_R-%T%%CCC%10401" />
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                  </when>
-                </choose>
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                <!-- Delay pattern Presence -->
-                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay" Inline="true" Layout="Grid">
-                  <Columns>
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                  </Columns>
-                  <Rows>
-                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                  </Rows>
-                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%108_R-%T%%CCC%10801" Cell="1,2" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%107_R-%T%%CCC%10701" Cell="1,3" />
-                </ParameterBlock>
-                <!-- end of delay pattern -->
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101">
-                  <when test=">0">
-                    <!-- Delay pattern PresenceShortDuration -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%110_R-%T%%CCC%11001" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%109_R-%T%%CCC%10901" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                    <!-- Delay pattern PresenceShortDelay -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%112_R-%T%%CCC%11201" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%111_R-%T%%CCC%11101" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                  </when>
-                </choose>
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                  <when test="0">
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
-                  </when>
-                  <when test=">0">
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%105_R-%T%%CCC%10501" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%105_R-%T%%CCC%10501">
-                      <when test="1">
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                          <when test="1">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%117_R-%T%%CCC%11701" />
-                          </when>
-                          <when test="2">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%118_R-%T%%CCC%11801" />
-                          </when>
-                          <when test="3">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%119_R-%T%%CCC%11901" />
-                          </when>
-                          <when test="4">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%120_R-%T%%CCC%12001" />
-                          </when>
-                        </choose>
-                      </when>
-                      <when test="2">
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                          <when test="1">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%121_R-%T%%CCC%12101" />
-                          </when>
-                          <when test="2">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%122_R-%T%%CCC%12201" />
-                          </when>
-                          <when test="3">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%123_R-%T%%CCC%12301" />
-                          </when>
-                          <when test="4">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%124_R-%T%%CCC%12401" />
-                          </when>
-                        </choose>
-                      </when>
-                      <when test="3">
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                          <when test="1">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%117_R-%T%%CCC%11701" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%121_R-%T%%CCC%12101" />
-                          </when>
-                          <when test="2">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%118_R-%T%%CCC%11801" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%122_R-%T%%CCC%12201" />
-                          </when>
-                          <when test="3">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%119_R-%T%%CCC%11901" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%123_R-%T%%CCC%12301" />
-                          </when>
-                          <when test="4">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%120_R-%T%%CCC%12001" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%124_R-%T%%CCC%12401" />
-                          </when>
-                        </choose>
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%102_R-%T%%CCC%10201" />
-                      </when>
-                    </choose>
-                  </when>
-                </choose>
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                  <when test="0">
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
-                  </when>
-                  <when test=">0">
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%106_R-%T%%CCC%10601" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%106_R-%T%%CCC%10601">
-                      <when test="1">
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                          <when test="1">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%125_R-%T%%CCC%12501" />
-                          </when>
-                          <when test="2">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%126_R-%T%%CCC%12601" />
-                          </when>
-                          <when test="3">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%127_R-%T%%CCC%12701" />
-                          </when>
-                          <when test="4">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%128_R-%T%%CCC%12801" />
-                          </when>
-                        </choose>
-                      </when>
-                      <when test="2">
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                          <when test="1">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%129_R-%T%%CCC%12901" />
-                          </when>
-                          <when test="2">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%130_R-%T%%CCC%13001" />
-                          </when>
-                          <when test="3">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%131_R-%T%%CCC%13101" />
-                          </when>
-                          <when test="4">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%132_R-%T%%CCC%13201" />
-                          </when>
-                        </choose>
-                      </when>
-                      <when test="3">
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                          <when test="1">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%125_R-%T%%CCC%12501" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%129_R-%T%%CCC%12901" />
-                          </when>
-                          <when test="2">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%126_R-%T%%CCC%12601" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%130_R-%T%%CCC%13001" />
-                          </when>
-                          <when test="3">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%127_R-%T%%CCC%12701" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%131_R-%T%%CCC%13101" />
-                          </when>
-                          <when test="4">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%128_R-%T%%CCC%12801" />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%132_R-%T%%CCC%13201" />
-                          </when>
-                        </choose>
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%103_R-%T%%CCC%10301" />
-                      </when>
-                    </choose>
-                  </when>
-                </choose>
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
-                <!-- Delay pattern: ManualFallbackDelay -->
-                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay" Inline="true" Layout="Grid">
-                  <Columns>
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                  </Columns>
-                  <Rows>
-                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                  </Rows>
-                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%134_R-%T%%CCC%13401" Cell="1,2" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%133_R-%T%%CCC%13301" Cell="1,3" />
-                </ParameterBlock>
-                <!-- end of delay pattern -->
-              </ParameterBlock>
-              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501">
-                <!-- Phase 2 -->
-                <when test=">0">
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%12" Name="PM%C%Phase2" Text="Phase 2: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701">
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
-                      <when test="0">
-                        <!-- Lux send cycle -->
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%215_R-%T%%CCC%21501" />
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%200_R-%T%%CCC%20001" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%200_R-%T%%CCC%20001">
-                          <when test="1">
-                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%216_R-%T%%CCC%21601" />
-                          </when>
-                          <when test="2">
-                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
-                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%216_R-%T%%CCC%21602" />
-                            <!-- Delay pattern Presence -->
-                            <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay2" Inline="true" Layout="Grid">
-                              <Columns>
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                              </Columns>
-                              <Rows>
-                                <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                              </Rows>
-                              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
-                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%214_R-%T%%CCC%21401" Cell="1,2" />
-                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%213_R-%T%%CCC%21301" Cell="1,3" />
-                            </ParameterBlock>
-                            <!-- end of delay pattern -->
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%204_R-%T%%CCC%20401" />
-                          </when>
-                        </choose>
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                    <!-- Delay pattern Presence -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%208_R-%T%%CCC%20801" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%207_R-%T%%CCC%20701" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%201_R-%T%%CCC%20101" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%201_R-%T%%CCC%20101">
-                      <when test=">0">
-                        <!-- Delay pattern PresenceShortDuration -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%210_R-%T%%CCC%21001" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%209_R-%T%%CCC%20901" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                        <!-- Delay pattern PresenceShortDelay -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%212_R-%T%%CCC%21201" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%211_R-%T%%CCC%21101" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%205_R-%T%%CCC%20501" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%205_R-%T%%CCC%20501">
-                          <when test="1">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%217_R-%T%%CCC%21701" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%218_R-%T%%CCC%21801" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%219_R-%T%%CCC%21901" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%220_R-%T%%CCC%22001" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="2">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%221_R-%T%%CCC%22101" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%222_R-%T%%CCC%22201" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%223_R-%T%%CCC%22301" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%224_R-%T%%CCC%22401" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="3">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%217_R-%T%%CCC%21701" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%221_R-%T%%CCC%22101" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%218_R-%T%%CCC%21801" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%222_R-%T%%CCC%22201" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%219_R-%T%%CCC%21901" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%223_R-%T%%CCC%22301" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%220_R-%T%%CCC%22001" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%224_R-%T%%CCC%22401" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test=">0">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%202_R-%T%%CCC%20201" />
-                          </when>
-                        </choose>
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%206_R-%T%%CCC%20601" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%206_R-%T%%CCC%20601">
-                          <when test="1">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%225_R-%T%%CCC%22501" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%226_R-%T%%CCC%22601" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%227_R-%T%%CCC%22701" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%228_R-%T%%CCC%22801" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="2">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%229_R-%T%%CCC%22901" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%230_R-%T%%CCC%23001" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%231_R-%T%%CCC%23101" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%232_R-%T%%CCC%23201" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="3">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%225_R-%T%%CCC%22501" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%229_R-%T%%CCC%22901" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%226_R-%T%%CCC%22601" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%230_R-%T%%CCC%23001" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%227_R-%T%%CCC%22701" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%231_R-%T%%CCC%23101" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%228_R-%T%%CCC%22801" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%232_R-%T%%CCC%23201" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test=">0">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%203_R-%T%%CCC%20301" />
-                          </when>
-                        </choose>
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
-                    <!-- Delay pattern: ManualFallbackDelay -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay2" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%234_R-%T%%CCC%23401" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%233_R-%T%%CCC%23301" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                  </ParameterBlock>
-                </when>
-                <!-- Phase 3 -->
-                <when test=">1">
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%13" Name="PM%C%Phase3" Text="Phase 3: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%028_R-%T%%CCC%02801">
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
-                      <when test="0">
-                        <!-- Lux send cycle -->
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%315_R-%T%%CCC%31501" />
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%300_R-%T%%CCC%30001" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%300_R-%T%%CCC%30001">
-                          <when test="1">
-                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%316_R-%T%%CCC%31601" />
-                          </when>
-                          <when test="2">
-                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
-                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%316_R-%T%%CCC%31602" />
-                            <!-- Delay pattern Presence -->
-                            <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay2" Inline="true" Layout="Grid">
-                              <Columns>
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                              </Columns>
-                              <Rows>
-                                <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                              </Rows>
-                              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
-                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%314_R-%T%%CCC%31401" Cell="1,2" />
-                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%313_R-%T%%CCC%31301" Cell="1,3" />
-                            </ParameterBlock>
-                            <!-- end of delay pattern -->
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%304_R-%T%%CCC%30401" />
-                          </when>
-                        </choose>
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                    <!-- Delay pattern Presence -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%308_R-%T%%CCC%30801" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%307_R-%T%%CCC%30701" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%301_R-%T%%CCC%30101" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%301_R-%T%%CCC%30101">
-                      <when test=">0">
-                        <!-- Delay pattern PresenceShortDuration -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%310_R-%T%%CCC%31001" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%309_R-%T%%CCC%30901" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                        <!-- Delay pattern PresenceShortDelay -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%312_R-%T%%CCC%31201" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%311_R-%T%%CCC%31101" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%305_R-%T%%CCC%30501" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%305_R-%T%%CCC%30501">
-                          <when test="1">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%317_R-%T%%CCC%31701" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%318_R-%T%%CCC%31801" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%319_R-%T%%CCC%31901" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%320_R-%T%%CCC%32001" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="2">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%321_R-%T%%CCC%32101" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%322_R-%T%%CCC%32201" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%323_R-%T%%CCC%32301" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%324_R-%T%%CCC%32401" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="3">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%317_R-%T%%CCC%31701" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%321_R-%T%%CCC%32101" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%318_R-%T%%CCC%31801" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%322_R-%T%%CCC%32201" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%319_R-%T%%CCC%31901" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%323_R-%T%%CCC%32301" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%320_R-%T%%CCC%32001" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%324_R-%T%%CCC%32401" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test=">0">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%302_R-%T%%CCC%30201" />
-                          </when>
-                        </choose>
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%306_R-%T%%CCC%30601" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%306_R-%T%%CCC%30601">
-                          <when test="1">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%325_R-%T%%CCC%32501" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%326_R-%T%%CCC%32601" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%327_R-%T%%CCC%32701" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%328_R-%T%%CCC%32801" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="2">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%329_R-%T%%CCC%32901" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%330_R-%T%%CCC%33001" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%331_R-%T%%CCC%33101" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%332_R-%T%%CCC%33201" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="3">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%325_R-%T%%CCC%32501" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%329_R-%T%%CCC%32901" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%326_R-%T%%CCC%32601" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%330_R-%T%%CCC%33001" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%327_R-%T%%CCC%32701" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%331_R-%T%%CCC%33101" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%328_R-%T%%CCC%32801" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%332_R-%T%%CCC%33201" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test=">0">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%303_R-%T%%CCC%30301" />
-                          </when>
-                        </choose>
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
-                    <!-- Delay pattern: ManualFallbackDelay -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay2" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%334_R-%T%%CCC%33401" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%333_R-%T%%CCC%33301" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                  </ParameterBlock>
-                </when>
-                <!-- Phase 4 -->
-                <when test=">2">
-                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%14" Name="PM%C%Phase4" Text="Phase 4: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%029_R-%T%%CCC%02901">
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
-                      <when test="0">
-                        <!-- Lux send cycle -->
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%415_R-%T%%CCC%41501" />
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%400_R-%T%%CCC%40001" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%400_R-%T%%CCC%40001">
-                          <when test="1">
-                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%416_R-%T%%CCC%41601" />
-                          </when>
-                          <when test="2">
-                            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
-                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%416_R-%T%%CCC%41602" />
-                            <!-- Delay pattern Presence -->
-                            <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay2" Inline="true" Layout="Grid">
-                              <Columns>
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
-                              </Columns>
-                              <Rows>
-                                <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                              </Rows>
-                              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
-                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%414_R-%T%%CCC%41401" Cell="1,2" />
-                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%413_R-%T%%CCC%41301" Cell="1,3" />
-                            </ParameterBlock>
-                            <!-- end of delay pattern -->
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%404_R-%T%%CCC%40401" />
-                          </when>
-                        </choose>
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                    <!-- Delay pattern Presence -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%408_R-%T%%CCC%40801" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%407_R-%T%%CCC%40701" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%401_R-%T%%CCC%40101" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%401_R-%T%%CCC%40101">
-                      <when test=">0">
-                        <!-- Delay pattern PresenceShortDuration -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%410_R-%T%%CCC%41001" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%409_R-%T%%CCC%40901" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                        <!-- Delay pattern PresenceShortDelay -->
-                        <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
-                          <Columns>
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                            <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                          </Columns>
-                          <Rows>
-                            <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                          </Rows>
-                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%412_R-%T%%CCC%41201" Cell="1,2" />
-                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%411_R-%T%%CCC%41101" Cell="1,3" />
-                        </ParameterBlock>
-                        <!-- end of delay pattern -->
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%405_R-%T%%CCC%40501" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%405_R-%T%%CCC%40501">
-                          <when test="1">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%417_R-%T%%CCC%41701" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%418_R-%T%%CCC%41801" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%419_R-%T%%CCC%41901" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%420_R-%T%%CCC%42001" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="2">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%421_R-%T%%CCC%42101" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%422_R-%T%%CCC%42201" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%423_R-%T%%CCC%42301" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%424_R-%T%%CCC%42401" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="3">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%417_R-%T%%CCC%41701" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%421_R-%T%%CCC%42101" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%418_R-%T%%CCC%41801" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%422_R-%T%%CCC%42201" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%419_R-%T%%CCC%41901" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%423_R-%T%%CCC%42301" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%420_R-%T%%CCC%42001" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%424_R-%T%%CCC%42401" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test=">0">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%402_R-%T%%CCC%40201" />
-                          </when>
-                        </choose>
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                      <when test="0">
-                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
-                      </when>
-                      <when test=">0">
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%406_R-%T%%CCC%40601" />
-                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%406_R-%T%%CCC%40601">
-                          <when test="1">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%425_R-%T%%CCC%42501" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%426_R-%T%%CCC%42601" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%427_R-%T%%CCC%42701" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%428_R-%T%%CCC%42801" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="2">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%429_R-%T%%CCC%42901" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%430_R-%T%%CCC%43001" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%431_R-%T%%CCC%43101" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%432_R-%T%%CCC%43201" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test="3">
-                            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
-                              <when test="1">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%425_R-%T%%CCC%42501" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%429_R-%T%%CCC%42901" />
-                              </when>
-                              <when test="2">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%426_R-%T%%CCC%42601" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%430_R-%T%%CCC%43001" />
-                              </when>
-                              <when test="3">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%427_R-%T%%CCC%42701" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%431_R-%T%%CCC%43101" />
-                              </when>
-                              <when test="4">
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%428_R-%T%%CCC%42801" />
-                                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%432_R-%T%%CCC%43201" />
-                              </when>
-                            </choose>
-                          </when>
-                          <when test=">0">
-                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%403_R-%T%%CCC%40301" />
-                          </when>
-                        </choose>
-                      </when>
-                    </choose>
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
-                    <!-- Delay pattern: ManualFallbackDelay -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay2" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%434_R-%T%%CCC%43401" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%433_R-%T%%CCC%43301" Cell="1,3" />
-                    </ParameterBlock>
-                    <!-- end of delay pattern -->
-                  </ParameterBlock>
+            <!-- Phase 1 -->
+            <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601">
+              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
+                <when test="0">
+                  <!-- Lux send cycle -->
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%115_R-%T%%CCC%11501" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001">
+                    <when test="1">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%116_R-%T%%CCC%11601" />
+                    </when>
+                    <when test="2">
+                      <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%116_R-%T%%CCC%11602" />
+                      <!-- Delay pattern Presence -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%114_R-%T%%CCC%11401" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%113_R-%T%%CCC%11301" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%104_R-%T%%CCC%10401" />
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 </when>
               </choose>
-            </when>
-          </choose>
-        </ParameterBlock>
-      </when>
-    </choose>
+              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+              <!-- Delay pattern Presence -->
+              <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay" Inline="true" Layout="Grid">
+                <Columns>
+                  <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                  <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                  <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                </Columns>
+                <Rows>
+                  <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                </Rows>
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%108_R-%T%%CCC%10801" Cell="1,2" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%107_R-%T%%CCC%10701" Cell="1,3" />
+              </ParameterBlock>
+              <!-- end of delay pattern -->
+              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101" />
+              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101">
+                <when test=">0">
+                  <!-- Delay pattern PresenceShortDuration -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%110_R-%T%%CCC%11001" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%109_R-%T%%CCC%10901" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                  <!-- Delay pattern PresenceShortDelay -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%112_R-%T%%CCC%11201" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%111_R-%T%%CCC%11101" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                </when>
+              </choose>
+              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
+              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                <when test="0">
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
+                </when>
+                <when test=">0">
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%105_R-%T%%CCC%10501" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%105_R-%T%%CCC%10501">
+                    <when test="1">
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                        <when test="1">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%117_R-%T%%CCC%11701" />
+                        </when>
+                        <when test="2">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%118_R-%T%%CCC%11801" />
+                        </when>
+                        <when test="3">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%119_R-%T%%CCC%11901" />
+                        </when>
+                        <when test="4">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%120_R-%T%%CCC%12001" />
+                        </when>
+                      </choose>
+                    </when>
+                    <when test="2">
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                        <when test="1">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%121_R-%T%%CCC%12101" />
+                        </when>
+                        <when test="2">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%122_R-%T%%CCC%12201" />
+                        </when>
+                        <when test="3">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%123_R-%T%%CCC%12301" />
+                        </when>
+                        <when test="4">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%124_R-%T%%CCC%12401" />
+                        </when>
+                      </choose>
+                    </when>
+                    <when test="3">
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                        <when test="1">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%117_R-%T%%CCC%11701" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%121_R-%T%%CCC%12101" />
+                        </when>
+                        <when test="2">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%118_R-%T%%CCC%11801" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%122_R-%T%%CCC%12201" />
+                        </when>
+                        <when test="3">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%119_R-%T%%CCC%11901" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%123_R-%T%%CCC%12301" />
+                        </when>
+                        <when test="4">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%120_R-%T%%CCC%12001" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%124_R-%T%%CCC%12401" />
+                        </when>
+                      </choose>
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%102_R-%T%%CCC%10201" />
+                    </when>
+                  </choose>
+                </when>
+              </choose>
+              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
+              <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                <when test="0">
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
+                </when>
+                <when test=">0">
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%106_R-%T%%CCC%10601" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%106_R-%T%%CCC%10601">
+                    <when test="1">
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                        <when test="1">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%125_R-%T%%CCC%12501" />
+                        </when>
+                        <when test="2">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%126_R-%T%%CCC%12601" />
+                        </when>
+                        <when test="3">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%127_R-%T%%CCC%12701" />
+                        </when>
+                        <when test="4">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%128_R-%T%%CCC%12801" />
+                        </when>
+                      </choose>
+                    </when>
+                    <when test="2">
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                        <when test="1">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%129_R-%T%%CCC%12901" />
+                        </when>
+                        <when test="2">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%130_R-%T%%CCC%13001" />
+                        </when>
+                        <when test="3">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%131_R-%T%%CCC%13101" />
+                        </when>
+                        <when test="4">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%132_R-%T%%CCC%13201" />
+                        </when>
+                      </choose>
+                    </when>
+                    <when test="3">
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                        <when test="1">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%125_R-%T%%CCC%12501" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%129_R-%T%%CCC%12901" />
+                        </when>
+                        <when test="2">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%126_R-%T%%CCC%12601" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%130_R-%T%%CCC%13001" />
+                        </when>
+                        <when test="3">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%127_R-%T%%CCC%12701" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%131_R-%T%%CCC%13101" />
+                        </when>
+                        <when test="4">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%128_R-%T%%CCC%12801" />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%132_R-%T%%CCC%13201" />
+                        </when>
+                      </choose>
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%103_R-%T%%CCC%10301" />
+                    </when>
+                  </choose>
+                </when>
+              </choose>
+              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+              <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
+              <!-- Delay pattern: ManualFallbackDelay -->
+              <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay" Inline="true" Layout="Grid">
+                <Columns>
+                  <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                  <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                  <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                </Columns>
+                <Rows>
+                  <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                </Rows>
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%134_R-%T%%CCC%13401" Cell="1,2" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%133_R-%T%%CCC%13301" Cell="1,3" />
+              </ParameterBlock>
+              <!-- end of delay pattern -->
+            </ParameterBlock>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501">
+              <!-- Phase 2 -->
+              <when test=">0">
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%12" Name="PM%C%Phase2" Text="Phase 2: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%027_R-%T%%CCC%02701">
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
+                    <when test="0">
+                      <!-- Lux send cycle -->
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%215_R-%T%%CCC%21501" />
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%200_R-%T%%CCC%20001" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%200_R-%T%%CCC%20001">
+                        <when test="1">
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%216_R-%T%%CCC%21601" />
+                        </when>
+                        <when test="2">
+                          <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%216_R-%T%%CCC%21602" />
+                          <!-- Delay pattern Presence -->
+                          <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay2" Inline="true" Layout="Grid">
+                            <Columns>
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                            </Columns>
+                            <Rows>
+                              <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                            </Rows>
+                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%214_R-%T%%CCC%21401" Cell="1,2" />
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%213_R-%T%%CCC%21301" Cell="1,3" />
+                          </ParameterBlock>
+                          <!-- end of delay pattern -->
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%204_R-%T%%CCC%20401" />
+                        </when>
+                      </choose>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                  <!-- Delay pattern Presence -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%208_R-%T%%CCC%20801" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%207_R-%T%%CCC%20701" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%201_R-%T%%CCC%20101" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%201_R-%T%%CCC%20101">
+                    <when test=">0">
+                      <!-- Delay pattern PresenceShortDuration -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%210_R-%T%%CCC%21001" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%209_R-%T%%CCC%20901" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                      <!-- Delay pattern PresenceShortDelay -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%212_R-%T%%CCC%21201" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%211_R-%T%%CCC%21101" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                    <when test="0">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%205_R-%T%%CCC%20501" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%205_R-%T%%CCC%20501">
+                        <when test="1">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%217_R-%T%%CCC%21701" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%218_R-%T%%CCC%21801" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%219_R-%T%%CCC%21901" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%220_R-%T%%CCC%22001" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="2">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%221_R-%T%%CCC%22101" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%222_R-%T%%CCC%22201" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%223_R-%T%%CCC%22301" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%224_R-%T%%CCC%22401" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="3">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%217_R-%T%%CCC%21701" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%221_R-%T%%CCC%22101" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%218_R-%T%%CCC%21801" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%222_R-%T%%CCC%22201" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%219_R-%T%%CCC%21901" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%223_R-%T%%CCC%22301" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%220_R-%T%%CCC%22001" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%224_R-%T%%CCC%22401" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test=">0">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%202_R-%T%%CCC%20201" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                    <when test="0">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%206_R-%T%%CCC%20601" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%206_R-%T%%CCC%20601">
+                        <when test="1">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%225_R-%T%%CCC%22501" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%226_R-%T%%CCC%22601" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%227_R-%T%%CCC%22701" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%228_R-%T%%CCC%22801" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="2">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%229_R-%T%%CCC%22901" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%230_R-%T%%CCC%23001" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%231_R-%T%%CCC%23101" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%232_R-%T%%CCC%23201" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="3">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%225_R-%T%%CCC%22501" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%229_R-%T%%CCC%22901" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%226_R-%T%%CCC%22601" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%230_R-%T%%CCC%23001" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%227_R-%T%%CCC%22701" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%231_R-%T%%CCC%23101" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%228_R-%T%%CCC%22801" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%232_R-%T%%CCC%23201" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test=">0">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%203_R-%T%%CCC%20301" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
+                  <!-- Delay pattern: ManualFallbackDelay -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay2" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%234_R-%T%%CCC%23401" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%233_R-%T%%CCC%23301" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                </ParameterBlock>
+              </when>
+              <!-- Phase 3 -->
+              <when test=">1">
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%13" Name="PM%C%Phase3" Text="Phase 3: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%028_R-%T%%CCC%02801">
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
+                    <when test="0">
+                      <!-- Lux send cycle -->
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%315_R-%T%%CCC%31501" />
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%300_R-%T%%CCC%30001" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%300_R-%T%%CCC%30001">
+                        <when test="1">
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%316_R-%T%%CCC%31601" />
+                        </when>
+                        <when test="2">
+                          <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%316_R-%T%%CCC%31602" />
+                          <!-- Delay pattern Presence -->
+                          <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay2" Inline="true" Layout="Grid">
+                            <Columns>
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                            </Columns>
+                            <Rows>
+                              <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                            </Rows>
+                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%314_R-%T%%CCC%31401" Cell="1,2" />
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%313_R-%T%%CCC%31301" Cell="1,3" />
+                          </ParameterBlock>
+                          <!-- end of delay pattern -->
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%304_R-%T%%CCC%30401" />
+                        </when>
+                      </choose>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                  <!-- Delay pattern Presence -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%308_R-%T%%CCC%30801" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%307_R-%T%%CCC%30701" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%301_R-%T%%CCC%30101" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%301_R-%T%%CCC%30101">
+                    <when test=">0">
+                      <!-- Delay pattern PresenceShortDuration -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%310_R-%T%%CCC%31001" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%309_R-%T%%CCC%30901" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                      <!-- Delay pattern PresenceShortDelay -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%312_R-%T%%CCC%31201" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%311_R-%T%%CCC%31101" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                    <when test="0">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%305_R-%T%%CCC%30501" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%305_R-%T%%CCC%30501">
+                        <when test="1">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%317_R-%T%%CCC%31701" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%318_R-%T%%CCC%31801" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%319_R-%T%%CCC%31901" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%320_R-%T%%CCC%32001" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="2">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%321_R-%T%%CCC%32101" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%322_R-%T%%CCC%32201" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%323_R-%T%%CCC%32301" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%324_R-%T%%CCC%32401" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="3">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%317_R-%T%%CCC%31701" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%321_R-%T%%CCC%32101" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%318_R-%T%%CCC%31801" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%322_R-%T%%CCC%32201" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%319_R-%T%%CCC%31901" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%323_R-%T%%CCC%32301" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%320_R-%T%%CCC%32001" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%324_R-%T%%CCC%32401" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test=">0">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%302_R-%T%%CCC%30201" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                    <when test="0">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%306_R-%T%%CCC%30601" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%306_R-%T%%CCC%30601">
+                        <when test="1">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%325_R-%T%%CCC%32501" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%326_R-%T%%CCC%32601" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%327_R-%T%%CCC%32701" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%328_R-%T%%CCC%32801" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="2">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%329_R-%T%%CCC%32901" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%330_R-%T%%CCC%33001" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%331_R-%T%%CCC%33101" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%332_R-%T%%CCC%33201" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="3">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%325_R-%T%%CCC%32501" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%329_R-%T%%CCC%32901" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%326_R-%T%%CCC%32601" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%330_R-%T%%CCC%33001" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%327_R-%T%%CCC%32701" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%331_R-%T%%CCC%33101" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%328_R-%T%%CCC%32801" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%332_R-%T%%CCC%33201" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test=">0">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%303_R-%T%%CCC%30301" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
+                  <!-- Delay pattern: ManualFallbackDelay -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay2" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%334_R-%T%%CCC%33401" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%333_R-%T%%CCC%33301" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                </ParameterBlock>
+              </when>
+              <!-- Phase 4 -->
+              <when test=">2">
+                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%14" Name="PM%C%Phase4" Text="Phase 4: {{0:unbenannt}}" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%029_R-%T%%CCC%02901">
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
+                    <when test="0">
+                      <!-- Lux send cycle -->
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%415_R-%T%%CCC%41501" />
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%400_R-%T%%CCC%40001" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%400_R-%T%%CCC%40001">
+                        <when test="1">
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%416_R-%T%%CCC%41601" />
+                        </when>
+                        <when test="2">
+                          <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%006_R-%T%%CCC%00601" />
+                          <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%416_R-%T%%CCC%41602" />
+                          <!-- Delay pattern Presence -->
+                          <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessAdaptiveDelay2" Inline="true" Layout="Grid">
+                            <Columns>
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                              <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="25%" />
+                            </Columns>
+                            <Rows>
+                              <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                            </Rows>
+                            <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit zur Helligkeitsanpassung" Cell="1,1" />
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%414_R-%T%%CCC%41401" Cell="1,2" />
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%413_R-%T%%CCC%41301" Cell="1,3" />
+                          </ParameterBlock>
+                          <!-- end of delay pattern -->
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%404_R-%T%%CCC%40401" />
+                        </when>
+                      </choose>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                  <!-- Delay pattern Presence -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%408_R-%T%%CCC%40801" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%407_R-%T%%CCC%40701" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%401_R-%T%%CCC%40101" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%401_R-%T%%CCC%40101">
+                    <when test=">0">
+                      <!-- Delay pattern PresenceShortDuration -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%410_R-%T%%CCC%41001" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%409_R-%T%%CCC%40901" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                      <!-- Delay pattern PresenceShortDelay -->
+                      <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
+                        <Columns>
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                          <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                        </Columns>
+                        <Rows>
+                          <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                        </Rows>
+                        <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%412_R-%T%%CCC%41201" Cell="1,2" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%411_R-%T%%CCC%41101" Cell="1,3" />
+                      </ParameterBlock>
+                      <!-- end of delay pattern -->
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                    <when test="0">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 1 ist nicht aktiv" />
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%405_R-%T%%CCC%40501" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%405_R-%T%%CCC%40501">
+                        <when test="1">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%417_R-%T%%CCC%41701" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%418_R-%T%%CCC%41801" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%419_R-%T%%CCC%41901" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%420_R-%T%%CCC%42001" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="2">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%421_R-%T%%CCC%42101" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%422_R-%T%%CCC%42201" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%423_R-%T%%CCC%42301" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%424_R-%T%%CCC%42401" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="3">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%417_R-%T%%CCC%41701" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%421_R-%T%%CCC%42101" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%418_R-%T%%CCC%41801" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%422_R-%T%%CCC%42201" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%419_R-%T%%CCC%41901" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%423_R-%T%%CCC%42301" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%420_R-%T%%CCC%42001" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%424_R-%T%%CCC%42401" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test=">0">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%402_R-%T%%CCC%40201" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2" UIHint="Headline" />
+                  <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                    <when test="0">
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Ausgang 2 ist nicht aktiv" />
+                    </when>
+                    <when test=">0">
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%406_R-%T%%CCC%40601" />
+                      <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%406_R-%T%%CCC%40601">
+                        <when test="1">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%425_R-%T%%CCC%42501" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%426_R-%T%%CCC%42601" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%427_R-%T%%CCC%42701" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%428_R-%T%%CCC%42801" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="2">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%429_R-%T%%CCC%42901" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%430_R-%T%%CCC%43001" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%431_R-%T%%CCC%43101" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%432_R-%T%%CCC%43201" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test="3">
+                          <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
+                            <when test="1">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%425_R-%T%%CCC%42501" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%429_R-%T%%CCC%42901" />
+                            </when>
+                            <when test="2">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%426_R-%T%%CCC%42601" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%430_R-%T%%CCC%43001" />
+                            </when>
+                            <when test="3">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%427_R-%T%%CCC%42701" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%431_R-%T%%CCC%43101" />
+                            </when>
+                            <when test="4">
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%428_R-%T%%CCC%42801" />
+                              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%432_R-%T%%CCC%43201" />
+                            </when>
+                          </choose>
+                        </when>
+                        <when test=">0">
+                          <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%403_R-%T%%CCC%40301" />
+                        </when>
+                      </choose>
+                    </when>
+                  </choose>
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuelle Bedienung" UIHint="Headline" />
+                  <!-- Delay pattern: ManualFallbackDelay -->
+                  <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%ManualFallbackDelay2" Inline="true" Layout="Grid">
+                    <Columns>
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                      <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                    </Columns>
+                    <Rows>
+                      <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                    </Rows>
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%434_R-%T%%CCC%43401" Cell="1,2" />
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%433_R-%T%%CCC%43301" Cell="1,3" />
+                  </ParameterBlock>
+                  <!-- end of delay pattern -->
+                </ParameterBlock>
+              </when>
+            </choose>
+          </when>
+        </choose>
+      </ParameterBlock>
+    </Channel>
   </Dynamic>
 </KNX>

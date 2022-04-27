@@ -35,6 +35,11 @@
 #define VAL_PM_PresenceTypeSwitch 1
 #define VAL_PM_PresenceTypeTrigger 2
 
+// presence usage
+#define VAL_PM_PresenceUsageNone 0
+#define VAL_PM_PresenceUsageMove 1
+#define VAL_PM_PresenceUsagePresence 2
+
 // output index, there are 2 outputs
 #define VAL_PM_Output1Index 0
 #define VAL_PM_Output2Index 1

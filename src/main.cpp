@@ -12,8 +12,6 @@ void setup()
 #ifdef ARDUINO_ARCH_RP2040
     Serial1.setRX(KNX_UART_RX_PIN);
     Serial1.setTX(KNX_UART_TX_PIN);
-    Serial2.setRX(HF_UART_RX_PIN);
-    Serial2.setTX(HF_UART_TX_PIN);
 #endif
     SERIAL_DEBUG.begin(115200);
     pinMode(PROG_LED_PIN, OUTPUT);
@@ -21,6 +19,8 @@ void setup()
     delay(DEBUG_DELAY);
     digitalWrite(PROG_LED_PIN, LOW);
 #ifdef HF_POWER_PIN
+    Serial2.setRX(HF_UART_RX_PIN);
+    Serial2.setTX(HF_UART_TX_PIN);
     pinMode(PRESENCE_LED_PIN, OUTPUT);
     pinMode(MOVE_LED_PIN, OUTPUT);
     pinMode(HF_S1_PIN, INPUT);
