@@ -92,6 +92,8 @@ class PresenceChannel
     void processStartup();
 
     bool getRawPresence();
+    bool getHardwarePresence();
+    void startHardwarePresence();
     void startPresenceTrigger();
     void startPresence(uint8_t iPresenceType, GroupObject &iKo);
     void startPresence(bool iForce = false);

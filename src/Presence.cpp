@@ -33,10 +33,19 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
     if (iBuffer[0] == 'p')
     {
         uint8_t lIndex = (iBuffer[1] - '0') * 10 + iBuffer[2] - '0' - 1;
-        if (lIndex >= 0 && lIndex < mNumChannels) {
+        if (lIndex >= 0 && lIndex < mNumChannels) 
+        {
             // this is a channel request
             lOutput = mChannel[lIndex]->processDiagnoseCommand(iBuffer);
-        } else { 
+        }
+        else if (iBuffer[1] == 'l')
+        {
+            // output hardware move/presence state
+            sprintf(iBuffer, "Move %d, Pres %d", mMove, mPresence);
+            lOutput = true;
+        }
+        else
+        {
             // Command start with p are presence diagnose commands
             // there are no
             sprintf(iBuffer, "p: bad args");
@@ -126,12 +135,16 @@ void Presence::processHardwarePresence()
                     mPresence = lPresence;
                     digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == mPresence);
                     knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
+                    if (mPresence)
+                        PresenceTrigger = true;
                 }
                 if (lMove != mMove) 
                 {
                     mMove = lMove;
                     digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (mMove > 0));
                     knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
+                    if (mMove)
+                        MoveTrigger = true;
                 }
             }
         }
@@ -216,6 +229,8 @@ void Presence::loop()
         lChannel->loop();
         // loopSubmodules();
     }
+    PresenceTrigger = false;
+    MoveTrigger = false;
 }
 
 void Presence::setup()
@@ -225,7 +240,7 @@ void Presence::setup()
     {
         // setup channels, not possible in constructor, because knx is not configured there
         // get number of channels from knxprod
-        mNumChannels = knx.paramByte(PM_PMChannels);
+        mNumChannels = PM_ChannelCount; // knx.paramByte(PM_PMChannels);
         if (PM_ChannelCount < mNumChannels)
         {
             char lErrorText[80];

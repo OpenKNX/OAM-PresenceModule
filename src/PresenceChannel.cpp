@@ -184,7 +184,7 @@ void PresenceChannel::processStartup()
         // we waited enough, remove State marker
         pCurrentState &= ~STATE_STARTUP;
         // set running state if the channel is active
-        if (paramBit(PM_pChannelActive, PM_pChannelActiveMask))
+        if (paramByte(PM_pChannelActive, PM_pChannelActiveMask, PM_pChannelActiveShift) == PM_VAL_ActiveYes)
             pCurrentState |= STATE_RUNNING;
         pOnDelay = 0;
     }
@@ -259,9 +259,18 @@ bool PresenceChannel::getRawPresence()
 {
     bool lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1)) || getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
     // if hardware presence sensor is available, we evaluate its value
-    if (!lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsage, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
+    if (!lPresence)
+        lPresence = getHardwarePresence();
+    return lPresence;
+}
+
+bool PresenceChannel::getHardwarePresence()
+{
+    // if hardware presence sensor is available, we evaluate its value
+    bool lPresence = false;
+    if (paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
         lPresence = sPresence->getHardwareMove();
-    if (!lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsage, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
+    if (!lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
         lPresence = sPresence->getHardwarePresence();
     return lPresence;
 }
@@ -270,7 +279,17 @@ bool PresenceChannel::getRawPresence()
 void PresenceChannel::startPresenceTrigger()
 {
     startPresence(true);
-    startPresence(false);
+    // startPresence(false);
+    pPresenceDelayTime = millis();
+    if (pPresenceDelayTime == 0)
+        pPresenceDelayTime = 1; // prevent the rare case of millis() == 0
+}
+
+void PresenceChannel::startHardwarePresence() 
+{
+    if (sPresence->PresenceTrigger || sPresence->MoveTrigger)
+        if (getHardwarePresence()) 
+            startPresenceTrigger();
 }
 
 // helper entry point for presence calculation initiated by a KO
@@ -711,7 +730,7 @@ void PresenceChannel::loop()
     if (!knx.configured())
         return;
 
-    if (paramByte(PM_pChannelActive, PM_pLockActiveMask, PM_pLockActiveShift) == PM_VAL_ActiveDisabled)
+    if (paramByte(PM_pChannelActive, PM_pChannelActiveMask, PM_pChannelActiveShift) != PM_VAL_ActiveYes)
         return;
 
     // here we do the things after setup, but only once in the loop()
@@ -727,6 +746,9 @@ void PresenceChannel::loop()
     // do no further processing until channel passed its startup time
     if (pCurrentState & STATE_RUNNING)
     {
+        // first we handle presence hardware
+        startHardwarePresence();
+
         // we revert the processing order for pipeline events
         // this reduces the chance to have a long running
         // sequence of funtions because of according pipeline settings

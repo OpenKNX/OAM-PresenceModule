@@ -12,6 +12,8 @@ public:
 
     // static
     // instance
+    bool PresenceTrigger = false;
+    bool MoveTrigger = false;
     bool getHardwarePresence();
     bool getHardwareMove();
     void processReadRequests();

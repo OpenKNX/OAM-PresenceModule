@@ -5,4 +5,5 @@
 .vscode/ipch
 **/*.knxprod
 **/*.debug.xml
+release/*
 doc/TP_Radar_Sensor/*
