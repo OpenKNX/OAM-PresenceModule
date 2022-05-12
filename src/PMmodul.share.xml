@@ -76,8 +76,8 @@
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-StatusLED" Name="StatusLED">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-0" />
-                  <Enumeration Text="aktiv bei Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-1" />
-                  <Enumeration Text="aktiv bei Bewegung, nur Tagsüber" Value="2" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-2" />
+                  <Enumeration Text="aktiv über Hardwae-Präsenz" Value="1" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-1" />
+                  <Enumeration Text="aktiv über Tagesphase" Value="2" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-2" />
                   <Enumeration Text="aktiv über externes Objekt" Value="3" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-3" />
                 </TypeRestriction>
               </ParameterType>
@@ -86,7 +86,7 @@
                   <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-0" />
                   <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-1" />
                   <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-2" />
-                </TypeRestriction>
+                </TypeRestriction> 
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceUsage" Name="PresenceUsage">
                 <TypeRestriction Base="Value" SizeInBit="2">

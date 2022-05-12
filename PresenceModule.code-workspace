@@ -30,6 +30,7 @@
 			"ranges": "cpp",
 			"istream": "cpp",
 			"ostream": "cpp"
-		}
+		},
+		"cSpell.language": "en,de-DE"
 	}
 }

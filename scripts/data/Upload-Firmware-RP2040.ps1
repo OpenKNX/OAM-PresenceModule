@@ -1,5 +1,7 @@
 Import-Module BitsTransfer
 
+$firmwareName = $args[0]
+
 Write-Host Suche RP2040 als Disk-Laufwerk...
 $device=$(Get-WmiObject Win32_LogicalDisk | Where-Object { $_.VolumeName -match "RPI-RP2" })
 if (!$device)
@@ -34,7 +36,7 @@ if (!$device)
 if ($device)
 {
     Write-Host Installiere firmware...
-    Start-BitsTransfer -Source data/firmware.uf2 -Destination $device.DeviceID.ToString() -Description "Installiere" -DisplayName "Installiere Firmware..."
+    Start-BitsTransfer -Source data/$firmwareName -Destination $device.DeviceID.ToString() -Description "Installiere" -DisplayName "Installiere Firmware..."
     # Copy-Item data/firmware.uf2 $device.DeviceID.ToString()
      Write-Host Fertig!
 }
