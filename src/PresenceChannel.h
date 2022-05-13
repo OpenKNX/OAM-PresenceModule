@@ -67,6 +67,24 @@
 #define VAL_PM_MORNING 2
 #define VAL_PM_EVENING 3
 
+// scene actions
+#define VAL_PM_SA_None 0
+#define VAL_PM_SA_ChangeBrightness 1
+#define VAL_PM_SA_AutoOff 2
+#define VAL_PM_SA_AutoOn 3
+#define VAL_PM_SA_ManualOff 4
+#define VAL_PM_SA_ManualOn 5
+#define VAL_PM_SA_LockOff 6
+#define VAL_PM_SA_LockOn 7
+#define VAL_PM_SA_Lock 8
+#define VAL_PM_SA_UnlockWithState 9
+#define VAL_PM_SA_Unlock 10
+#define VAL_PM_SA_Reserve1 11
+#define VAL_PM_SA_Reserve2 12
+#define VAL_PM_SA_Reserve3 13
+#define VAL_PM_SA_LeaveRoom 14
+#define VAL_PM_SA_Reset 15
+
 // forward declaration
 class Presence;
 
@@ -104,6 +122,7 @@ class PresenceChannel
     void onPresenceBrightnessChange(bool iOn);
     void onPresenceChange(bool iOn);
 
+    void startSceneCommand(GroupObject &iKo);
     void startAuto(bool iOn);
     void processAuto();
     void startManual(bool iOn);

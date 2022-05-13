@@ -76,9 +76,16 @@
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-StatusLED" Name="StatusLED">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-0" />
-                  <Enumeration Text="aktiv über Hardwae-Präsenz" Value="1" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-1" />
-                  <Enumeration Text="aktiv über Tagesphase" Value="2" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-2" />
+                  <Enumeration Text="aktiv bei Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-1" />
+                  <Enumeration Text="aktiv bei Präsenz" Value="2" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-2" />
                   <Enumeration Text="aktiv über externes Objekt" Value="3" Id="M-00FA_A-0001-01-0000_PT-StatusLED_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-StatusLEDPIR" Name="StatusLEDPIR">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-StatusLEDPIR_EN-0" />
+                  <Enumeration Text="aktiv bei Bewegung" Value="1" Id="M-00FA_A-0001-01-0000_PT-StatusLEDPIR_EN-1" />
+                  <Enumeration Text="aktiv über externes Objekt" Value="3" Id="M-00FA_A-0001-01-0000_PT-StatusLEDPIR_EN-3" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceType" Name="PresenceType">
@@ -149,6 +156,26 @@
                   <Enumeration Text="AUS gesendet" Value="1" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-1" />
                   <Enumeration Text="EIN gesendet" Value="2" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-2" />
                   <Enumeration Text="Aktueller Zustand gesendet" Value="3" Id="M-00FA_A-0001-01-0000_PT-LockOff_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-SceneAction" Name="SceneAction">
+                <TypeRestriction Base="Value" SizeInBit="4">
+                  <Enumeration Text="keine Aktion" Value="0" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-0" />
+                  <Enumeration Text="ändert Helligkeit im Raum" Value="1" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-1" />
+                  <Enumeration Text="Automatik übersteuern mit AUS" Value="2" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-2" />
+                  <Enumeration Text="Automatik übersteuern mit EIN" Value="3" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-3" />
+                  <Enumeration Text="Manuell übersteuern mit AUS" Value="4" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-4" />
+                  <Enumeration Text="Manuell übersteuern mit EIN" Value="5" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-5" />
+                  <Enumeration Text="Sperren und AUS senden" Value="6" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-6" />
+                  <Enumeration Text="Sperren und EIN senden" Value="7" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-7" />
+                  <Enumeration Text="Sperren und nichts senden" Value="8" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-8" />
+                  <Enumeration Text="Sperre aufheben und Zustand senden" Value="9" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-9" />
+                  <Enumeration Text="Sperre aufheben und nichts senden" Value="10" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-10" />
+                  <!-- <Enumeration Text="" Value="11" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-11" /> -->
+                  <!-- <Enumeration Text="" Value="12" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-12" /> -->
+                  <!-- <Enumeration Text="" Value="13" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-13" /> -->
+                  <Enumeration Text="Raum verlassen" Value="14" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-14" />
+                  <Enumeration Text="Reset auslösen" Value="15" Id="M-00FA_A-0001-01-0000_PT-SceneAction_EN-15" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>

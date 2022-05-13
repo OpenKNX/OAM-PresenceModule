@@ -127,7 +127,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo)
         }
         else if (iKo.asap() == calcKoNumber(PM_KoKOpPresence1))
         {
-            // which kind of presence informationd do we get
+            // which kind of presence information do we get
             uint8_t lPresenceType = paramByte(PM_pPresence1Type, PM_pPresence1TypeMask, PM_pPresence1TypeShift);
             startPresence(lPresenceType, iKo);
         }
@@ -166,6 +166,68 @@ void PresenceChannel::processInputKo(GroupObject &iKo)
         else if (iKo.asap() == calcKoNumber(PM_KoKOpDayPhase))
         {
                 startDayPhase();
+        }
+        else if (iKo.asap() == calcKoNumber(PM_KoKOpScene))
+        {
+            startSceneCommand(iKo);
+        }
+    }
+}
+
+void PresenceChannel::startSceneCommand(GroupObject &iKo) 
+{
+    // get scene number
+    uint8_t lSceneKo = iKo.value(getDPT(VAL_DPT_17));
+    // check if scene is used
+    for (uint8_t lIndex = 0; lIndex < 10; lIndex++)
+    {
+        uint8_t lSceneParam = paramByte(PM_pScene0 + lIndex);
+        if (lSceneParam == lSceneKo) 
+        {
+            uint8_t lAction = paramByte(PM_pSceneAction0 + lIndex / 2);
+            // get high/low nibble as action code
+            lAction = (lIndex % 2) ? (lAction & PM_pSceneAction0Mask) >> PM_pSceneAction0Shift : (lAction & PM_pSceneAction1Mask);
+            switch (lAction)
+            {
+                case VAL_PM_SA_ChangeBrightness:
+                    /* not implemented yet */
+                    break;
+                case VAL_PM_SA_AutoOff:
+                    startAuto(false);
+                    break;
+                case VAL_PM_SA_AutoOn:
+                    startAuto(true);
+                    break;
+                case VAL_PM_SA_ManualOff:
+                    startManual(false);
+                    break;
+                case VAL_PM_SA_ManualOn:
+                    startManual(true);
+                    break;
+                case VAL_PM_SA_LockOff:
+                    onLock(true, VAL_PM_LockOutputOff, 0);
+                    break;
+                case VAL_PM_SA_LockOn:
+                    onLock(true, VAL_PM_LockOutputOn, 0);
+                    break;
+                case VAL_PM_SA_Lock:
+                    onLock(true, 0, 0);
+                    break;
+                case VAL_PM_SA_UnlockWithState:
+                    onLock(false, 0, VAL_PM_LockOutputCurrent);
+                    break;
+                case VAL_PM_SA_Unlock:
+                    onLock(false, 0, 0);
+                    break;
+                case VAL_PM_SA_LeaveRoom:
+                    /* not implemented yet */
+                    break;
+                case VAL_PM_SA_Reset:
+                    startReset();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
@@ -479,7 +541,7 @@ void PresenceChannel::startLock()
     // check lock mode (simple lock or priority control)
     uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
     if (lLockType == VAL_PM_LockTypePriority) {
-        uint8_t lPriority = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_2));
+        uint8_t lPriority = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_5));
         bool lValue = (lPriority & 2);
         uint8_t lLockSend = (lPriority & 1) + 1;
         onLock(lValue, lLockSend, lLockSend);
