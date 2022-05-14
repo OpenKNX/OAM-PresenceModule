@@ -587,7 +587,7 @@
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00902" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009" Text="{{0:PM %C%}}: Tag/Nacht" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" ObjectSize="1 Bit" DatapointType="DPST-1-1" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%010_R-%T%%CCC%01001" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%010" Text="{{0:PM %C%}}: Helligkeitsschwelle" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%011_R-%T%%CCC%01101" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%011" Text="{{0:PM %C%}}: Nachlaufzeit" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
-    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%012_R-%T%%CCC%01201" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%012" Text="{{0:PM %C%}}: PM über Scene steuern" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
+    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%012_R-%T%%CCC%01201" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%012" Text="{{0:PM %C%}}: PM über Szene steuern" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01301" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013" Text="{{0:PM %C%}}: Schalten 1" ObjectSize="1 Bit" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" DatapointType="DPST-1-1" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01302" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013" Text="{{0:PM %C%}}: Wert 1" ObjectSize="1 Byte"    TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" DatapointType="DPST-5-5" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01303" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013" Text="{{0:PM %C%}}: Szene 1" ObjectSize="1 Byte"   TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" DatapointType="DPST-17-1" />
@@ -1008,7 +1008,7 @@
                   <Row Id="M-00FA_A-0001-01-0000_PB-%C%13_R-10" Name="Row10" Text="10" />
                 </Rows>
                 <Columns>
-                  <Column Id="M-00FA_A-0001-01-0000_PB-%C%13_C-1" Name="Col1" Text="Szene" Width="30%" />
+                  <Column Id="M-00FA_A-0001-01-0000_PB-%C%13_C-1" Name="Col1" Text="Szene" Width="25%" />
                   <Column Id="M-00FA_A-0001-01-0000_PB-%C%13_C-2" Name="Col2" Text="Funktion" Width="50%" />
                 </Columns>
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%040_R-%T%%CCC%04001" Cell="1,1" />

@@ -177,16 +177,16 @@ void PresenceChannel::processInputKo(GroupObject &iKo)
 void PresenceChannel::startSceneCommand(GroupObject &iKo) 
 {
     // get scene number
-    uint8_t lSceneKo = iKo.value(getDPT(VAL_DPT_17));
+    uint8_t lSceneFromKo = (uint8_t)iKo.value(getDPT(VAL_DPT_17)) + 1;
     // check if scene is used
     for (uint8_t lIndex = 0; lIndex < 10; lIndex++)
     {
-        uint8_t lSceneParam = paramByte(PM_pScene0 + lIndex);
-        if (lSceneParam == lSceneKo) 
+        uint8_t lSceneFromParam = paramByte(PM_pScene0 + lIndex);
+        if (lSceneFromParam == lSceneFromKo) 
         {
             uint8_t lAction = paramByte(PM_pSceneAction0 + lIndex / 2);
             // get high/low nibble as action code
-            lAction = (lIndex % 2) ? (lAction & PM_pSceneAction0Mask) >> PM_pSceneAction0Shift : (lAction & PM_pSceneAction1Mask);
+            lAction = (lIndex % 2) ? (lAction & PM_pSceneAction1Mask) : (lAction & PM_pSceneAction0Mask) >> PM_pSceneAction0Shift;
             switch (lAction)
             {
                 case VAL_PM_SA_ChangeBrightness:
