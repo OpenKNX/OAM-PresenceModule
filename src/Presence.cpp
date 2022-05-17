@@ -64,15 +64,27 @@ void Presence::processInputKo(GroupObject &iKo){
 #ifdef HF_POWER_PIN
         mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
 #endif
-    } else if (iKo.asap() == PM_KoHfReset) {
+    }
+    else if (iKo.asap() == PM_KoHfReset)
+    {
         // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
         startPowercycleHfSensor();
-    } else if (iKo.asap() >= PM_KoOffset && iKo.asap() < PM_KoOffset + mNumChannels * PM_KoBlockSize) {
+    }
+    else if (iKo.asap() == PM_KoLEDMove)
+    {
+        processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
+    }
+    else if (iKo.asap() == PM_KoLEDPresence)
+    {
+        processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxPresence);
+    }
+    else if (iKo.asap() >= PM_KoOffset && iKo.asap() < PM_KoOffset + mNumChannels * PM_KoBlockSize)
+    {
         // we are in the Range of presence KOs
         uint8_t lChannelIndex = (iKo.asap() - PM_KoOffset) / PM_KoBlockSize;
         PresenceChannel *lChannel = mChannel[lChannelIndex];
         lChannel->processInputKo(iKo);
-    } 
+    }
 }
 
 bool Presence::getHardwarePresence()
@@ -115,6 +127,63 @@ void Presence::processPowercycleHfSensor()
     }
 }
 
+// handles the following situations for hardware LEDs (presence- and move-LED):
+// - turn on and off by hardware if selected in settings
+// - turn off on lock through day phase
+// - be aware of multiple channels creating led locks
+// - turn on and off by knx 
+// - retstory old led state on lock removal
+void Presence::processLED(bool iOn, LedCaller iCaller)
+{
+    static int8_t sLedsLocked = false;
+    static bool sLedMove = false;
+    static bool sLedPresence = false;
+
+    bool lLedMove = sLedMove;
+    bool lLedPresence = sLedPresence;
+    uint8_t lMoveLedParam = (knx.paramByte(PM_LEDMove) & PM_LEDMoveMask) >> PM_LEDMoveShift;
+    uint8_t lPresenceLedParam = (knx.paramByte(PM_LEDPresence) & PM_LEDPresenceMask) >> PM_LEDPresenceShift;
+    // we implement all led cases in one method
+    switch (iCaller)
+    {
+        case CallerLock:
+            sLedsLocked += (iOn) ? 1 : -1;
+            // LEDs will keep the old values
+            if (sLedsLocked <= 0) 
+                sLedsLocked = 0;
+            break;
+        case CallerMove:
+            if (lMoveLedParam == VAL_PM_LedMove)
+                lLedMove = iOn;
+            if (lPresenceLedParam == VAL_PM_LedMove)
+                lLedPresence = iOn;
+            break;
+        case CallerPresence:
+            if (lMoveLedParam == VAL_PM_LedPresence)
+                lLedMove = iOn;
+            if (lPresenceLedParam == VAL_PM_LedPresence)
+                lLedPresence = iOn;
+            break;
+        case CallerKnxMove:
+            if (lMoveLedParam == VAL_PM_LedKnx)
+                lLedMove = iOn;
+            break;
+        case CallerKnxPresence:
+            if (lMoveLedParam == VAL_PM_LedKnx)
+                lLedPresence = iOn;
+            break;
+        default:
+            // both LEDs are switched
+            lLedMove = iOn;
+            lLedPresence = iOn;
+            break;
+    }
+    digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (lLedMove && sLedsLocked == 0));
+    digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == (lLedPresence && sLedsLocked == 0));
+    // store the current values in memory
+    sLedMove = lLedMove;
+    sLedPresence = lLedPresence;
+}
 void Presence::processHardwarePresence()
 {
 #ifdef SERIAL_HF
@@ -133,7 +202,8 @@ void Presence::processHardwarePresence()
                 if (lPresence != mPresence)
                 {
                     mPresence = lPresence;
-                    digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == mPresence);
+                    // digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == mPresence);
+                    processLED(mPresence, CallerPresence);
                     knx.getGroupObject(PM_KoPresenceOut).value(mPresence, getDPT(VAL_DPT_1));
                     if (mPresence)
                         PresenceTrigger = true;
@@ -141,7 +211,8 @@ void Presence::processHardwarePresence()
                 if (lMove != mMove) 
                 {
                     mMove = lMove;
-                    digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (mMove > 0));
+                    // digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (mMove > 0));
+                    processLED(mMove > 0, CallerMove);
                     knx.getGroupObject(PM_KoMoveOut).value(mMove, getDPT(VAL_DPT_5));
                     if (mMove)
                         MoveTrigger = true;

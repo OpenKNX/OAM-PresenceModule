@@ -7,24 +7,35 @@
 class Presence
 {
 public:
-    Presence();
-    ~Presence();
+  enum LedCaller
+  {
+      CallerNone,
+      CallerMove,
+      CallerPresence,
+      CallerLock,
+      CallerKnxMove,
+      CallerKnxPresence
+  };
 
-    // static
-    // instance
-    bool PresenceTrigger = false;
-    bool MoveTrigger = false;
-    bool getHardwarePresence();
-    bool getHardwareMove();
-    void processReadRequests();
-    void processInputKo(GroupObject &iKo);
-    bool processDiagnoseCommand(char *iBuffer);
-    void debug();
-    void setup();
-    void loop();
+  Presence();
+  ~Presence();
+
+  // static
+  // instance
+  bool PresenceTrigger = false;
+  bool MoveTrigger = false;
+  bool getHardwarePresence();
+  bool getHardwareMove();
+  void processLED(bool iOn, LedCaller iCaller);
+  void processReadRequests();
+  void processInputKo(GroupObject &iKo);
+  bool processDiagnoseCommand(char *iBuffer);
+  void debug();
+  void setup();
+  void loop();
 
 private:
-    // support presence hardware
+  // support presence hardware
   float mPresenceCombined = 0;
   bool mPresence = false;
   uint8_t mMove = 0;

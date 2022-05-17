@@ -3,14 +3,17 @@
 #include "HardwareDevices.h"
 
 // State marker (BITFIELD !!!)
-#define STATE_STARTUP 1 // startup delay for each channel
-#define STATE_RUNNING 2 // this channel is running
-#define STATE_MANUAL 4  // manual mode on
-#define STATE_AUTO 8  // manual mode on
-#define STATE_PRESENCE 16 // there is presence
-#define STATE_PRESENCE_SHORT 32 // short presence evaluation
-#define STATE_LOCK 64 // lock state
+#define STATE_STARTUP 1            // startup delay for each channel
+#define STATE_RUNNING 2            // this channel is running
+#define STATE_MANUAL 4             // manual mode on
+#define STATE_AUTO 8               // manual mode on
+#define STATE_PRESENCE 16          // there is presence
+#define STATE_PRESENCE_SHORT 32    // short presence evaluation
+#define STATE_LOCK 64              // lock state
 #define STATE_DAY_PHASE_CHANGE 128 // change day phase at desired point of time
+#define STATE_DOWNTIME 256         // Downtime after leave room
+#define STATE_ADAPTIVE 512         // adaptive brightness calculation
+#define STATE_ADAPTIVE_READ 1024   // adaptive brightness calculation
 
 // Value marker (BITFIELD)
 #define PM_BIT_OUTPUT_SET 1             // output value to send
@@ -25,10 +28,10 @@
 #define PM_VAL_ActiveDisabled 2
 
 // and we also define all enum values for PM
-#define VAL_LedOffPM 0
-#define VAL_LedOnPM 1
-#define VAL_LedOnChannelPM 2
-#define VAL_LedKnxPM 3
+#define VAL_PM_LedOff 0
+#define VAL_PM_LedMove 1
+#define VAL_PM_LedPresence 2
+#define VAL_PM_LedKnx 3
 
 // presence type
 #define VAL_PM_PresenceTypeOff 0
@@ -55,7 +58,7 @@
 #define VAL_PM_LockTypePriority 1
 #define VAL_PM_LockTypeLock 2
 
-// lock ouptut
+// lock output
 #define VAL_PM_LockOutputNone 0
 #define VAL_PM_LockOutputOff 1
 #define VAL_PM_LockOutputOn 2
@@ -123,6 +126,8 @@ class PresenceChannel
     void onPresenceChange(bool iOn);
 
     void startSceneCommand(GroupObject &iKo);
+    void startDowntime();
+    void processDowntime();
     void startAuto(bool iOn);
     void processAuto();
     void startManual(bool iOn);
@@ -138,6 +143,8 @@ class PresenceChannel
 
     void startBrightness(GroupObject &iKo);
     void processBrightness();
+    void startAdaptiveBrightness();
+    void processAdaptiveBrightness();
 
     int8_t getDayPhaseFromKO();
     void startDayPhase();
@@ -162,7 +169,9 @@ class PresenceChannel
     uint32_t pManualFallbackTime = 0; // Rückfallzeit aus Manuellmodus
     uint32_t pOutput1CyclicTime = 0;  // Zyklisch senden Ausgang 1
     uint32_t pOutput2CyclicTime = 0;  // Zyklisch senden Ausgang 2
-    uint32_t pLockDelayTime = 0;  // Rückfallzeit Sperre/Zwangsführung
+    uint32_t pLockDelayTime = 0;      // Rückfallzeit Sperre/Zwangsführung
+    uint32_t pDowntimeDelayTime = 0;  // Totzeit
+    uint32_t pAdaptiveDelayTime = 0;  // adaptive brightness calculation delay
 
   public:
     PresenceChannel(uint8_t iChannelNumber);
