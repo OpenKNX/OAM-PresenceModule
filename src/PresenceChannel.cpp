@@ -41,8 +41,49 @@ uint16_t PresenceChannel::calcKoNumber(uint8_t iKoIndex) {
     return lResult;
 }
 
-GroupObject *PresenceChannel::getKo(uint8_t iKoIndex){
-    return &knx.getGroupObject(calcKoNumber(iKoIndex));
+// calculates correct KoIndex for this channel, returns -1 for invalid !!!
+int8_t PresenceChannel::calcKoIndex(uint16_t iKoNumber)
+{
+    int16_t lResult = (iKoNumber - PM_KoOffset);
+    // check if channel is valid
+    if ((int8_t)(lResult / PM_KoBlockSize) == mChannelId)
+        lResult = lResult % PM_KoBlockSize;
+    else
+        lResult = -1;
+    return (int8_t)lResult;
+}
+
+// this function also respects internal KO, even though they are addressed with external KO addresses
+GroupObject *PresenceChannel::getKo(uint8_t iKoIndex)
+{
+    uint8_t lParamIndex;
+    uint16_t lKoNumber;
+    // internal objects have to be enumerated here explicitly
+    switch (iKoIndex)
+    {
+        case PM_KoKOpLux:
+        case PM_KoKOpPresence1:
+        case PM_KoKOpPresence2:
+        case PM_KoKOpSetAuto:
+        case PM_KoKOpSetManual:
+        case PM_KoKOpAktorState:
+        case PM_KoKOpLock:
+        case PM_KoKOpReset:
+        case PM_KoKOpDayPhase:
+            lParamIndex = PM_pNumLux + iKoIndex;
+            break;
+        case PM_KoKOpScene:
+            lParamIndex = PM_pNumScene;
+            break;
+        default:
+            lParamIndex = 0;
+            break;
+    }
+    if (lParamIndex)
+        lKoNumber = paramWord(lParamIndex) & 0x7FFF;
+    else
+        lKoNumber = calcKoNumber(iKoIndex);
+    return &knx.getGroupObject(lKoNumber);
 }
 
 bool PresenceChannel::paramBit(uint16_t iParamIndex, uint8_t iParamMask, bool iWithPhase /* = false */)
@@ -115,34 +156,35 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
     return lResult;
 }
 
-void PresenceChannel::processInputKo(GroupObject &iKo)
+void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
 {
     // we process KO only if we are running
     if (pCurrentState & STATE_RUNNING) {
         // search for correct KO
-        if (iKo.asap() == calcKoNumber(PM_KoKOpLux))
+        uint8_t lKoIndex = (iKoIndex >= 0) ? iKoIndex : calcKoIndex(iKo.asap());
+        if (lKoIndex == PM_KoKOpLux || lKoIndex == PM_KoKOpLuxOn || lKoIndex == PM_KoKOpLuxOff)
         {
-            // measured external brightness
-            startBrightness(iKo);
+            // measured external brightness or changed brightness level
+            startBrightness();
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpPresence1))
+        else if (lKoIndex == PM_KoKOpPresence1)
         {
             // which kind of presence information do we get
             uint8_t lPresenceType = paramByte(PM_pPresence1Type, PM_pPresence1TypeMask, PM_pPresence1TypeShift);
             startPresence(lPresenceType, iKo);
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpPresence2))
+        else if (lKoIndex == PM_KoKOpPresence2)
         {
             // change of presence information
             uint8_t lPresenceType = paramByte(PM_pPresence2Type, PM_pPresence2TypeMask, PM_pPresence2TypeShift);
             startPresence(lPresenceType, iKo);
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpSetAutomatic))
+        else if (lKoIndex == PM_KoKOpSetAuto)
         {
             // Automatic mode
             startAuto(iKo.value(getDPT(VAL_DPT_1)));
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpSetManual))
+        else if (lKoIndex == PM_KoKOpSetManual)
         {
             // Manual mode
             bool lValue = iKo.value(getDPT(VAL_DPT_1));
@@ -160,31 +202,31 @@ void PresenceChannel::processInputKo(GroupObject &iKo)
                     startAuto(pCurrentValue & PM_BIT_OUTPUT_SET);
             }
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpAktorState))
+        else if (lKoIndex == PM_KoKOpAktorState)
         {
             // Actor state changed
             startActorState(iKo);
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpLock))
+        else if (lKoIndex == PM_KoKOpLock)
         {
             // lock mode
             startLock();
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpReset))
+        else if (lKoIndex == PM_KoKOpReset)
         {
             // reset PM, we just react on ON-telegrams
             if (iKo.value(getDPT(VAL_DPT_1)))
                 startReset();
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpDayPhase))
+        else if (lKoIndex == PM_KoKOpDayPhase)
         {
                 startDayPhase();
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpScene))
+        else if (lKoIndex == PM_KoKOpScene)
         {
             startSceneCommand(iKo);
         }
-        else if (iKo.asap() == calcKoNumber(PM_KoKOpManualDimAbs) || iKo.asap() == calcKoNumber(PM_KoKOpManualDimRel))
+        else if (lKoIndex == PM_KoKOpChangeDimAbs || lKoIndex == PM_KoKOpChangeDimRel || lKoIndex == PM_KoKOpChangeSwitch)
         {
             startAdaptiveBrightness();
         }
@@ -498,9 +540,7 @@ void PresenceChannel::onPresenceChange(bool iOn)
 {
     // Output is only influenced in auto mode
     if (!(pCurrentState & STATE_MANUAL))
-    {
         startOutput(iOn);
-    }
 }
 
 // downtime after switch off
@@ -509,7 +549,7 @@ void PresenceChannel::startDowntime()
     // ensure auto mode
     onManualChange(false);
     // set state
-    pCurrentState |= STATE_AUTO | STATE_DOWNTIME;
+    pCurrentState |= STATE_DOWNTIME;
     // set downtime timer
     pDowntimeDelayTime = delayTimerInit();
     // set output according to input value
@@ -559,7 +599,7 @@ void PresenceChannel::processManual()
     if (pManualFallbackTime > 0)
     {
         // in case manual mode is presence dependent, any presence resets manual fallback time
-        if ((pCurrentState & (STATE_PRESENCE | STATE_PRESENCE_SHORT)) && paramBit(PM_pAManualWithPresence, PM_pAManualWithPresenceMask))
+        if (paramBit(PM_pAManualWithPresence, PM_pAManualWithPresenceMask) && getRawPresence())
         {
             pManualFallbackTime = delayTimerInit();
         }
@@ -610,7 +650,7 @@ void PresenceChannel::startLock()
 
 void PresenceChannel::processLock()
 {
-    // chack if there is a time given to reset lock
+    // check if there is a time given to reset lock
     if ((pCurrentState & STATE_LOCK) && paramBit(PM_pLockFallback, PM_pLockFallbackMask)) {
         if (delayCheck(pLockDelayTime, paramTimeDelay(PM_pLockFallbackBase))) {
             // end lock
@@ -722,7 +762,7 @@ void PresenceChannel::processActorState()
     // currently nothing to do
 }
 
-void PresenceChannel::startBrightness(GroupObject &iKo)
+void PresenceChannel::startBrightness()
 {
     // should we suppress brightness evaluation?
     bool lEvalBrightness = !(pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS_OFF);
@@ -733,15 +773,17 @@ void PresenceChannel::startBrightness(GroupObject &iKo)
     if (lEvalBrightness) 
     {
         // first check for upper value, if higher, then switch off
-        uint32_t lBrightness = iKo.value(getDPT(VAL_DPT_9));
+        uint32_t lBrightness = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
         if (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
         {
-            // we have to turn off light but not presence
-            if (paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
-                onPresenceChange(false);
+            // we start timer off delay
+            if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
+                pBrightnessOffDelayTime = delayTimerInit();
         }
         else if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
         {
+            // deactivate brightness off
+            pBrightnessOffDelayTime = 0;
             // its getting dark, if we are in presence state, we turn light on
             if ((pCurrentState & STATE_PRESENCE) && !(pCurrentState & STATE_AUTO)) {
                 onPresenceChange(true);
@@ -752,7 +794,15 @@ void PresenceChannel::startBrightness(GroupObject &iKo)
 
 void PresenceChannel::processBrightness()
 {
-    // currently do nothing
+    if (pBrightnessOffDelayTime > 0) 
+    {
+        if (delayCheck(pBrightnessOffDelayTime, paramTimeDelay(PM_pABrightnessOffDelayBase, true)))
+        {
+            pBrightnessOffDelayTime = 0;
+            // we have to turn off light but not presence
+            onPresenceChange(false);
+        }
+    }
 }
 
 void PresenceChannel::startAdaptiveBrightness()
@@ -829,7 +879,7 @@ void PresenceChannel::processOutput()
 {
     uint8_t lOutput = 0;
     if (!(pCurrentState & STATE_LOCK)) {
-        // ceck for cyclic send of output 1
+        // check for cyclic send of output 1
         if (paramBit(PM_pOutput1Cyclic, PM_pOutput1CyclicMask) && delayCheck(pOutput1CyclicTime, paramTimeDelay(PM_pOutput1CyclicBase)))
             lOutput = 1;
         // check for cyclic send of output 2
@@ -925,12 +975,30 @@ void PresenceChannel::loop()
             processDayPhase();
         if (pCurrentState & (STATE_ADAPTIVE))
             processAdaptiveBrightness();
+        // brightness is always evaluated
+        processBrightness();
         // output is always evaluated
         processOutput();
     }
 }
 
-void PresenceChannel::setup() {
+void PresenceChannel::prepareInternalKo()
+{
+    // we know the indexes of internal KO
+    for (uint8_t lIndex = PM_pNumLux; lIndex <= PM_pNumScene; lIndex++)
+    {
+        uint16_t lInternalKo = paramWord(lIndex);
+        if (lInternalKo & 0x8000) 
+        {
+            uint8_t lKoIndex = (lIndex < PM_pNumScene) ? lIndex - PM_pNumLux + PM_KoKOpLux : PM_KoKOpScene;
+            sPresence->addKoMap(lInternalKo & 0x7FFF, mChannelId, lKoIndex);
+        }
+    }
+}
+
+void PresenceChannel::setup() 
+{
+    prepareInternalKo();
     // at the beginning we are on day phase 1
     onDayPhase(0);
     // init auto state

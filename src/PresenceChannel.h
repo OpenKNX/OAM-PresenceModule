@@ -99,6 +99,7 @@ class PresenceChannel
 
     uint32_t calcParamIndex(uint16_t iParamIndex, bool iWithPhase);
     uint16_t calcKoNumber(uint8_t iKoIndex);
+    int8_t calcKoIndex(uint16_t iKoNumber);
     GroupObject *getKo(uint8_t iKoIndex);
 
     bool paramBit(uint16_t iParamIndex, uint8_t iParamMask, bool iWithPhase = false);
@@ -141,7 +142,7 @@ class PresenceChannel
     void startActorState(GroupObject &iKo);
     void processActorState();
 
-    void startBrightness(GroupObject &iKo);
+    void startBrightness();
     void processBrightness();
     void startAdaptiveBrightness();
     void processAdaptiveBrightness();
@@ -157,6 +158,8 @@ class PresenceChannel
     void processOutput();
     void onOutput(bool iOutputIndex, bool iOn);
 
+    void prepareInternalKo();
+
   protected:
     static Presence *sPresence;
     static uint8_t sDayPhaseParameterSize; // memory block size of day phase parameters, calculated in setup
@@ -166,12 +169,13 @@ class PresenceChannel
     uint32_t pOnDelay = 0;
     uint32_t pPresenceDelayTime = 0;  // Nachlaufzeit
     uint32_t pPresenceShortDelayTime = 0; // Kurze Anwesenheit Nachlaufzeit
-    uint32_t pManualFallbackTime = 0; // Rückfallzeit aus Manuellmodus
+    uint32_t pManualFallbackTime = 0; // Rückfallzeit aus Manuell-Modus
     uint32_t pOutput1CyclicTime = 0;  // Zyklisch senden Ausgang 1
     uint32_t pOutput2CyclicTime = 0;  // Zyklisch senden Ausgang 2
     uint32_t pLockDelayTime = 0;      // Rückfallzeit Sperre/Zwangsführung
     uint32_t pDowntimeDelayTime = 0;  // Totzeit
     uint32_t pAdaptiveDelayTime = 0;  // adaptive brightness calculation delay
+    uint32_t pBrightnessOffDelayTime = 0;  // brightness off delay
 
   public:
     PresenceChannel(uint8_t iChannelNumber);
@@ -183,7 +187,7 @@ class PresenceChannel
     uint8_t getIndex();
 
     bool processReadRequest();
-    void processInputKo(GroupObject &iKo);
+    void processInputKo(GroupObject &iKo, int8_t iKoIndex = -1);
     bool processDiagnoseCommand(char *iBuffer);
     void setup();
     void loop();

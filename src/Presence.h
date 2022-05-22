@@ -4,6 +4,18 @@
 #include "Sensor.h"
 #include "SensorMR24xxB1.h"
 
+// maps on KO to an Other KO
+// Used for internal KO infrastructure
+// working with KO indexes
+// originalKoIndex is the index of the KO which is accessed by the firmware
+// internalKoIndex is the index of the KO which should be returned instead
+struct sKoMap
+{
+    uint16_t koNumber; // absolute internal KO number as entered in ETS
+    uint8_t channelIndex; // channel which uses this internal KO
+    uint8_t koIndex; // channel index (within channel) which uses this internal KO
+};
+
 class Presence
 {
 public:
@@ -34,7 +46,14 @@ public:
   void setup();
   void loop();
 
+  void addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex);
+  bool mapKO(uint16_t iKoNumber, sKoMap **iKoMap);
+
 private:
+  static const uint16_t cCountKoMap = PM_ChannelCount * 6;
+  sKoMap mKoMap[cCountKoMap];  // in average 6 internal KO per Channel (4*6*30=720 Byte)
+  uint8_t mNumKoMap = 0;
+
   // support presence hardware
   float mPresenceCombined = 0;
   bool mPresence = false;
@@ -53,7 +72,7 @@ private:
   Sensor *mBrightnessSensor;
   uint32_t mHfPowerCycleDelay = 0;
   bool mDoPresenceHardwareCycle = 0;
-  
+
   void startSensor();
 
   // channel handling

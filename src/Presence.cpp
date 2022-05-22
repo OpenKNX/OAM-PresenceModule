@@ -15,6 +15,38 @@ Presence::Presence()
 
 Presence::~Presence() {}
 
+void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex)
+{
+    // first implementation, in future we use sorted insert
+    mKoMap[mNumKoMap].koNumber = iKoNumber;
+    mKoMap[mNumKoMap].channelIndex = iChannelId;
+    mKoMap[mNumKoMap].koIndex = iKoIndex;
+    if (mNumKoMap < cCountKoMap)
+        mNumKoMap++;
+}
+
+// search for a given KO index for an other
+// KO, which uses also this KO as an internal input
+bool Presence::mapKO(uint16_t iKoNumber, sKoMap **iKoMap)
+{
+    sKoMap *lIterator = *iKoMap;
+    if (*iKoMap == 0)
+        lIterator = &mKoMap[0];
+    else
+        lIterator++;
+    while (lIterator->koNumber > 0)
+    {
+        if (lIterator->koNumber == iKoNumber)
+        {
+            *iKoMap = lIterator;
+            return true;
+        }
+        else
+            lIterator++;
+    }
+    return false;
+}
+
 void Presence::processReadRequests()
 {
     // this method is called after startup delay and executes read requests, which should just happen once after startup
@@ -55,33 +87,52 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
     return lOutput;
 }
 
-void Presence::processInputKo(GroupObject &iKo){
-    if (iKo.asap() == PM_KoSensitivity) {
+void Presence::processInputKo(GroupObject &iKo)
+{
+    // we have to check first, if external KO are used
+    sKoMap *lKoMap = nullptr;
+    uint16_t lAsap = iKo.asap();
+    while (mapKO(lAsap, &lKoMap))
+    {
+        uint16_t lKoIndex = lKoMap->koIndex;
+        // here we check the range of internal KO per channel (KoIndex, not KoNumber)
+        if ((lKoIndex >= PM_KoKOpLux && lKoIndex <= PM_KoKOpDayPhase) || lKoIndex == PM_KoKOpScene )
+        {
+            // we are in the Range of presence KOs
+            uint8_t lChannelIndex = lKoMap->channelIndex;
+            PresenceChannel *lChannel = mChannel[lChannelIndex];
+            lChannel->processInputKo(iKo);
+        }
+    }
+    if (lAsap == PM_KoSensitivity)
+    {
 #ifdef HF_POWER_PIN
         mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, iKo.value(getDPT(VAL_DPT_5)));
 #endif
-    } else if (iKo.asap() == PM_KoScenario) {
+    }
+    else if (lAsap == PM_KoScenario)
+    {
 #ifdef HF_POWER_PIN
         mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
 #endif
     }
-    else if (iKo.asap() == PM_KoHfReset)
+    else if (lAsap == PM_KoHfReset)
     {
         // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
         startPowercycleHfSensor();
     }
-    else if (iKo.asap() == PM_KoLEDMove)
+    else if (lAsap == PM_KoLEDMove)
     {
         processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
     }
-    else if (iKo.asap() == PM_KoLEDPresence)
+    else if (lAsap == PM_KoLEDPresence)
     {
         processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxPresence);
     }
-    else if (iKo.asap() >= PM_KoOffset && iKo.asap() < PM_KoOffset + mNumChannels * PM_KoBlockSize)
+    else if (lAsap >= PM_KoOffset && lAsap < PM_KoOffset + mNumChannels * PM_KoBlockSize)
     {
         // we are in the Range of presence KOs
-        uint8_t lChannelIndex = (iKo.asap() - PM_KoOffset) / PM_KoBlockSize;
+        uint8_t lChannelIndex = (lAsap - PM_KoOffset) / PM_KoBlockSize;
         PresenceChannel *lChannel = mChannel[lChannelIndex];
         lChannel->processInputKo(iKo);
     }
@@ -132,7 +183,7 @@ void Presence::processPowercycleHfSensor()
 // - turn off on lock through day phase
 // - be aware of multiple channels creating led locks
 // - turn on and off by knx 
-// - retstory old led state on lock removal
+// - restore old led state on lock removal
 void Presence::processLED(bool iOn, LedCaller iCaller)
 {
     static int8_t sLedsLocked = false;
