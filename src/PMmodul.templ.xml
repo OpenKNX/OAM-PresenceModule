@@ -17,7 +17,7 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%006" Name="p%C%Output1Type" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OutputType" Text="Ausgang 1 ist vom Typ" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%007" Name="p%C%Output2Type" Offset="1" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OutputType" Text="Ausgang 2 ist vom Typ" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%008" Name="p%C%ChannelActive" Offset="1" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-ChannelActive" Text="Kanalaktivität" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%009" Name="p%C%BrightnessIndependent" Offset="2" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kanal ist unabhängig von Helligkeit" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%009" Name="p%C%BrightnessIndependent" Offset="2" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNoInverted" Text="Kanal ist Helligkeitsabhängig" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%010" Name="p%C%Output1Cyclic" Offset="2" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Ausgang 1 sendet zyklisch" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%011" Name="p%C%Output2Cyclic" Offset="2" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Ausgang 2 sendet zyklisch" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%012" Name="p%C%LockType" Offset="2" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-LockType" Text="Sperrobjekt" Value="0" />
@@ -93,6 +93,8 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%059" Name="p%C%SceneAction9" Offset="14" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-SceneAction" Text="SzeneAction9" Value="0" />
     </Union>
     <!-- Internal inputs -->
+    <!-- there is a dependancy in the order of internal input parameters and KO enabled for internal input -->
+    <!-- any changes here should be also included in coding!!!! -->
     <Union SizeInBit="160">
       <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="36" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%064" Name="p%C%IntLux" ParameterType="M-00FA_A-0001-01-0000_PT-KOInputTab" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
@@ -116,6 +118,9 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%082" Name="p%C%IntScene" ParameterType="M-00FA_A-0001-01-0000_PT-KOInputTab" Offset="18" BitOffset="0" Text="Neues oder internes KO" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%083" Name="p%C%NumScene" ParameterType="M-00FA_A-0001-01-0000_PT-KONumber" Offset="18" BitOffset="1" Text="Nummer vom internen KO" Value="%K12%" />
     </Union>
+    <!-- KO enablement (for internal KO, once per channel, just ets local and invisible) -->
+    <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%084" Name="p%C%EnableLux" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Lux" Value="0" />
+    <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%085" Name="p%C%EnableDayPhase" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="DayPhase" Value="0" />
     <!-- Phase 1 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
@@ -422,35 +427,37 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%062_R-%T%%CCC%06201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%062" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%063_R-%T%%CCC%06301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%063" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%064_R-%T%%CCC%06401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%064" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%065_R-%T%%CCC%06501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%065" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%065_R-%T%%CCC%06502" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%065" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%065_R-%T%%CCC%06501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%065" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%065_R-%T%%CCC%06502" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%065" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%067_R-%T%%CCC%06701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%067" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%067_R-%T%%CCC%06702" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%067" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%067_R-%T%%CCC%06701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%067" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%067_R-%T%%CCC%06702" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%067" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%069_R-%T%%CCC%06901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%069" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%069_R-%T%%CCC%06902" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%069" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%069_R-%T%%CCC%06901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%069" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%069_R-%T%%CCC%06902" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%069" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%070_R-%T%%CCC%07001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%070" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%071_R-%T%%CCC%07101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%071" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%071_R-%T%%CCC%07102" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%071" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%071_R-%T%%CCC%07101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%071" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%071_R-%T%%CCC%07102" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%071" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%072_R-%T%%CCC%07201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%072" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%073_R-%T%%CCC%07301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%073" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%073_R-%T%%CCC%07302" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%073" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%073_R-%T%%CCC%07301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%073" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%073_R-%T%%CCC%07302" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%073" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%074_R-%T%%CCC%07401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%074" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%075_R-%T%%CCC%07501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%075" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%075_R-%T%%CCC%07502" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%075" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%075_R-%T%%CCC%07501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%075" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%075_R-%T%%CCC%07502" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%075" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%076_R-%T%%CCC%07601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%076" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%077_R-%T%%CCC%07701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%077" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%077_R-%T%%CCC%07702" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%077" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%077_R-%T%%CCC%07701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%077" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%077_R-%T%%CCC%07702" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%077" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%078_R-%T%%CCC%07801" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%078" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%079_R-%T%%CCC%07901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%079" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%079_R-%T%%CCC%07902" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%079" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%079_R-%T%%CCC%07901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%079" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%079_R-%T%%CCC%07902" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%079" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%080_R-%T%%CCC%08001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%080" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%081_R-%T%%CCC%08101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%081" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%081_R-%T%%CCC%08102" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%081" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%081_R-%T%%CCC%08101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%081" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%081_R-%T%%CCC%08102" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%081" Value="1" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%082_R-%T%%CCC%08201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%082" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%083_R-%T%%CCC%08301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%083" Access="Read"/>
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%083_R-%T%%CCC%08302" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%083" Value="1"/>
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%083_R-%T%%CCC%08301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%083" Access="Read" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%083_R-%T%%CCC%08302" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%083" Value="1" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%084" Access="None" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%085" Access="None" />
     <!-- Phase 1 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101" />
@@ -616,7 +623,7 @@
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%004" Name="KOp%C%SetManual" Number="%K4%" Text="Manuell übersteuern" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%005" Name="KOp%C%AktorState" Number="%K5%" Text="Aktorstatus" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%007" Name="KOp%C%Lock" Number="%K6%" Text="Sperre" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-    <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%008" Name="KOp%C%Reset" Number="%K7%" Text="Reset" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+    <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%008" Name="KOp%C%Reset" Number="%K7%" Text="Reset" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-15" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%009" Name="KOp%C%DayPhase" Number="%K8%" Text="Tagesphase" ObjectSize="1 Byte" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-17-1" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%010" Name="KOp%C%LuxOn" Number="%K9%" Text="Einschalt-Helligkeitsschwelle" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%006" Name="KOp%C%LuxOff" Number="%K10%" Text="Ausschalt-Helligkeitsschwelle" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -687,16 +694,37 @@
           </when>
           <when test=">0">
             <!-- KO which are always visible -->
-            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%003_R-%T%%CCC%00301" />
-            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%004_R-%T%%CCC%00401" />
-            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%005_R-%T%%CCC%00501" />
-            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%008_R-%T%%CCC%00801" />
             <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%011_R-%T%%CCC%01101" />
-            <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%012_R-%T%%CCC%01201" />
             <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%015_R-%T%%CCC%01501" />
             <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%016_R-%T%%CCC%01601" />
             <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%017_R-%T%%CCC%01701" />
             <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%018_R-%T%%CCC%01801" />
+            <!-- followed by the ones which are hidden, if they are internal KO -->
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%070_R-%T%%CCC%07001">
+              <when test="0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%003_R-%T%%CCC%00301" />
+              </when>
+            </choose>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%072_R-%T%%CCC%07201">
+              <when test="0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%004_R-%T%%CCC%00401" />
+              </when>
+            </choose>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%074_R-%T%%CCC%07401">
+              <when test="0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%005_R-%T%%CCC%00501" />
+              </when>
+            </choose>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%078_R-%T%%CCC%07801">
+              <when test="0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%008_R-%T%%CCC%00801" />
+              </when>
+            </choose>
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%082_R-%T%%CCC%08201">
+              <when test="0">
+                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%012_R-%T%%CCC%01201" />
+              </when>
+            </choose>
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
             <!-- lux settings -->
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
@@ -709,13 +737,24 @@
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000007_R-%T%00000701">
                   <when test="0">
                     <!-- there is no hardware sensor, we use external brightness -->
-                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401" Value="1" />
                   </when>
                   <when test="!=0">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%034_R-%T%%CCC%03401" />
                     <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%034_R-%T%%CCC%03401">
                       <when test="0">
                         <!-- the user don't want to use hardware sensor, we use external brightness -->
+                        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401" Value="1" />
+                      </when>
+                    </choose>
+                  </when>
+                </choose>
+                <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401">
+                  <when test="1">
+                    <!-- we use external brightness -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%064_R-%T%%CCC%06401">
+                      <when test="0">
+                        <!-- but only if there is no internal KO connected -->
                         <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%000_R-%T%%CCC%00001" />
                       </when>
                     </choose>
@@ -756,12 +795,24 @@
             </choose>
             <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
               <when test=">0">
-                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                <!-- we use external presence input -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601">
+                  <when test="0">
+                    <!-- but only, if it is not connected internally -->
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                  </when>
+                </choose>
               </when>
             </choose>
             <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
               <when test=">0">
-                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                <!-- we use external presence input -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801">
+                  <when test="0">
+                    <!-- but only, if it is not connected internally -->
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                  </when>
+                </choose>
               </when>
             </choose>
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -848,10 +899,22 @@
             <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201" />
             <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201">
               <when test="1">
-                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00702" />
+                <!-- Zwangsführung -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%076_R-%T%%CCC%07601">
+                  <when test="0">
+                    <!-- but only if it is not connected internally -->
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00702" />
+                  </when>
+                </choose>
               </when>
               <when test="2">
-                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00701" />
+                <!-- Lock -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%076_R-%T%%CCC%07601">
+                  <when test="0">
+                    <!-- but only if it is not connected internally -->
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%007_R-%T%%CCC%00701" />
+                  </when>
+                </choose>
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%013_R-%T%%CCC%01301" />
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%014_R-%T%%CCC%01401" />
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%015_R-%T%%CCC%01501" />
@@ -916,10 +979,10 @@
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401" />
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401">
                   <when test="0">
-                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" Value="1" />
                   </when>
                   <when test="1">
-                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00902" />
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" Value="2" />
                   </when>
                 </choose>
                 <!-- 2 Phasen -->
@@ -972,7 +1035,7 @@
               </when>
               <when test=">1">
                 <!-- 3 oder mehr Phasen -->
-                <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" Value="1" />
               </when>
               <when test="2">
                 <!-- 3 Phasen -->
@@ -1044,6 +1107,20 @@
                   <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%029_R-%T%%CCC%02901" Cell="5,3" />
                   <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%033_R-%T%%CCC%03301" Cell="5,4" />
                 </ParameterBlock>
+              </when>
+            </choose>
+            <!-- Enable DayPhase KO -->
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%080_R-%T%%CCC%08001">
+              <when test="0">
+                <!-- only if not internally connected -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501">
+                  <when test="1">
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00901" />
+                  </when>
+                  <when test="2">
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%009_R-%T%%CCC%00902" />
+                  </when>
+                </choose>
               </when>
             </choose>
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -1119,6 +1196,9 @@
               <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Interne Eingänge" UIHint="Headline" />
               <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Man kann die Eingänge vom PM statt über Gruppenadressen auch intern mit anderen Kommunikationsobjekten verbinden. Das bietet sich vor allem für Logikausgänge, aber auch für die Verbindung mit anderen PM-Kanälen an." />
               <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Information" Text="Achtung: Alle DPT der intern verknüpften KO müssen zum Original-KO passen. Weder die Applikation noch die Firmware haben eine Möglichkeit, das zu überprüfen. Falsche DPT können zu einem Hänger des Moduls führen!" />
+              <!-- hidden, but necessary -->
+              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401" />
+              <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" />
               <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-%C%15" Name="Grid%C%IntInput" Inline="true" Layout="Grid">
                 <Rows>
                   <Row Id="M-00FA_A-0001-01-0000_PB-%C%15_R-1" Name="Row1" Text="1" />
@@ -1137,38 +1217,114 @@
                   <Column Id="M-00FA_A-0001-01-0000_PB-%C%15_C-1" Name="Col1" Width="40%" />
                   <Column Id="M-00FA_A-0001-01-0000_PB-%C%15_C-2" Name="Col2" Width="50%" />
                   <Column Id="M-00FA_A-0001-01-0000_PB-%C%15_C-3" Name="Col3" Width="10%" />
+                  <Column Id="M-00FA_A-0001-01-0000_PB-%C%15_C-4" Name="Col4" Width="10%" />
                 </Columns>
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Headline" Text="&#10;Eingang" Cell="1,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Headline" Text="Neues KO erzeugen oder&#10;bestehendes KO nutzen" Cell="1,2" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Headline" Text="&#10;KO-Nr." Cell="1,3" />
-
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Headline" Text="&#10;DPT" Cell="1,4" />
+                <!-- constant texts -->
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit extern" Cell="2,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz A" Cell="3,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz B" Cell="4,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Automatik übersteuern" Cell="5,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuell übersteuern" Cell="6,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Aktorstatus" Cell="7,1" />
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Sperre" Cell="8,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Reset" Cell="9,1" />
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tagesphase" Cell="10,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="PM über Szene steuern" Cell="11,1" />
 
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%064_R-%T%%CCC%06401" Cell="2,2" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601" Cell="3,2" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801" Cell="4,2" />
+                <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401">
+                  <when test="0">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="2,2" />
+                  </when>
+                  <when test="1">
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%064_R-%T%%CCC%06401" Cell="2,2" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 9.004" Cell="2,4" />
+                  </when>
+                </choose>
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
+                  <when test=">0">
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601" Cell="3,2" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="3,4" />
+                  </when>
+                  <when default="true">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="3,2" />
+                  </when>
+                </choose>
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
+                  <when test=">0">
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801" Cell="4,2" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="4,4" />
+                  </when>
+                  <when default="true">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="4,2" />
+                  </when>
+                </choose>
+                
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%070_R-%T%%CCC%07001" Cell="5,2" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="5,4" />
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%072_R-%T%%CCC%07201" Cell="6,2" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="6,4" />
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%074_R-%T%%CCC%07401" Cell="7,2" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%076_R-%T%%CCC%07601" Cell="8,2" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="7,4" />
+                
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201">
+                  <when test="0">
+                    <!-- inaktiv -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Sperre" Cell="8,1" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="8,2" />
+                  </when>
+                  <when test="1">
+                    <!-- Zwangsführung -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Zwangsführung" Cell="8,1" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 2.001" Cell="8,4" />
+                  </when>
+                  <when test="2">
+                    <!-- Lock -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Sperre" Cell="8,1" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="8,4" />
+                  </when>
+                  <when test=">0">
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%076_R-%T%%CCC%07601" Cell="8,2" />
+                  </when>
+                </choose>
+
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%078_R-%T%%CCC%07801" Cell="9,2" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%080_R-%T%%CCC%08001" Cell="10,2" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.015" Cell="9,4" />
+
+                <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501">
+                  <when test="0">
+                    <!-- inaktiv -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="10,2" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tagesphase" Cell="10,1" />
+                  </when>
+                  <when test="1">
+                    <!-- Tagesphase -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tagesphase" Cell="10,1" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="17.001" Cell="10,4" />
+                  </when>
+                  <when test="2">
+                    <!-- Tag/Nacht -->
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Tag/Nacht" Cell="10,1" />
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="10,4" />
+                  </when>
+                  <when test=">0">
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%080_R-%T%%CCC%08001" Cell="10,2" />
+                  </when>
+                </choose>
+
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%082_R-%T%%CCC%08201" Cell="11,2" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="17.001" Cell="11,4" />
+
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%064_R-%T%%CCC%06401">
                   <when test="0">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%065_R-%T%%CCC%06501" Cell="2,3" />
                   </when>
                   <when test="1">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%065_R-%T%%CCC%06502" Cell="2,3" />
+                  </when>
+                  <when default="true">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Headline" Text="X" Cell="2,3" />
                   </when>
                 </choose>
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601">

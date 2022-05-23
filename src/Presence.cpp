@@ -101,40 +101,40 @@ void Presence::processInputKo(GroupObject &iKo)
             // we are in the Range of presence KOs
             uint8_t lChannelIndex = lKoMap->channelIndex;
             PresenceChannel *lChannel = mChannel[lChannelIndex];
-            lChannel->processInputKo(iKo);
+            lChannel->processInputKo(iKo, lKoMap->koIndex);
         }
     }
-    if (lAsap == PM_KoSensitivity)
+    switch (lAsap)
     {
+        case PM_KoSensitivity:
 #ifdef HF_POWER_PIN
-        mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, iKo.value(getDPT(VAL_DPT_5)));
+            mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, iKo.value(getDPT(VAL_DPT_5)));
 #endif
-    }
-    else if (lAsap == PM_KoScenario)
-    {
+            break;
+        case PM_KoScenario:
 #ifdef HF_POWER_PIN
-        mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
+            mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
 #endif
-    }
-    else if (lAsap == PM_KoHfReset)
-    {
-        // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
-        startPowercycleHfSensor();
-    }
-    else if (lAsap == PM_KoLEDMove)
-    {
-        processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
-    }
-    else if (lAsap == PM_KoLEDPresence)
-    {
-        processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxPresence);
-    }
-    else if (lAsap >= PM_KoOffset && lAsap < PM_KoOffset + mNumChannels * PM_KoBlockSize)
-    {
-        // we are in the Range of presence KOs
-        uint8_t lChannelIndex = (lAsap - PM_KoOffset) / PM_KoBlockSize;
-        PresenceChannel *lChannel = mChannel[lChannelIndex];
-        lChannel->processInputKo(iKo);
+            break;
+        case PM_KoHfReset:
+            // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
+            startPowercycleHfSensor();
+            break;
+        case PM_KoLEDMove:
+            processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxMove);
+            break;
+        case PM_KoLEDPresence:
+            processLED(iKo.value(getDPT(VAL_DPT_1)), CallerKnxPresence);
+            break;
+        default:
+            if (lAsap >= PM_KoOffset && lAsap < PM_KoOffset + mNumChannels * PM_KoBlockSize)
+            {
+                // we are in the Range of presence KOs
+                uint8_t lChannelIndex = (lAsap - PM_KoOffset) / PM_KoBlockSize;
+                PresenceChannel *lChannel = mChannel[lChannelIndex];
+                lChannel->processInputKo(iKo);
+            }
+            break;
     }
 }
 
