@@ -229,8 +229,10 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
             lLedPresence = iOn;
             break;
     }
+#ifdef SERIAL_HF
     digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (lLedMove && sLedsLocked == 0));
     digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == (lLedPresence && sLedsLocked == 0));
+#endif
     // store the current values in memory
     sLedMove = lLedMove;
     sLedPresence = lLedPresence;
