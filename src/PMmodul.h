@@ -1039,24 +1039,18 @@
 #define PM_pAPresenceShort           56      // 1 Bit, Bit 5
 #define     PM_pAPresenceShortMask 0x20
 #define     PM_pAPresenceShortShift 5
-#define PM_pAOutput1Send             56      // 1 Bit, Bit 4
-#define     PM_pAOutput1SendMask 0x10
-#define     PM_pAOutput1SendShift 4
-#define PM_pAOutput2Send             56      // 1 Bit, Bit 3
-#define     PM_pAOutput2SendMask 0x08
-#define     PM_pAOutput2SendShift 3
-#define PM_pALockHardwareLEDs        56      // 1 Bit, Bit 2
-#define     PM_pALockHardwareLEDsMask 0x04
-#define     PM_pALockHardwareLEDsShift 2
-#define PM_pAOutput1Filter           56      // 2 Bits, Bit 1-0
-#define     PM_pAOutput1FilterMask 0x03
-#define     PM_pAOutput1FilterShift 0
-#define PM_pAOutput2Filter           57      // 2 Bits, Bit 7-6
-#define     PM_pAOutput2FilterMask 0xC0
-#define     PM_pAOutput2FilterShift 6
-#define PM_pAManualWithPresence      57      // 1 Bit, Bit 5
-#define     PM_pAManualWithPresenceMask 0x20
-#define     PM_pAManualWithPresenceShift 5
+#define PM_pALockHardwareLEDs        56      // 1 Bit, Bit 4
+#define     PM_pALockHardwareLEDsMask 0x10
+#define     PM_pALockHardwareLEDsShift 4
+#define PM_pAOutput1Filter           56      // 2 Bits, Bit 3-2
+#define     PM_pAOutput1FilterMask 0x0C
+#define     PM_pAOutput1FilterShift 2
+#define PM_pAOutput2Filter           56      // 2 Bits, Bit 1-0
+#define     PM_pAOutput2FilterMask 0x03
+#define     PM_pAOutput2FilterShift 0
+#define PM_pAManualWithPresence      57      // 1 Bit, Bit 7
+#define     PM_pAManualWithPresenceMask 0x80
+#define     PM_pAManualWithPresenceShift 7
 #define PM_pAPresenceDelayBase       58      // 2 Bits, Bit 7-6
 #define     PM_pAPresenceDelayBaseMask 0xC0
 #define     PM_pAPresenceDelayBaseShift 6
@@ -1101,24 +1095,18 @@
 #define PM_pBPresenceShort           78      // 1 Bit, Bit 5
 #define     PM_pBPresenceShortMask 0x20
 #define     PM_pBPresenceShortShift 5
-#define PM_pBOutput1Send             78      // 1 Bit, Bit 4
-#define     PM_pBOutput1SendMask 0x10
-#define     PM_pBOutput1SendShift 4
-#define PM_pBOutput2Send             78      // 1 Bit, Bit 3
-#define     PM_pBOutput2SendMask 0x08
-#define     PM_pBOutput2SendShift 3
-#define PM_pBLockHardwareLEDs        78      // 1 Bit, Bit 2
-#define     PM_pBLockHardwareLEDsMask 0x04
-#define     PM_pBLockHardwareLEDsShift 2
-#define PM_pBOutput1Filter           78      // 2 Bits, Bit 1-0
-#define     PM_pBOutput1FilterMask 0x03
-#define     PM_pBOutput1FilterShift 0
-#define PM_pBOutput2Filter           79      // 2 Bits, Bit 7-6
-#define     PM_pBOutput2FilterMask 0xC0
-#define     PM_pBOutput2FilterShift 6
-#define PM_pBManualWithPresence      79      // 1 Bit, Bit 5
-#define     PM_pBManualWithPresenceMask 0x20
-#define     PM_pBManualWithPresenceShift 5
+#define PM_pBLockHardwareLEDs        78      // 1 Bit, Bit 4
+#define     PM_pBLockHardwareLEDsMask 0x10
+#define     PM_pBLockHardwareLEDsShift 4
+#define PM_pBOutput1Filter           78      // 2 Bits, Bit 3-2
+#define     PM_pBOutput1FilterMask 0x0C
+#define     PM_pBOutput1FilterShift 2
+#define PM_pBOutput2Filter           78      // 2 Bits, Bit 1-0
+#define     PM_pBOutput2FilterMask 0x03
+#define     PM_pBOutput2FilterShift 0
+#define PM_pBManualWithPresence      79      // 1 Bit, Bit 7
+#define     PM_pBManualWithPresenceMask 0x80
+#define     PM_pBManualWithPresenceShift 7
 #define PM_pBPresenceDelayBase       80      // 2 Bits, Bit 7-6
 #define     PM_pBPresenceDelayBaseMask 0xC0
 #define     PM_pBPresenceDelayBaseShift 6
@@ -1163,24 +1151,18 @@
 #define PM_pCPresenceShort           98      // 1 Bit, Bit 5
 #define     PM_pCPresenceShortMask 0x20
 #define     PM_pCPresenceShortShift 5
-#define PM_pCOutput1Send             98      // 1 Bit, Bit 4
-#define     PM_pCOutput1SendMask 0x10
-#define     PM_pCOutput1SendShift 4
-#define PM_pCOutput2Send             98      // 1 Bit, Bit 3
-#define     PM_pCOutput2SendMask 0x08
-#define     PM_pCOutput2SendShift 3
-#define PM_pCLockHardwareLEDs        98      // 1 Bit, Bit 2
-#define     PM_pCLockHardwareLEDsMask 0x04
-#define     PM_pCLockHardwareLEDsShift 2
-#define PM_pCOutput1Filter           98      // 2 Bits, Bit 1-0
-#define     PM_pCOutput1FilterMask 0x03
-#define     PM_pCOutput1FilterShift 0
-#define PM_pCOutput2Filter           99      // 2 Bits, Bit 7-6
-#define     PM_pCOutput2FilterMask 0xC0
-#define     PM_pCOutput2FilterShift 6
-#define PM_pCManualWithPresence      99      // 1 Bit, Bit 5
-#define     PM_pCManualWithPresenceMask 0x20
-#define     PM_pCManualWithPresenceShift 5
+#define PM_pCLockHardwareLEDs        98      // 1 Bit, Bit 4
+#define     PM_pCLockHardwareLEDsMask 0x10
+#define     PM_pCLockHardwareLEDsShift 4
+#define PM_pCOutput1Filter           98      // 2 Bits, Bit 3-2
+#define     PM_pCOutput1FilterMask 0x0C
+#define     PM_pCOutput1FilterShift 2
+#define PM_pCOutput2Filter           98      // 2 Bits, Bit 1-0
+#define     PM_pCOutput2FilterMask 0x03
+#define     PM_pCOutput2FilterShift 0
+#define PM_pCManualWithPresence      99      // 1 Bit, Bit 7
+#define     PM_pCManualWithPresenceMask 0x80
+#define     PM_pCManualWithPresenceShift 7
 #define PM_pCPresenceDelayBase       100      // 2 Bits, Bit 7-6
 #define     PM_pCPresenceDelayBaseMask 0xC0
 #define     PM_pCPresenceDelayBaseShift 6
@@ -1225,24 +1207,18 @@
 #define PM_pDPresenceShort           118      // 1 Bit, Bit 5
 #define     PM_pDPresenceShortMask 0x20
 #define     PM_pDPresenceShortShift 5
-#define PM_pDOutput1Send             118      // 1 Bit, Bit 4
-#define     PM_pDOutput1SendMask 0x10
-#define     PM_pDOutput1SendShift 4
-#define PM_pDOutput2Send             118      // 1 Bit, Bit 3
-#define     PM_pDOutput2SendMask 0x08
-#define     PM_pDOutput2SendShift 3
-#define PM_pDLockHardwareLEDs        118      // 1 Bit, Bit 2
-#define     PM_pDLockHardwareLEDsMask 0x04
-#define     PM_pDLockHardwareLEDsShift 2
-#define PM_pDOutput1Filter           118      // 2 Bits, Bit 1-0
-#define     PM_pDOutput1FilterMask 0x03
-#define     PM_pDOutput1FilterShift 0
-#define PM_pDOutput2Filter           119      // 2 Bits, Bit 7-6
-#define     PM_pDOutput2FilterMask 0xC0
-#define     PM_pDOutput2FilterShift 6
-#define PM_pDManualWithPresence      119      // 1 Bit, Bit 5
-#define     PM_pDManualWithPresenceMask 0x20
-#define     PM_pDManualWithPresenceShift 5
+#define PM_pDLockHardwareLEDs        118      // 1 Bit, Bit 4
+#define     PM_pDLockHardwareLEDsMask 0x10
+#define     PM_pDLockHardwareLEDsShift 4
+#define PM_pDOutput1Filter           118      // 2 Bits, Bit 3-2
+#define     PM_pDOutput1FilterMask 0x0C
+#define     PM_pDOutput1FilterShift 2
+#define PM_pDOutput2Filter           118      // 2 Bits, Bit 1-0
+#define     PM_pDOutput2FilterMask 0x03
+#define     PM_pDOutput2FilterShift 0
+#define PM_pDManualWithPresence      119      // 1 Bit, Bit 7
+#define     PM_pDManualWithPresenceMask 0x80
+#define     PM_pDManualWithPresenceShift 7
 #define PM_pDPresenceDelayBase       120      // 2 Bits, Bit 7-6
 #define     PM_pDPresenceDelayBaseMask 0xC0
 #define     PM_pDPresenceDelayBaseShift 6
@@ -1308,4 +1284,4 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 52
+#define MAIN_ApplicationVersion 54
