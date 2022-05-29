@@ -33,6 +33,11 @@
 #define VAL_PM_LedPresence 2
 #define VAL_PM_LedKnx 3
 
+// brightness auto off
+#define VAL_PM_LuxNoOff 0
+#define VAL_PM_LuxAbsoluteOff 1
+#define VAL_PM_LuxAdaptiveOff 2
+
 // presence type
 #define VAL_PM_PresenceTypeOff 0
 #define VAL_PM_PresenceTypeSwitch 1
