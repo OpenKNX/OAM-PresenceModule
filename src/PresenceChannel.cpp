@@ -166,8 +166,11 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
         bool lValue = iKo.value(getDPT(VAL_DPT_1));
         switch (lKoIndex)
         {
-            case PM_KoKOpLux:
             case PM_KoKOpLuxOn:
+                calculateBrightnessOff();
+                // a start brightness is triggered by a new value to KO(LuxOff)
+                break;
+            case PM_KoKOpLux:
             case PM_KoKOpLuxOff:
                 // measured external brightness or changed brightness level
                 startBrightness();
@@ -379,22 +382,8 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
     // brightness to turn on light
     uint32_t lBrightness = paramWord(PM_pABrightnessOn, true);
     getKo(PM_KoKOpLuxOn)->value(lBrightness, getDPT(VAL_DPT_9));
-    // calculate brightness to turn off light
-    // we have to differ between absolute and adaptive turn off light
-    uint8_t lLuxAutoOff = paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true);
-    switch (lLuxAutoOff)
-    {
-        case VAL_PM_LuxAdaptiveOff:
-            startAdaptiveBrightness();
-            break;
-        case VAL_PM_LuxAbsoluteOff:
-            lBrightness += paramWord(PM_pABrightnessDelta, true);
-            getKo(PM_KoKOpLuxOff)->value(lBrightness, getDPT(VAL_DPT_9));
-            break;
-        default:
-            // do nothing
-            break;
-    }
+    // brightness to turn off light
+    calculateBrightnessOff();
 }
 
 bool PresenceChannel::getRawPresence()
@@ -606,7 +595,7 @@ void PresenceChannel::processManual()
     if (pManualFallbackTime > 0)
     {
         // in case manual mode is presence dependent, any presence resets manual fallback time
-        if (paramBit(PM_pAManualWithPresence, PM_pAManualWithPresenceMask) && getRawPresence())
+        if (paramBit(PM_pAManualWithPresence, PM_pAManualWithPresenceMask, true) && getRawPresence())
         {
             pManualFallbackTime = delayTimerInit();
         }
@@ -765,6 +754,29 @@ void PresenceChannel::processActorState()
     // currently nothing to do
 }
 
+void PresenceChannel::calculateBrightnessOff()
+{
+    // calculate brightness to turn off light
+    // we have to differ between absolute and adaptive turn off light
+    uint8_t lLuxAutoOff = paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true);
+    switch (lLuxAutoOff)
+    {
+        case VAL_PM_LuxAdaptiveOff:
+            // for adaptive off the calculation is async
+            startAdaptiveBrightness();
+            break;
+        case VAL_PM_LuxAbsoluteOff:
+            // for absolute off we simply add the offset to current on limit
+            uint32_t lBrightness = getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9));
+            lBrightness += paramWord(PM_pABrightnessDelta, true);
+            getKo(PM_KoKOpLuxOff)->value(lBrightness, getDPT(VAL_DPT_9));
+            break;
+        default:
+            // do nothing
+            break;
+    }
+}
+
 void PresenceChannel::startBrightness()
 {
     // should we suppress brightness evaluation?
@@ -783,12 +795,16 @@ void PresenceChannel::startBrightness()
             if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
                 pBrightnessOffDelayTime = delayTimerInit();
         }
-        else if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        else 
         {
             // deactivate brightness off
             pBrightnessOffDelayTime = 0;
+        }
+        // now check lower value, if below, turn light on
+        if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        {
             // its getting dark, if we are in presence state, we turn light on
-            if ((pCurrentState & STATE_PRESENCE) && !(pCurrentState & STATE_AUTO)) {
+            if ((pCurrentState & STATE_PRESENCE) && (pCurrentState & STATE_AUTO)) {
                 onPresenceChange(true);
             }
         }
@@ -825,12 +841,12 @@ void PresenceChannel::processAdaptiveBrightness()
     // should we calculate adaptive brightness
     if (pCurrentState & STATE_ADAPTIVE) 
     {
-        if (!(pCurrentState & STATE_ADAPTIVE_READ) && pAdaptiveDelayTime > 0 && delayCheck(pAdaptiveDelayTime, paramTimeDelay(PM_pAdaptiveDelayBase, true)))
+        if (!(pCurrentState & STATE_ADAPTIVE_READ) && pAdaptiveDelayTime > 0 && delayCheck(pAdaptiveDelayTime, paramTimeDelay(PM_pAdaptiveDelayBase, false)))
         {
             // we waited the whole adaptive delay time for an according brightness update
             pAdaptiveDelayTime = 0;
             // should we send now a read request?
-            if (paramBit(PM_pBrightnessRead, PM_pBrightnessReadMask, true))
+            if (paramBit(PM_pBrightnessRead, PM_pBrightnessReadMask, false))
             {
                 // send a read request
                 getKo(PM_KoKOpLux)->requestObjectRead();
@@ -839,7 +855,7 @@ void PresenceChannel::processAdaptiveBrightness()
                 pAdaptiveDelayTime = delayTimerInit();
             }
         }
-        else if (pCurrentState & STATE_ADAPTIVE_READ && delayCheck(pAdaptiveDelayTime, 1000))
+        else if (pCurrentState & STATE_ADAPTIVE_READ && delayCheck(pAdaptiveDelayTime, 1500))
         {
             // we waited one second for the read and continue processing with current lux value
             pCurrentState &= ~STATE_ADAPTIVE_READ;
@@ -903,7 +919,7 @@ void PresenceChannel::processOutput()
     }
     if (lOutput)
     {
-        // we hav to send something
+        // we have to send something
         bool lOn = (pCurrentValue & PM_BIT_OUTPUT_SET);
         if (lOutput & 1) {
             onOutput(VAL_PM_Output1Index, lOn);

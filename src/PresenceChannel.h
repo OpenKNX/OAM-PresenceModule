@@ -151,6 +151,7 @@ class PresenceChannel
     void processBrightness();
     void startAdaptiveBrightness();
     void processAdaptiveBrightness();
+    void calculateBrightnessOff();
 
     int8_t getDayPhaseFromKO();
     void startDayPhase();
