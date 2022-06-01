@@ -925,6 +925,27 @@
 #define PM_pBrightnessRead            4      // 1 Bit, Bit 7
 #define     PM_pBrightnessReadMask 0x80
 #define     PM_pBrightnessReadShift 7
+#define PM_pStartReadLux              4      // 1 Bit, Bit 6
+#define     PM_pStartReadLuxMask 0x40
+#define     PM_pStartReadLuxShift 6
+#define PM_pStartReadPresence1        4      // 1 Bit, Bit 5
+#define     PM_pStartReadPresence1Mask 0x20
+#define     PM_pStartReadPresence1Shift 5
+#define PM_pStartReadPresence2        4      // 1 Bit, Bit 4
+#define     PM_pStartReadPresence2Mask 0x10
+#define     PM_pStartReadPresence2Shift 4
+#define PM_pStartReadAktorState       4      // 1 Bit, Bit 3
+#define     PM_pStartReadAktorStateMask 0x08
+#define     PM_pStartReadAktorStateShift 3
+#define PM_pStartReadLock             4      // 1 Bit, Bit 2
+#define     PM_pStartReadLockMask 0x04
+#define     PM_pStartReadLockShift 2
+#define PM_pStartReadDayPhase         4      // 1 Bit, Bit 1
+#define     PM_pStartReadDayPhaseMask 0x02
+#define     PM_pStartReadDayPhaseShift 1
+#define PM_pStartReadScene            4      // 1 Bit, Bit 0
+#define     PM_pStartReadSceneMask 0x01
+#define     PM_pStartReadSceneShift 0
 #define PM_pChannelDelayBase          5      // 2 Bits, Bit 7-6
 #define     PM_pChannelDelayBaseMask 0xC0
 #define     PM_pChannelDelayBaseShift 6
@@ -1284,4 +1305,4 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 54
+#define MAIN_ApplicationVersion 56
