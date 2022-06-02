@@ -101,6 +101,7 @@ class PresenceChannel
   private:
     uint8_t mChannelId = 0; // zero based
     uint8_t mCurrentDayPhase = 0; // zero based
+    bool mHardwarePresence = false;
 
     uint32_t calcParamIndex(uint16_t iParamIndex, bool iWithPhase);
     uint16_t calcKoNumber(uint8_t iKoIndex);

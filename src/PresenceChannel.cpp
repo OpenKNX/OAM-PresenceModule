@@ -461,9 +461,15 @@ void PresenceChannel::startPresenceTrigger()
 
 void PresenceChannel::startHardwarePresence() 
 {
-    if (sPresence->PresenceTrigger || sPresence->MoveTrigger)
-        if (getHardwarePresence()) 
-            startPresenceTrigger();
+    bool lPresence = getHardwarePresence();
+    if (mHardwarePresence != lPresence)
+    {
+        mHardwarePresence = lPresence;
+        startPresence(lPresence);
+    }
+    // if (sPresence->PresenceTrigger || sPresence->MoveTrigger)
+    //     if (getHardwarePresence()) 
+    //         startPresenceTrigger();
 }
 
 // helper entry point for presence calculation initiated by a KO
