@@ -308,6 +308,51 @@ void PresenceChannel::processStartup()
     }
 }
 
+void PresenceChannel::processReadRequests()
+{
+    // this method is called after startup delay and executes read requests, which should just happen once after startup
+    if (pReadRequestCounter < 255 && delayCheck(pReadRequestDelay, 500))
+    {
+        pReadRequestCounter += 1;
+        pReadRequestDelay = delayTimerInit();
+        switch (pReadRequestCounter)
+        {
+            case 1:
+                if (paramBit(PM_pStartReadLux, PM_pStartReadLuxMask))
+                    getKo(PM_KoKOpLux)->requestObjectRead();
+                break;
+            case 2:
+                if (paramBit(PM_pStartReadPresence1, PM_pStartReadPresence1Mask))
+                    getKo(PM_KoKOpPresence1)->requestObjectRead();
+                break;
+            case 3:
+                if (paramBit(PM_pStartReadPresence2, PM_pStartReadPresence2Mask))
+                    getKo(PM_KoKOpPresence2)->requestObjectRead();
+                break;
+            case 4:
+                if (paramBit(PM_pStartReadAktorState, PM_pStartReadAktorStateMask))
+                    getKo(PM_KoKOpAktorState)->requestObjectRead();
+                break;
+            case 5:
+                if (paramBit(PM_pStartReadLock, PM_pStartReadLockMask))
+                    getKo(PM_KoKOpLock)->requestObjectRead();
+                break;
+            case 6:
+                if (paramBit(PM_pStartReadDayPhase, PM_pStartReadDayPhaseMask))
+                    getKo(PM_KoKOpDayPhase)->requestObjectRead();
+                break;
+            case 7:
+                if (paramBit(PM_pStartReadScene, PM_pStartReadSceneMask))
+                    getKo(PM_KoKOpScene)->requestObjectRead();
+                break;
+
+            default:
+                pReadRequestCounter = 255; // all read requests processed
+                break;
+        }
+    }
+}
+
 int8_t PresenceChannel::getDayPhaseFromKO()
 {
     // derive day phase from scene number
@@ -759,6 +804,7 @@ void PresenceChannel::calculateBrightnessOff()
     // calculate brightness to turn off light
     // we have to differ between absolute and adaptive turn off light
     uint8_t lLuxAutoOff = paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true);
+    uint32_t lBrightness;
     switch (lLuxAutoOff)
     {
         case VAL_PM_LuxAdaptiveOff:
@@ -767,7 +813,7 @@ void PresenceChannel::calculateBrightnessOff()
             break;
         case VAL_PM_LuxAbsoluteOff:
             // for absolute off we simply add the offset to current on limit
-            uint32_t lBrightness = getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9));
+            lBrightness = getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9));
             lBrightness += paramWord(PM_pABrightnessDelta, true);
             getKo(PM_KoKOpLuxOff)->value(lBrightness, getDPT(VAL_DPT_9));
             break;
@@ -982,7 +1028,9 @@ void PresenceChannel::loop()
     // do no further processing until channel passed its startup time
     if (pCurrentState & STATE_RUNNING)
     {
-        // first we handle presence hardware
+        // handle read requests
+        processReadRequests();
+        // handle presence hardware
         startHardwarePresence();
 
         // we revert the processing order for pipeline events

@@ -117,6 +117,7 @@ class PresenceChannel
 
     void startStartup();
     void processStartup();
+    void processReadRequests();
 
     bool getRawPresence();
     bool getHardwarePresence();
@@ -173,6 +174,8 @@ class PresenceChannel
     uint32_t pCurrentState = 0;
     uint32_t pCurrentValue = 0;
     uint32_t pOnDelay = 0;
+    uint32_t pReadRequestDelay = 0;
+    uint8_t pReadRequestCounter = 0;
     uint32_t pPresenceDelayTime = 0;  // Nachlaufzeit
     uint32_t pPresenceShortDelayTime = 0; // Kurze Anwesenheit Nachlaufzeit
     uint32_t pManualFallbackTime = 0; // Rückfallzeit aus Manuell-Modus

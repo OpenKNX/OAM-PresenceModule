@@ -54,7 +54,13 @@ void Presence::processReadRequests()
     if (!sCalledProcessReadRequests)
     {
         // we go through all IO devices defined as outputs and check for initial read requests
-        // WireDevice::processReadRequests();
+        if (knx.paramByte(PM_ReadLed) & PM_ReadLedMask)
+        {
+            if ((knx.paramByte(PM_LEDPresence) & PM_LEDPresenceMask) >> PM_LEDPresenceShift == VAL_PM_LedKnx)
+                knx.getGroupObject(PM_KoLEDPresence).requestObjectRead();
+            if ((knx.paramByte(PM_LEDMove) & PM_LEDMoveMask) >> PM_LEDMoveShift == VAL_PM_LedKnx)
+                knx.getGroupObject(PM_KoLEDMove).requestObjectRead();
+        }
         sCalledProcessReadRequests = true;
     }
 }
