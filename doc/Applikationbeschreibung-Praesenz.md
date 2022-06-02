@@ -24,7 +24,7 @@ Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer d
 
 Diese Applikation realisiert alle wesentlichen Funktionen eines Präsenz- bzw. Bewegungsmelders. Sie kann mit passender Präsenz- oder Bewegungsmelder-Hardware betrieben werden oder - und das ist das Besondere - auch als "Virtueller Präsenzmelder", indem sie Präsenz- und Helligkeitsinformationen über den KNX-Bus empfängt. Somit kann diese Applikation eine Art Update für existierende Präsenzmelder-Hardware darstellen, deren Applikation alt oder ungenügend ist und die gewünschten Funktionen nicht leistet.
 
-Auch wenn im Folgenden immer von Präsenzmelder gesprochen wird, so hängt diese Eigenschaft von der verwendeten Präsen- bzw. Bewegungserkennung ab. Somit ist aus Sicht der Applikation Präsenz- und Bewegungsmelder synonym zu sehen, die angeschlossene Hardware bestimmt durch ihre Sensitivität, ob es sich um einen Präsenz- oder Bewegungsmelder handelt.
+Auch wenn im Folgenden immer von Präsenzmelder gesprochen wird, so hängt diese Eigenschaft von der verwendeten Präsenz- bzw. Bewegungserkennung ab. Somit ist aus Sicht der Applikation Präsenz- und Bewegungsmelder synonym zu sehen, die angeschlossene Hardware bestimmt durch ihre Sensitivität, ob es sich um einen Präsenz- oder Bewegungsmelder handelt.
 
 Die Idee zu dieser Applikation ist bei der Verwendung vom True Presence Präsenzmelder entstanden. Dieser hat eine gute bis sehr gute Präsenzerkennung, mittelmäßige Helligkeitswerte und eine schlechte Applikation. In Verbindung mit dieser (virtuellen) Applikation funktioniert er wesentlich besser und kann dann sogar zusätzliche Funktionen wie Kurzzeit-Präsenz.
 
@@ -81,11 +81,11 @@ Der Phantasie sind hier keine Grenzen gesetzt. Die Phasen können auch ganz ande
 
 ### Adaptive Ausschaltschwelle
 
-Die Hauptanwendung für einen Präsenzmelder ist immer noch das Schalten von Licht. Während sich die meisten Personen, die neu im Bereich Hausautomatisierung sind, Gedanken darüber machen, wann das Licht eingeschaltet werden soll und wann nicht, die die größte Herausforderung, wann das Licht ausgeschaltet werden soll. Die erste (laienhafte) Idee hierzu ist: "Wenn ich nicht im Raum bin", allerdings ist das zu kurz gedacht.
+Die Hauptanwendung für einen Präsenzmelder ist immer noch das Schalten von Licht. Während sich die meisten Personen, die neu im Bereich Hausautomatisierung sind, Gedanken darüber machen, wann das Licht eingeschaltet werden soll und wann nicht, ist die größte Herausforderung, wann das Licht ausgeschaltet werden soll. Die erste (laienhafte) Idee hierzu ist: "Wenn ich nicht im Raum bin", allerdings ist das zu kurz gedacht.
 
 Die Information "Wenn ich nicht im Raum bin" hängt von der Qualität der Präsenzerkennung ab und es gibt viele Stellschrauben wie Nachlaufzeit, Empfindlichkeit, Kurzzeitpräsenz, die eine individuelle und zufriedenstellende Einstellung hierzu erlauben, auch bei diesem Präsenzmelder.
 
-Dem 2. Aspekt für das Ausschalten des Lichts - "Wenn es wieder hell genug ist" - wird hingegen bei derzeit verfügbaren Produkten am Markt sehr wenig Aufmerksamkeit geschenkt. Die Situation ist erstmal einfach zu motivieren:
+Dem 2. Aspekt für das Ausschalten des Lichts - "Wenn es wieder hell genug ist" - wird hingegen bei derzeit verfügbaren Produkten am Markt sehr wenig Aufmerksamkeit geschenkt. Die Situation ist einfach zu motivieren:
 
 Man kommt morgens ins Esszimmer zum Frühstück, es dämmert draußen, das Licht wird vom PM eingeschaltet, da es noch nicht hell genug ist. Während des Frühstücks wird es heller und die Helligkeit von außen wird so hoch, dass sie das Licht im Raum überflüssig macht. Jetzt sollte der PM das Licht ausschalten.
 
@@ -293,7 +293,7 @@ Ein PM-Kanal berücksichtigt normalerweise eine gemessene Helligkeit bei seinen 
 
 Wählt man hier Ja, wird die Helligkeit in den vorgegebenen Grenzen zum Schalten berücksichtigt, bei einem Nein wird keine Helligkeit berücksichtigt.
 
-Die eigentlichen Hellikgeitsgrenzen zum Ein- und Ausschalten sind abhängig von der Tagesphase und werden dort definiert.
+Die eigentlichen Helligkeitsgrenzen zum Ein- und Ausschalten sind abhängig von der Tagesphase und werden dort definiert.
 
 ### **Totzeit bis zur Helligkeitsanpassung**
 
@@ -311,13 +311,13 @@ Eine neue Ausschaltschwelle wird erst berechnet, wenn ein neuer Helligkeitswert 
 
 ## Präsenzeingänge
 
-Hier kann bestimmt werden, ob und wie die Präsenzinformation von externer oder interner Hardware zum dem Melderkanal gelangt.
+Hier kann bestimmt werden, ob und wie die Präsenzinformation von externer oder interner Hardware zu dem Melderkanal gelangt.
 
 ![Präsenzeingänge](pics/PresenceKanal.png)
 
 Alle Präsenzinformationen werden über ein logisches ODER verarbeitet, eine Nachlaufzeit beginnt erst, wenn alle Präsenzeingänge eine 0 liefern.
 
-### **Eintang Präsenz A/B**
+### **Eingang Präsenz A/B**
 
 Es gibt 2 Kommunikationsobjekte, die Präsenzinformationen von einem externen Melder empfangen können. Die Werte können wie folgt belegt werden.
 
@@ -331,7 +331,7 @@ Der externe Sensor liefert die Präsenzinformation als schaltendes Objekt. Solan
 
 #### **triggernd (nur EIN wird ausgewertet)**
 
-Der externe Sensor liefert die Präsenzinformation als trigger. Sobald ein EIN-Signal anliegt, ist Präsenz vorhanden und die Nachlaufzeit läuft an. Ein erneutes EIN setzt die Nachlaufzeit zurück, d.h. sie läuft erneut an. 
+Der externe Sensor liefert die Präsenzinformation als Trigger. Sobald ein EIN-Signal anliegt, ist Präsenz vorhanden und die Nachlaufzeit läuft an. Ein erneutes EIN setzt die Nachlaufzeit zurück, d.h. sie läuft erneut an. 
 
 Der externe Sensor muss sicherstellen, dass er valide Präsenzinformationen häufiger sendet als die minimale Nachlaufzeit, die verwendet wird. Empfohlen wird ein zyklisches senden, mindestens doppelt so häufig wie die Nachlaufzeit.
 
@@ -387,7 +387,7 @@ Hier wird eingestellt, auf welche Art und Weise der Kanal gesperrt werden kann.
 
 ### **Sperrobjekt**
 
-Man kann bei diesem Melder verschiedene Arten von Sperren definieren. Solange der Melder im Sperrmodus ist, Sendet er keine Telegramme am Ausgang.
+Man kann bei diesem Melder verschiedene Arten von Sperren definieren. Solange der Melder im Sperrmodus ist, sendet er keine Telegramme am Ausgang.
 
 #### **nicht aktiv**
 
@@ -422,21 +422,21 @@ Eine Sperre wird durch ein AUS-Telegramm ausgelöst, eine Freigabe durch ein EIN
 
 Erscheint nur, wenn das Sperrobjekt "Sperre" eingestellt ist.
 
-Der Melder kann beim aktivieren einer Sperre etwas senden lassen, hier wird bestimmt, was passiert.
+Der Melder kann beim Aktivieren einer Sperre etwas senden lassen, hier wird bestimmt, was passiert.
 
 > Achtung: Ein EIN- bzw. AUS-Signal ist nicht zu verwechseln mit einem EIN- oder AUS-Telegramm. Das entsprechende Signal wird am Ausgang in das passende Telegramm verwandelt, das in der aktuellen Tagesphase für  EIN- bzw. AUS-Signal gesendet werden soll. Ein EIN-Signal kann somit durchaus zu einer Szene 5 und ein AUS-Signal zu einer Szene 17 führen.
 
 #### **nichts gesendet**
 
-Beim aktivieren der Sperre passiert nichts am Ausgang.
+Beim Aktivieren der Sperre passiert nichts am Ausgang.
 
 #### **AUS gesendet**
 
-Beim aktivieren der Sperre wird ein AUS-Signal gesendet.
+Beim Aktivieren der Sperre wird ein AUS-Signal gesendet.
 
 #### **EIN gesendet**
 
-Beim aktivieren der Sperre wird ein EIN-Signal gesendet.
+Beim Aktivieren der Sperre wird ein EIN-Signal gesendet.
 
 ### **Beim AUSschalten wird**
 
@@ -448,21 +448,21 @@ Der Melder kann beim deaktivieren einer Sperre etwas senden lassen, hier wird be
 
 #### **nichts gesendet**
 
-Beim deaktivieren der Sperre passiert nichts am Ausgang.
+Beim Deaktivieren der Sperre passiert nichts am Ausgang.
 
 #### **AUS gesendet**
 
-Beim deaktivieren der Sperre wird ein AUS-Signal gesendet.
+Beim Deaktivieren der Sperre wird ein AUS-Signal gesendet.
 
 #### **EIN gesendet**
 
-Beim deaktivieren der Sperre wird ein EIN-Signal gesendet.
+Beim Deaktivieren der Sperre wird ein EIN-Signal gesendet.
 
 #### **Aktueller Zustand gesendet**
 
 Beim deaktivieren der Sperre wird das Signal gesendet, dass gerade am Ausgang anliegen würde, wenn der Melder nicht gesperrt gewesen wäre.
 
-Somit funktioniert ein gesperrter Melder intern normal weiter und sendet einfach nur keine Telegramme. Bei dieser Einstellung wird beim entsperren einfach das letzte unterdrückte Signal gesendet.
+Somit funktioniert ein gesperrter Melder intern normal weiter und sendet einfach nur keine Telegramme. Bei dieser Einstellung wird beim Entsperren einfach das letzte unterdrückte Signal gesendet.
 
 ### **Mit Rückfallzeit?**
 
@@ -539,7 +539,7 @@ Dies ist eine Sonderfunktion, die sich nur mit wenigen externen Bewegungsmeldern
 
 Folgende Situation wird adressiert: Man verlässt einen Raum oder einen Bereich und macht per Taster das Licht aus. Wenn man z.B. abends zu Bett geht, spricht nichts dagegen, das Licht auszumachen anstatt die entsprechenden Nachlaufzeiten abzuwarten. Kaum ist man im Schlafzimmer angelangt, stellt man fest, dass man sein Handy vergessen hat. Jetzt geht man in den Raum zurück und möchte eigentlich dass jetzt erneut das Licht angeht, genauer gesagt sogar dass die Kurzzeitpräsenz wirkt.
 
-Leider ist die Aktion "Licht aus" beim Verlassen des Raumes die gleiche wie "Licht aus" zum fernsehen, bei der ich im Raum bleibe und einfach möchte, dass das Licht so lange aus bleibt, wie ich in diesem Raum bin und fernsehe.
+Leider ist die Aktion "Licht aus" beim Verlassen des Raumes die gleiche wie "Licht aus" zum Fernsehen, bei der ich im Raum bleibe und einfach möchte, dass das Licht so lange aus bleibt, wie ich in diesem Raum bin und fernsehe.
 
 Da beide Aktionen konkurrierend sind, gibt es die Möglichkeit, ein "Raum verlassen" direkt über eine Szene aufzurufen (siehe [Szenensteuerung](#szenensteuerung)). Für den einfachen Tastendruck kann man sich hier entscheiden, wie der Melder bei "Licht aus" reagieren soll.
 
@@ -555,7 +555,7 @@ Da ein "Raum verlassen" dazu führt, dass jegliche Nachlaufzeiten und die aktuel
 
 ## Manuell übersteuern
 
-Das Kommunikationsobjekt "Manuell übersteuern" erlaubt es, die Automatik des PM zu übersteuern und einen Wert (EIN oder AUS) vorzugeben. Diese Funktion kann man auch als Kurzzeitsperre interpretieren, denn solange die Funktion aktiviert ist, ist die Automatik abgeschaltet. Manuelle übersteuern wird beendet, indem man ein Telegramm an das Kommunikationsobjekt "Automatik übersteuern" sendet.
+Das Kommunikationsobjekt "Manuell übersteuern" erlaubt es, die Automatik des PM zu übersteuern und einen Wert (EIN oder AUS) vorzugeben. Diese Funktion kann man auch als Kurzzeitsperre interpretieren, denn solange die Funktion aktiviert ist, ist die Automatik abgeschaltet. Manuelles übersteuern wird beendet, indem man ein Telegramm an das Kommunikationsobjekt "Automatik übersteuern" sendet.
 
 Wenn man für Lichtsteuerung einen 2-Tasten-Bedienung wählt (Wippe), dann kann man hervorragend die Wippe auf Kurz-/Lang-Betätigung stellen und dann die Kurzbefehle auf die "Automatik übersteuern" legen und die Langbefehle auf "Manuell übersteuern". Man erhält folgende komfortable Kombinationen:
 
@@ -641,7 +641,7 @@ Hier kann eine Zeit eingegeben werden, um die das Ausschalten nach dem Übersche
 
 Der Hintergrund ist, dass an wolkigen Tagen nicht jeder kurze Sonnenstrahl, der mal durch die Wolken bricht, gleich das gesamte Lichambiente abschaltet.
 
-Wird in der Zeit sie Ausschaltschwelle wieder unterschritten, wird natürlich nicht abgeschaltet und der Timer zurückgesetzt.
+Wird in der Zeit die Ausschaltschwelle wieder unterschritten, wird natürlich nicht abgeschaltet und der Timer zurückgesetzt.
 
 ## Präsenzeinstellungen
 

@@ -773,7 +773,7 @@
                     </choose>
                   </when>
                 </choose>
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die folgenden Einstelleungen sind nur wichtig, wenn in den Tagesphasen das Ausschalten über adaptive Helligkeitsschwelle gewählt wird." />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Die folgenden Einstellungen sind nur wichtig, wenn in den Tagesphasen das Ausschalten über adaptive Helligkeitsschwelle gewählt wird." />
                 <!-- Delay pattern brightness off  -->
                 <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%BrightnessOffDelay4" Inline="true" Layout="Grid">
                   <Columns>
