@@ -791,7 +791,7 @@ void PresenceChannel::startActorState(GroupObject &iKo)
     // startReset();  // Bernhard: actor state off during run-on time ends run-on time
     // }
     // but we do not send anything to the knx bus
-    syncOutput();
+    // syncOutput();
 }
 
 void PresenceChannel::processActorState()
