@@ -533,7 +533,18 @@ Ob Phase 1 die Bedeutung "Tag" und Phase 2 die Bedeutung "Nacht" hat, wie im Bei
 
 ## Raum verlassen
 
-Dies ist eine Sonderfunktion, die sich nur mit wenigen externen Bewegungsmeldern realisieren lässt.
+Dies ist eine Sonderfunktion, die sich nur mit wenigen externen Bewegungsmeldern realisieren lässt. Sie ist experimentell und erfordert normalerweise eine Versuchsreihe, damit es zufriedenstellend funktioniert.
+
+Der Abschnitt erscheint nur, wenn
+
+* beim Betrieb mit externen Melder(n)
+  * die Melder zurückgesetzt werden können (Reset)
+  * oder zumindest zusätzlich zur Präsenz auch Bewegung melden können
+* beim Betrieb mit internem Melder
+  * der interne Melder Präsenz und Bewegung melden kann (macht der von uns unterstützte HF-Melder)
+  * der interne Melder ein PIR-Melder ist
+
+Mit "Bewegung melden" sind kurzzeitige Bewegungsmeldungen gemeint, die schaltend sind und idealerweise schon nach weniger als 5 Sekunden, spätestens nach 15 Sekunden stillstand melden.
 
 ![Raum verlassen](pics/LeaveRoom.png)
 
@@ -541,7 +552,15 @@ Folgende Situation wird adressiert: Man verlässt einen Raum oder einen Bereich 
 
 Leider ist die Aktion "Licht aus" beim Verlassen des Raumes die gleiche wie "Licht aus" zum Fernsehen, bei der ich im Raum bleibe und einfach möchte, dass das Licht so lange aus bleibt, wie ich in diesem Raum bin und fernsehe.
 
-Da beide Aktionen konkurrierend sind, gibt es die Möglichkeit, ein "Raum verlassen" direkt über eine Szene aufzurufen (siehe [Szenensteuerung](#szenensteuerung)). Für den einfachen Tastendruck kann man sich hier entscheiden, wie der Melder bei "Licht aus" reagieren soll.
+Da beide Aktionen konkurrierend sind, gibt es die Möglichkeit, ein "Raum verlassen" direkt über eine Szene aufzurufen (siehe [Szenensteuerung](#szenensteuerung)). Für den einfachen Tastendruck kann man sich hier entscheiden, wie der Melder bei "Licht aus" reagieren soll, indem man den Tastendruck an "Automatik übersteuern" sendet oder als Szene "Raum verlassen".
+
+### **Wie funktioniert "Raum verlassen"?**
+
+Ziel: Ich verlasse den Raum und sage das dem Melder durch einen Tastendruck. Vereinfacht gesagt soll der Melder dann intern zurückgesetzt werden, wie nach dem Einschalten. Dadurch würde er die nächste Bewegung/Präsenz detektieren (das wäre beim erneuten Betreten) und normal in Kurzzeitpräsenz, dann in Langzeitpräsenz etc. gehen, so wie er eben parametriert ist.
+
+Da man zu dem Zeitpunkt, in dem man die "Raum verlassen"-Taste drückt, wahrscheinlich noch im Raum ist, kann noch eine kurze Totzeit eingestellt werden, die der Melder nach dem Befehl wartet, bevor er den Reset macht.
+
+Da die vorliegende Applikation ein virtueller Präsenzmelder (VPM) ist, ist das eigentliche präsenzerfassende Gerät ein externes KNX-Gerät, auf dessen Hardware man keinen Zugriff hat. Dieses externe Gerät würde also potentiell noch 60 oder mehr Sekunden lang Präsenz melden. Aus Sicht des VPM würde dieser nach seinem lokalen Reset also sofort eine Präsenz empfangen und damit das Licht wieder anmachen, was sicherlich nicht erwünscht ist.
 
 ### **'Automatik übersteuern'=AUS heißt 'Raum verlassen'**
 
@@ -815,13 +834,13 @@ Es wird die [Raum verlassen](#raum-verlassen) Funktion aufgerufen. Es ist identi
 
 Es wird ein interner Reset des Melders durchgeführt. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Reset".
 
-## **Interne Eingänge**
+## **Eingänge**
 
 Dies ist eine Funktion für erfahrene Benutzer.
 
-![Interne Eingänge](pics/InterneEingaenge.png)
+![Eingänge](pics/InterneEingaenge.png)
 
-Normalerweise werden in KNX alle Kommunikationsobjekte über Gruppenadressen verbunden. Zwischen verschiedenen Geräten ist es anders gar nicht möglich. 
+Normalerweise werden in KNX alle Kommunikationsobjekte über Gruppenadressen verbunden. Zwischen verschiedenen Geräten ist es anders gar nicht möglich.
 
 Diese Applikation enthält aber neben dem Präsenzmodul auch noch ein Logikmodul. Natürlich können Logiken des Logikmoduls mit den Eingängen des Präsenzmoduls über Gruppenadressen kommunizieren. Das führt aber zu zusätzlichen Telegrammen auf dem Bus. Und da Logiken kompliziert sein können, erfordern sie möglicherweise viele GA und damit viele Telegramme.
 
@@ -833,4 +852,12 @@ Interne Eingänge ermöglichen es, einen Eingang direkt mit irgendeinem Kommunik
 
 In der Tabelle wird für jeden Eingang, der eine interne Verbindung unterstützt, angegeben, ob für diesen Eingang ein neues KO angelegt werden soll (keine interne Verbindung) oder ein bestehendes KO genutzt werden soll (mit dem dann der Eingang intern verbunden ist).
 
-###
+TODO: Dieses Kapitel nochmal umstellen, hier nur ein paar Sachen, die nicht vergessen werden sollten...
+
+In der Tabelle kann auch noch angegeben werden, für welche Eingänge bei einem Neustart ein Lesetelegramm verschickt werden soll, damit der PM in den aktuellen Zustand versetzt werden kann.
+
+Lesetelegramme können in einigen Fällen nicht korrekt verarbeitet werden und sind deswegen nicht verfügbar:
+
+* Ein deaktivierter Eingang kann natürlich keine Lesetelegramme verschicken.
+* Bei einem Eingang, der ein existierendes KO benutzt (also intern verbunden ist), kann das "fremde" KO nicht durch den PM dazu "missbraucht" werden, ein Lesetelegramm zu verschicken, weil das PM-Modul nicht wissen kann, wie sich das "fremde" KO dann verhält. In einem solchen Fall sollte das "fremde" KO dazu gebracht werden, ein Lesetelegramm zu verschicken, die Antwort wird aufgrund der internen Verbindung auch durch das PM-Modul ausgewertet.
+* Ein triggernder Eingang (Präsenz A/B als Trigger, Reset und Manuell/Automatik übersteuern, also alle triggernden Eingänge) ist ja nur in dem Augenblick gültig. Es wird eine 1 (oder eine 0) gesendet. Wenn man später erneut liest, kannst man nur wieder eine 1 (oder eine 0) als Antwort bekommen, aber der Wert ist nicht mehr gültig. Also macht es an der Stelle keinen Sinn, ein Lesetelegramm anzubieten.

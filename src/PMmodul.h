@@ -861,7 +861,7 @@
 
 // Parameter per channel
 #define PM_ParamBlockOffset 2628
-#define PM_ParamBlockSize 138
+#define PM_ParamBlockSize 139
 #define PM_pPresence1Type             0      // 2 Bits, Bit 7-6
 #define     PM_pPresence1TypeMask 0xC0
 #define     PM_pPresence1TypeShift 6
@@ -949,338 +949,344 @@
 #define PM_pStartReadScene            4      // 1 Bit, Bit 0
 #define     PM_pStartReadSceneMask 0x01
 #define     PM_pStartReadSceneShift 0
-#define PM_pChannelDelayBase          5      // 2 Bits, Bit 7-6
+#define PM_pExternalSupportsReset     5      // 1 Bit, Bit 7
+#define     PM_pExternalSupportsResetMask 0x80
+#define     PM_pExternalSupportsResetShift 7
+#define PM_pExternalSupportsMove      5      // 1 Bit, Bit 6
+#define     PM_pExternalSupportsMoveMask 0x40
+#define     PM_pExternalSupportsMoveShift 6
+#define PM_pChannelDelayBase          6      // 2 Bits, Bit 7-6
 #define     PM_pChannelDelayBaseMask 0xC0
 #define     PM_pChannelDelayBaseShift 6
-#define PM_pChannelDelayTime          5      // uint14_t
-#define PM_pOutput1CyclicBase         7      // 2 Bits, Bit 7-6
+#define PM_pChannelDelayTime          6      // uint14_t
+#define PM_pOutput1CyclicBase         8      // 2 Bits, Bit 7-6
 #define     PM_pOutput1CyclicBaseMask 0xC0
 #define     PM_pOutput1CyclicBaseShift 6
-#define PM_pOutput1CyclicTime         7      // uint14_t
-#define PM_pOutput2CyclicBase         9      // 2 Bits, Bit 7-6
+#define PM_pOutput1CyclicTime         8      // uint14_t
+#define PM_pOutput2CyclicBase        10      // 2 Bits, Bit 7-6
 #define     PM_pOutput2CyclicBaseMask 0xC0
 #define     PM_pOutput2CyclicBaseShift 6
-#define PM_pOutput2CyclicTime         9      // uint14_t
-#define PM_pLockFallbackBase         11      // 2 Bits, Bit 7-6
+#define PM_pOutput2CyclicTime        10      // uint14_t
+#define PM_pLockFallbackBase         12      // 2 Bits, Bit 7-6
 #define     PM_pLockFallbackBaseMask 0xC0
 #define     PM_pLockFallbackBaseShift 6
-#define PM_pLockFallbackTime         11      // uint14_t
-#define PM_pDowntimeOffBase          13      // 2 Bits, Bit 7-6
+#define PM_pLockFallbackTime         12      // uint14_t
+#define PM_pDowntimeOffBase          14      // 2 Bits, Bit 7-6
 #define     PM_pDowntimeOffBaseMask 0xC0
 #define     PM_pDowntimeOffBaseShift 6
-#define PM_pDowntimeOffTime          13      // uint14_t
-#define PM_pAdaptiveDelayBase        15      // 2 Bits, Bit 7-6
+#define PM_pDowntimeOffTime          14      // uint14_t
+#define PM_pAdaptiveDelayBase        16      // 2 Bits, Bit 7-6
 #define     PM_pAdaptiveDelayBaseMask 0xC0
 #define     PM_pAdaptiveDelayBaseShift 6
-#define PM_pAdaptiveDelayTime        15      // uint14_t
-#define PM_pPhase1Scene              17      // 8 Bits, Bit 7-0
-#define PM_pPhase2Scene              18      // 8 Bits, Bit 7-0
-#define PM_pPhase3Scene              19      // 8 Bits, Bit 7-0
-#define PM_pPhase4Scene              20      // 8 Bits, Bit 7-0
-#define PM_pScene0                   21      // 8 Bits, Bit 7-0
-#define PM_pScene1                   22      // 8 Bits, Bit 7-0
-#define PM_pScene2                   23      // 8 Bits, Bit 7-0
-#define PM_pScene3                   24      // 8 Bits, Bit 7-0
-#define PM_pScene4                   25      // 8 Bits, Bit 7-0
-#define PM_pScene5                   26      // 8 Bits, Bit 7-0
-#define PM_pScene6                   27      // 8 Bits, Bit 7-0
-#define PM_pScene7                   28      // 8 Bits, Bit 7-0
-#define PM_pScene8                   29      // 8 Bits, Bit 7-0
-#define PM_pScene9                   30      // 8 Bits, Bit 7-0
-#define PM_pSceneAction0             31      // 4 Bits, Bit 7-4
+#define PM_pAdaptiveDelayTime        16      // uint14_t
+#define PM_pPhase1Scene              18      // 8 Bits, Bit 7-0
+#define PM_pPhase2Scene              19      // 8 Bits, Bit 7-0
+#define PM_pPhase3Scene              20      // 8 Bits, Bit 7-0
+#define PM_pPhase4Scene              21      // 8 Bits, Bit 7-0
+#define PM_pScene0                   22      // 8 Bits, Bit 7-0
+#define PM_pScene1                   23      // 8 Bits, Bit 7-0
+#define PM_pScene2                   24      // 8 Bits, Bit 7-0
+#define PM_pScene3                   25      // 8 Bits, Bit 7-0
+#define PM_pScene4                   26      // 8 Bits, Bit 7-0
+#define PM_pScene5                   27      // 8 Bits, Bit 7-0
+#define PM_pScene6                   28      // 8 Bits, Bit 7-0
+#define PM_pScene7                   29      // 8 Bits, Bit 7-0
+#define PM_pScene8                   30      // 8 Bits, Bit 7-0
+#define PM_pScene9                   31      // 8 Bits, Bit 7-0
+#define PM_pSceneAction0             32      // 4 Bits, Bit 7-4
 #define     PM_pSceneAction0Mask 0xF0
 #define     PM_pSceneAction0Shift 4
-#define PM_pSceneAction1             31      // 4 Bits, Bit 3-0
+#define PM_pSceneAction1             32      // 4 Bits, Bit 3-0
 #define     PM_pSceneAction1Mask 0x0F
 #define     PM_pSceneAction1Shift 0
-#define PM_pSceneAction2             32      // 4 Bits, Bit 7-4
+#define PM_pSceneAction2             33      // 4 Bits, Bit 7-4
 #define     PM_pSceneAction2Mask 0xF0
 #define     PM_pSceneAction2Shift 4
-#define PM_pSceneAction3             32      // 4 Bits, Bit 3-0
+#define PM_pSceneAction3             33      // 4 Bits, Bit 3-0
 #define     PM_pSceneAction3Mask 0x0F
 #define     PM_pSceneAction3Shift 0
-#define PM_pSceneAction4             33      // 4 Bits, Bit 7-4
+#define PM_pSceneAction4             34      // 4 Bits, Bit 7-4
 #define     PM_pSceneAction4Mask 0xF0
 #define     PM_pSceneAction4Shift 4
-#define PM_pSceneAction5             33      // 4 Bits, Bit 3-0
+#define PM_pSceneAction5             34      // 4 Bits, Bit 3-0
 #define     PM_pSceneAction5Mask 0x0F
 #define     PM_pSceneAction5Shift 0
-#define PM_pSceneAction6             34      // 4 Bits, Bit 7-4
+#define PM_pSceneAction6             35      // 4 Bits, Bit 7-4
 #define     PM_pSceneAction6Mask 0xF0
 #define     PM_pSceneAction6Shift 4
-#define PM_pSceneAction7             34      // 4 Bits, Bit 3-0
+#define PM_pSceneAction7             35      // 4 Bits, Bit 3-0
 #define     PM_pSceneAction7Mask 0x0F
 #define     PM_pSceneAction7Shift 0
-#define PM_pSceneAction8             35      // 4 Bits, Bit 7-4
+#define PM_pSceneAction8             36      // 4 Bits, Bit 7-4
 #define     PM_pSceneAction8Mask 0xF0
 #define     PM_pSceneAction8Shift 4
-#define PM_pSceneAction9             35      // 4 Bits, Bit 3-0
+#define PM_pSceneAction9             36      // 4 Bits, Bit 3-0
 #define     PM_pSceneAction9Mask 0x0F
 #define     PM_pSceneAction9Shift 0
-#define PM_pIntLux                   36      // 1 Bit, Bit 7
+#define PM_pIntLux                   37      // 1 Bit, Bit 7
 #define     PM_pIntLuxMask 0x80
 #define     PM_pIntLuxShift 7
-#define PM_pNumLux                   36      // uint15_t
-#define PM_pIntPresence1             38      // 1 Bit, Bit 7
+#define PM_pNumLux                   37      // uint15_t
+#define PM_pIntPresence1             39      // 1 Bit, Bit 7
 #define     PM_pIntPresence1Mask 0x80
 #define     PM_pIntPresence1Shift 7
-#define PM_pNumPresence1             38      // uint15_t
-#define PM_pIntPresence2             40      // 1 Bit, Bit 7
+#define PM_pNumPresence1             39      // uint15_t
+#define PM_pIntPresence2             41      // 1 Bit, Bit 7
 #define     PM_pIntPresence2Mask 0x80
 #define     PM_pIntPresence2Shift 7
-#define PM_pNumPresence2             40      // uint15_t
-#define PM_pIntSetAuto               42      // 1 Bit, Bit 7
+#define PM_pNumPresence2             41      // uint15_t
+#define PM_pIntSetAuto               43      // 1 Bit, Bit 7
 #define     PM_pIntSetAutoMask 0x80
 #define     PM_pIntSetAutoShift 7
-#define PM_pNumSetAuto               42      // uint15_t
-#define PM_pIntSetManual             44      // 1 Bit, Bit 7
+#define PM_pNumSetAuto               43      // uint15_t
+#define PM_pIntSetManual             45      // 1 Bit, Bit 7
 #define     PM_pIntSetManualMask 0x80
 #define     PM_pIntSetManualShift 7
-#define PM_pNumSetManual             44      // uint15_t
-#define PM_pIntActorState            46      // 1 Bit, Bit 7
+#define PM_pNumSetManual             45      // uint15_t
+#define PM_pIntActorState            47      // 1 Bit, Bit 7
 #define     PM_pIntActorStateMask 0x80
 #define     PM_pIntActorStateShift 7
-#define PM_pNumActorState            46      // uint15_t
-#define PM_pIntLock                  48      // 1 Bit, Bit 7
+#define PM_pNumActorState            47      // uint15_t
+#define PM_pIntLock                  49      // 1 Bit, Bit 7
 #define     PM_pIntLockMask 0x80
 #define     PM_pIntLockShift 7
-#define PM_pNumLock                  48      // uint15_t
-#define PM_pIntReset                 50      // 1 Bit, Bit 7
+#define PM_pNumLock                  49      // uint15_t
+#define PM_pIntReset                 51      // 1 Bit, Bit 7
 #define     PM_pIntResetMask 0x80
 #define     PM_pIntResetShift 7
-#define PM_pNumReset                 50      // uint15_t
-#define PM_pIntDayPhase              52      // 1 Bit, Bit 7
+#define PM_pNumReset                 51      // uint15_t
+#define PM_pIntDayPhase              53      // 1 Bit, Bit 7
 #define     PM_pIntDayPhaseMask 0x80
 #define     PM_pIntDayPhaseShift 7
-#define PM_pNumDayPhase              52      // uint15_t
-#define PM_pIntScene                 54      // 1 Bit, Bit 7
+#define PM_pNumDayPhase              53      // uint15_t
+#define PM_pIntScene                 55      // 1 Bit, Bit 7
 #define     PM_pIntSceneMask 0x80
 #define     PM_pIntSceneShift 7
-#define PM_pNumScene                 54      // uint15_t
-#define PM_pABrightnessAuto          56      // 2 Bits, Bit 7-6
+#define PM_pNumScene                 55      // uint15_t
+#define PM_pABrightnessAuto          57      // 2 Bits, Bit 7-6
 #define     PM_pABrightnessAutoMask 0xC0
 #define     PM_pABrightnessAutoShift 6
-#define PM_pAPresenceShort           56      // 1 Bit, Bit 5
+#define PM_pAPresenceShort           57      // 1 Bit, Bit 5
 #define     PM_pAPresenceShortMask 0x20
 #define     PM_pAPresenceShortShift 5
-#define PM_pALockHardwareLEDs        56      // 1 Bit, Bit 4
+#define PM_pALockHardwareLEDs        57      // 1 Bit, Bit 4
 #define     PM_pALockHardwareLEDsMask 0x10
 #define     PM_pALockHardwareLEDsShift 4
-#define PM_pAOutput1Filter           56      // 2 Bits, Bit 3-2
+#define PM_pAOutput1Filter           57      // 2 Bits, Bit 3-2
 #define     PM_pAOutput1FilterMask 0x0C
 #define     PM_pAOutput1FilterShift 2
-#define PM_pAOutput2Filter           56      // 2 Bits, Bit 1-0
+#define PM_pAOutput2Filter           57      // 2 Bits, Bit 1-0
 #define     PM_pAOutput2FilterMask 0x03
 #define     PM_pAOutput2FilterShift 0
-#define PM_pAManualWithPresence      57      // 1 Bit, Bit 7
+#define PM_pAManualWithPresence      58      // 1 Bit, Bit 7
 #define     PM_pAManualWithPresenceMask 0x80
 #define     PM_pAManualWithPresenceShift 7
-#define PM_pAPresenceDelayBase       58      // 2 Bits, Bit 7-6
+#define PM_pAPresenceDelayBase       59      // 2 Bits, Bit 7-6
 #define     PM_pAPresenceDelayBaseMask 0xC0
 #define     PM_pAPresenceDelayBaseShift 6
-#define PM_pAPresenceDelayTime       58      // uint14_t
-#define PM_pAPresenceShortDurationBase 60      // 2 Bits, Bit 7-6
+#define PM_pAPresenceDelayTime       59      // uint14_t
+#define PM_pAPresenceShortDurationBase 61      // 2 Bits, Bit 7-6
 #define     PM_pAPresenceShortDurationBaseMask 0xC0
 #define     PM_pAPresenceShortDurationBaseShift 6
-#define PM_pAPresenceShortDurationTime 60      // uint14_t
-#define PM_pAPresenceShortDelayBase  62      // 2 Bits, Bit 7-6
+#define PM_pAPresenceShortDurationTime 61      // uint14_t
+#define PM_pAPresenceShortDelayBase  63      // 2 Bits, Bit 7-6
 #define     PM_pAPresenceShortDelayBaseMask 0xC0
 #define     PM_pAPresenceShortDelayBaseShift 6
-#define PM_pAPresenceShortDelayTime  62      // uint14_t
-#define PM_pABrightnessOffDelayBase  64      // 2 Bits, Bit 7-6
+#define PM_pAPresenceShortDelayTime  63      // uint14_t
+#define PM_pABrightnessOffDelayBase  65      // 2 Bits, Bit 7-6
 #define     PM_pABrightnessOffDelayBaseMask 0xC0
 #define     PM_pABrightnessOffDelayBaseShift 6
-#define PM_pABrightnessOffDelayTime  64      // uint14_t
-#define PM_pAManualFallbackDelayBase 66      // 2 Bits, Bit 7-6
+#define PM_pABrightnessOffDelayTime  65      // uint14_t
+#define PM_pAManualFallbackDelayBase 67      // 2 Bits, Bit 7-6
 #define     PM_pAManualFallbackDelayBaseMask 0xC0
 #define     PM_pAManualFallbackDelayBaseShift 6
-#define PM_pAManualFallbackDelayTime 66      // uint14_t
-#define PM_pABrightnessOn            68      // uint16_t
-#define PM_pABrightnessDelta         70      // uint16_t
-#define PM_pAOutput1On               72      // 8 Bits, Bit 7-0
-#define PM_pAOutput1OnValue          72      // uint8_t
-#define PM_pAOutput1OnScene          72      // 8 Bits, Bit 7-0
-#define PM_pAOutput1OnDim            72      // uint8_t
-#define PM_pAOutput1Off              73      // 8 Bits, Bit 7-0
-#define PM_pAOutput1OffValue         73      // uint8_t
-#define PM_pAOutput1OffScene         73      // 8 Bits, Bit 7-0
-#define PM_pAOutput1OffDim           73      // uint8_t
-#define PM_pAOutput2On               74      // 8 Bits, Bit 7-0
-#define PM_pAOutput2OnValue          74      // uint8_t
-#define PM_pAOutput2OnScene          74      // 8 Bits, Bit 7-0
-#define PM_pAOutput2OnDim            74      // uint8_t
-#define PM_pAOutput2Off              75      // 8 Bits, Bit 7-0
-#define PM_pAOutput2OffValue         75      // uint8_t
-#define PM_pAOutput2OffScene         75      // 8 Bits, Bit 7-0
-#define PM_pAOutput2OffDim           75      // uint8_t
-#define PM_pBBrightnessAuto          78      // 2 Bits, Bit 7-6
+#define PM_pAManualFallbackDelayTime 67      // uint14_t
+#define PM_pABrightnessOn            69      // uint16_t
+#define PM_pABrightnessDelta         71      // uint16_t
+#define PM_pAOutput1On               73      // 8 Bits, Bit 7-0
+#define PM_pAOutput1OnValue          73      // uint8_t
+#define PM_pAOutput1OnScene          73      // 8 Bits, Bit 7-0
+#define PM_pAOutput1OnDim            73      // uint8_t
+#define PM_pAOutput1Off              74      // 8 Bits, Bit 7-0
+#define PM_pAOutput1OffValue         74      // uint8_t
+#define PM_pAOutput1OffScene         74      // 8 Bits, Bit 7-0
+#define PM_pAOutput1OffDim           74      // uint8_t
+#define PM_pAOutput2On               75      // 8 Bits, Bit 7-0
+#define PM_pAOutput2OnValue          75      // uint8_t
+#define PM_pAOutput2OnScene          75      // 8 Bits, Bit 7-0
+#define PM_pAOutput2OnDim            75      // uint8_t
+#define PM_pAOutput2Off              76      // 8 Bits, Bit 7-0
+#define PM_pAOutput2OffValue         76      // uint8_t
+#define PM_pAOutput2OffScene         76      // 8 Bits, Bit 7-0
+#define PM_pAOutput2OffDim           76      // uint8_t
+#define PM_pBBrightnessAuto          79      // 2 Bits, Bit 7-6
 #define     PM_pBBrightnessAutoMask 0xC0
 #define     PM_pBBrightnessAutoShift 6
-#define PM_pBPresenceShort           78      // 1 Bit, Bit 5
+#define PM_pBPresenceShort           79      // 1 Bit, Bit 5
 #define     PM_pBPresenceShortMask 0x20
 #define     PM_pBPresenceShortShift 5
-#define PM_pBLockHardwareLEDs        78      // 1 Bit, Bit 4
+#define PM_pBLockHardwareLEDs        79      // 1 Bit, Bit 4
 #define     PM_pBLockHardwareLEDsMask 0x10
 #define     PM_pBLockHardwareLEDsShift 4
-#define PM_pBOutput1Filter           78      // 2 Bits, Bit 3-2
+#define PM_pBOutput1Filter           79      // 2 Bits, Bit 3-2
 #define     PM_pBOutput1FilterMask 0x0C
 #define     PM_pBOutput1FilterShift 2
-#define PM_pBOutput2Filter           78      // 2 Bits, Bit 1-0
+#define PM_pBOutput2Filter           79      // 2 Bits, Bit 1-0
 #define     PM_pBOutput2FilterMask 0x03
 #define     PM_pBOutput2FilterShift 0
-#define PM_pBManualWithPresence      79      // 1 Bit, Bit 7
+#define PM_pBManualWithPresence      80      // 1 Bit, Bit 7
 #define     PM_pBManualWithPresenceMask 0x80
 #define     PM_pBManualWithPresenceShift 7
-#define PM_pBPresenceDelayBase       80      // 2 Bits, Bit 7-6
+#define PM_pBPresenceDelayBase       81      // 2 Bits, Bit 7-6
 #define     PM_pBPresenceDelayBaseMask 0xC0
 #define     PM_pBPresenceDelayBaseShift 6
-#define PM_pBPresenceDelayTime       80      // uint14_t
-#define PM_pBPresenceShortDurationBase 82      // 2 Bits, Bit 7-6
+#define PM_pBPresenceDelayTime       81      // uint14_t
+#define PM_pBPresenceShortDurationBase 83      // 2 Bits, Bit 7-6
 #define     PM_pBPresenceShortDurationBaseMask 0xC0
 #define     PM_pBPresenceShortDurationBaseShift 6
-#define PM_pBPresenceShortDurationTime 82      // uint14_t
-#define PM_pBPresenceShortDelayBase  84      // 2 Bits, Bit 7-6
+#define PM_pBPresenceShortDurationTime 83      // uint14_t
+#define PM_pBPresenceShortDelayBase  85      // 2 Bits, Bit 7-6
 #define     PM_pBPresenceShortDelayBaseMask 0xC0
 #define     PM_pBPresenceShortDelayBaseShift 6
-#define PM_pBPresenceShortDelayTime  84      // uint14_t
-#define PM_pBBrightnessOffDelayBase  86      // 2 Bits, Bit 7-6
+#define PM_pBPresenceShortDelayTime  85      // uint14_t
+#define PM_pBBrightnessOffDelayBase  87      // 2 Bits, Bit 7-6
 #define     PM_pBBrightnessOffDelayBaseMask 0xC0
 #define     PM_pBBrightnessOffDelayBaseShift 6
-#define PM_pBBrightnessOffDelayTime  86      // uint14_t
-#define PM_pBManualFallbackDelayBase 88      // 2 Bits, Bit 7-6
+#define PM_pBBrightnessOffDelayTime  87      // uint14_t
+#define PM_pBManualFallbackDelayBase 89      // 2 Bits, Bit 7-6
 #define     PM_pBManualFallbackDelayBaseMask 0xC0
 #define     PM_pBManualFallbackDelayBaseShift 6
-#define PM_pBManualFallbackDelayTime 88      // uint14_t
-#define PM_pBBrightnessOn            90      // uint16_t
-#define PM_pBBrightnessDelta         92      // uint16_t
-#define PM_pBOutput1On               94      // 8 Bits, Bit 7-0
-#define PM_pBOutput1OnValue          94      // uint8_t
-#define PM_pBOutput1OnScene          94      // 8 Bits, Bit 7-0
-#define PM_pBOutput1OnDim            94      // uint8_t
-#define PM_pBOutput1Off              95      // 8 Bits, Bit 7-0
-#define PM_pBOutput1OffValue         95      // uint8_t
-#define PM_pBOutput1OffScene         95      // 8 Bits, Bit 7-0
-#define PM_pBOutput1OffDim           95      // uint8_t
-#define PM_pBOutput2On               96      // 8 Bits, Bit 7-0
-#define PM_pBOutput2OnValue          96      // uint8_t
-#define PM_pBOutput2OnScene          96      // 8 Bits, Bit 7-0
-#define PM_pBOutput2OnDim            96      // uint8_t
-#define PM_pBOutput2Off              97      // 8 Bits, Bit 7-0
-#define PM_pBOutput2OffValue         97      // uint8_t
-#define PM_pBOutput2OffScene         97      // 8 Bits, Bit 7-0
-#define PM_pBOutput2OffDim           97      // uint8_t
-#define PM_pCBrightnessAuto          98      // 2 Bits, Bit 7-6
+#define PM_pBManualFallbackDelayTime 89      // uint14_t
+#define PM_pBBrightnessOn            91      // uint16_t
+#define PM_pBBrightnessDelta         93      // uint16_t
+#define PM_pBOutput1On               95      // 8 Bits, Bit 7-0
+#define PM_pBOutput1OnValue          95      // uint8_t
+#define PM_pBOutput1OnScene          95      // 8 Bits, Bit 7-0
+#define PM_pBOutput1OnDim            95      // uint8_t
+#define PM_pBOutput1Off              96      // 8 Bits, Bit 7-0
+#define PM_pBOutput1OffValue         96      // uint8_t
+#define PM_pBOutput1OffScene         96      // 8 Bits, Bit 7-0
+#define PM_pBOutput1OffDim           96      // uint8_t
+#define PM_pBOutput2On               97      // 8 Bits, Bit 7-0
+#define PM_pBOutput2OnValue          97      // uint8_t
+#define PM_pBOutput2OnScene          97      // 8 Bits, Bit 7-0
+#define PM_pBOutput2OnDim            97      // uint8_t
+#define PM_pBOutput2Off              98      // 8 Bits, Bit 7-0
+#define PM_pBOutput2OffValue         98      // uint8_t
+#define PM_pBOutput2OffScene         98      // 8 Bits, Bit 7-0
+#define PM_pBOutput2OffDim           98      // uint8_t
+#define PM_pCBrightnessAuto          99      // 2 Bits, Bit 7-6
 #define     PM_pCBrightnessAutoMask 0xC0
 #define     PM_pCBrightnessAutoShift 6
-#define PM_pCPresenceShort           98      // 1 Bit, Bit 5
+#define PM_pCPresenceShort           99      // 1 Bit, Bit 5
 #define     PM_pCPresenceShortMask 0x20
 #define     PM_pCPresenceShortShift 5
-#define PM_pCLockHardwareLEDs        98      // 1 Bit, Bit 4
+#define PM_pCLockHardwareLEDs        99      // 1 Bit, Bit 4
 #define     PM_pCLockHardwareLEDsMask 0x10
 #define     PM_pCLockHardwareLEDsShift 4
-#define PM_pCOutput1Filter           98      // 2 Bits, Bit 3-2
+#define PM_pCOutput1Filter           99      // 2 Bits, Bit 3-2
 #define     PM_pCOutput1FilterMask 0x0C
 #define     PM_pCOutput1FilterShift 2
-#define PM_pCOutput2Filter           98      // 2 Bits, Bit 1-0
+#define PM_pCOutput2Filter           99      // 2 Bits, Bit 1-0
 #define     PM_pCOutput2FilterMask 0x03
 #define     PM_pCOutput2FilterShift 0
-#define PM_pCManualWithPresence      99      // 1 Bit, Bit 7
+#define PM_pCManualWithPresence      100      // 1 Bit, Bit 7
 #define     PM_pCManualWithPresenceMask 0x80
 #define     PM_pCManualWithPresenceShift 7
-#define PM_pCPresenceDelayBase       100      // 2 Bits, Bit 7-6
+#define PM_pCPresenceDelayBase       101      // 2 Bits, Bit 7-6
 #define     PM_pCPresenceDelayBaseMask 0xC0
 #define     PM_pCPresenceDelayBaseShift 6
-#define PM_pCPresenceDelayTime       100      // uint14_t
-#define PM_pCPresenceShortDurationBase 102      // 2 Bits, Bit 7-6
+#define PM_pCPresenceDelayTime       101      // uint14_t
+#define PM_pCPresenceShortDurationBase 103      // 2 Bits, Bit 7-6
 #define     PM_pCPresenceShortDurationBaseMask 0xC0
 #define     PM_pCPresenceShortDurationBaseShift 6
-#define PM_pCPresenceShortDurationTime 102      // uint14_t
-#define PM_pCPresenceShortDelayBase  104      // 2 Bits, Bit 7-6
+#define PM_pCPresenceShortDurationTime 103      // uint14_t
+#define PM_pCPresenceShortDelayBase  105      // 2 Bits, Bit 7-6
 #define     PM_pCPresenceShortDelayBaseMask 0xC0
 #define     PM_pCPresenceShortDelayBaseShift 6
-#define PM_pCPresenceShortDelayTime  104      // uint14_t
-#define PM_pCBrightnessOffDelayBase  106      // 2 Bits, Bit 7-6
+#define PM_pCPresenceShortDelayTime  105      // uint14_t
+#define PM_pCBrightnessOffDelayBase  107      // 2 Bits, Bit 7-6
 #define     PM_pCBrightnessOffDelayBaseMask 0xC0
 #define     PM_pCBrightnessOffDelayBaseShift 6
-#define PM_pCBrightnessOffDelayTime  106      // uint14_t
-#define PM_pCManualFallbackDelayBase 108      // 2 Bits, Bit 7-6
+#define PM_pCBrightnessOffDelayTime  107      // uint14_t
+#define PM_pCManualFallbackDelayBase 109      // 2 Bits, Bit 7-6
 #define     PM_pCManualFallbackDelayBaseMask 0xC0
 #define     PM_pCManualFallbackDelayBaseShift 6
-#define PM_pCManualFallbackDelayTime 108      // uint14_t
-#define PM_pCBrightnessOn            110      // uint16_t
-#define PM_pCBrightnessDelta         112      // uint16_t
-#define PM_pCOutput1On               114      // 8 Bits, Bit 7-0
-#define PM_pCOutput1OnValue          114      // uint8_t
-#define PM_pCOutput1OnScene          114      // 8 Bits, Bit 7-0
-#define PM_pCOutput1OnDim            114      // uint8_t
-#define PM_pCOutput1Off              115      // 8 Bits, Bit 7-0
-#define PM_pCOutput1OffValue         115      // uint8_t
-#define PM_pCOutput1OffScene         115      // 8 Bits, Bit 7-0
-#define PM_pCOutput1OffDim           115      // uint8_t
-#define PM_pCOutput2On               116      // 8 Bits, Bit 7-0
-#define PM_pCOutput2OnValue          116      // uint8_t
-#define PM_pCOutput2OnScene          116      // 8 Bits, Bit 7-0
-#define PM_pCOutput2OnDim            116      // uint8_t
-#define PM_pCOutput2Off              117      // 8 Bits, Bit 7-0
-#define PM_pCOutput2OffValue         117      // uint8_t
-#define PM_pCOutput2OffScene         117      // 8 Bits, Bit 7-0
-#define PM_pCOutput2OffDim           117      // uint8_t
-#define PM_pDBrightnessAuto          118      // 2 Bits, Bit 7-6
+#define PM_pCManualFallbackDelayTime 109      // uint14_t
+#define PM_pCBrightnessOn            111      // uint16_t
+#define PM_pCBrightnessDelta         113      // uint16_t
+#define PM_pCOutput1On               115      // 8 Bits, Bit 7-0
+#define PM_pCOutput1OnValue          115      // uint8_t
+#define PM_pCOutput1OnScene          115      // 8 Bits, Bit 7-0
+#define PM_pCOutput1OnDim            115      // uint8_t
+#define PM_pCOutput1Off              116      // 8 Bits, Bit 7-0
+#define PM_pCOutput1OffValue         116      // uint8_t
+#define PM_pCOutput1OffScene         116      // 8 Bits, Bit 7-0
+#define PM_pCOutput1OffDim           116      // uint8_t
+#define PM_pCOutput2On               117      // 8 Bits, Bit 7-0
+#define PM_pCOutput2OnValue          117      // uint8_t
+#define PM_pCOutput2OnScene          117      // 8 Bits, Bit 7-0
+#define PM_pCOutput2OnDim            117      // uint8_t
+#define PM_pCOutput2Off              118      // 8 Bits, Bit 7-0
+#define PM_pCOutput2OffValue         118      // uint8_t
+#define PM_pCOutput2OffScene         118      // 8 Bits, Bit 7-0
+#define PM_pCOutput2OffDim           118      // uint8_t
+#define PM_pDBrightnessAuto          119      // 2 Bits, Bit 7-6
 #define     PM_pDBrightnessAutoMask 0xC0
 #define     PM_pDBrightnessAutoShift 6
-#define PM_pDPresenceShort           118      // 1 Bit, Bit 5
+#define PM_pDPresenceShort           119      // 1 Bit, Bit 5
 #define     PM_pDPresenceShortMask 0x20
 #define     PM_pDPresenceShortShift 5
-#define PM_pDLockHardwareLEDs        118      // 1 Bit, Bit 4
+#define PM_pDLockHardwareLEDs        119      // 1 Bit, Bit 4
 #define     PM_pDLockHardwareLEDsMask 0x10
 #define     PM_pDLockHardwareLEDsShift 4
-#define PM_pDOutput1Filter           118      // 2 Bits, Bit 3-2
+#define PM_pDOutput1Filter           119      // 2 Bits, Bit 3-2
 #define     PM_pDOutput1FilterMask 0x0C
 #define     PM_pDOutput1FilterShift 2
-#define PM_pDOutput2Filter           118      // 2 Bits, Bit 1-0
+#define PM_pDOutput2Filter           119      // 2 Bits, Bit 1-0
 #define     PM_pDOutput2FilterMask 0x03
 #define     PM_pDOutput2FilterShift 0
-#define PM_pDManualWithPresence      119      // 1 Bit, Bit 7
+#define PM_pDManualWithPresence      120      // 1 Bit, Bit 7
 #define     PM_pDManualWithPresenceMask 0x80
 #define     PM_pDManualWithPresenceShift 7
-#define PM_pDPresenceDelayBase       120      // 2 Bits, Bit 7-6
+#define PM_pDPresenceDelayBase       121      // 2 Bits, Bit 7-6
 #define     PM_pDPresenceDelayBaseMask 0xC0
 #define     PM_pDPresenceDelayBaseShift 6
-#define PM_pDPresenceDelayTime       120      // uint14_t
-#define PM_pDPresenceShortDurationBase 122      // 2 Bits, Bit 7-6
+#define PM_pDPresenceDelayTime       121      // uint14_t
+#define PM_pDPresenceShortDurationBase 123      // 2 Bits, Bit 7-6
 #define     PM_pDPresenceShortDurationBaseMask 0xC0
 #define     PM_pDPresenceShortDurationBaseShift 6
-#define PM_pDPresenceShortDurationTime 122      // uint14_t
-#define PM_pDPresenceShortDelayBase  124      // 2 Bits, Bit 7-6
+#define PM_pDPresenceShortDurationTime 123      // uint14_t
+#define PM_pDPresenceShortDelayBase  125      // 2 Bits, Bit 7-6
 #define     PM_pDPresenceShortDelayBaseMask 0xC0
 #define     PM_pDPresenceShortDelayBaseShift 6
-#define PM_pDPresenceShortDelayTime  124      // uint14_t
-#define PM_pDBrightnessOffDelayBase  126      // 2 Bits, Bit 7-6
+#define PM_pDPresenceShortDelayTime  125      // uint14_t
+#define PM_pDBrightnessOffDelayBase  127      // 2 Bits, Bit 7-6
 #define     PM_pDBrightnessOffDelayBaseMask 0xC0
 #define     PM_pDBrightnessOffDelayBaseShift 6
-#define PM_pDBrightnessOffDelayTime  126      // uint14_t
-#define PM_pDManualFallbackDelayBase 128      // 2 Bits, Bit 7-6
+#define PM_pDBrightnessOffDelayTime  127      // uint14_t
+#define PM_pDManualFallbackDelayBase 129      // 2 Bits, Bit 7-6
 #define     PM_pDManualFallbackDelayBaseMask 0xC0
 #define     PM_pDManualFallbackDelayBaseShift 6
-#define PM_pDManualFallbackDelayTime 128      // uint14_t
-#define PM_pDBrightnessOn            130      // uint16_t
-#define PM_pDBrightnessDelta         132      // uint16_t
-#define PM_pDOutput1On               134      // 8 Bits, Bit 7-0
-#define PM_pDOutput1OnValue          134      // uint8_t
-#define PM_pDOutput1OnScene          134      // 8 Bits, Bit 7-0
-#define PM_pDOutput1OnDim            134      // uint8_t
-#define PM_pDOutput1Off              135      // 8 Bits, Bit 7-0
-#define PM_pDOutput1OffValue         135      // uint8_t
-#define PM_pDOutput1OffScene         135      // 8 Bits, Bit 7-0
-#define PM_pDOutput1OffDim           135      // uint8_t
-#define PM_pDOutput2On               136      // 8 Bits, Bit 7-0
-#define PM_pDOutput2OnValue          136      // uint8_t
-#define PM_pDOutput2OnScene          136      // 8 Bits, Bit 7-0
-#define PM_pDOutput2OnDim            136      // uint8_t
-#define PM_pDOutput2Off              137      // 8 Bits, Bit 7-0
-#define PM_pDOutput2OffValue         137      // uint8_t
-#define PM_pDOutput2OffScene         137      // 8 Bits, Bit 7-0
-#define PM_pDOutput2OffDim           137      // uint8_t
+#define PM_pDManualFallbackDelayTime 129      // uint14_t
+#define PM_pDBrightnessOn            131      // uint16_t
+#define PM_pDBrightnessDelta         133      // uint16_t
+#define PM_pDOutput1On               135      // 8 Bits, Bit 7-0
+#define PM_pDOutput1OnValue          135      // uint8_t
+#define PM_pDOutput1OnScene          135      // 8 Bits, Bit 7-0
+#define PM_pDOutput1OnDim            135      // uint8_t
+#define PM_pDOutput1Off              136      // 8 Bits, Bit 7-0
+#define PM_pDOutput1OffValue         136      // uint8_t
+#define PM_pDOutput1OffScene         136      // 8 Bits, Bit 7-0
+#define PM_pDOutput1OffDim           136      // uint8_t
+#define PM_pDOutput2On               137      // 8 Bits, Bit 7-0
+#define PM_pDOutput2OnValue          137      // uint8_t
+#define PM_pDOutput2OnScene          137      // 8 Bits, Bit 7-0
+#define PM_pDOutput2OnDim            137      // uint8_t
+#define PM_pDOutput2Off              138      // 8 Bits, Bit 7-0
+#define PM_pDOutput2OffValue         138      // uint8_t
+#define PM_pDOutput2OffScene         138      // 8 Bits, Bit 7-0
+#define PM_pDOutput2OffDim           138      // uint8_t
 
 // Communication objects per channel (multiple occurance)
 #define PM_KoOffset 50
@@ -1304,8 +1310,8 @@
 #define PM_KoKOpChangeDimRel 16
 #define PM_KoKOpChangeDimAbs 17
 #define PM_KoKOpChangeSwitch 18
-#define PM_KoKOpReserve1 19
+#define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 57
+#define MAIN_ApplicationVersion 58

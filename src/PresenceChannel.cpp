@@ -455,8 +455,8 @@ bool PresenceChannel::getHardwarePresence()
 void PresenceChannel::startPresenceTrigger()
 {
     startPresence(true);
-    // startPresence(false);
-    pPresenceDelayTime = delayTimerInit();
+    startPresence(false);
+    // pPresenceDelayTime = delayTimerInit();
 }
 
 void PresenceChannel::startHardwarePresence() 
@@ -856,7 +856,7 @@ void PresenceChannel::startBrightness()
         if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
         {
             // its getting dark, if we are in presence state, we turn light on
-            if ((pCurrentState & STATE_PRESENCE) && (pCurrentState & STATE_AUTO)) {
+            if ((pCurrentState & STATE_PRESENCE) && !(pCurrentState & STATE_MANUAL)) {
                 onPresenceChange(true);
             }
         }
