@@ -190,7 +190,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
                 startAuto(lValue);
                 break;
             case PM_KoKOpSetManual:
-                // check for tow button mode
+                // check for two button mode
                 if (paramBit(PM_pManualModeKeyCount, PM_pManualModeKeyCountMask))
                     startManual(lValue);
                 else // use single button mode
@@ -456,7 +456,7 @@ void PresenceChannel::startPresenceTrigger()
 {
     startPresence(true);
     startPresence(false);
-    // pPresenceDelayTime = delayTimerInit();
+    // pPresenceDelayTime = delayTimerInit(); // diese Variante führt zu Issue #12
 }
 
 void PresenceChannel::startHardwarePresence() 
@@ -530,7 +530,7 @@ void PresenceChannel::endPresence(bool iSend /* = true */)
 {
     // presence and short presence determination are stopped
     pCurrentState &= ~(STATE_PRESENCE | STATE_PRESENCE_SHORT | STATE_AUTO);
-    pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS_OFF;
+    pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
     pPresenceDelayTime = 0;
     pPresenceShortDelayTime = 0;
     if (iSend) onPresenceChange(false);
@@ -620,6 +620,8 @@ void PresenceChannel::startAuto(bool iOn)
     startPresenceTrigger();
     // and we also start/reset short presence here
     startPresenceShort();
+    // disable brightness handling according to current brightness
+    disableBrightness(iOn);
     // set state
     pCurrentState |= STATE_AUTO;
     // set output according to input value
@@ -791,13 +793,13 @@ void PresenceChannel::startActorState(GroupObject &iKo)
         return;
 
     // in case of actor change we behave like Auto-On (light should go out after delay time)
-    // if (lValue) {         
     startAuto(lValue);
-    // } else {
-    // startReset();  // Bernhard: actor state off during run-on time ends run-on time
-    // }
     // but we do not send anything to the knx bus
     // syncOutput();
+    // but we do not enter Auto state
+    pCurrentState &= ~STATE_AUTO;
+    // and we do not disable brightness handling
+    pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
 }
 
 void PresenceChannel::processActorState()
@@ -832,7 +834,7 @@ void PresenceChannel::calculateBrightnessOff()
 void PresenceChannel::startBrightness()
 {
     // should we suppress brightness evaluation?
-    bool lEvalBrightness = !(pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS_OFF);
+    bool lEvalBrightness = !(pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS);
     // or are we working brightness independent?
     lEvalBrightness = lEvalBrightness && (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask));
     // or are we in manual mode?
@@ -856,9 +858,9 @@ void PresenceChannel::startBrightness()
         if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
         {
             // its getting dark, if we are in presence state, we turn light on
-            if ((pCurrentState & STATE_PRESENCE) && !(pCurrentState & STATE_MANUAL)) {
+            // except we are in auto state (technically here it is Auto-Off), we should not turn on
+            if ((pCurrentState & STATE_PRESENCE) && (pCurrentState & STATE_AUTO) == 0) 
                 onPresenceChange(true);
-            }
         }
     }
 }
@@ -873,6 +875,25 @@ void PresenceChannel::processBrightness()
             // we have to turn off light but not presence
             onPresenceChange(false);
         }
+    }
+}
+
+void PresenceChannel::disableBrightness(bool iOn)
+{
+    // are we brightness dependant
+    if (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
+    {
+        // get current brightness
+        uint32_t lBrightness = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+        // we disable brightness handling according to current brightness and current output state
+        // turn on even though there is enough light
+        bool lDisable1 = iOn && (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+        // turn off even though it is too dark 
+        bool lDisable2 = !iOn && (lBrightness < (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
+        if (lDisable1 || lDisable2)
+            pCurrentValue |= PM_BIT_DISABLE_BRIGHTNESS;
+        else
+            pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
     }
 }
 
