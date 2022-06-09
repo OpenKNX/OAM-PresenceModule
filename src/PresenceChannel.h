@@ -19,7 +19,7 @@
 #define PM_BIT_OUTPUT_SET 1             // output value to send
 #define PM_BIT_OUTPUT_WRITTEN 2         // output value sent
 #define PM_BIT_OUTPUT_FORCE 4           // output value sent
-#define PM_BIT_DISABLE_BRIGHTNESS 8 // Brightness off temporarily disabled
+#define PM_BIT_DISABLE_BRIGHTNESS 8     // Brightness off temporarily disabled
 
 #define PM_VAL_OUTPUT_MASK (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN)
 

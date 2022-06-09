@@ -120,7 +120,8 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
 {
     bool lResult = false;
     // at this point we know, that the we have p<nn> in buffer, so we look at the next letter
-    if (iBuffer[3] == 't') {
+    if (iBuffer[3] == 't') 
+    {
         // output remaining presence time
         int16_t lPresence = 0;
         if (pCurrentState & STATE_PRESENCE) {
@@ -152,6 +153,57 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             sprintf(iBuffer, "inactive");
         }
         lResult = true;
+    }
+    else if (iBuffer[3] == 's')
+    {
+        if (iBuffer[4] == '1')
+        {
+            // long version
+            // "aut0 day13 lck"
+            if (pCurrentState & STATE_MANUAL)
+                sprintf(iBuffer, "man");
+            else if (pCurrentState & STATE_AUTO)
+                sprintf(iBuffer, "aut");
+            else
+                sprintf(iBuffer, "nor");
+            iBuffer[3] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
+            iBuffer[4] = ' ';
+        }
+        else
+        {
+            // short version
+            // "[nam][01] d[1-4][1-4] l t h -"
+            // n=normal, a=auto, m=manual
+            // 0=off, 1=on
+            // d=day phase
+            // 1-4=current phase
+            // 1-4=next phase
+            // l=is lock
+            // t=in totzeit
+            // h=in helligkeitsberechnung
+            // -=disable brightness handling
+            if (pCurrentState & STATE_MANUAL)
+                iBuffer[0] = 'm';
+            else if (pCurrentState & STATE_AUTO)
+                iBuffer[0] = 'a';
+            else
+                iBuffer[0] = 'n';
+
+            iBuffer[1] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
+            iBuffer[2] = ' ';
+            iBuffer[3] = 'd';
+            iBuffer[4] = mCurrentDayPhase + 49;
+            iBuffer[5] = getDayPhaseFromKO() + 49;
+            iBuffer[6] = ' ';
+            iBuffer[7] = (pCurrentState & STATE_LOCK) ? 'l' : ' ';
+            iBuffer[8] = ' ';
+            iBuffer[9] = (pCurrentState & STATE_DOWNTIME) ? 't' : ' ';
+            iBuffer[10] = ' ';
+            iBuffer[11] = (pCurrentState & STATE_ADAPTIVE) ? 'h' : ' ';
+            iBuffer[12] = ' ';
+            iBuffer[13] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? '-' : ' ';
+            iBuffer[14] = 0;
+        }
     }
     return lResult;
 }
@@ -874,6 +926,8 @@ void PresenceChannel::processBrightness()
             pBrightnessOffDelayTime = 0;
             // we have to turn off light but not presence
             onPresenceChange(false);
+            // if brightness handling is allowed, we have to disable auto mode
+            pCurrentState &= ~STATE_AUTO;
         }
     }
 }
