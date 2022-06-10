@@ -172,37 +172,38 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
         else
         {
             // short version
-            // "[nam][01] d[1-4][1-4] l t h -"
-            // n=normal, a=auto, m=manual
+            // "[NAM][01] A[1-4][1-4] [L-] [T-] [H-] [X-]"
+            // N=normal, A=auto, M=manual
             // 0=off, 1=on
-            // d=day phase
+            // D=day phase
             // 1-4=current phase
             // 1-4=next phase
-            // l=is lock
-            // t=in totzeit
-            // h=in helligkeitsberechnung
-            // -=disable brightness handling
+            // L=is lock, -=unlock
+            // T=in totzeit, -=normal
+            // H=in helligkeitsberechnung, -=normal
+            // X=disable brightness handling, -=normal
             if (pCurrentState & STATE_MANUAL)
-                iBuffer[0] = 'm';
+                iBuffer[0] = 'M';
             else if (pCurrentState & STATE_AUTO)
-                iBuffer[0] = 'a';
+                iBuffer[0] = 'A';
             else
-                iBuffer[0] = 'n';
+                iBuffer[0] = 'N';
 
             iBuffer[1] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
             iBuffer[2] = ' ';
-            iBuffer[3] = 'd';
+            iBuffer[3] = 'D';
             iBuffer[4] = mCurrentDayPhase + 49;
             iBuffer[5] = getDayPhaseFromKO() + 49;
             iBuffer[6] = ' ';
-            iBuffer[7] = (pCurrentState & STATE_LOCK) ? 'l' : ' ';
+            iBuffer[7] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
             iBuffer[8] = ' ';
-            iBuffer[9] = (pCurrentState & STATE_DOWNTIME) ? 't' : ' ';
+            iBuffer[9] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
             iBuffer[10] = ' ';
-            iBuffer[11] = (pCurrentState & STATE_ADAPTIVE) ? 'h' : ' ';
+            iBuffer[11] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
             iBuffer[12] = ' ';
-            iBuffer[13] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? '-' : ' ';
+            iBuffer[13] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
             iBuffer[14] = 0;
+            lResult = true;
         }
     }
     return lResult;
@@ -415,10 +416,10 @@ int8_t PresenceChannel::getDayPhaseFromKO()
     }
     else 
     {
-    uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_17));
-    for (; lPhaseCount >= 0; lPhaseCount--)
-        if (paramByte(PM_pPhase1Scene + lPhaseCount) == lScene)
-            break;
+        uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_17));
+        for (; lPhaseCount >= 0; lPhaseCount--)
+            if (paramByte(PM_pPhase1Scene + lPhaseCount) == lScene)
+                break;
     }
     return lPhaseCount;
 }
