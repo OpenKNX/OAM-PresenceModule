@@ -125,7 +125,7 @@
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-PhaseChange" Name="PhaseChange">
                 <TypeRestriction Base="Value" SizeInBit="1">
-                  <Enumeration Text="Bei Zustandswechsel am Ausgang" Value="0" Id="M-00FA_A-0001-01-0000_PT-PhaseChange_EN-0" />
+                  <Enumeration Text="Sobald der Ausgang AUS ist" Value="0" Id="M-00FA_A-0001-01-0000_PT-PhaseChange_EN-0" />
                   <Enumeration Text="Sofort beim Wechsel der Tagesphase" Value="1" Id="M-00FA_A-0001-01-0000_PT-PhaseChange_EN-1" />
                 </TypeRestriction>
               </ParameterType>
@@ -182,6 +182,28 @@
                 <TypeRestriction Base="Value" SizeInBit="1">
                   <Enumeration Text="Eintastenbedienung" Value="0" Id="M-00FA_A-0001-01-0000_PT-KeyCount_EN-0" />
                   <Enumeration Text="Zweitastenbedienung" Value="1" Id="M-00FA_A-0001-01-0000_PT-KeyCount_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll" Name="LeaveRoomModeAll">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll_EN-0" />
+                  <Enumeration Text="Totzeit" Value="1" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll_EN-1" />
+                  <Enumeration Text="Totzeit + Reset" Value="2" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll_EN-2" />
+                  <Enumeration Text="Bewegung + Totzeit" Value="3" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll_EN-3" />
+                  <Enumeration Text="Bewegung + Totzeit + Reset" Value="4" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll_EN-4" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove" Name="LeaveRoomModeMove">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove_EN-0" />
+                  <Enumeration Text="Totzeit" Value="1" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove_EN-1" />
+                  <Enumeration Text="Bewegung + Totzeit" Value="3" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove_EN-3" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset" Name="LeaveRoomModeReset">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="Raum verlassen inaktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset_EN-0" />
+                  <Enumeration Text="Totzeit + Reset" Value="2" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset_EN-2" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>

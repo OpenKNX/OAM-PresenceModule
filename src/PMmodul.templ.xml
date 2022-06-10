@@ -194,7 +194,7 @@
     <!-- Phase 2 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="79" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="77" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%200" Name="pB%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%201" Name="pB%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%236" Name="pB%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -208,7 +208,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="81" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="79" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%207" Name="pB%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%208" Name="pB%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -226,13 +226,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="91" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="89" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%215" Name="pB%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%216" Name="pB%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="95" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="93" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%217" Name="pB%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%218" Name="pB%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%219" Name="pB%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -254,7 +254,7 @@
     <!-- Phase 3 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="99" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="97" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%300" Name="pC%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%301" Name="pC%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%336" Name="pC%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -268,7 +268,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="101" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="99" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%307" Name="pC%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%308" Name="pC%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -286,13 +286,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="111" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="109" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%315" Name="pC%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%316" Name="pC%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="115" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="113" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%317" Name="pC%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%318" Name="pC%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%319" Name="pC%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -314,7 +314,7 @@
     <!-- Phase 4 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="119" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="117" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%400" Name="pD%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%401" Name="pD%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%436" Name="pD%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -328,7 +328,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="121" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="119" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%407" Name="pD%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%408" Name="pD%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -346,13 +346,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="131" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="129" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%415" Name="pD%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%416" Name="pD%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="135" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="133" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%417" Name="pD%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%418" Name="pD%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%419" Name="pD%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
