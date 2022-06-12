@@ -523,9 +523,6 @@ void PresenceChannel::startHardwarePresence()
         mHardwarePresence = lPresence;
         startPresence(lPresence);
     }
-    // if (sPresence->PresenceTrigger || sPresence->MoveTrigger)
-    //     if (getHardwarePresence()) 
-    //         startPresenceTrigger();
 }
 
 // helper entry point for presence calculation initiated by a KO
@@ -663,23 +660,25 @@ void PresenceChannel::startLeaveRoom()
     pLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
     switch (pLeaveRoomMode)
     {
-    case VAL_PM_LRM_Downtime:
-        // in this case we just wait until downtime passed and afterwards we wait for the first Move
-        startDowntime(); // has to be first to set correct state
-        onManualChange(false);
-        endPresence(true);
-        break;
-    case VAL_PM_LRM_MoveDowntime:
-        // dispatch to process handler
-        pCurrentState |= STATE_LEAVE_ROOM;
-        onManualChange(false);
-        endPresence(true);
-        break;
+        case VAL_PM_LRM_Downtime:
+        case VAL_PM_LRM_DowntimeReset:
+            // in this case we just wait until downtime passed and afterwards we wait for the first Move
+            startDowntime(); // has to be first to set correct state
+            onManualChange(false);
+            endPresence(true);
+            break;
+        case VAL_PM_LRM_MoveDowntime:
+        case VAL_PM_LRM_MoveDowntimeReset:
+            // dispatch to process handler
+            pCurrentState |= STATE_LEAVE_ROOM;
+            onManualChange(false);
+            endPresence(true);
+            break;
 
-    default:
-        // if there is no leave room configured, we process auto off
-        startAuto(false);
-        break;
+        default:
+            // if there is no leave room configured, we process auto off
+            startAuto(false);
+            break;
     }
 }
 
@@ -694,13 +693,23 @@ void PresenceChannel::processLeaveRoom()
                 endLeaveRoom();
                 startPresence();
             }
+            // if somewhen presence vanishes, we also continue in normal mode
+            if (!getRawPresence())
+                endLeaveRoom();
+            break;
+        case VAL_PM_LRM_DowntimeReset:
+            // we send a reset to external PM and go to normal mode
+            getKo(PM_KoKOpResetExternalPM)->value(true, getDPT(VAL_DPT_1));
+            // TODO: reset internal PIR, as soon as implemented
+            endLeaveRoom();
             break;
         case VAL_PM_LRM_MoveDowntime:
+        case VAL_PM_LRM_MoveDowntimeReset:
             // we wait until current move gets inactive
             if (!getRawPresence(true))
             {
                 // from now on it is the same like downtime processing
-                pLeaveRoomMode = VAL_PM_LRM_Downtime;
+                pLeaveRoomMode = (pLeaveRoomMode == VAL_PM_LRM_MoveDowntime) ? VAL_PM_LRM_Downtime : VAL_PM_LRM_DowntimeReset;
                 pCurrentState &= ~STATE_LEAVE_ROOM;
                 startDowntime();
             }
