@@ -484,22 +484,25 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
     calculateBrightnessOff();
 }
 
-bool PresenceChannel::getRawPresence()
+bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 {
-    bool lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1)) || getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
-    // if hardware presence sensor is available, we evaluate its value
-    if (!lPresence)
-        lPresence = getHardwarePresence();
+    bool lPresence = getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
+    if (!lPresence && !iJustMove) {
+        lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1));
+        // if hardware presence sensor is available, we evaluate its value
+        if (!lPresence)
+            lPresence = getHardwarePresence(iJustMove);
+    }
     return lPresence;
 }
 
-bool PresenceChannel::getHardwarePresence()
+bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
 {
     // if hardware presence sensor is available, we evaluate its value
     bool lPresence = false;
     if (paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
         lPresence = sPresence->getHardwareMove();
-    if (!lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
+    if (!iJustMove && !lPresence && paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
         lPresence = sPresence->getHardwarePresence();
     return lPresence;
 }
@@ -549,6 +552,10 @@ void PresenceChannel::startPresence(uint8_t iPresenceType, GroupObject &iKo)
 // main entry point for presence calculation (KO independent), implemented as switching presence channel 
 void PresenceChannel::startPresence(bool iForce /* = false */)
 {
+    // during leave room we ignore any presence processing
+    if (isLeaveRoom())
+        return;
+
     // this method handles both presence inputs. We handle both combined by an OR.
     if (iForce || getRawPresence()) {
         // do according actions if presence changes
@@ -591,6 +598,10 @@ void PresenceChannel::endPresence(bool iSend /* = true */)
 
 void PresenceChannel::startPresenceShort()
 {
+    // during leave room we ignore any presence processing
+    if (isLeaveRoom())
+        return;
+
     if (paramBit(PM_pAPresenceShort, PM_pAPresenceShortMask, true))
     {
         // set the mark for short presence mode
@@ -625,6 +636,10 @@ void PresenceChannel::processPresenceShort()
 
 void PresenceChannel::onPresenceBrightnessChange(bool iOn)
 {
+    // during leave room we ignore any presence processing
+    if (isLeaveRoom())
+        return;
+
     // calculate output dependent on brightness and auto mode
     if (iOn && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask)) 
     {
@@ -643,17 +658,77 @@ void PresenceChannel::onPresenceChange(bool iOn)
         startOutput(iOn);
 }
 
-// downtime after switch off
+void PresenceChannel::startLeaveRoom()
+{
+    pLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
+    switch (pLeaveRoomMode)
+    {
+    case VAL_PM_LRM_Downtime:
+        // in this case we just wait until downtime passed and afterwards we wait for the first Move
+        startDowntime(); // has to be first to set correct state
+        onManualChange(false);
+        endPresence(true);
+        break;
+    case VAL_PM_LRM_MoveDowntime:
+        // dispatch to process handler
+        pCurrentState |= STATE_LEAVE_ROOM;
+        onManualChange(false);
+        endPresence(true);
+        break;
+
+    default:
+        // if there is no leave room configured, we process auto off
+        startAuto(false);
+        break;
+    }
+}
+
+void PresenceChannel::processLeaveRoom()
+{
+    switch (pLeaveRoomMode)
+    {
+        case VAL_PM_LRM_Downtime:
+            // we wait for the next move, which also starts new presence cycle
+            if (getRawPresence(true))
+            {
+                endLeaveRoom();
+                startPresence();
+            }
+            break;
+        case VAL_PM_LRM_MoveDowntime:
+            // we wait until current move gets inactive
+            if (!getRawPresence(true))
+            {
+                // from now on it is the same like downtime processing
+                pLeaveRoomMode = VAL_PM_LRM_Downtime;
+                pCurrentState &= ~STATE_LEAVE_ROOM;
+                startDowntime();
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+void PresenceChannel::endLeaveRoom()
+{
+    pCurrentState &= ~(STATE_DOWNTIME | STATE_LEAVE_ROOM);
+    pDowntimeDelayTime = 0;
+}
+
+bool PresenceChannel::isLeaveRoom()
+{
+    return (pCurrentState & (STATE_DOWNTIME | STATE_LEAVE_ROOM));
+}
+
+// downtime during leave room
 void PresenceChannel::startDowntime()
 {
-    // ensure auto mode
-    onManualChange(false);
     // set state
     pCurrentState |= STATE_DOWNTIME;
     // set downtime timer
     pDowntimeDelayTime = delayTimerInit();
-    // set output according to input value
-    startOutput(false);
 }
 
 void PresenceChannel::processDowntime()
@@ -661,12 +736,17 @@ void PresenceChannel::processDowntime()
     if (pDowntimeDelayTime > 0 && delayCheck(pDowntimeDelayTime, getDelayPattern(PM_pDowntimeOffBase, false))) 
     {
         pDowntimeDelayTime = 0;
+        // we end downtime handling
         pCurrentState &= ~STATE_DOWNTIME;
+        // and wait for next move
+        pCurrentState |= STATE_LEAVE_ROOM;
     }
 }
 
 void PresenceChannel::startAuto(bool iOn)
 {
+    // end any leave room processing
+    endLeaveRoom();
     // ensure auto mode
     onManualChange(false);
     // we start presence delay
@@ -687,6 +767,8 @@ void PresenceChannel::processAuto()
 
 void PresenceChannel::startManual(bool iOn)
 {
+    // end any leave room processing
+    endLeaveRoom();
     // ensure manual mode
     onManualChange(true);
     // we stop presence delay
@@ -838,6 +920,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
 void PresenceChannel::startReset()
 {
     // We reset PM so that next (or an existing) presence signal immediately turns output on
+    endLeaveRoom();
     onManualChange(false);
     endPresence(true);
 
@@ -861,7 +944,10 @@ void PresenceChannel::startActorState(GroupObject &iKo)
         return;
 
     // in case of actor change we behave like Auto-On (light should go out after delay time)
-    startAuto(lValue);
+    if (lValue)
+        startAuto(lValue);
+    else
+        startLeaveRoom();
     // but we do not send anything to the knx bus
     // syncOutput();
     // but we do not enter Auto state
@@ -901,6 +987,10 @@ void PresenceChannel::calculateBrightnessOff()
 
 void PresenceChannel::startBrightness()
 {
+    // during leave room we ignore any brightness processing
+    if (isLeaveRoom())
+        return;
+
     // should we suppress brightness evaluation?
     bool lEvalBrightness = !(pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS);
     // or are we working brightness independent?
@@ -1144,6 +1234,10 @@ void PresenceChannel::loop()
             processDayPhase();
         if (pCurrentState & (STATE_ADAPTIVE))
             processAdaptiveBrightness();
+        if (pCurrentState & (STATE_LEAVE_ROOM))
+            processLeaveRoom();
+        if (pCurrentState & (STATE_DOWNTIME))
+            processDowntime();
         // brightness is always evaluated
         processBrightness();
         // output is always evaluated

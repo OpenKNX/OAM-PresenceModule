@@ -14,6 +14,7 @@
 #define STATE_DOWNTIME 256         // Downtime after leave room
 #define STATE_ADAPTIVE 512         // adaptive brightness calculation
 #define STATE_ADAPTIVE_READ 1024   // adaptive brightness calculation
+#define STATE_LEAVE_ROOM 2048      // During leave room we ignore any presence signal
 
 // Value marker (BITFIELD)
 #define PM_BIT_OUTPUT_SET 1             // output value to send
@@ -93,6 +94,12 @@
 #define VAL_PM_SA_LeaveRoom 14
 #define VAL_PM_SA_Reset 15
 
+#define VAL_PM_LRM_None 0
+#define VAL_PM_LRM_Downtime 1
+#define VAL_PM_LRM_DowntimeReset 2
+#define VAL_PM_LRM_MoveDowntime 3
+#define VAL_PM_LRM_MoveDowntimeReset 4
+
 // forward declaration
 class Presence;
 
@@ -120,8 +127,8 @@ class PresenceChannel
     void processStartup();
     void processReadRequests();
 
-    bool getRawPresence();
-    bool getHardwarePresence();
+    bool getRawPresence(bool iJustMove = false);
+    bool getHardwarePresence(bool iJustMove = false);
     void startHardwarePresence();
     void startPresenceTrigger();
     void startPresence(uint8_t iPresenceType, GroupObject &iKo);
@@ -134,6 +141,10 @@ class PresenceChannel
     void onPresenceChange(bool iOn);
 
     void startSceneCommand(GroupObject &iKo);
+    void startLeaveRoom();
+    void processLeaveRoom();
+    void endLeaveRoom();
+    bool isLeaveRoom();
     void startDowntime();
     void processDowntime();
     void startAuto(bool iOn);
@@ -187,6 +198,7 @@ class PresenceChannel
     uint32_t pDowntimeDelayTime = 0;  // Totzeit
     uint32_t pAdaptiveDelayTime = 0;  // adaptive brightness calculation delay
     uint32_t pBrightnessOffDelayTime = 0;  // brightness off delay
+    uint8_t pLeaveRoomMode = 0; // used for leave room SM
 
   public:
     PresenceChannel(uint8_t iChannelNumber);
