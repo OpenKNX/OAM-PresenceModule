@@ -40,6 +40,11 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%092" Name="p%C%StartReadScene" Offset="4" BitOffset="7" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Steuerszene nach Neustart vom Bus lesen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="5" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" Name="p%C%ExternalSupportsMove" Offset="5" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Präsenz B meldet Bewegung statt Präsenz?" Value="0" />
+      <!-- ist is intended that the below 3 overlay each other -->
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%097" Name="p%C%LeaveRoomModeAll" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll" Text="Modus für Raum verlassen" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%098" Name="p%C%LeaveRoomModeMove" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove" Text="Modus für Raum verlassen" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%099" Name="p%C%LeaveRoomModeReset" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset" Text="Modus für Raum verlassen" Value="0" />
+      <!-- 3 Bit free -->
     </Union>
     <!-- Delay patterns (once per channel) -->
     <Union SizeInBit="96">
@@ -130,7 +135,8 @@
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%084" Name="p%C%EnableLux" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Lux" Value="0" />
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%085" Name="p%C%EnableDayPhase" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="DayPhase" Value="0" />
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%095" Name="p%C%ExternalPMExist" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="External PM" Value="0" />
-    <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%096" Name="p%C%LeaveRoom" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Leave room possible" Value="0" />
+    <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%096" Name="p%C%LeaveRoom" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="Leave room possible - with mode" Value="0" />
+    <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%003" Name="p%C%LeaveRoomModeChosen" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="Leave room mode chosen" Value="0" />
     <!-- Phase 1 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
@@ -375,7 +381,7 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002" />
-    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%003_R-%T%%CCC%00301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%003" /> -->
+    <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%003" Access="None" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%006_R-%T%%CCC%00601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%006" />
@@ -479,6 +485,9 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094_R-%T%%CCC%09401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095" Access="None" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%096" Access="None" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%097_R-%T%%CCC%09701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%097" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%098_R-%T%%CCC%09801" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%098" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%099_R-%T%%CCC%09901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%099" />
     <!-- Phase 1 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101" />
@@ -696,6 +705,9 @@
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" />
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" />
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" />
+        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" />
+        <!-- init leave room -->
+        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
         <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
         <!-- Channel name -->
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
@@ -853,18 +865,18 @@
             <!-- calculate reset-ability and if leave room is possible -->
             <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501">
               <when test="0">
-                <!-- without external PM, we check internal presence settings to allow "Leave room" -->
+                <!-- without external PM, we check for PIR-Sensor to allow "Leave room" -->
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%036_R-%T%%CCC%03601">
                   <when test=">0">
-                    <!-- and allow "Leave room" -->
-                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
+                    <!-- and allow "Leave room" wth mode all -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="3" />
                   </when>
                 </choose>
-                <!-- check if second input is move input -->
+                <!-- without external PM, we check for HF-Sensor to allow "Leave room" -->
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%035_R-%T%%CCC%03501">
                   <when test=">0">
-                    <!-- and allow "Leave room" -->
-                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
+                    <!-- and allow "Leave room" wth mode move -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="2" />
                   </when>
                 </choose>
               </when>
@@ -875,15 +887,24 @@
                   <when test="1">
                     <!-- we activate reset output -->
                     <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%019_R-%T%%CCC%01901" />
-                    <!-- and allow "Leave room" -->
+                    <!-- and allow "Leave room" wth mode reset -->
                     <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
                   </when>
                 </choose>
                 <!-- check if second input is move input -->
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%094_R-%T%%CCC%09401">
                   <when test="1">
-                    <!-- and allow "Leave room" -->
-                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
+                    <!-- check if it is also reset -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%093_R-%T%%CCC%09301">
+                      <when test="1">
+                        <!-- we allow "Leave room" wth mode all -->
+                        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="3" />
+                      </when>
+                      <when test="0">
+                        <!-- else we allow "Leave room" wth mode move -->
+                        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="2" />
+                      </when>
+                    </choose>
                   </when>
                 </choose>
               </when>
@@ -1206,25 +1227,42 @@
             <!-- Leave room = (D && !A) || (E && !A) || (A && B) || (A && C)-->
             <!-- Leave room = (!A && (D || E)) || (A && (B || C)) -->
             <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601">
-              <when test="1">
+              <when test=">0">
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Raum verlassen" UIHint="Headline" />
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%039_R-%T%%CCC%03901" />
-                <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%040_R-%T%%CCC%04001" /> -->
-                <!-- Delay pattern: Downtime Off delay -->
-                <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%DowntimeOffDelay" Inline="true" Layout="Grid">
-                  <Columns>
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                    <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                  </Columns>
-                  <Rows>
-                    <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                  </Rows>
-                  <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit nach Raum verlassen" Cell="1,1" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%038_R-%T%%CCC%03801" Cell="1,2" />
-                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%037_R-%T%%CCC%03701" Cell="1,3" />
-                </ParameterBlock>
-                <!-- end of delay pattern -->
+              </when>
+              <when test="1">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%099_R-%T%%CCC%09901" />
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" SourceParamRefRef="M-00FA_A-0001-01-0000_UP-%T%%CCC%099_R-%T%%CCC%09901" />
+              </when>
+              <when test="2">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%098_R-%T%%CCC%09801" />
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" SourceParamRefRef="M-00FA_A-0001-01-0000_UP-%T%%CCC%098_R-%T%%CCC%09801" />
+              </when>
+              <when test="3">
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%097_R-%T%%CCC%09701" />
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" SourceParamRefRef="M-00FA_A-0001-01-0000_UP-%T%%CCC%097_R-%T%%CCC%09701" />
+              </when>
+              <when test=">0">
+                <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301">
+                  <when test=">0">
+                    <!-- Delay pattern: Downtime Off delay -->
+                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%DowntimeOffDelay" Inline="true" Layout="Grid">
+                      <Columns>
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
+                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
+                      </Columns>
+                      <Rows>
+                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
+                      </Rows>
+                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Totzeit nach Raum verlassen" Cell="1,1" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%038_R-%T%%CCC%03801" Cell="1,2" />
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%037_R-%T%%CCC%03701" Cell="1,3" />
+                    </ParameterBlock>
+                    <!-- end of delay pattern -->
+                    <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%039_R-%T%%CCC%03901" />
+                  </when>
+                </choose>
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
               </when>
             </choose>

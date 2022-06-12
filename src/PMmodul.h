@@ -955,6 +955,15 @@
 #define PM_pExternalSupportsMove      5      // 1 Bit, Bit 6
 #define     PM_pExternalSupportsMoveMask 0x40
 #define     PM_pExternalSupportsMoveShift 6
+#define PM_pLeaveRoomModeAll          5      // 3 Bits, Bit 5-3
+#define     PM_pLeaveRoomModeAllMask 0x38
+#define     PM_pLeaveRoomModeAllShift 3
+#define PM_pLeaveRoomModeMove         5      // 3 Bits, Bit 5-3
+#define     PM_pLeaveRoomModeMoveMask 0x38
+#define     PM_pLeaveRoomModeMoveShift 3
+#define PM_pLeaveRoomModeReset        5      // 3 Bits, Bit 5-3
+#define     PM_pLeaveRoomModeResetMask 0x38
+#define     PM_pLeaveRoomModeResetShift 3
 #define PM_pChannelDelayBase          6      // 2 Bits, Bit 7-6
 #define     PM_pChannelDelayBaseMask 0xC0
 #define     PM_pChannelDelayBaseShift 6
@@ -1314,4 +1323,4 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 59
+#define MAIN_ApplicationVersion 62

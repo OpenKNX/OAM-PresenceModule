@@ -787,17 +787,12 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     else if (pCurrentState & STATE_LOCK)
     {
         pCurrentState &= ~STATE_LOCK;
-        // should we send something?
-        // bool lOn = false;
         uint32_t lPresenceDelayTime;
         switch (iLockOffSend)
         {
         case VAL_PM_LockOutputNone:
             // nothing should be send, so we set the output state to current state
             syncOutput();
-            // we start auto mode with current value
-            // lOn = pCurrentValue & PM_BIT_OUTPUT_SET;
-            // endPresence(false);
             break;
         case VAL_PM_LockOutputOff:
             startAuto(false);
@@ -817,6 +812,26 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
         default:
             break;
         }
+    }
+    // we have to sync KO according to lock state
+    uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
+    uint8_t lLockValue = (iLockOn << 1);
+    uint8_t lLockSend = lLockValue ? iLockOnSend : iLockOffSend;
+    switch (lLockType)
+    {
+        case VAL_PM_LockTypePriority:
+            if (lLockSend == VAL_PM_LockOutputNone || lLockSend == VAL_PM_LockOutputCurrent)
+                lLockValue |= (pCurrentValue & PM_BIT_OUTPUT_SET > 0);
+            else
+                lLockValue |= (lLockSend == VAL_PM_LockOutputOn);
+            getKo(PM_KoKOpLock)->valueNoSend(lLockValue, getDPT(VAL_DPT_5));
+            break;
+        case VAL_PM_LockTypeLock:
+            getKo(PM_KoKOpLock)->valueNoSend(iLockOn, getDPT(VAL_DPT_1));
+            break;
+        default:
+            // do nothing
+            break;
     }
 }
 
