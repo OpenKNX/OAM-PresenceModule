@@ -120,25 +120,31 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
 {
     bool lResult = false;
     // at this point we know, that the we have p<nn> in buffer, so we look at the next letter
-    if (iBuffer[3] == 't') 
+    if (iBuffer[3] == 't')
     {
         // output remaining presence time
         int16_t lPresence = 0;
-        if (pCurrentState & STATE_PRESENCE) {
+        if (pCurrentState & STATE_PRESENCE)
+        {
             // we present both, long and short presence
             lPresence = getKo(PM_KoKOpPresenceDelay)->value(getDPT(VAL_DPT_7));
-            if (pPresenceDelayTime > 0) {
+            if (pPresenceDelayTime > 0)
+            {
                 lPresence = lPresence - (uint16_t)((millis() - pPresenceDelayTime) / 1000);
             }
             // Long presence output is "L mm:ss "
             snprintf(iBuffer, 14, "L %02d:%02d ", (lPresence / 60) % 60, lPresence % 60);
-            if (pCurrentState & STATE_PRESENCE_SHORT) {
+            if (pCurrentState & STATE_PRESENCE_SHORT)
+            {
                 lPresence = paramTimeDelay(PM_pAPresenceShortDurationBase, true, true);
                 lPresence = lPresence - (uint16_t)((millis() - pPresenceShortDelayTime) / 1000);
-                if (lPresence >= 0) {
+                if (lPresence >= 0)
+                {
                     // Short presence duration output is "L mm:ss S m:ss"
                     snprintf(iBuffer + 8, 7, "S %01d:%02d", (lPresence / 60) % 60, lPresence % 60);
-                } else {
+                }
+                else
+                {
                     // Short presence evaluation output is "L mm:ss D m:ss"
                     snprintf(iBuffer + 8, 7, "D %01d:%02d", (-lPresence / 60) % 60, -lPresence % 60);
                 }
@@ -147,8 +153,46 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
         else if (pCurrentState & STATE_RUNNING)
         {
             sprintf(iBuffer, "no presence");
-        } 
-        else 
+        }
+        else
+        {
+            sprintf(iBuffer, "inactive");
+        }
+        lResult = true;
+    }
+    else if (iBuffer[3] == 'l')
+    {
+        // output leave room modes
+        // p<nn>l
+        // L (OFF|TOT|T+R|B+T|BTR) T mm:ss
+        if (isLeaveRoom())
+        {
+            uint8_t lIndex = 0;
+            int16_t lTime = 0;
+            const char *lModes = "OFFTOTT+RB+TBTR";
+            // we present leave room mode
+            iBuffer[lIndex++] = 'L';
+            iBuffer[lIndex++] = ' ';
+            for (uint8_t lCount = 0; lCount < 3; lCount++)
+                iBuffer[lIndex++] = lModes[(pLeaveRoomMode * 3 + lCount)];
+            iBuffer[lIndex++] = ' ';
+            iBuffer[lIndex] = 0; // do not increment lIndex here
+            if (pDowntimeDelayTime > 0)
+            {
+                lTime = paramTimeDelay(PM_pDowntimeOffBase, false, true);
+                lTime = lTime - (uint16_t)((millis() - pDowntimeDelayTime) / 1000);
+                // Downtime output is "T mm:ss "
+                if (lTime >= 0)
+                    snprintf(iBuffer + lIndex, 8, "T %02d:%02d ", (lTime / 60) % 60, lTime % 60);
+                else
+                    snprintf(iBuffer + lIndex, 8, "T-%02d:%02d ", (-lTime / 60) % 60, -lTime % 60);
+            }
+        }
+        else if (pCurrentState & STATE_RUNNING)
+        {
+            sprintf(iBuffer, "no leave room");
+        }
+        else
         {
             sprintf(iBuffer, "inactive");
         }
@@ -172,37 +216,38 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
         else
         {
             // short version
-            // "[NAM][01] A[1-4][1-4] [L-] [T-] [H-] [X-]"
+            // "[NAM][01] D[1-4][1-4] [L-][H-][X-][R-][T-]"
             // N=normal, A=auto, M=manual
             // 0=off, 1=on
             // D=day phase
             // 1-4=current phase
             // 1-4=next phase
             // L=is lock, -=unlock
-            // T=in totzeit, -=normal
             // H=in helligkeitsberechnung, -=normal
             // X=disable brightness handling, -=normal
+            // R=leave Room is active, -=not active
+            // T=in totzeit, -=normal
+            uint8_t lIndex = 0;
             if (pCurrentState & STATE_MANUAL)
-                iBuffer[0] = 'M';
+                iBuffer[lIndex++] = 'M';
             else if (pCurrentState & STATE_AUTO)
-                iBuffer[0] = 'A';
+                iBuffer[lIndex++] = 'A';
             else
-                iBuffer[0] = 'N';
+                iBuffer[lIndex++] = 'N';
 
-            iBuffer[1] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
-            iBuffer[2] = ' ';
-            iBuffer[3] = 'D';
-            iBuffer[4] = mCurrentDayPhase + 49;
-            iBuffer[5] = getDayPhaseFromKO() + 49;
-            iBuffer[6] = ' ';
-            iBuffer[7] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
-            iBuffer[8] = ' ';
-            iBuffer[9] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
-            iBuffer[10] = ' ';
-            iBuffer[11] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
-            iBuffer[12] = ' ';
-            iBuffer[13] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
-            iBuffer[14] = 0;
+            iBuffer[lIndex++] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
+            iBuffer[lIndex++] = ' ';
+            iBuffer[lIndex++] = 'D';
+            iBuffer[lIndex++] = mCurrentDayPhase + 49;
+            iBuffer[lIndex++] = getDayPhaseFromKO() + 49;
+            iBuffer[lIndex++] = ' ';
+            iBuffer[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
+            iBuffer[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
+            iBuffer[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
+            iBuffer[lIndex++] = (isLeaveRoom()) ? 'R' : '-';
+            iBuffer[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
+            // 3 char free
+            iBuffer[lIndex++] = 0;
             lResult = true;
         }
     }
@@ -738,7 +783,7 @@ void PresenceChannel::startDowntime()
 
 void PresenceChannel::processDowntime()
 {
-    if (pDowntimeDelayTime > 0 && delayCheck(pDowntimeDelayTime, getDelayPattern(PM_pDowntimeOffBase, false))) 
+    if (pDowntimeDelayTime > 0 && delayCheck(pDowntimeDelayTime, paramTimeDelay(PM_pDowntimeOffBase, false))) 
     {
         pDowntimeDelayTime = 0;
         // we end downtime handling
