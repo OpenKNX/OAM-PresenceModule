@@ -39,11 +39,6 @@
 #define VAL_PM_LuxAbsoluteOff 1
 #define VAL_PM_LuxAdaptiveOff 2
 
-// presence type
-#define VAL_PM_PresenceTypeOff 0
-#define VAL_PM_PresenceTypeSwitch 1
-#define VAL_PM_PresenceTypeTrigger 2
-
 // presence usage
 #define VAL_PM_PresenceUsageNone 0
 #define VAL_PM_PresenceUsageMove 1
@@ -131,7 +126,7 @@ class PresenceChannel
     bool getHardwarePresence(bool iJustMove = false);
     void startHardwarePresence();
     void startPresenceTrigger();
-    void startPresence(uint8_t iPresenceType, GroupObject &iKo);
+    void startPresence(bool iIsTrigger, GroupObject &iKo);
     void startPresence(bool iForce = false);
     void processPresence();
     void endPresence(bool iSend = true);

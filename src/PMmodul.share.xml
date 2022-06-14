@@ -88,12 +88,20 @@
                   <Enumeration Text="aktiv über externes Objekt" Value="3" Id="M-00FA_A-0001-01-0000_PT-StatusLEDPIR_EN-3" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceInputs" Name="PresenceInputs">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceInputs_EN-0" />
+                  <Enumeration Text="Präsenz" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceInputs_EN-1" />
+                  <Enumeration Text="Bewegung" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceInputs_EN-2" />
+                  <Enumeration Text="Präsenz und Bewegung" Value="3" Id="M-00FA_A-0001-01-0000_PT-PresenceInputs_EN-3" />
+                  <Enumeration Text="Präsenz und weitere Präsenz" Value="4" Id="M-00FA_A-0001-01-0000_PT-PresenceInputs_EN-4" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceType" Name="PresenceType">
-                <TypeRestriction Base="Value" SizeInBit="2">
-                  <Enumeration Text="nicht aktiv" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-0" />
-                  <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-1" />
-                  <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="2" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-2" />
-                </TypeRestriction> 
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="schaltend (EIN und AUS wird ausgewertet)" Value="0" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-0" />
+                  <Enumeration Text="triggernd (nur EIN wird ausgewertet)" Value="1" Id="M-00FA_A-0001-01-0000_PT-PresenceType_EN-1" />
+                </TypeRestriction>
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-PresenceUsage" Name="PresenceUsage">
                 <TypeRestriction Base="Value" SizeInBit="2">

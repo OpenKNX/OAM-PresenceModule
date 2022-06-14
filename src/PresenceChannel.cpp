@@ -214,7 +214,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
     // we process KO only if we are running
     if (pCurrentState & STATE_RUNNING) {
         // search for correct KO
-        uint8_t lPresenceType;
+        bool lIsTrigger;
         uint8_t lKoIndex = (iKoIndex >= 0) ? iKoIndex : calcKoIndex(iKo.asap());
         bool lValue = iKo.value(getDPT(VAL_DPT_1));
         switch (lKoIndex)
@@ -230,13 +230,13 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
                 break;
             case PM_KoKOpPresence1:
                 // which kind of presence information do we get
-                lPresenceType = paramByte(PM_pPresence1Type, PM_pPresence1TypeMask, PM_pPresence1TypeShift);
-                startPresence(lPresenceType, iKo);
+                lIsTrigger = paramBit(PM_pPresenceType, PM_pPresenceTypeMask);
+                startPresence(lIsTrigger, iKo);
                 break;
             case PM_KoKOpPresence2:
                 // change of presence information
-                lPresenceType = paramByte(PM_pPresence2Type, PM_pPresence2TypeMask, PM_pPresence2TypeShift);
-                startPresence(lPresenceType, iKo);
+                lIsTrigger = paramBit(PM_pMoveType, PM_pMoveTypeMask);
+                startPresence(lIsTrigger, iKo);
                 break;
             case PM_KoKOpSetAuto:
                 // Automatic mode
@@ -329,7 +329,7 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
                     onLock(false, 0, 0);
                     break;
                 case VAL_PM_SA_LeaveRoom:
-                    /* not implemented yet */
+                    startLeaveRoom();
                     break;
                 case VAL_PM_SA_Reset:
                     startReset();
@@ -526,18 +526,14 @@ void PresenceChannel::startHardwarePresence()
 }
 
 // helper entry point for presence calculation initiated by a KO
-void PresenceChannel::startPresence(uint8_t iPresenceType, GroupObject &iKo)
+void PresenceChannel::startPresence(bool iIsTrigger, GroupObject &iKo)
 {
-    // sanity check
-    if (iPresenceType == VAL_PM_PresenceTypeOff)
-        return;
-
     bool lPresenceValue = iKo.value(getDPT(VAL_DPT_1));
     // we ignore explicitly OFF telegrams of triggered input
-    if (iPresenceType == VAL_PM_PresenceTypeTrigger && !lPresenceValue)
+    if (iIsTrigger && !lPresenceValue)
         return;
     startPresence();
-    if (iPresenceType == VAL_PM_PresenceTypeTrigger && lPresenceValue)
+    if (iIsTrigger && lPresenceValue)
     {
         // triggered input sent a 1, we immediately set it to 0
         iKo.value(false, getDPT(VAL_DPT_1));
@@ -758,16 +754,23 @@ void PresenceChannel::startAuto(bool iOn)
     endLeaveRoom();
     // ensure auto mode
     onManualChange(false);
-    // we start presence delay
-    startPresenceTrigger();
-    // and we also start/reset short presence here
-    startPresenceShort();
-    // disable brightness handling according to current brightness
-    disableBrightness(iOn);
-    // set state
-    pCurrentState |= STATE_AUTO;
-    // set output according to input value
-    startOutput(iOn);
+    // check if we have to go to leave room
+    uint8_t lLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
+    if (!iOn && lLeaveRoomMode > VAL_PM_LRM_None)
+        startLeaveRoom();
+    else
+    {
+        // we start presence delay
+        startPresenceTrigger();
+        // and we also start/reset short presence here
+        startPresenceShort();
+        // disable brightness handling according to current brightness
+        disableBrightness(iOn);
+        // set state
+        pCurrentState |= STATE_AUTO;
+        // set output according to input value
+        startOutput(iOn);
+    }
 }
 
 void PresenceChannel::processAuto()

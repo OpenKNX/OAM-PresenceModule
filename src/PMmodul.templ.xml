@@ -9,9 +9,9 @@
     <!-- Bitfield settings (once per channel) -->
     <Union SizeInBit="48">
       <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="0" BitOffset="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%001" Name="p%C%Presence1Type" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceType" Text="Eingang Präsenz A" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%002" Name="p%C%Presence2Type" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceType" Text="Eingang Präsenz B" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%900" Name="p%C%PresenceInputs" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceInputs" Text="Eingänge für externen Melder" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%901" Name="p%C%PresenceType" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceType" Text="Eingang Präsenz" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%902" Name="p%C%MoveType" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-PresenceType" Text="Eingang Bewegung" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%004" Name="p%C%PhaseBool" Offset="0" BitOffset="5" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Tagesphasen über Tag-/Nacht-Objekt verfügbar machen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%005" Name="p%C%PhaseCount" Offset="0" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-PhaseCount" Text="Anzahl Tagesphasen" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%006" Name="p%C%Output1Type" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OutputType" Text="Ausgang 1 ist vom Typ" Value="1" />
@@ -39,7 +39,8 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%091" Name="p%C%StartReadDayPhase" Offset="4" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Tagesphase nach Neustart vom Bus lesen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%092" Name="p%C%StartReadScene" Offset="4" BitOffset="7" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Steuerszene nach Neustart vom Bus lesen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="5" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" Name="p%C%ExternalSupportsMove" Offset="5" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Präsenz B meldet Bewegung statt Präsenz?" Value="0" />
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" Name="p%C%ExternalSupportsMove" Offset="5" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Präsenz B meldet Bewegung statt Präsenz?" Value="0" /> -->
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="5" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
       <!-- ist is intended that the below 3 overlay each other -->
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%097" Name="p%C%LeaveRoomModeAll" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll" Text="Modus für Raum verlassen" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%098" Name="p%C%LeaveRoomModeMove" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove" Text="Modus für Raum verlassen" Value="0" />
@@ -134,7 +135,7 @@
     <!-- KO enablement (for internal KO, once per channel, just ets local and invisible) -->
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%084" Name="p%C%EnableLux" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Lux" Value="0" />
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%085" Name="p%C%EnableDayPhase" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="DayPhase" Value="0" />
-    <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%095" Name="p%C%ExternalPMExist" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="External PM" Value="0" />
+    <!-- <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%095" Name="p%C%ExternalPMExist" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="External PM" Value="0" /> -->
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%096" Name="p%C%LeaveRoom" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="Leave room possible - with mode" Value="0" />
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%003" Name="p%C%LeaveRoomModeChosen" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Text="Leave room mode chosen" Value="0" />
     <!-- Phase 1 -->
@@ -379,8 +380,8 @@
   </Parameters>
   <ParameterRefs>
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002" />
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001" /> -->
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002" /> -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%003" Access="None" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%004" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%005_R-%T%%CCC%00501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%005" />
@@ -482,12 +483,16 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%091_R-%T%%CCC%09101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%091" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%092_R-%T%%CCC%09201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%092" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%093_R-%T%%CCC%09301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%093" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094_R-%T%%CCC%09401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095" Access="None" />
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094_R-%T%%CCC%09401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" /> -->
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095" Access="None" /> -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%096" Access="None" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%097_R-%T%%CCC%09701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%097" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%098_R-%T%%CCC%09801" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%098" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%099_R-%T%%CCC%09901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%099" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%900_R-%T%%CCC%90001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%900" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%901_R-%T%%CCC%90101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%901" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90202" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902" Text="Eingang weitere Präsenz" />
     <!-- Phase 1 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%100_R-%T%%CCC%10001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%100" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%101" />
@@ -669,8 +674,9 @@
   </ComObjectTable>
   <ComObjectRefs>
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%000" Text="{{0:PM %C%}}: Helligkeit extern" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
-    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001" Text="{{0:PM %C%}}: Präsenz A" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
-    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002" Text="{{0:PM %C%}}: Präsenz B" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
+    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001" Text="{{0:PM %C%}}: Präsenz" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
+    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002" Text="{{0:PM %C%}}: Bewegung" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
+    <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00202" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002" Text="{{0:PM %C%}}: Weitere Präsenz" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%003_R-%T%%CCC%00301" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%003" Text="{{0:PM %C%}}: Automatik übersteuern" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%004_R-%T%%CCC%00401" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%004" Text="{{0:PM %C%}}: Manuell übersteuern" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
     <ComObjectRef Id="M-00FA_A-0001-01-0000_O-%T%%CCC%005_R-%T%%CCC%00501" RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%005" Text="{{0:PM %C%}}: Aktorstatus" TextParameterRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
@@ -703,11 +709,8 @@
         <!-- hidden, but necessary -->
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401" />
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%085_R-%T%%CCC%08501" />
-        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" />
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" />
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%003_R-%T%%CCC%00301" />
-        <!-- init leave room -->
-        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
         <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
         <!-- Channel name -->
         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%000_R-%T%%CCC%00001" />
@@ -770,6 +773,8 @@
             <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901" />
             <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901">
               <when test="0">
+                <!-- Reset external brightness -->
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%084_R-%T%%CCC%08401" Value="0" />
                 <!-- is lux dependent -->
                 <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%010_R-%T%%CCC%01001" />
                 <!-- check for hardware lux --> 
@@ -821,38 +826,6 @@
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
             <!-- Presence input settings -->
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenzeingänge" UIHint="Headline" />
-            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101" />
-            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201" />
-            <!-- Check for first presence input -->
-            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
-              <when test=">0">
-                <!-- mark that external PM exists -->
-                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" Value="1" />
-                <!-- we use external presence input -->
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601">
-                  <when test="0">
-                    <!-- but only, if it is not connected internally -->
-                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" />
-                  </when>
-                </choose>
-              </when>
-            </choose>
-            <!-- Check for second presence input -->
-            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
-              <when test=">0">
-                <!-- mark that external PM exists -->
-                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501" Value="1" />
-                <!-- and ask if this is a move input -->
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%094_R-%T%%CCC%09401" />
-                <!-- we use external presence input -->
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801">
-                  <when test="0">
-                    <!-- but only, if it is not connected internally -->
-                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" />
-                  </when>
-                </choose>
-              </when>
-            </choose>
             <!-- is there also presence hardware -->
             <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000006_R-%T%00000601">
               <when test="1">
@@ -862,11 +835,64 @@
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%035_R-%T%%CCC%03501" />
               </when>
             </choose>
+            <!-- external PM -->
+            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%900_R-%T%%CCC%90001" />
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%900_R-%T%%CCC%90001">
+              <when test="1">
+                <!-- Presence input exists -->
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%901_R-%T%%CCC%90101" />
+              </when>
+              <when test="2">
+                <!-- Move input exists -->
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90201" />
+              </when>
+              <when test="3">
+                <!-- Presence and Move input exists -->
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%901_R-%T%%CCC%90101" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90201" />
+              </when>
+              <when test="4">
+                <!-- Presence and additional Presence input exists -->
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%901_R-%T%%CCC%90101" />
+                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90202" />
+              </when>
+              <when test="1 3 4">
+                <!-- we use external presence input 1 -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601">
+                  <when test="0">
+                    <!-- but only, if it is not connected internally -->
+                    <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                  </when>
+                </choose>
+              </when>
+              <when test="2 3 4">
+                <!-- we use external presence input 2 -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801">
+                  <when test="0">
+                    <!-- but only, if it is not connected internally -->
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%900_R-%T%%CCC%90001">
+                      <when test="4">
+                        <!-- input is additional presence -->
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00202" />
+                      </when>
+                      <when test="2 3">
+                        <!-- input is move -->
+                        <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                      </when>
+                    </choose>
+                  </when>
+                </choose>
+              </when>
+            </choose>
             <!-- calculate reset-ability and if leave room is possible -->
-            <choose ParamRefId="M-00FA_A-0001-01-0000_P-%T%%CCC%095_R-%T%%CCC%09501">
+            <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%900_R-%T%%CCC%90001">
               <when test="0">
                 <!-- without external PM, we check for PIR-Sensor to allow "Leave room" -->
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                  <when test="0">
+                    <!-- reset "leave room" -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
+                  </when>
                   <when test=">0">
                     <!-- and allow "Leave room" wth mode all -->
                     <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="3" />
@@ -874,16 +900,24 @@
                 </choose>
                 <!-- without external PM, we check for HF-Sensor to allow "Leave room" -->
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                  <when test="0">
+                    <!-- reset "leave room" -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
+                  </when>
                   <when test=">0">
                     <!-- and allow "Leave room" wth mode move -->
                     <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="2" />
                   </when>
                 </choose>
               </when>
-              <when test="1">
+              <when test=">0">
                 <!-- If an external PM is used, we check if it can be resetted -->
                 <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%093_R-%T%%CCC%09301" />
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%093_R-%T%%CCC%09301">
+                  <when test="0">
+                    <!-- reset "leave room" -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
+                  </when>
                   <when test="1">
                     <!-- we activate reset output -->
                     <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%019_R-%T%%CCC%01901" />
@@ -891,22 +925,24 @@
                     <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
                   </when>
                 </choose>
-                <!-- check if second input is move input -->
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%094_R-%T%%CCC%09401">
+              </when>
+              <!-- check if second input is move input -->
+              <when test="2 3">
+                <!-- check if it is also reset -->
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%093_R-%T%%CCC%09301">
                   <when test="1">
-                    <!-- check if it is also reset -->
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%093_R-%T%%CCC%09301">
-                      <when test="1">
-                        <!-- we allow "Leave room" wth mode all -->
-                        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="3" />
-                      </when>
-                      <when test="0">
-                        <!-- else we allow "Leave room" wth mode move -->
-                        <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="2" />
-                      </when>
-                    </choose>
+                    <!-- we allow "Leave room" wth mode all -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="3" />
+                  </when>
+                  <when test="0">
+                    <!-- else we allow "Leave room" wth mode move -->
+                    <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="2" />
                   </when>
                 </choose>
+              </when>
+              <when test="1 4">
+                <!-- reset "leave room" -->
+                <Assign TargetParamRefRef="M-00FA_A-0001-01-0000_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
               </when>
             </choose>
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -1301,8 +1337,7 @@
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" UIHint="Headline" Text="&#10;DPT" Cell="1,5" />
                 <!-- constant texts -->
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit extern" Cell="2,1" />
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz A" Cell="3,1" />
-                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz B" Cell="4,1" />
+                <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Präsenz" Cell="3,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Automatik übersteuern" Cell="5,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Manuell übersteuern" Cell="6,1" />
                 <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Aktorstatus" Cell="7,1" />
@@ -1318,21 +1353,25 @@
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 9.004" Cell="2,5" />
                   </when>
                 </choose>
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
-                  <when test=">0">
+                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%900_R-%T%%CCC%90001">
+                  <when test="1 3 4">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601" Cell="3,3" />
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="3,5" />
                   </when>
-                  <when default="true">
+                  <when test="0 2">
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="3,3" />
                   </when>
-                </choose>
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
-                  <when test=">0">
+                  <when test="0 1 2 3">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Bewegung" Cell="4,1" />
+                  </when>
+                  <when test="4">
+                    <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Weitere Präsenz" Cell="4,1" />
+                  </when>
+                  <when test="2 3 4">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801" Cell="4,3" />
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text=" 1.001" Cell="4,5" />
                   </when>
-                  <when default="true">
+                  <when test="0 1">
                     <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Eingang deaktiviert" Cell="4,3" />
                   </when>
                 </choose>
@@ -1407,8 +1446,8 @@
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%066_R-%T%%CCC%06601">
                   <when test="0">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%067_R-%T%%CCC%06701" Cell="3,4" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%001_R-%T%%CCC%00101">
-                      <when test="1">
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%901_R-%T%%CCC%90101">
+                      <when test="0">
                         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%087_R-%T%%CCC%08701" Cell="3,2" />
                       </when>
                     </choose>
@@ -1420,8 +1459,13 @@
                 <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%068_R-%T%%CCC%06801">
                   <when test="0">
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%069_R-%T%%CCC%06901" Cell="4,4" />
-                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%002_R-%T%%CCC%00201">
-                      <when test="1">
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90201">
+                      <when test="0">
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%088_R-%T%%CCC%08801" Cell="4,2" />
+                      </when>
+                    </choose>
+                    <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%902_R-%T%%CCC%90202">
+                      <when test="0">
                         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%088_R-%T%%CCC%08801" Cell="4,2" />
                       </when>
                     </choose>

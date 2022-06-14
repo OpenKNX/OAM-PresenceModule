@@ -1,7 +1,9 @@
 # set product names
 $targetName="PresenceModule"
 $sourceName="PMmodul"
+# for Release-Builds uncomment the following line
 # $releaseName="$sourceName-Release"
+# for Beta-Builds uncomment the following line
 $releaseName="$sourceName"
 
 # check for working dir

@@ -862,15 +862,15 @@
 // Parameter per channel
 #define PM_ParamBlockOffset 2628
 #define PM_ParamBlockSize 137
-#define PM_pPresence1Type             0      // 2 Bits, Bit 7-6
-#define     PM_pPresence1TypeMask 0xC0
-#define     PM_pPresence1TypeShift 6
-#define PM_pPresence2Type             0      // 2 Bits, Bit 5-4
-#define     PM_pPresence2TypeMask 0x30
-#define     PM_pPresence2TypeShift 4
-#define PM_pBrightnessIntern          0      // 1 Bit, Bit 3
-#define     PM_pBrightnessInternMask 0x08
-#define     PM_pBrightnessInternShift 3
+#define PM_pPresenceInputs            0      // 3 Bits, Bit 7-5
+#define     PM_pPresenceInputsMask 0xE0
+#define     PM_pPresenceInputsShift 5
+#define PM_pPresenceType              0      // 1 Bit, Bit 4
+#define     PM_pPresenceTypeMask 0x10
+#define     PM_pPresenceTypeShift 4
+#define PM_pMoveType                  0      // 1 Bit, Bit 3
+#define     PM_pMoveTypeMask 0x08
+#define     PM_pMoveTypeShift 3
 #define PM_pPhaseBool                 0      // 1 Bit, Bit 2
 #define     PM_pPhaseBoolMask 0x04
 #define     PM_pPhaseBoolShift 2
@@ -952,9 +952,9 @@
 #define PM_pExternalSupportsReset     5      // 1 Bit, Bit 7
 #define     PM_pExternalSupportsResetMask 0x80
 #define     PM_pExternalSupportsResetShift 7
-#define PM_pExternalSupportsMove      5      // 1 Bit, Bit 6
-#define     PM_pExternalSupportsMoveMask 0x40
-#define     PM_pExternalSupportsMoveShift 6
+#define PM_pBrightnessIntern          5      // 1 Bit, Bit 6
+#define     PM_pBrightnessInternMask 0x40
+#define     PM_pBrightnessInternShift 6
 #define PM_pLeaveRoomModeAll          5      // 3 Bits, Bit 5-3
 #define     PM_pLeaveRoomModeAllMask 0x38
 #define     PM_pLeaveRoomModeAllShift 3
@@ -1323,4 +1323,4 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 63
+#define MAIN_ApplicationVersion 67
