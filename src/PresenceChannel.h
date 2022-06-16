@@ -89,11 +89,19 @@
 #define VAL_PM_SA_LeaveRoom 14
 #define VAL_PM_SA_Reset 15
 
+// leave room modes
 #define VAL_PM_LRM_None 0
 #define VAL_PM_LRM_Downtime 1
 #define VAL_PM_LRM_DowntimeReset 2
 #define VAL_PM_LRM_MoveDowntime 3
 #define VAL_PM_LRM_MoveDowntimeReset 4
+
+// available presence inputs
+#define VAL_PM_PI_None 0
+#define VAL_PM_PI_Presence 1
+#define VAL_PM_PI_Move 2
+#define VAL_PM_PI_PresenceMove 3
+#define VAL_PM_PI_PresencePresence 4
 
 // forward declaration
 class Presence;

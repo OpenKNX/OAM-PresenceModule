@@ -531,13 +531,16 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 {
+    // iJustMove is ignored, if there is only presence available
+    bool lJustMove = false;
+    if (paramByte(PM_pPresenceInputs, PM_pPresenceInputsMask, PM_pPresenceInputsShift) == VAL_PM_PI_PresenceMove)
+        lJustMove = iJustMove;
     bool lPresence = getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
-    if (!lPresence && !iJustMove) {
+    if (!lPresence && !lJustMove)
         lPresence = getKo(PM_KoKOpPresence1)->value(getDPT(VAL_DPT_1));
-        // if hardware presence sensor is available, we evaluate its value
-        if (!lPresence)
-            lPresence = getHardwarePresence(iJustMove);
-    }
+    // if hardware presence sensor is available, we evaluate its value
+    if (!lPresence)
+        lPresence = getHardwarePresence(iJustMove); // for internal sensors, we use iJustMove !!!
     return lPresence;
 }
 
@@ -662,7 +665,7 @@ void PresenceChannel::processPresenceShort()
         else 
         {
             // if we get any further presence information, we stop short presence without ending normal presence
-            bool lPresence = getRawPresence();
+            bool lPresence = getRawPresence(true);
             if (lPresence) 
             {
                 pCurrentState &= ~STATE_PRESENCE_SHORT;
