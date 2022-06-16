@@ -1,3 +1,18 @@
+
+<!-- 
+cSpell:words Präsenzmelder Präsenzkanäle Präsenzerkennung Präsenzinformationen Präsenzsensor Präsenzkanälen Präsenzsignal Präsenzinformation Präsenzeingänge präsenzerfassende Präsenzeinstellungen Präsenzsignals präsenzabhängig Präsenzmodul Präsenzmoduls Praesenz
+cSpell:words Helligkeitsgesteuert Helligkeitsunabhängig helligkeitsbasierte Luxwert helligkeitsbezogenen Helligkeitsabhängig helligkeitsverändernden
+cSpell:words Moduswechsel
+cSpell:words Szenennutzung Szenensteuerung szenensteuerung
+cSpell:words Tagesphasenabhängig
+cSpell:words Kommunikaitonsobjekte
+cSpell:words Melderkanal
+cSpell:words Dimmwert Dimmadressen Dimmstatus Aktorstatus
+cSpell:words priorität
+cSpell:words erwartungskonform
+cSpell:words VEML Eingaenge
+-->
+
 # Applikationsbeschreibung Präsenz
 
 Die Applikation Präsenz erlaubt eine Parametrisierung von Kanälen mit Präsenzmelder-Funktionalität mit der ETS.
@@ -8,7 +23,7 @@ Sie ist in die Bereiche
 * PM-Kanäle
 * Logikkanäle
 
-gegliedert, wobei die Präsenzkanäle wiederum in bis zu 20 Kanäle untergliedert sind. 
+gegliedert, wobei die Präsenzkanäle wiederum in bis zu 20 Kanäle untergliedert sind.
 
 Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM-LogicModule/blob/main/doc/Applikationsbeschreibung-Logik.md) beschrieben.
 
@@ -22,7 +37,7 @@ Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer d
 
 ## Einleitung
 
-Diese Applikation realisiert alle wesentlichen Funktionen eines Präsenz- bzw. Bewegungsmelders. Sie kann mit passender Präsenz- oder Bewegungsmelder-Hardware betrieben werden oder - und das ist das Besondere - auch als "Virtueller Präsenzmelder", indem sie Präsenz- und Helligkeitsinformationen über den KNX-Bus empfängt. Somit kann diese Applikation eine Art Update für existierende Präsenzmelder-Hardware darstellen, deren Applikation alt oder ungenügend ist und die gewünschten Funktionen nicht leistet.
+Diese Applikation realisiert alle wesentlichen Funktionen eines Präsenz- bzw. Bewegungsmelders. Sie kann mit passender Präsenz- oder Bewegungsmelder-Hardware betrieben werden oder - und das ist das Besondere - auch als "Virtueller Präsenzmelder", indem sie Präsenz-, Bewegungs- und Helligkeitsinformationen über den KNX-Bus empfängt. Somit kann diese Applikation eine Art Update für existierende Präsenzmelder-Hardware darstellen, deren Applikation alt oder ungenügend ist und die gewünschten Funktionen nicht leistet.
 
 Auch wenn im Folgenden immer von Präsenzmelder gesprochen wird, so hängt diese Eigenschaft von der verwendeten Präsenz- bzw. Bewegungserkennung ab. Somit ist aus Sicht der Applikation Präsenz- und Bewegungsmelder synonym zu sehen, die angeschlossene Hardware bestimmt durch ihre Sensitivität, ob es sich um einen Präsenz- oder Bewegungsmelder handelt.
 
@@ -39,22 +54,27 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 * Virtueller PM: Verwendbar mit einem oder mehreren Slaves
   * PM ist dann Master für alle Slaves
   * Das Präsenz-Signal kann schaltend oder triggernd sein
-  * Helligkeit kann vom gleichen Slave kommen oder vor irgendeinem anderen Helligkeitssensor
+  * Helligkeit kann vom gleichen Slave kommen oder von irgendeinem anderen Helligkeitssensor
+  * Falls die externe Quelle getrennt Bewegungs- und Präsenzinformationen liefern kann, wird das in dafür geeigneten Funktionen berücksichtigt.
 
 * Tagesphasen
   * Es wird nicht nur Tag/Nacht, sondern bis zu 4 Tagesphasen unterstützt (Morgens, Tag, Abend, Nacht)
   * Tagesphasen können beliebig benannt werden
   * Jede Tagesphase unterstützt eigene Nachlaufzeiten, Helligkeiten, Kurzzeitpräsenz
 
-* Adaptive Ausschaltschwelle
+* Innovative Adaptive Ausschaltschwelle über Helligkeit
   * Erlaubt absolute oder relative Helligkeitsschwellen
   * Abschaltung bei externen Lichteinflüssen
   * Beachtet mehrere Lichtkanäle
 
 * Automatik- und Manuell- und Sperrmodus
-  * Wechsel zwischen Modi für Ein- und Zweitastenbedienung vorgesehen
-  * Szenensteuerung für Modi
-  * Einstellbare Rückfallzeiten für Modi
+  * Der Moduswechsel ist über Ein- und Zweitastenbedienung vorgesehen
+  * Der Moduswechsel kann auch über Szenen vorgenommen werden
+  * Einstellbare Rückfallzeiten für Manuell- oder Sperrmodus
+
+* Innovative "Raum verlassen"-Funktion
+  * Erlaubt dem Melder die Unterscheidung zwischen "Licht aus und im Raum bleiben" und "Licht aus und Raum verlassen".
+  * Schaltet damit Licht genau dann ein, wenn man es benötigt
 
 * Viele Parameter über GA modifizierbar
   * aktuelle Helligkeitsschwelle
@@ -70,7 +90,7 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 
 Jeder PM-Kanal unterstützt bis zu 4 Tagesphasen, die frei benannt werden können und unterschiedliches Ein- und Ausschaltverhalten erlauben. Benötigt man nur 2 Phasen, kann man diese auch als Tag-/Nachtphase nutzen.
 
-Mehr als 2 Phasen eignen sich z.B. für 
+Mehr als 2 Phasen eignen sich z.B. für
 
 * Morgens: Sehr helles Licht (zum aufwachen und frühstücken)
 * Tag: Kurze Nachlaufzeit, also schnelles abschalten nach manuellem einschalten
@@ -93,15 +113,37 @@ Es gibt Präsenzmelder, die eine helligkeitsbasierte Ausschaltschwelle erlauben.
 
 Die in diesem Melder eingebaute adaptive Ausschaltschwelle berücksichtigt genau dieses Problem und erlaubt eine smarte Abschaltung des Lichts unter Berücksichtigung beliebig vieler Lichtkreise und verschiedener Möglichkeiten der Helligkeitsänderung mittels schalten, dimmen und Szenennutzung.
 
-Die Grundidee ist einfach: Nach dem Einschalten von einem oder mehreren Lichtkreisen wird ein Moment gewartet, bis der Lichtsensor die aktuelle Helligkeit im Raum gemessen hat und dem PM gemeldet hat. Jetzt wird die Ausschaltschwelle berechnet: Der Benutzer hat in der Applikation festgelegt "Um wieviel darf es heller werden?". Dieser Wert wird zur aktuellen Helligkeit addiert und das als neue Ausschaltschwelle festgelegt. Darf es um 20 Lux heller werden und es wurden 127 Lux gemessen, so ist die Ausschaltschwelle 147 Lux.
+Die Grundidee ist einfach: Nach dem Einschalten von einem oder mehreren Lichtkreisen wird ein Moment gewartet, bis der Lichtsensor die aktuelle Helligkeit im Raum gemessen hat und dem PM gemeldet hat. Jetzt wird die Ausschaltschwelle berechnet: Der Benutzer hat in der Applikation festgelegt "Um wie viel heller darf es werden?". Dieser Wert wird zur aktuellen Helligkeit addiert und das als neue Ausschaltschwelle festgelegt. Darf es um 20 Lux heller werden und es wurden 127 Lux gemessen, so ist die Ausschaltschwelle 147 Lux.
 
-Erhöht sich die Helligkeit im Raum durch das Sonnenlicht auf 150 Lux, würde das Licht ausgeschaltet werden, da es jetzt heller ist als durch die Beleuchtung im Raum. 
+Erhöht sich die Helligkeit im Raum durch das Sonnenlicht auf 150 Lux, würde das Licht ausgeschaltet werden, da es jetzt heller ist als durch die Beleuchtung im Raum.
 
 Erhöht sich die Helligkeit im Raum durch eine Szene (die eine weitere Lichtquelle auf 50% dimmt) auf 150 Lux, würde der PM eine neue Ausschaltschwelle berechnen (150 Lux + 20 Lux = 170 Lux). Das passiert dadurch, dass der PM auf alle Schalt-, Dimm- und Szenen-Signale aller Lichtquellen im Raum hörend reagiert. Die neue Schwelle würde somit eine Lichtabschaltung durch weitere Lichtquellen verhindern. Würde das Sonnenlicht jetzt die Raumhelligkeit auf 171 Lux bringen, würde auch hier wieder das Licht ausgeschaltet werden.
 
 Da man nicht mit jeder Wolke, die vorüber zieht, sein aktuelles Lichtambiente ausgeschaltet bekommen will, kann man auch eine Nachlaufzeit einstellen, in der die Ausschaltschwelle überschritten werden darf, bevor das Licht ausgeschaltet wird. Ist diese Nachlaufzeit z.B. 5 Minuten, muss im obigen Beispiel die Helligkeit von 170 Lux 5 Minuten lang überschritten sein, bevor das Licht ausgeschaltet wird.
 
 Die Einstellungen für die adaptive Ausschaltschwelle sind Tagesphasenabhängig und können somit in den Morgenstunden anders definiert werden als in den Tages- oder Abendstunden.
+
+### **Automatik-, Manuell- und Sperrmodus**
+
+Egal wie gut ein PM ist und wie aufwändig alles parametriert ist, aktuelle Wünsche des Benutzers werden immer über Melder mitgeteilt werden müssen.
+
+Dies versetzt dann den Melder in einen bestimmten Sondermodus, der den aktuellen Benutzerwunsch repräsentiert.
+
+#### **Automatikmodus**
+
+Folgende Situation: Man sitzt abends zusammen und möchte bei Kerzenschein gemütlich einen Wein trinken. Da es dunkel ist, hat der Melder die Beleuchtung bereits eingeschaltet, man möchte also das Licht ausschalten, um die Kerzen zur Geltung kommen zu lassen.
+
+Andere Situation: Man kommt morgens zum Frühstück. Es ist noch dämmerig, aber schon so hell, dass der Melder das Licht nicht angemacht hat. Subjektiv ist es aber zu dunkel und man möchte das Licht einschalten, damit man gemütlich frühstücken kann.
+
+Klassische Melder bieten für so etwas Sperren an, die den Melder deaktivieren. Damit kann natürlich die gewünschte Lichtsituation (abends manuell ausschalten, morgens manuell einschalten) erreicht werden.
+
+Eine Sperre ist aber in einer solchen Situation meist ein viel zu grobes Werkzeug und hat einige Nachteile:
+
+* Es muss zuerst die Sperre aktiviert werden
+* dann muss der gewünschte Lichtzustand eingestellt werden
+* Der Melder verliert durch die Sperre jegliche Funktionalität
+* Man muss explizit dran denken, dass man beim Verlassen des Raumes noch eine aktive Sperre hat und diese deaktivieren
+* und nach den deaktivieren der Sperre muss man auch noch das Licht ausmachen.
 
 ## **Allgemeine Parameter**
 
@@ -162,7 +204,6 @@ Erscheint nur, wenn ein Hardware-Präsenzsensor ausgewählt ist.
 
 #### **Rohdaten auf den Bus senden?**
 
-
 Der Präsenzsensor kann seine Daten direkt auf den Bus senden, ohne jegliche Präsenzmelder-Funktionalität "dazwischen". Diese Daten umfassen Informationen wie Präsenz, Bewegung, Bewegungsmoment, Bewegungsrichtung (auf den Sensor zu oder von ihm weg). Mit einem Ja werden entsprechende Kommunikationsobjekte freigeschaltet, die diese Daten senden.
 
 ### Helligkeit
@@ -173,7 +214,7 @@ Erscheint nur, wenn ein Hardware-Helligkeitssensor ausgewählt ist.
 
 #### **Korrektur Luxwert**
 
-Der vom Helligkeitssensor gemessene Luxwert kann hier korrigiert werden. Der auf den Bus gesendete Luxwert wird um den hier eingestellten Wert erhöht. 
+Der vom Helligkeitssensor gemessene Luxwert kann hier korrigiert werden. Der auf den Bus gesendete Luxwert wird um den hier eingestellten Wert erhöht.
 
 Wird 10 Lux eingestellt und 20 Lux gemessen, wird auf den Bus 30 Lux gesendet.
 Wird -10 Lux eingestellt und 50 Lux gemessen, wird auf den Bus 40 Lux gesendet.
@@ -181,12 +222,11 @@ Für alle Werte, die rechnerisch einen negativen Wert ergeben, wird 0 Lux gesend
 
 #### **Senden der Helligkeit bei Änderung um**
 
-Die gemessene Helligkeit kann auf den Bus gesendet werden. Mit dieser Einstellung wird festgelegt, um wie viel Lux sich der Wert ändern muss, damit dieser auf den Bus gesendet wird. 
+Die gemessene Helligkeit kann auf den Bus gesendet werden. Mit dieser Einstellung wird festgelegt, um wie viel Lux sich der Wert ändern muss, damit dieser auf den Bus gesendet wird.
 
 Wird 10 Lux eingestellt und der letzte gesendete Wert war 50 Lux, dann wird ein neues Telegramm gesendet, sobald ein Wert kleiner oder gleich 40 Lux bzw. größer oder gleich 60 Lux gemessen wird.
 
 Unabhängig vom Senden der Werte auf den Bus kann die Helligkeit bei den Präsenzkanälen herangezogen werden.
-
 
 #### **Helligkeitswert zyklisch senden**
 
@@ -228,7 +268,7 @@ Wird diese Einstellung gewählt, erscheint ein zusätzliches Kommunikationsobjek
 
 ## **PM*x*: *unbekannt***
 
-Hier werden alle kanalspezifischen Präsenzmelder-Einstellungen vorgenommen. Da alle Kanäle identisch sind, wird nur ein Kanal beschrieben. 
+Hier werden alle kanalspezifischen Präsenzmelder-Einstellungen vorgenommen. Da alle Kanäle identisch sind, wird nur ein Kanal beschrieben.
 
 Das *x* ist eine Zahl und steht für die Nummer des Kanals, der definiert wird.
 
@@ -236,7 +276,7 @@ Der Text *unbekannt* wird durch die Beschreibung des Kanals ersetzt, sobald eine
 
 ![PM-Kanal](pics/PM-Kanal.png)
 
-Auf der Hauptseite werden globale Einstellungen für den gesamten Kanal vorgenommen und die Anzahl der Tagesphasen definiert. Spezielle Tagesphasen-Einstellungen werden auf weiteres Unterseiten vorgenommen. 
+Auf der Hauptseite werden globale Einstellungen für den gesamten Kanal vorgenommen und die Anzahl der Tagesphasen definiert. Spezielle Tagesphasen-Einstellungen werden auf weiteres Unterseiten vorgenommen.
 
 Ein Kanal kann nicht nur über Kommunikationsobjekte, sondern auch über Szenen gesteuert werden. Dafür steht eine weitere Seite "Szenensteuerung" zur Verfügung.
 
@@ -271,7 +311,7 @@ Hier kann man einen PM-Kanal aktivieren.
 
 #### **Inaktiv**
 
-Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet. 
+Dieser Kanal ist inaktiv. Alle Einstellungen und alle Kommunikaitonsobjekte sind ausgeblendet.
 
 #### **Aktiv**
 
@@ -283,7 +323,7 @@ Dieser Kanal ist inaktiv. Er kann vollständig definiert sein und keine Einstell
 
 ## Helligkeit
 
-Hier erfolgen die Helligkeitsbezogenen Einstellungen für diesen Kanal.
+Hier erfolgen die helligkeitsbezogenen Einstellungen für diesen Kanal.
 
 ![Helligkeit](pics/HelligkeitKanal.png)
 
@@ -305,7 +345,7 @@ Die hier angegebene Zeit ist die Pause, in der auf einen neuen Helligkeitswert g
 
 ### **Nach Totzeit Lesetelegramm senden?**
 
-Es kann sein, dass ein Helligkeitssensor während der Totzeit eine Helligkeitsänderung nicht von sich aus sendet. Um wirklich einen neuen Helligkeitswert zu erhalten, kann man den PM veranlassen, ein Lesetelegramm zu schicken. 
+Es kann sein, dass ein Helligkeitssensor während der Totzeit eine Helligkeitsänderung nicht von sich aus sendet. Um wirklich einen neuen Helligkeitswert zu erhalten, kann man den PM veranlassen, ein Lesetelegramm zu schicken.
 
 Eine neue Ausschaltschwelle wird erst berechnet, wenn ein neuer Helligkeitswert empfangen wurde.
 
@@ -331,7 +371,7 @@ Der externe Sensor liefert die Präsenzinformation als schaltendes Objekt. Solan
 
 #### **triggernd (nur EIN wird ausgewertet)**
 
-Der externe Sensor liefert die Präsenzinformation als Trigger. Sobald ein EIN-Signal anliegt, ist Präsenz vorhanden und die Nachlaufzeit läuft an. Ein erneutes EIN setzt die Nachlaufzeit zurück, d.h. sie läuft erneut an. 
+Der externe Sensor liefert die Präsenzinformation als Trigger. Sobald ein EIN-Signal anliegt, ist Präsenz vorhanden und die Nachlaufzeit läuft an. Ein erneutes EIN setzt die Nachlaufzeit zurück, d.h. sie läuft erneut an.
 
 Der externe Sensor muss sicherstellen, dass er valide Präsenzinformationen häufiger sendet als die minimale Nachlaufzeit, die verwendet wird. Empfohlen wird ein zyklisches senden, mindestens doppelt so häufig wie die Nachlaufzeit.
 
@@ -355,7 +395,7 @@ Der Ausgang ist nicht aktiv und kann nichts senden. Das entsprechende Kommunikat
 
 #### **Schalten (DPT 1.x)**
 
-Der Ausgang ist schaltend. 
+Der Ausgang ist schaltend.
 
 #### **Wert (DPT 5.x)**
 
@@ -391,7 +431,7 @@ Man kann bei diesem Melder verschiedene Arten von Sperren definieren. Solange de
 
 #### **nicht aktiv**
 
-Die Sperre ist nicht aktiviert. Das entsprechende Kommunikaitonsobjekt ist deaktiviert.
+Die Sperre ist nicht aktiviert. Das entsprechende Kommunikationsobjekt ist deaktiviert.
 
 #### **Zwangsführung**
 
@@ -402,7 +442,7 @@ Es wird ein Zwangsführungsobjekt DPT 2 sichtbar. Mit den entsprechenden Zwangsf
 * priorität, AUS (10) - Der Melder geht in den Sperrmodus und schaltet aus
 * priorität, EIN (11) - Der Melder geht in den Sperrmodus und schaltet ein
 
-#### **Sperre** 
+#### **Sperre**
 
 Es wird ein Sperrobjekt DPT 1 sichtbar. Beim Empfang des entsprechenden Sperrsignals wird die Sperre aktiviert bzw. deaktiviert.
 
@@ -468,7 +508,7 @@ Somit funktioniert ein gesperrter Melder intern normal weiter und sendet einfach
 
 Werden Sperren bzw. eine Zwangsführung manuell geschaltet, so ist es nicht ungewöhnlich, dass vergessen wird, diese Sperre/Zwangsführung wieder zu beenden.
 
-Mit dieser Einstellung kann man eine Rückfallzeit aktivieren, nach der der Melder von sich aus die Sperre aufhebt und wieder in den Normalbetrieb geht. 
+Mit dieser Einstellung kann man eine Rückfallzeit aktivieren, nach der der Melder von sich aus die Sperre aufhebt und wieder in den Normalbetrieb geht.
 
 Bei der Aufhebung einer Sperre wird die unter [Beim AUSschalten wird](#beim-ausschalten-wird) definierte Aktion ausgeführt.
 Bei der Aufhebung einer Zwangsführung wird in den Zustand "normal, AUS" gesprungen.
@@ -588,7 +628,7 @@ Der Melder erlaubt es auch, ein ähnliches Konzept mit einer Ein-Tasten-Bedienun
 * Licht ist aus - Kurz drücken - Schaltet das Licht im Automatik-Modus ein (Licht geht ohne Präsenz nach der Nachlaufzeit aus)
 * Licht ist an - Kurz drücken - Schaltet das Licht im Automatik-Modus aus (Licht geht so lange nicht an, wie Präsenz + Nachlaufzeit eingestellt sind)
 * Manuell-Modus ist aus - Lang drücken - Das Licht bleibt im aktuellen Zustand (AN oder AUS), Melder geht in den Manuell-Modus und schaltet so das Licht nicht mehr, bis Manuell-Modus aufgehoben wurde.
-* Manuell-Modus ist an - Lang drücken - Das Licht bleibt im aktuellen Zustand (AN oder AUS), Melder geht in den Automatik-Modus und macht das Licht nach entsprechender Prasenz + Nachlaufzeit wieder AUS/AN.
+* Manuell-Modus ist an - Lang drücken - Das Licht bleibt im aktuellen Zustand (AN oder AUS), Melder geht in den Automatik-Modus und macht das Licht nach entsprechender Präsenz + Nachlaufzeit wieder AUS/AN.
 
 ![Manuell übersteuern](pics/ManualOverride.png)
 
@@ -604,7 +644,7 @@ Bei der Eintastenbedienung schaltet ein EIN am Kommunikationsobjekt 'Manuell üb
 
 #### **Zweitastenbedienung**
 
-Bei der Zweitastenbedienung schaltet jedes Telegramm am Kommunikationsobjekt 'Manuell übersteuern' den Manuell-Modus ein. Ist es ein EIN-Telegramm, wird zusätzlich ein EIN-Signal gesendet. Ist es ein AUS-Telegramm, wird zusätzlich ein AUS-Signal gesendet. 
+Bei der Zweitastenbedienung schaltet jedes Telegramm am Kommunikationsobjekt 'Manuell übersteuern' den Manuell-Modus ein. Ist es ein EIN-Telegramm, wird zusätzlich ein EIN-Signal gesendet. Ist es ein AUS-Telegramm, wird zusätzlich ein AUS-Signal gesendet.
 
 ## **Phase *n*: *Phasenname*
 
@@ -643,7 +683,7 @@ Diese Einstellung wählt die neue und innovative [adaptive Ausschaltschwelle](#a
 * am Kommunikationsobjekt 'Änderung schalten' der Aktorstatus einer jeden Lichtquelle verbunden sein (als hörende Adresse)
 * am Kommunikationsobjekt 'Änderung relativ dimmen' alle Dimmadressen einer jeden Lichtquelle verbunden sein (als hörende Adresse)
 * am Kommunikationsobjekt 'Änderung absolut dimmen' alle Dimmstatus-Adressen einer jeden Lichtquelle verbunden sein (als hörende Adresse)
-* am Kommunikationsobjekt 'PM über Szene steuern' alle Szenen-Adressen aller Lichtuellen, die die Helligkeit beeinflussen, verbunden sein.
+* am Kommunikationsobjekt 'PM über Szene steuern' alle Szenen-Adressen aller Lichtquellen, die die Helligkeit beeinflussen, verbunden sein.
 * In der Szenensteuerung alle helligkeitsverändernden Szenen aufgelistet sein mit der Funktion 'ändert Helligkeit im Raum'
 
 Dies ist die Maximalforderung für eine sofortige und unmittelbare Reaktion des Melders. Technisch sollte es reichen, alle Lichtquellen-Aktoren-Status mit 'Änderung schalten' und 'Änderung absolut dimmen' zu verbinden.
@@ -658,7 +698,7 @@ Bei der adaptiven Ausschaltschwelle wird dieser Luxwert nach jeder beabsichtigte
 
 Hier kann eine Zeit eingegeben werden, um die das Ausschalten nach dem Überscheiten der Ausschaltschwelle verzögert wird. Das Licht bleibt also um die angegebene Zeit länger an, obwohl die Ausschaltschwelle schon überschritten ist.
 
-Der Hintergrund ist, dass an wolkigen Tagen nicht jeder kurze Sonnenstrahl, der mal durch die Wolken bricht, gleich das gesamte Lichambiente abschaltet.
+Der Hintergrund ist, dass an wolkigen Tagen nicht jeder kurze Sonnenstrahl, der mal durch die Wolken bricht, gleich das gesamte Lichtambiente abschaltet.
 
 Wird in der Zeit die Ausschaltschwelle wieder unterschritten, wird natürlich nicht abgeschaltet und der Timer zurückgesetzt.
 
@@ -674,7 +714,7 @@ Hier wird die Zeit angegeben, die der Melder noch nach dem ausbleiben des Präse
 
 ### **Kurze Anwesenheit erkennen?**
 
-Es gibt Situationen, in denen man einen Raum nur kurz betritt und schnell danach wieder verlässt. Solche Situationen können erkannt werden und dann kann das Licht entsprechend früher ausgemacht werden. 
+Es gibt Situationen, in denen man einen Raum nur kurz betritt und schnell danach wieder verlässt. Solche Situationen können erkannt werden und dann kann das Licht entsprechend früher ausgemacht werden.
 
 Wird hier ein "Ja" gewählt, kann man Einstellungen für Kurzzeitpräsenz vornehmen.
 
@@ -700,9 +740,9 @@ Beim Ausgang werden die Einstellungen vorgenommen, die abhängig von den Tagesph
 
 ![Ausgang](pics/AusgangPhase.png)
 
-Da beide Ausgänge gleich definiert werden, wird hier nur einer beschrieben. 
+Da beide Ausgänge gleich definiert werden, wird hier nur einer beschrieben.
 
-Der Ausgang setzt die internen EIN- bzw. AUS-Signale in konkrete KNX-Telegramme um. Diese Telegramme passen dann zu dem DPT, der für den Ausgang definiert wurde. 
+Der Ausgang setzt die internen EIN- bzw. AUS-Signale in konkrete KNX-Telegramme um. Diese Telegramme passen dann zu dem DPT, der für den Ausgang definiert wurde.
 
 Das Eingabefeld ist passend zum DPT des Ausgangs. Folgende Werte sind möglich:
 
@@ -717,7 +757,7 @@ Hier wird eingestellt, bei welchem Signal der Ausgang sendet.
 
 #### **nichts**
 
-Wird "nichts" gewählt, wird nichts gesendet. 
+Wird "nichts" gewählt, wird nichts gesendet.
 
 #### **nur EIN**
 
@@ -772,7 +812,7 @@ Viele Funktionen, für die ein Kommunikationsobjekt zur Verfügung steht, könne
 
 ![Szenensteuerung](pics/Szenensteuerung.png)
 
-In der Tabelle können bis zu 10 Szenen ausgewählt werden, die mit entsprechenden Funktionen verbunden werden. Sobald eine der ausgewählten Szenen am Kommunikationsobjekt "PM über Szenen steuern" empfangen wird, wird die verknüpfte Funktion ausgeführt. 
+In der Tabelle können bis zu 10 Szenen ausgewählt werden, die mit entsprechenden Funktionen verbunden werden. Sobald eine der ausgewählten Szenen am Kommunikationsobjekt "PM über Szenen steuern" empfangen wird, wird die verknüpfte Funktion ausgeführt.
 
 Im Folgenden werden die verknüpfbaren Funktionen beschrieben:
 
@@ -848,7 +888,9 @@ Interne Eingänge ermöglichen es, einen Eingang direkt mit irgendeinem Kommunik
 
 > Wichtig: Es ist immer nur möglich, einen Eingang mit einem anderen KO zu verbinden, egal ob dieses ein Ein- oder Ausgang ist. Es ist allerdings nicht möglich (und auch nicht sinnvoll), Ausgänge miteinander zu verbinden. Somit verbinden man immer einen Eingang vom Präsenzmodul mit einem Ein- oder Ausgang vom Logik- oder Präsenzmodul. Ebenso verbindet man einen Eingang vom Logikmodul mit einem Ein- oder Ausgang vom Logik- bzw. Präsenzmodul.
 
-> Achtung: Von direkt intern verbundene Kommunikationsobjekten weiß die ETS nichts. Somit können da auch nicht die üblichen Prüfungen der ETS greifen. Es ist die Aufgabe des Benutzers, darauf zu achten, dass die DPT der verbundenen Objekte zusammen passen. Weder die ETS-Applikation noch die Firmware des Gerätes können technisch überprüfen, ob die DPT der verbundenen KO stimmen. Somit kann auch nicht entsprechend gewarnt werden. Aus diesem Grunde werden interne Eingägne nur für erfahrene Benutzer empfohlen.
+Folgendes ist noch zu beachten:
+
+> Achtung: Von direkt intern verbundene Kommunikationsobjekten weiß die ETS nichts. Somit können da auch nicht die üblichen Prüfungen der ETS greifen. Es ist die Aufgabe des Benutzers, darauf zu achten, dass die DPT der verbundenen Objekte zusammen passen. Weder die ETS-Applikation noch die Firmware des Gerätes können technisch überprüfen, ob die DPT der verbundenen KO stimmen. Somit kann auch nicht entsprechend gewarnt werden. Aus diesem Grunde werden interne Eingänge nur für erfahrene Benutzer empfohlen.
 
 In der Tabelle wird für jeden Eingang, der eine interne Verbindung unterstützt, angegeben, ob für diesen Eingang ein neues KO angelegt werden soll (keine interne Verbindung) oder ein bestehendes KO genutzt werden soll (mit dem dann der Eingang intern verbunden ist).
 
