@@ -18,8 +18,10 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%007" Name="p%C%Output2Type" Offset="1" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OutputType" Text="Ausgang 2 ist vom Typ" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%008" Name="p%C%ChannelActive" Offset="1" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-ChannelActive" Text="Kanalaktivität" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%009" Name="p%C%BrightnessIndependent" Offset="2" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNoInverted" Text="Kanal ist Helligkeitsabhängig" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%010" Name="p%C%Output1Cyclic" Offset="2" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Ausgang 1 sendet zyklisch" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%011" Name="p%C%Output2Cyclic" Offset="2" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Ausgang 2 sendet zyklisch" Value="0" />
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%010" Name="p%C%Output1Cyclic" Offset="2" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Ausgang 1 sendet zyklisch" Value="0" /> -->
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%011" Name="p%C%Output2Cyclic" Offset="2" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Ausgang 2 sendet zyklisch" Value="0" /> -->
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="2" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="2" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%012" Name="p%C%LockType" Offset="2" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-LockType" Text="Sperrobjekt" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%013" Name="p%C%LockActive" Offset="2" BitOffset="5" ParameterType="M-00FA_A-0001-01-0000_PT-LockActive" Text="    Sperraktivität" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%014" Name="p%C%LockOn" Offset="2" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-LockOn" Text="    Beim EINschalten wird" Value="0" />
@@ -38,36 +40,33 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%090" Name="p%C%StartReadLock" Offset="4" BitOffset="5" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Sperre nach Neustart vom Bus lesen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%091" Name="p%C%StartReadDayPhase" Offset="4" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Tagesphase nach Neustart vom Bus lesen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%092" Name="p%C%StartReadScene" Offset="4" BitOffset="7" ParameterType="M-00FA_A-0001-01-0000_PT-CheckBox" Text="Steuerszene nach Neustart vom Bus lesen?" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="5" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
-      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%094" Name="p%C%ExternalSupportsMove" Offset="5" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Präsenz B meldet Bewegung statt Präsenz?" Value="0" /> -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="5" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
       <!-- ist is intended that the below 3 overlay each other -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%097" Name="p%C%LeaveRoomModeAll" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll" Text="Modus für Raum verlassen" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%098" Name="p%C%LeaveRoomModeMove" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove" Text="Modus für Raum verlassen" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%099" Name="p%C%LeaveRoomModeReset" Offset="5" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset" Text="Modus für Raum verlassen" Value="0" />
-      <!-- 3 Bit free -->
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%097" Name="p%C%LeaveRoomModeAll" Offset="5" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeAll" Text="Modus für Raum verlassen" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%098" Name="p%C%LeaveRoomModeMove" Offset="5" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeMove" Text="Modus für Raum verlassen" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%099" Name="p%C%LeaveRoomModeReset" Offset="5" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset" Text="Modus für Raum verlassen" Value="0" />
+      <!-- 5 Bit free -->
     </Union>
     <!-- Delay patterns (once per channel) -->
-    <Union SizeInBit="96">
+    <Union SizeInBit="64">
       <!-- Channel Delay -->
       <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="6" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%018" Name="p%C%ChannelDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%019" Name="p%C%ChannelDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
-      <!-- Cyclic Output 1 send -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%020" Name="p%C%Output1CyclicBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="2" BitOffset="0" Text="Zeitbasis" Value="1" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%021" Name="p%C%Output1CyclicTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="2" BitOffset="2" Text="Zeit" Value="5" />
-      <!-- Cyclic Output 2 send -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%022" Name="p%C%Output2CyclicBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="4" BitOffset="0" Text="Zeitbasis" Value="1" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%023" Name="p%C%Output2CyclicTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="4" BitOffset="2" Text="Zeit" Value="5" />
       <!-- Lock Fallback Delay -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%024" Name="p%C%LockFallbackBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="6" BitOffset="0" Text="Zeitbasis" Value="2" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%025" Name="p%C%LockFallbackTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="6" BitOffset="2" Text="Zeit" Value="12" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%024" Name="p%C%LockFallbackBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="2" BitOffset="0" Text="Zeitbasis" Value="2" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%025" Name="p%C%LockFallbackTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="2" BitOffset="2" Text="Zeit" Value="12" />
       <!-- DowntimeOff Delay -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%037" Name="p%C%DowntimeOffBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="8" BitOffset="0" Text="Zeitbasis" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%038" Name="p%C%DowntimeOffTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="8" BitOffset="2" Text="Zeit" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%037" Name="p%C%DowntimeOffBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="4" BitOffset="0" Text="Zeitbasis" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%038" Name="p%C%DowntimeOffTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="4" BitOffset="2" Text="Zeit" Value="0" />
       <!-- Brightness Adaptive Calculation Delay -->
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%061" Name="p%C%AdaptiveDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase10" Offset="10" BitOffset="0" Text="Zeitbasis" Value="0" />
-      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%062" Name="p%C%AdaptiveDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="10" BitOffset="2" Text="Zeit" Value="5" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%061" Name="p%C%AdaptiveDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase10" Offset="6" BitOffset="0" Text="Zeitbasis" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%062" Name="p%C%AdaptiveDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="6" BitOffset="2" Text="Zeit" Value="5" />
+      <!-- Cyclic Output 1 send -->
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%020" Name="p%C%Output1CyclicBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="8" BitOffset="0" Text="Zeitbasis" Value="1" /> -->
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%021" Name="p%C%Output1CyclicTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="8" BitOffset="2" Text="Zeit" Value="5" /> -->
+      <!-- Cyclic Output 2 send -->
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%022" Name="p%C%Output2CyclicBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="10" BitOffset="0" Text="Zeitbasis" Value="1" /> -->
+      <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%023" Name="p%C%Output2CyclicTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="10" BitOffset="2" Text="Zeit" Value="5" /> -->
     </Union>
     <!-- Day phasees (once per channel) -->
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%026" Name="p%C%Phase1Name" ParameterType="M-00FA_A-0001-01-0000_PT-Text40Byte" Text="Name" Value="Tag" />
@@ -76,7 +75,7 @@
     <Parameter Id="M-00FA_A-0001-01-0000_P-%T%%CCC%029" Name="p%C%Phase4Name" ParameterType="M-00FA_A-0001-01-0000_PT-Text40Byte" Text="Name" Value="Abend" />
     <Union SizeInBit="32">
       <!-- keep them always in one unit in ordered sequence-->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="18" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="14" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%030" Name="p%C%Phase1Scene" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Text="Szene Phase 1" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%031" Name="p%C%Phase2Scene" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Text="Szene Phase 2" Value="2" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%032" Name="p%C%Phase3Scene" Offset="2" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Text="Szene Phase 3" Value="3" />
@@ -84,7 +83,7 @@
     </Union>
     <Union SizeInBit="120">
       <!-- Scene definitions-->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="22" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="18" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%040" Name="p%C%Scene0" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneIn" Text="Szene0" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%041" Name="p%C%Scene1" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneIn" Text="Szene1" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%042" Name="p%C%Scene2" Offset="2" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneIn" Text="Szene2" Value="0" />
@@ -110,7 +109,7 @@
     <!-- there is a dependancy in the order of internal input parameters and KO enabled for internal input -->
     <!-- any changes here should be also included in coding!!!! -->
     <Union SizeInBit="160">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="37" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="33" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%064" Name="p%C%IntLux" ParameterType="M-00FA_A-0001-01-0000_PT-KOInputTab" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%065" Name="p%C%NumLux" ParameterType="M-00FA_A-0001-01-0000_PT-KONumber" Offset="0" BitOffset="1" Text="Nummer vom internen KO" Value="%K0%" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%066" Name="p%C%IntPresence1" ParameterType="M-00FA_A-0001-01-0000_PT-KOInputTab" Offset="2" BitOffset="0" Text="Neues oder internes KO" Value="0" />
@@ -141,7 +140,7 @@
     <!-- Phase 1 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="57" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="53" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%100" Name="pA%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%101" Name="pA%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%136" Name="pA%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -155,7 +154,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="59" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="55" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%107" Name="pA%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%108" Name="pA%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -173,13 +172,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="69" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="65" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%115" Name="pA%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%116" Name="pA%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="73" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="69" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%117" Name="pA%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%118" Name="pA%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%119" Name="pA%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -201,7 +200,7 @@
     <!-- Phase 2 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="77" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="73" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%200" Name="pB%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%201" Name="pB%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%236" Name="pB%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -215,7 +214,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="79" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="75" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%207" Name="pB%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%208" Name="pB%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -233,13 +232,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="89" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="85" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%215" Name="pB%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%216" Name="pB%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="93" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="89" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%217" Name="pB%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%218" Name="pB%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%219" Name="pB%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -261,7 +260,7 @@
     <!-- Phase 3 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="97" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="93" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%300" Name="pC%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%301" Name="pC%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%336" Name="pC%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -275,7 +274,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="99" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="95" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%307" Name="pC%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%308" Name="pC%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -293,13 +292,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="109" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="105" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%315" Name="pC%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%316" Name="pC%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="113" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="109" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%317" Name="pC%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%318" Name="pC%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%319" Name="pC%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -321,7 +320,7 @@
     <!-- Phase 4 -->
     <!-- Bitfield settings (per day phase) -->
     <Union SizeInBit="16">
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="117" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="113" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%400" Name="pD%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%401" Name="pD%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%436" Name="pD%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -335,7 +334,7 @@
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="119" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="115" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%407" Name="pD%C%PresenceDelayBase" ParameterType="M-00FA_A-0001-01-0000_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%408" Name="pD%C%PresenceDelayTime" ParameterType="M-00FA_A-0001-01-0000_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
       <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -353,13 +352,13 @@
     </Union>
     <Union SizeInBit="32">
       <!-- Brightness (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="129" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="125" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%415" Name="pD%C%BrightnessOn" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%416" Name="pD%C%BrightnessDelta" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
     </Union>
     <Union SizeInBit="32">
       <!-- OutputValue (per day phase) -->
-      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="133" BitOffset="0" />
+      <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="129" BitOffset="0" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%417" Name="pD%C%Output1On" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%418" Name="pD%C%Output1OnValue" ParameterType="M-00FA_A-0001-01-0000_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%419" Name="pD%C%Output1OnScene" ParameterType="M-00FA_A-0001-01-0000_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -389,8 +388,8 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%008_R-%T%%CCC%00801" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%008" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%009_R-%T%%CCC%00901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%009" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011" />
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010" /> -->
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011" /> -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%012_R-%T%%CCC%01201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%012" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%013_R-%T%%CCC%01301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%013" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%014_R-%T%%CCC%01401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%014" />
@@ -399,10 +398,10 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%017_R-%T%%CCC%01701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%017" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%018_R-%T%%CCC%01801" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%018" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%019_R-%T%%CCC%01901" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%019" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%020_R-%T%%CCC%02001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%020" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%021_R-%T%%CCC%02101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%021" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%022_R-%T%%CCC%02201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%022" />
-    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%023_R-%T%%CCC%02301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%023" />
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%020_R-%T%%CCC%02001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%020" /> -->
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%021_R-%T%%CCC%02101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%021" /> -->
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%022_R-%T%%CCC%02201" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%022" /> -->
+    <!-- <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%023_R-%T%%CCC%02301" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%023" /> -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%024_R-%T%%CCC%02401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%024" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%025_R-%T%%CCC%02501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%025" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%%CCC%026_R-%T%%CCC%02601" RefId="M-00FA_A-0001-01-0000_P-%T%%CCC%026" />
@@ -963,28 +962,28 @@
               <when test="4">
                 <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%013_R-%T%%CCC%01304" />
               </when>
-              <when test=">0">
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001">
-                  <when test="1">
+              <!-- <when test=">0"> -->
+                <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001" /> -->
+                <!-- <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%010_R-%T%%CCC%01001"> -->
+                  <!-- <when test="1"> -->
                     <!-- Delay pattern: Output 1 Cyclic Send -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output1Cyclic" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%021_R-%T%%CCC%02101" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%020_R-%T%%CCC%02001" Cell="1,3" />
-                    </ParameterBlock>
+                    <!-- <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output1Cyclic" Inline="true" Layout="Grid"> -->
+                      <!-- <Columns> -->
+                        <!-- <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" /> -->
+                        <!-- <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" /> -->
+                        <!-- <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" /> -->
+                      <!-- </Columns> -->
+                      <!-- <Rows> -->
+                        <!-- <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" /> -->
+                      <!-- </Rows> -->
+                      <!-- <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" /> -->
+                      <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%021_R-%T%%CCC%02101" Cell="1,2" /> -->
+                      <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%020_R-%T%%CCC%02001" Cell="1,3" /> -->
+                    <!-- </ParameterBlock> -->
                     <!-- end of delay pattern -->
-                  </when>
-                </choose>ParamRefId
-              </when>
+                  <!-- </when> -->
+                <!-- </choose> -->
+              <!-- </when> -->
             </choose>
             <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701" />
             <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%007_R-%T%%CCC%00701">
@@ -1000,28 +999,28 @@
               <when test="4">
                 <ComObjectRefRef RefId="M-00FA_A-0001-01-0000_O-%T%%CCC%014_R-%T%%CCC%01404" />
               </when>
-              <when test=">0">
-                <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101" />
-                <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101">
-                  <when test="1">
+              <!-- <when test=">0"> -->
+                <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101" /> -->
+                <!-- <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%011_R-%T%%CCC%01101"> -->
+                  <!-- <when test="1"> -->
                     <!-- Delay pattern: Output 2 Cyclic Send -->
-                    <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output2Cyclic" Inline="true" Layout="Grid">
-                      <Columns>
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" />
-                        <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" />
-                      </Columns>
-                      <Rows>
-                        <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" />
-                      </Rows>
-                      <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%023_R-%T%%CCC%02301" Cell="1,2" />
-                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%022_R-%T%%CCC%02201" Cell="1,3" />
-                    </ParameterBlock>
+                    <!-- <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="p%C%Output2Cyclic" Inline="true" Layout="Grid"> -->
+                      <!-- <Columns> -->
+                        <!-- <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-1" Name="Col1" Width="45%" /> -->
+                        <!-- <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-2" Name="Col2" Width="15%" /> -->
+                        <!-- <Column Id="M-00FA_A-0001-01-0000_PB-nnn_C-3" Name="Col3" Width="20%" /> -->
+                      <!-- </Columns> -->
+                      <!-- <Rows> -->
+                        <!-- <Row Id="M-00FA_A-0001-01-0000_PB-nnn_R-1" Name="Row1" /> -->
+                      <!-- </Rows> -->
+                      <!-- <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" /> -->
+                      <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%023_R-%T%%CCC%02301" Cell="1,2" /> -->
+                      <!-- <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%022_R-%T%%CCC%02201" Cell="1,3" /> -->
+                    <!-- </ParameterBlock> -->
                     <!-- end of delay pattern -->
-                  </when>
-                </choose>
-              </when>
+                  <!-- </when> -->
+                <!-- </choose> -->
+              <!-- </when> -->
             </choose>
             <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
             <!-- Lock -->

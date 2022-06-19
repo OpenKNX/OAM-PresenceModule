@@ -285,7 +285,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
                 break;
             case PM_KoKOpSetAuto:
                 // Automatic mode
-                startAuto(lValue);
+                startAuto(lValue, false);
                 break;
             case PM_KoKOpSetManual:
                 // check for two button mode
@@ -295,7 +295,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
                     if (lValue)
                         startManual(pCurrentValue & PM_BIT_OUTPUT_SET);
                     else
-                        startAuto(pCurrentValue & PM_BIT_OUTPUT_SET);
+                        startAuto(pCurrentValue & PM_BIT_OUTPUT_SET, false);
                 break;
             case PM_KoKOpAktorState:
                 // Actor state changed
@@ -347,10 +347,10 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
                     startAdaptiveBrightness();
                     break;
                 case VAL_PM_SA_AutoOff:
-                    startAuto(false);
+                    startAuto(false, false);
                     break;
                 case VAL_PM_SA_AutoOn:
-                    startAuto(true);
+                    startAuto(true, false);
                     break;
                 case VAL_PM_SA_ManualOff:
                     startManual(false);
@@ -374,7 +374,7 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
                     onLock(false, 0, 0);
                     break;
                 case VAL_PM_SA_LeaveRoom:
-                    startLeaveRoom();
+                    startLeaveRoom(false);
                     break;
                 case VAL_PM_SA_Reset:
                     startReset();
@@ -699,7 +699,7 @@ void PresenceChannel::onPresenceChange(bool iOn)
         startOutput(iOn);
 }
 
-void PresenceChannel::startLeaveRoom()
+void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
 {
     pLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
     switch (pLeaveRoomMode)
@@ -709,19 +709,19 @@ void PresenceChannel::startLeaveRoom()
             // in this case we just wait until downtime passed and afterwards we wait for the first Move
             startDowntime(); // has to be first to set correct state
             onManualChange(false);
-            endPresence(true);
+            endPresence(!iSuppressOutput);
             break;
         case VAL_PM_LRM_MoveDowntime:
         case VAL_PM_LRM_MoveDowntimeReset:
             // dispatch to process handler
             pCurrentState |= STATE_LEAVE_ROOM;
             onManualChange(false);
-            endPresence(true);
+            endPresence(!iSuppressOutput);
             break;
 
         default:
             // if there is no leave room configured, we process auto off
-            startAuto(false);
+            startAuto(false, iSuppressOutput);
             break;
     }
 }
@@ -796,7 +796,7 @@ void PresenceChannel::processDowntime()
     }
 }
 
-void PresenceChannel::startAuto(bool iOn)
+void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
 {
     // end any leave room processing
     endLeaveRoom();
@@ -805,7 +805,7 @@ void PresenceChannel::startAuto(bool iOn)
     // check if we have to go to leave room
     uint8_t lLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
     if (!iOn && lLeaveRoomMode > VAL_PM_LRM_None)
-        startLeaveRoom();
+        startLeaveRoom(iSuppressOutput);
     else
     {
         // we start presence delay
@@ -818,6 +818,8 @@ void PresenceChannel::startAuto(bool iOn)
         pCurrentState |= STATE_AUTO;
         // set output according to input value
         startOutput(iOn);
+        if (iSuppressOutput)
+            syncOutput();
     }
 }
 
@@ -937,11 +939,11 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
             syncOutput();
             break;
         case VAL_PM_LockOutputOff:
-            startAuto(false);
+            startAuto(false, false);
             forceOutput(true);
             break;
         case VAL_PM_LockOutputOn:
-            startAuto(true);
+            startAuto(true, false);
             forceOutput(true);
             break;
         case VAL_PM_LockOutputCurrent:
@@ -1005,9 +1007,9 @@ void PresenceChannel::startActorState(GroupObject &iKo)
 
     // in case of actor change we behave like Auto-On (light should go out after delay time)
     if (lValue)
-        startAuto(lValue);
+        startAuto(lValue, true);
     else
-        startLeaveRoom();
+        startLeaveRoom(true);
     // but we do not send anything to the knx bus
     // syncOutput();
     // but we do not enter Auto state
@@ -1196,12 +1198,12 @@ void PresenceChannel::processOutput()
 {
     uint8_t lOutput = 0;
     if (!(pCurrentState & STATE_LOCK)) {
-        // check for cyclic send of output 1
-        if (paramBit(PM_pOutput1Cyclic, PM_pOutput1CyclicMask) && delayCheck(pOutput1CyclicTime, paramTimeDelay(PM_pOutput1CyclicBase)))
-            lOutput = 1;
-        // check for cyclic send of output 2
-        if (paramBit(PM_pOutput2Cyclic, PM_pOutput2CyclicMask) && delayCheck(pOutput2CyclicTime, paramTimeDelay(PM_pOutput2CyclicBase)))
-            lOutput |= 2;
+        // // check for cyclic send of output 1
+        // if (paramBit(PM_pOutput1Cyclic, PM_pOutput1CyclicMask) && delayCheck(pOutput1CyclicTime, paramTimeDelay(PM_pOutput1CyclicBase)))
+        //     lOutput = 1;
+        // // check for cyclic send of output 2
+        // if (paramBit(PM_pOutput2Cyclic, PM_pOutput2CyclicMask) && delayCheck(pOutput2CyclicTime, paramTimeDelay(PM_pOutput2CyclicBase)))
+        //     lOutput |= 2;
         // check for send because of output state change
         uint8_t lValue = pCurrentValue & (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN);
         if (lValue > 0 && lValue < (PM_BIT_OUTPUT_SET | PM_BIT_OUTPUT_WRITTEN))
@@ -1216,11 +1218,11 @@ void PresenceChannel::processOutput()
         bool lOn = (pCurrentValue & PM_BIT_OUTPUT_SET);
         if (lOutput & 1) {
             onOutput(VAL_PM_Output1Index, lOn);
-            pOutput1CyclicTime = delayTimerInit();
+            // pOutput1CyclicTime = delayTimerInit();
         }
         if (lOutput & 2) {
             onOutput(VAL_PM_Output2Index, lOn);
-            pOutput2CyclicTime = delayTimerInit();
+            // pOutput2CyclicTime = delayTimerInit();
         }
         syncOutput();
         forceOutput(false);

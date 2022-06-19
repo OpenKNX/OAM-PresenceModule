@@ -144,13 +144,13 @@ class PresenceChannel
     void onPresenceChange(bool iOn);
 
     void startSceneCommand(GroupObject &iKo);
-    void startLeaveRoom();
+    void startLeaveRoom(bool iSuppressOutput);
     void processLeaveRoom();
     void endLeaveRoom();
     bool isLeaveRoom();
     void startDowntime();
     void processDowntime();
-    void startAuto(bool iOn);
+    void startAuto(bool iOn, bool iSuppressOutput);
     void processAuto();
     void startManual(bool iOn);
     void processManual();

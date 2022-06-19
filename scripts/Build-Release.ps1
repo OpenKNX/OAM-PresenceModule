@@ -2,9 +2,9 @@
 $targetName="PresenceModule"
 $sourceName="PMmodul"
 # for Release-Builds uncomment the following line
-# $releaseName="$sourceName-Release"
+$releaseName="$sourceName-Release"
 # for Beta-Builds uncomment the following line
-$releaseName="$sourceName"
+# $releaseName="$sourceName"
 
 # check for working dir
 if (Test-Path -Path release) {

@@ -2,15 +2,9 @@
 <!-- 
 cSpell:words Präsenzmelder Präsenzkanäle Präsenzerkennung Präsenzinformationen Präsenzsensor Präsenzkanälen Präsenzsignal Präsenzinformation Präsenzeingänge präsenzerfassende Präsenzeinstellungen Präsenzsignals präsenzabhängig Präsenzmodul Präsenzmoduls Praesenz
 cSpell:words Helligkeitsgesteuert Helligkeitsunabhängig helligkeitsbasierte Luxwert helligkeitsbezogenen Helligkeitsabhängig helligkeitsverändernden
-cSpell:words Moduswechsel
 cSpell:words Szenennutzung Szenensteuerung szenensteuerung
-cSpell:words Tagesphasenabhängig
-cSpell:words Kommunikaitonsobjekte
-cSpell:words Melderkanal
-cSpell:words Dimmwert Dimmadressen Dimmstatus Aktorstatus
-cSpell:words priorität
-cSpell:words erwartungskonform
-cSpell:words VEML Eingaenge
+cSpell:words Dimmwert Dimmadressen Dimmstatus Dimmaktor Dimmvorgänge Aktorstatus Aktorstatuswechsel
+cSpell:words Moduswechsel Manuellmodus Tagesphasenabhängig Kommunikaitonsobjekte Melderkanal priorität erwartungskonform VEML Eingaenge
 -->
 
 # Applikationsbeschreibung Präsenz
@@ -41,7 +35,7 @@ Diese Applikation realisiert alle wesentlichen Funktionen eines Präsenz- bzw. B
 
 Auch wenn im Folgenden immer von Präsenzmelder gesprochen wird, so hängt diese Eigenschaft von der verwendeten Präsenz- bzw. Bewegungserkennung ab. Somit ist aus Sicht der Applikation Präsenz- und Bewegungsmelder synonym zu sehen, die angeschlossene Hardware bestimmt durch ihre Sensitivität, ob es sich um einen Präsenz- oder Bewegungsmelder handelt.
 
-Die Idee zu dieser Applikation ist bei der Verwendung vom True Presence Präsenzmelder entstanden. Dieser hat eine gute bis sehr gute Präsenzerkennung, mittelmäßige Helligkeitswerte und eine schlechte Applikation. In Verbindung mit dieser (virtuellen) Applikation funktioniert er wesentlich besser und kann dann sogar zusätzliche Funktionen wie Kurzzeit-Präsenz.
+Die Idee zu dieser Applikation ist bei der Verwendung vom True Presence Präsenzmelder entstanden. Dieser hat eine gute bis sehr gute Präsenzerkennung, einen mittelmäßigen Helligkeitssensor und eine schlechte Applikation. In Verbindung mit dieser (virtuellen) Applikation funktioniert er wesentlich besser und kann dann sogar zusätzliche Funktionen wie Kurzzeit-Präsenz.
 
 Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 
@@ -99,7 +93,7 @@ Mehr als 2 Phasen eignen sich z.B. für
 
 Der Phantasie sind hier keine Grenzen gesetzt. Die Phasen können auch ganz anders heißen, z.B. Normal, Fernsehen, Lesen und Nacht. Mit dem integrierten Logikmodul können die Phasen passend über Zeitschaltuhren oder entsprechende Logikfunktionen aktiviert werden.
 
-### Adaptive Ausschaltschwelle
+### Adaptive Ausschaltschwelle über Helligkeit
 
 Die Hauptanwendung für einen Präsenzmelder ist immer noch das Schalten von Licht. Während sich die meisten Personen, die neu im Bereich Hausautomatisierung sind, Gedanken darüber machen, wann das Licht eingeschaltet werden soll und wann nicht, ist die größte Herausforderung, wann das Licht ausgeschaltet werden soll. Die erste (laienhafte) Idee hierzu ist: "Wenn ich nicht im Raum bin", allerdings ist das zu kurz gedacht.
 
@@ -125,9 +119,19 @@ Die Einstellungen für die adaptive Ausschaltschwelle sind Tagesphasenabhängig 
 
 ### **Automatik-, Manuell- und Sperrmodus**
 
-Egal wie gut ein PM ist und wie aufwändig alles parametriert ist, aktuelle Wünsche des Benutzers werden immer über Melder mitgeteilt werden müssen.
+Egal wie gut ein PM ist und wie aufwändig alles parametriert ist, aktuelle Wünsche des Benutzers werden immer dem Melder mitgeteilt werden müssen.
 
 Dies versetzt dann den Melder in einen bestimmten Sondermodus, der den aktuellen Benutzerwunsch repräsentiert.
+
+#### **Sperrmodus**
+
+Wie jeder andere Präsenzmelder kann auch dieser PM gesperrt werden. Eine Sperre ist eine Funktion mit sehr hoher Priorität, die alle anderen Funktionen des PM deaktiviert. Es werden somit jegliche Präsenz- oder Helligkeitsinformationen wie auch niedriger priorisierte Benutzeraktionen ignoriert.
+
+Eine Sperre kann nur durch einen Entsperrbefehl oder automatisch nach der eingestellten Rückfallzeit aufgehoben werden.
+
+#### **Manuellmodus**
+
+Der Manuellmodus ist ähnlich dem Sperrmodus, allerdings mit geringerer Priorität und flexibler. 
 
 #### **Automatikmodus**
 
@@ -903,3 +907,13 @@ Lesetelegramme können in einigen Fällen nicht korrekt verarbeitet werden und s
 * Ein deaktivierter Eingang kann natürlich keine Lesetelegramme verschicken.
 * Bei einem Eingang, der ein existierendes KO benutzt (also intern verbunden ist), kann das "fremde" KO nicht durch den PM dazu "missbraucht" werden, ein Lesetelegramm zu verschicken, weil das PM-Modul nicht wissen kann, wie sich das "fremde" KO dann verhält. In einem solchen Fall sollte das "fremde" KO dazu gebracht werden, ein Lesetelegramm zu verschicken, die Antwort wird aufgrund der internen Verbindung auch durch das PM-Modul ausgewertet.
 * Ein triggernder Eingang (Präsenz A/B als Trigger, Reset und Manuell/Automatik übersteuern, also alle triggernden Eingänge) ist ja nur in dem Augenblick gültig. Es wird eine 1 (oder eine 0) gesendet. Wenn man später erneut liest, kannst man nur wieder eine 1 (oder eine 0) als Antwort bekommen, aber der Wert ist nicht mehr gültig. Also macht es an der Stelle keinen Sinn, ein Lesetelegramm anzubieten.
+
+TODO: Sachen, die noch in die Doku eingearbeitet werden müssen:
+
+Ein Aktorstatuswechsel kann nur durch 2 Dinge passieren:
+Der PM hat geschaltet und daraufhin (also zeitlich später) meldet der Aktor, dass er die Schaltung durchgeführt hat. Das ist erwartungskonform. Wenn der neue Aktorstatus = aktueller PM-Status, dann passiert einfach nichts.
+Jemand hat von außen, am PM vorbei, den Aktor geschaltet. Bei rein schaltendem Betrieb würde man sich fragen, warum so was passieren sollte, man kann ja auch über den PM schalten. Aber wenn man Szenen und mehrere Lichtkreise im Sinn hat, dann wird einem schnell klar, dass man schnell Lichtkombinationen wählen kann, die den/die eigentlich vom PM gesteuerten Lichtreis(e) ein- oder abschalten. In diesem Fall ist der neue Aktorstatus != aktueller PM-Status. Das führt auf jeden Fall dazu, dass der PM seinen internen Zustand aktualisiert und dieser wieder passend zum Aktorstatus ist.
+Der Fall 2 hat bisher auch dazu geführt, dass am Ausgang nochmal geschaltet wurde, da sich eine Änderung vom internen Zustand immer an den Ausgängen bemerkbar gemacht hat. Wenn man das Ganze wiederum rein schaltend betrachtet, dann ist das nicht schlimm, denn wenn ein Aktor direkt mit einer 1 eingeschaltet wurde, ist es nicht schlimm, wenn der Melder nochmal eine 1 hinterher schickt.
+Betrachtet man aber Szenen und Dimmvorgänge, gibt es starke Unterschiede. Nehmen wir an, der PM dimmt beim Einschalten auf 80%. Wenn ich jetzt diesen Lichtkreis manuell (vom AUS-Zustand) auf 20% dimme, wird der Dimmaktor einen Aktorstatus EIN senden, der PM geht in den EIN-Zustand und schickt dann ein "auf 80% dimmen" hinterher. Das ist auf jeden Fall etwas, dass man nicht möchte. Bei verschiedenen Lichtkreisen, mehreren Szenen und Kombinationen mit manueller Bedienung wird das noch viel komplizierter.
+Neues Verhalten: Ein Aktorstatuswechsel im Fall 2 führt immer noch zur internen Statusänderung, aber nicht mehr zu einer Schaltaktion. Der Ausgang wird nicht tangiert. Der neue interne Status löst aber alle internen Vorgänge aus wie Nachlaufzeiten, Totzeiten, Präsenzerkennung etc. aus. Sobald diese wieder eine Aktion bedingen, wird diese natürlich vom PM ausgeführt.
+Dies ermöglicht im einfachsten Fall, den PM so zu parametrieren, dass er einfach immer das Licht ausmacht, auch wenn es nicht durch den PM eingeschaltet wurde. In komplexen Fällen kann der Aktorstatus bei Nutzung von Szenen und Lichtkreisen als eine Art "Sicherheitsgurt" funktionieren, um in Situationen, an die man nicht gedacht hat, eine sinnvolle Standardaufgabe zu erfüllen.
