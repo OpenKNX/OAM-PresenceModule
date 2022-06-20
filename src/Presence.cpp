@@ -304,39 +304,29 @@ void Presence::processHardwarePresence()
     }
 #endif
 #ifdef PIR_PIN
-    uint8_t lPresenceLed = ((knx.paramByte(LOG_LEDRot) & LOG_LEDRotMask) >> LOG_LEDRotShift);
-    uint8_t lInfoLed = ((knx.paramByte(LOG_LEDOrange) & LOG_LEDOrangeMask) >> LOG_LEDOrangeShift);
     if (digitalRead(PIR_PIN))
     {
-        if (!mPresence)
+        if (mMove == 0)
         {
             mPresenceDelay = millis();
-            mPresence = true;
+            mMove = 1;
             mPresenceChanged = true;
         }
     }
     else
     {
-        if (mPresence && delayCheck(mPresenceDelay, 500))
+        if (mMove > 0 && delayCheck(mPresenceDelay, 500))
         {
-            mPresence = false;
+            mMove = 0;
             mPresenceChanged = true;
         }
     }
     if (mPresenceChanged)
     {
         mPresenceChanged = false;
-        if (lPresenceLed == VAL_LedOnPM || (lPresenceLed == VAL_LedOnChannelPM && mPresenceLedOn))
-        {
-            digitalWrite(PRESENCE_LED_PIN, mPresence);
-        }
-        if (lInfoLed == VAL_LedOnPM || (lInfoLed == VAL_LedOnChannelPM && mInfoLedOn))
-        {
-            digitalWrite(INFO_LED_PIN, mPresence);
-        }
+        processLED(mMove > 0, CallerMove);
     }
     // add Trigger for any channel which registered for Hardware-PIR
-
 #endif
 }
 
