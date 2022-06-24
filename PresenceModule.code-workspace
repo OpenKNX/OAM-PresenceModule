@@ -29,7 +29,11 @@
 			"string_view": "cpp",
 			"ranges": "cpp",
 			"istream": "cpp",
-			"ostream": "cpp"
+			"ostream": "cpp",
+			"deque": "cpp",
+			"unordered_map": "cpp",
+			"vector": "cpp",
+			"initializer_list": "cpp"
 		},
 		"cSpell.language": "en,de-DE"
 	}

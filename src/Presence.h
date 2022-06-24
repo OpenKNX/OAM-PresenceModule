@@ -37,6 +37,7 @@ public:
   bool PresenceTrigger = false;
   bool MoveTrigger = false;
   bool getHardwarePresence();
+  float getHardwareBrightness();
   bool getHardwareMove();
   void processLED(bool iOn, LedCaller iCaller);
   void processReadRequests();
@@ -70,10 +71,13 @@ private:
   SensorMR24xxB1 *mPresenceSensor;
   #endif
   Sensor *mBrightnessSensor;
+  uint32_t mBrightnessDelay = 0;
+  float mLux = NO_NUM;
+  float mLuxLast = NO_NUM;
   uint32_t mHfPowerCycleDelay = 0;
   bool mDoPresenceHardwareCycle = 0;
 
-  void startSensor();
+  void startSensors();
 
   // channel handling
   PresenceChannel *mChannel[PM_ChannelCount];
@@ -82,6 +86,7 @@ private:
   uint8_t getChannelId(PresenceChannel *iChannel);
 
   void processHardwarePresence();
+  void processHardwareLux();
   void startPowercycleHfSensor();
   void processPowercycleHfSensor();
   // bool prepareChannels();

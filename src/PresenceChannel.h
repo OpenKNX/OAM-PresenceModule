@@ -103,6 +103,16 @@
 #define VAL_PM_PI_PresenceMove 3
 #define VAL_PM_PI_PresencePresence 4
 
+// Presence Hardware
+#define VAL_PM_PS_None 0
+#define VAL_PM_PS_Pir 1
+#define VAL_PM_PS_Hf 2
+
+// Presence Hardware
+#define VAL_PM_LUX_None 0
+#define VAL_PM_LUX_VEML 1
+#define VAL_PM_LUX_OPT 2
+
 // forward declaration
 class Presence;
 
@@ -112,6 +122,7 @@ class PresenceChannel
     uint8_t mChannelId = 0; // zero based
     uint8_t mCurrentDayPhase = 0; // zero based
     bool mHardwarePresence = false;
+    uint32_t mBrightnessPollDelay = 0;
 
     uint32_t calcParamIndex(uint16_t iParamIndex, bool iWithPhase);
     uint16_t calcKoNumber(uint8_t iKoIndex);
@@ -163,6 +174,8 @@ class PresenceChannel
     void startActorState(GroupObject &iKo);
     void processActorState();
 
+    float getRawBrightness();
+    void startHardwareBrightness();
     void startBrightness();
     void processBrightness();
     void disableBrightness(bool iOn);

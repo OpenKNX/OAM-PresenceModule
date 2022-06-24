@@ -544,6 +544,11 @@ bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
     return lPresence;
 }
 
+float PresenceChannel::getRawBrightness()
+{
+    return getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+}
+
 bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
 {
     // if hardware presence sensor is available, we evaluate its value
@@ -563,13 +568,27 @@ void PresenceChannel::startPresenceTrigger()
     // pPresenceDelayTime = delayTimerInit(); // diese Variante führt zu Issue #12
 }
 
-void PresenceChannel::startHardwarePresence() 
+void PresenceChannel::startHardwarePresence()
 {
     bool lPresence = getHardwarePresence();
     if (mHardwarePresence != lPresence)
     {
         mHardwarePresence = lPresence;
         startPresence(lPresence);
+    }
+}
+
+void PresenceChannel::startHardwareBrightness() 
+{
+    // if hardware brightness is handled, no external brightness is available
+    if (paramByte(PM_HWLux) > 0)
+    {
+        // we have to poll here
+        if (delayCheck(mBrightnessPollDelay, 15000))
+        {
+            mBrightnessPollDelay = delayTimerInit();
+            startBrightness();
+        }
     }
 }
 
@@ -685,7 +704,7 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
     if (iOn && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask)) 
     {
         // check brightness in case of turning on
-        if ((uint32_t)getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9)) <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        if ((uint32_t)getRawBrightness() <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
             onPresenceChange(iOn);
     }
     else // turn off if brightness independent
@@ -820,6 +839,8 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
         startOutput(iOn);
         if (iSuppressOutput)
             syncOutput();
+        else
+            forceOutput(true);
     }
 }
 
@@ -837,6 +858,7 @@ void PresenceChannel::startManual(bool iOn)
     endPresence();
     // set output according to input value
     startOutput(iOn);
+    forceOutput(true);
 }
 
 void PresenceChannel::processManual()
@@ -1062,7 +1084,7 @@ void PresenceChannel::startBrightness()
     if (lEvalBrightness) 
     {
         // first check for upper value, if higher, then switch off
-        uint32_t lBrightness = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+        uint32_t lBrightness = getRawBrightness();
         if (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
         {
             // we start timer off delay
@@ -1106,7 +1128,8 @@ void PresenceChannel::disableBrightness(bool iOn)
     if (!paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
     {
         // get current brightness
-        uint32_t lBrightness = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+        uint32_t lBrightness = getRawBrightness();
+        ;
         // we disable brightness handling according to current brightness and current output state
         // turn on even though there is enough light
         bool lDisable1 = iOn && (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));
@@ -1159,7 +1182,7 @@ void PresenceChannel::processAdaptiveBrightness()
         else if (pAdaptiveDelayTime == 0)
         {
             // take current lux value, but not less that turn on limit
-            uint32_t lBrightnessOff = MAX((uint32_t)getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9)), (uint32_t)(paramWord(PM_pABrightnessOn, true)));
+            uint32_t lBrightnessOff = MAX((uint32_t)getRawBrightness(), (uint32_t)(paramWord(PM_pABrightnessOn, true)));
             // add adaptive offset and set it as new off limit
             lBrightnessOff += paramWord(PM_pABrightnessDelta, true);
             getKo(PM_KoKOpLuxOff)->value(lBrightnessOff, getDPT(VAL_DPT_9));
@@ -1281,6 +1304,8 @@ void PresenceChannel::loop()
         processReadRequests();
         // handle presence hardware
         startHardwarePresence();
+        // handle brightness hardware
+        startHardwareBrightness();
 
         // we revert the processing order for pipeline events
         // this reduces the chance to have a long running

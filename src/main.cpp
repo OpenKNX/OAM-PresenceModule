@@ -22,6 +22,8 @@ void setup()
 #ifdef HF_POWER_PIN
     Serial2.setRX(HF_UART_RX_PIN);
     Serial2.setTX(HF_UART_TX_PIN);
+    Wire1.setSDA(2);
+    Wire1.setSCL(3);
     pinMode(PRESENCE_LED_PIN, OUTPUT);
     pinMode(MOVE_LED_PIN, OUTPUT);
     pinMode(HF_S1_PIN, INPUT);

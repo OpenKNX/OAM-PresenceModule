@@ -173,8 +173,8 @@
 #define PM_ReadLed                   42      // 1 Bit, Bit 5
 #define     PM_ReadLedMask 0x20
 #define     PM_ReadLedShift 5
-#define PM_LuxOffsetPM               42      // int8_t
-#define PM_LuxSendDelta              43      // uint16_t
+#define PM_LuxOffsetPM               43      // int8_t
+#define PM_LuxSendDelta              44      // uint16_t
 #define PM_LuxSendCycleDelayBase     46      // 2 Bits, Bit 7-6
 #define     PM_LuxSendCycleDelayBaseMask 0xC0
 #define     PM_LuxSendCycleDelayBaseShift 6
@@ -1309,4 +1309,4 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 70
+#define MAIN_ApplicationVersion 71

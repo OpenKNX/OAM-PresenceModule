@@ -8,6 +8,8 @@
 #include "Presence.h"
 #include "Sensor.h"
 #include "SensorMR24xxB1.h"
+#include "SensorOPT300x.h"
+#include "SensorVEML7700.h"
 
 Presence::Presence()
 {
@@ -155,14 +157,31 @@ bool Presence::getHardwareMove()
 }
 
 // Starting all required sensors, this call may be blocking (with delay)
-void Presence::startSensor()
+void Presence::startSensors()
 {
+    uint8_t lHardwarePM = (knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) >> PM_HWPresenceShift;
+    uint8_t lHardwareLux = (knx.paramByte(PM_HWLux) & PM_HWLuxMask) >> PM_HWLuxShift;
+
+    if (lHardwarePM == VAL_PM_PS_Hf)
+    {
 #ifdef HF_POWER_PIN
-    mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
-    mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
+        mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
+#endif
+    }
+    
+    switch (lHardwareLux)
+    {
+        case VAL_PM_LUX_VEML:
+            mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
+            break;
+        case VAL_PM_LUX_OPT:
+            mBrightnessSensor = Sensor::factory(SENS_OPT300X, Lux);
+            break;
+        default:
+            break;
+    }
     // now start all sensors at the correct speed
     Sensor::beginSensors();
-#endif
 }
 
 void Presence::startPowercycleHfSensor()
@@ -243,6 +262,7 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
     sLedMove = lLedMove;
     sLedPresence = lLedPresence;
 }
+
 void Presence::processHardwarePresence()
 {
 #ifdef SERIAL_HF
@@ -330,6 +350,38 @@ void Presence::processHardwarePresence()
 #endif
 }
 
+void Presence::processHardwareLux()
+{
+    if (mBrightnessSensor != 0)
+    {
+        float lValue = 0;
+        if (Sensor::measureValue(MeasureType::Lux, lValue))
+        {
+            if (lValue != mLux)
+            {
+                bool lSend = false;
+                mLux = lValue;
+                knx.getGroupObject(PM_KoLuxOut).valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
+                uint16_t lAbsDelta = knx.paramWord(PM_LuxSendDelta);
+                uint32_t lTimeDelta = getDelayPattern(PM_LuxSendCycleDelayBase);
+                lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
+                lSend = lSend || (lAbsDelta > 0 && abs(mLux - mLuxLast) > lAbsDelta);
+                if (lSend)
+                {
+                    mLuxLast = mLux;
+                    mBrightnessDelay = delayTimerInit();
+                    knx.getGroupObject(PM_KoLuxOut).objectWritten();
+                }
+            }
+        }
+    }
+}
+
+float Presence::getHardwareBrightness()
+{
+    return mLux + knx.paramByte(PM_LuxOffsetPM);
+}
+
 void Presence::loop()
 {
     if (!knx.configured())
@@ -338,6 +390,7 @@ void Presence::loop()
     if (mDoPresenceHardwareCycle)
     {
         processHardwarePresence();
+        processHardwareLux();
         processPowercycleHfSensor();
         Sensor::sensorLoop();
     }
@@ -377,6 +430,6 @@ void Presence::setup()
             mChannel[lIndex]->setup();
         }
         mDoPresenceHardwareCycle = ((knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) > 0) || ((knx.paramByte(PM_HWLux) & PM_HWLuxMask) > 0);
-        startSensor();
+        startSensors();
     }
 }
