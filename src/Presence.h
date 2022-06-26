@@ -72,6 +72,7 @@ private:
   #endif
   Sensor *mBrightnessSensor;
   uint32_t mBrightnessDelay = 0;
+  uint32_t mBrightnessProcess = 0;
   float mLux = NO_NUM;
   float mLuxLast = NO_NUM;
   uint32_t mHfPowerCycleDelay = 0;

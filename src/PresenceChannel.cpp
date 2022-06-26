@@ -546,7 +546,12 @@ bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 
 float PresenceChannel::getRawBrightness()
 {
-    return getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+    float lResult = NO_NUM;
+    if (paramBit(PM_pBrightnessIntern, PM_pBrightnessInternMask))
+        lResult = sPresence->getHardwareBrightness();
+    else
+        lResult = getKo(PM_KoKOpLux)->value(getDPT(VAL_DPT_9));
+    return lResult;
 }
 
 bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
@@ -581,10 +586,10 @@ void PresenceChannel::startHardwarePresence()
 void PresenceChannel::startHardwareBrightness() 
 {
     // if hardware brightness is handled, no external brightness is available
-    if (paramByte(PM_HWLux) > 0)
+    if (paramByte(PM_HWLux) > 0 && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
     {
         // we have to poll here
-        if (delayCheck(mBrightnessPollDelay, 15000))
+        if (delayCheck(mBrightnessPollDelay, 1500))
         {
             mBrightnessPollDelay = delayTimerInit();
             startBrightness();

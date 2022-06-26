@@ -355,23 +355,22 @@ void Presence::processHardwareLux()
     if (mBrightnessSensor != 0)
     {
         float lValue = 0;
-        if (Sensor::measureValue(MeasureType::Lux, lValue))
+        // we check for brightness only every second
+        if (delayCheck(mBrightnessProcess, 1000) && Sensor::measureValue(MeasureType::Lux, lValue))
         {
-            if (lValue != mLux)
+            mBrightnessProcess = delayTimerInit();
+            bool lSend = false;
+            mLux = lValue;
+            knx.getGroupObject(PM_KoLuxOut).valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
+            uint16_t lAbsDelta = knx.paramWord(PM_LuxSendDelta);
+            uint32_t lTimeDelta = getDelayPattern(PM_LuxSendCycleDelayBase);
+            lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
+            lSend = lSend || (lAbsDelta > 0 && abs(mLux - mLuxLast) > lAbsDelta);
+            if (lSend)
             {
-                bool lSend = false;
-                mLux = lValue;
-                knx.getGroupObject(PM_KoLuxOut).valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
-                uint16_t lAbsDelta = knx.paramWord(PM_LuxSendDelta);
-                uint32_t lTimeDelta = getDelayPattern(PM_LuxSendCycleDelayBase);
-                lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
-                lSend = lSend || (lAbsDelta > 0 && abs(mLux - mLuxLast) > lAbsDelta);
-                if (lSend)
-                {
-                    mLuxLast = mLux;
-                    mBrightnessDelay = delayTimerInit();
-                    knx.getGroupObject(PM_KoLuxOut).objectWritten();
-                }
+                mLuxLast = mLux;
+                mBrightnessDelay = delayTimerInit();
+                knx.getGroupObject(PM_KoLuxOut).objectWritten();
             }
         }
     }
