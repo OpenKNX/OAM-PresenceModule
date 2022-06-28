@@ -163,7 +163,7 @@ class PresenceChannel
     void processDowntime();
     void startAuto(bool iOn, bool iSuppressOutput);
     void processAuto();
-    void startManual(bool iOn);
+    void startManual(bool iOn, bool iSuppressOutput);
     void processManual();
     void onManualChange(bool iOn);
     void startLock();

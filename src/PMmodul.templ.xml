@@ -147,10 +147,11 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%105" Name="pA%C%Output1Filter" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 1 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%106" Name="pA%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%135" Name="pA%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%137" Name="pA%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%102" Name="pA%C%Output1Send" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%103" Name="pA%C%Output2Send" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%104" Name="pA%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-      <!-- 7 Bit free -->
+      <!-- 6 Bit free -->
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -207,10 +208,11 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%205" Name="pB%C%Output1Filter" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 1 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%206" Name="pB%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%235" Name="pB%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%237" Name="pB%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%202" Name="pB%C%Output1Send" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%203" Name="pB%C%Output2Send" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%204" Name="pB%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-      <!-- 7 Bit free -->
+      <!-- 6 Bit free -->
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -267,10 +269,11 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%305" Name="pC%C%Output1Filter" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 1 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%306" Name="pC%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%335" Name="pC%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%337" Name="pC%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%302" Name="pC%C%Output1Send" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%303" Name="pC%C%Output2Send" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%304" Name="pC%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-      <!-- 7 Bit free -->
+      <!-- 6 Bit free -->
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -327,10 +330,11 @@
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%405" Name="pD%C%Output1Filter" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 1 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%406" Name="pD%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="M-00FA_A-0001-01-0000_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
       <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%435" Name="pD%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
+      <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%437" Name="pD%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%402" Name="pD%C%Output1Send" Offset="0" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%403" Name="pD%C%Output2Send" Offset="0" BitOffset="4" ParameterType="M-00FA_A-0001-01-0000_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
       <!-- <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%404" Name="pD%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="M-00FA_A-0001-01-0000_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-      <!-- 7 Bit free -->
+      <!-- 6 Bit free -->
     </Union>
     <Union SizeInBit="80">
       <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -531,6 +535,7 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%134_R-%T%%CCC%13401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%134" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%135_R-%T%%CCC%13501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%135" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%136_R-%T%%CCC%13601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%136" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%137_R-%T%%CCC%13701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%137" />
     <!-- Phase 2 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%200_R-%T%%CCC%20001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%200" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%201_R-%T%%CCC%20101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%201" />
@@ -570,6 +575,7 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%234_R-%T%%CCC%23401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%234" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%235_R-%T%%CCC%23501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%235" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%236_R-%T%%CCC%23601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%236" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%237_R-%T%%CCC%23701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%237" />
     <!-- Phase 3 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%300_R-%T%%CCC%30001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%300" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%301_R-%T%%CCC%30101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%301" />
@@ -609,6 +615,7 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%334_R-%T%%CCC%33401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%334" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%335_R-%T%%CCC%33501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%335" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%336_R-%T%%CCC%33601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%336" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%337_R-%T%%CCC%33701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%337" />
     <!-- Phase 4 -->
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%400_R-%T%%CCC%40001" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%400" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%401_R-%T%%CCC%40101" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%401" />
@@ -648,6 +655,7 @@
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%434_R-%T%%CCC%43401" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%434" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%435_R-%T%%CCC%43501" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%435" />
     <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%436_R-%T%%CCC%43601" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%436" />
+    <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%%CCC%437_R-%T%%CCC%43701" RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%437" />
   </ParameterRefs>
   <ComObjectTable>
     <ComObject Id="M-00FA_A-0001-01-0000_O-%T%%CCC%000" Name="KOp%C%Lux" Number="%K0%" Text="Helligkeit extern" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -1672,6 +1680,7 @@
                     <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%111_R-%T%%CCC%11101" Cell="1,3" />
                   </ParameterBlock>
                   <!-- end of delay pattern -->
+                  <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%137_R-%T%%CCC%13701" />
                 </when>
               </choose>
               <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%136_R-%T%%CCC%13601" />
@@ -1923,6 +1932,7 @@
                         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%211_R-%T%%CCC%21101" Cell="1,3" />
                       </ParameterBlock>
                       <!-- end of delay pattern -->
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%237_R-%T%%CCC%23701" />
                     </when>
                   </choose>
                   <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%236_R-%T%%CCC%23601" />
@@ -2174,6 +2184,7 @@
                         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%311_R-%T%%CCC%31101" Cell="1,3" />
                       </ParameterBlock>
                       <!-- end of delay pattern -->
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%337_R-%T%%CCC%33701" />
                     </when>
                   </choose>
                   <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%336_R-%T%%CCC%33601" />
@@ -2425,6 +2436,7 @@
                         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%411_R-%T%%CCC%41101" Cell="1,3" />
                       </ParameterBlock>
                       <!-- end of delay pattern -->
+                      <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%437_R-%T%%CCC%43701" />
                     </when>
                   </choose>
                   <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%%CCC%436_R-%T%%CCC%43601" />

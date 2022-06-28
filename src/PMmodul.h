@@ -174,7 +174,10 @@
 #define     PM_ReadLedMask 0x20
 #define     PM_ReadLedShift 5
 #define PM_LuxOffsetPM               43      // int8_t
-#define PM_LuxSendDelta              44      // uint16_t
+#define PM_LuxSendDeltaAbsRel        44      // 1 Bit, Bit 7
+#define     PM_LuxSendDeltaAbsRelMask 0x80
+#define     PM_LuxSendDeltaAbsRelShift 7
+#define PM_LuxSendDelta              44      // uint15_t
 #define PM_LuxSendCycleDelayBase     46      // 2 Bits, Bit 7-6
 #define     PM_LuxSendCycleDelayBaseMask 0xC0
 #define     PM_LuxSendCycleDelayBaseShift 6
@@ -1076,6 +1079,9 @@
 #define PM_pAManualWithPresence      54      // 1 Bit, Bit 7
 #define     PM_pAManualWithPresenceMask 0x80
 #define     PM_pAManualWithPresenceShift 7
+#define PM_pAPresenceShortNoSwitch   54      // 1 Bit, Bit 6
+#define     PM_pAPresenceShortNoSwitchMask 0x40
+#define     PM_pAPresenceShortNoSwitchShift 6
 #define PM_pAPresenceDelayBase       55      // 2 Bits, Bit 7-6
 #define     PM_pAPresenceDelayBaseMask 0xC0
 #define     PM_pAPresenceDelayBaseShift 6
@@ -1132,6 +1138,9 @@
 #define PM_pBManualWithPresence      74      // 1 Bit, Bit 7
 #define     PM_pBManualWithPresenceMask 0x80
 #define     PM_pBManualWithPresenceShift 7
+#define PM_pBPresenceShortNoSwitch   74      // 1 Bit, Bit 6
+#define     PM_pBPresenceShortNoSwitchMask 0x40
+#define     PM_pBPresenceShortNoSwitchShift 6
 #define PM_pBPresenceDelayBase       75      // 2 Bits, Bit 7-6
 #define     PM_pBPresenceDelayBaseMask 0xC0
 #define     PM_pBPresenceDelayBaseShift 6
@@ -1188,6 +1197,9 @@
 #define PM_pCManualWithPresence      94      // 1 Bit, Bit 7
 #define     PM_pCManualWithPresenceMask 0x80
 #define     PM_pCManualWithPresenceShift 7
+#define PM_pCPresenceShortNoSwitch   94      // 1 Bit, Bit 6
+#define     PM_pCPresenceShortNoSwitchMask 0x40
+#define     PM_pCPresenceShortNoSwitchShift 6
 #define PM_pCPresenceDelayBase       95      // 2 Bits, Bit 7-6
 #define     PM_pCPresenceDelayBaseMask 0xC0
 #define     PM_pCPresenceDelayBaseShift 6
@@ -1244,6 +1256,9 @@
 #define PM_pDManualWithPresence      114      // 1 Bit, Bit 7
 #define     PM_pDManualWithPresenceMask 0x80
 #define     PM_pDManualWithPresenceShift 7
+#define PM_pDPresenceShortNoSwitch   114      // 1 Bit, Bit 6
+#define     PM_pDPresenceShortNoSwitchMask 0x40
+#define     PM_pDPresenceShortNoSwitchShift 6
 #define PM_pDPresenceDelayBase       115      // 2 Bits, Bit 7-6
 #define     PM_pDPresenceDelayBaseMask 0xC0
 #define     PM_pDPresenceDelayBaseShift 6
@@ -1308,5 +1323,5 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 71
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 4

@@ -290,12 +290,12 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
             case PM_KoKOpSetManual:
                 // check for two button mode
                 if (paramBit(PM_pManualModeKeyCount, PM_pManualModeKeyCountMask))
-                    startManual(lValue);
+                    startManual(lValue, false);
                 else // use single button mode
                     if (lValue)
-                        startManual(pCurrentValue & PM_BIT_OUTPUT_SET);
+                        startManual(pCurrentValue & PM_BIT_OUTPUT_SET, true);
                     else
-                        startAuto(pCurrentValue & PM_BIT_OUTPUT_SET, false);
+                        startAuto(pCurrentValue & PM_BIT_OUTPUT_SET, true);
                 break;
             case PM_KoKOpAktorState:
                 // Actor state changed
@@ -353,10 +353,10 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
                     startAuto(true, false);
                     break;
                 case VAL_PM_SA_ManualOff:
-                    startManual(false);
+                    startManual(false, false);
                     break;
                 case VAL_PM_SA_ManualOn:
-                    startManual(true);
+                    startManual(true, false);
                     break;
                 case VAL_PM_SA_LockOff:
                     onLock(true, VAL_PM_LockOutputOff, 0);
@@ -694,6 +694,10 @@ void PresenceChannel::processPresenceShort()
             {
                 pCurrentState &= ~STATE_PRESENCE_SHORT;
                 pPresenceShortDelayTime = 0;
+                // in case of passageway we turn on ouput after short presence
+                bool lPassageway = paramBit(PM_pAPresenceShortNoSwitch, PM_pAPresenceShortNoSwitchMask, true);
+                if (lPassageway)
+                    onPresenceChange(true);
             }
         }
     }
@@ -720,7 +724,12 @@ void PresenceChannel::onPresenceChange(bool iOn)
 {
     // Output is only influenced in auto mode
     if (!(pCurrentState & STATE_MANUAL))
-        startOutput(iOn);
+    {
+        bool lPassageway = paramBit(PM_pAPresenceShortNoSwitch, PM_pAPresenceShortNoSwitchMask, true);
+        // in a passageway we do not turn on during short presence
+        if (!(iOn && lPassageway && (pCurrentState & STATE_PRESENCE_SHORT)))
+            startOutput(iOn);
+    }
 }
 
 void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
@@ -853,7 +862,7 @@ void PresenceChannel::processAuto()
 {
 }
 
-void PresenceChannel::startManual(bool iOn)
+void PresenceChannel::startManual(bool iOn, bool iSuppressOutput)
 {
     // end any leave room processing
     endLeaveRoom();
@@ -863,7 +872,10 @@ void PresenceChannel::startManual(bool iOn)
     endPresence();
     // set output according to input value
     startOutput(iOn);
-    forceOutput(true);
+    if (iSuppressOutput)
+        syncOutput();
+    else
+        forceOutput(true);
 }
 
 void PresenceChannel::processManual()
@@ -992,7 +1004,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     {
         case VAL_PM_LockTypePriority:
             if (lLockSend == VAL_PM_LockOutputNone || lLockSend == VAL_PM_LockOutputCurrent)
-                lLockValue |= (pCurrentValue & PM_BIT_OUTPUT_SET > 0);
+                lLockValue |= ((pCurrentValue & PM_BIT_OUTPUT_SET) > 0);
             else
                 lLockValue |= (lLockSend == VAL_PM_LockOutputOn);
             getKo(PM_KoKOpLock)->valueNoSend(lLockValue, getDPT(VAL_DPT_5));

@@ -21,7 +21,7 @@
                 <TypeNumber SizeInBit="8" Type="signedInt" minInclusive="-120" maxInclusive="120" />
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-AbsLux" Name="AbsLux">
-                <TypeNumber SizeInBit="16" Type="unsignedInt" minInclusive="0" maxInclusive="50000" />
+                <TypeNumber SizeInBit="15" Type="unsignedInt" minInclusive="0" maxInclusive="30000" />
               </ParameterType>
               <ParameterType Id="M-00FA_A-0001-01-0000_PT-ActiveInaktive" Name="ActiveInaktive">
                 <TypeRestriction Base="Value" SizeInBit="1">
@@ -214,6 +214,12 @@
                   <Enumeration Text="Totzeit + Reset" Value="2" Id="M-00FA_A-0001-01-0000_PT-LeaveRoomModeReset_EN-2" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="M-00FA_A-0001-01-0000_PT-LuxAbsRel" Name="LuxAbsRel">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="in Lux (absolut)" Value="0" Id="M-00FA_A-0001-01-0000_PT-LuxAbsRel_EN-0" />
+                  <Enumeration Text="in % (relativ)" Value="1" Id="M-00FA_A-0001-01-0000_PT-LuxAbsRel_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
             </ParameterTypes>
             <Parameters>
               <!-- Logic share parameters go from 0 to 29? We leave some space -->
@@ -238,7 +244,8 @@
               <Union SizeInBit="24">
                 <Memory CodeSegment="M-00FA_A-0001-01-0000_RS-04-00000" Offset="43" BitOffset="0" />
                 <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000010" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
-                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000011" Name="LuxSendDelta" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" SuffixText="Lux" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000014" Name="LuxSendDeltaAbsRel" Offset="1" BitOffset="0" ParameterType="M-00FA_A-0001-01-0000_PT-LuxAbsRel" Text="Helligkeitsänderung wird angegeben in" Value="0" />
+                <Parameter Id="M-00FA_A-0001-01-0000_UP-%T%000011" Name="LuxSendDelta" Offset="1" BitOffset="1" ParameterType="M-00FA_A-0001-01-0000_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" Value="0" />
               </Union>
               <!-- send cyclic brightness (delay pattern) -->
               <Union SizeInBit="16">
@@ -258,9 +265,11 @@
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000008_R-%T%00000801" RefId="M-00FA_A-0001-01-0000_UP-%T%000008" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_P-%T%000009_R-%T%00000901" RefId="M-00FA_A-0001-01-0000_P-%T%000009" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000010_R-%T%00001001" RefId="M-00FA_A-0001-01-0000_UP-%T%000010" />
-              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" RefId="M-00FA_A-0001-01-0000_UP-%T%000011" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" RefId="M-00FA_A-0001-01-0000_UP-%T%000011" SuffixText="Lux" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001102" RefId="M-00FA_A-0001-01-0000_UP-%T%000011" SuffixText="%" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000012_R-%T%00001201" RefId="M-00FA_A-0001-01-0000_UP-%T%000012" />
               <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000013_R-%T%00001301" RefId="M-00FA_A-0001-01-0000_UP-%T%000013" />
+              <ParameterRef Id="M-00FA_A-0001-01-0000_UP-%T%000014_R-%T%00001401" RefId="M-00FA_A-0001-01-0000_UP-%T%000014" />
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="M-00FA_A-0001-01-0000_O-%T%000001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -336,7 +345,15 @@
                         <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <ParameterSeparator Id="M-00FA_A-0001-01-0000_PS-nnn" Text="Helligkeit" UIHint="Headline" />
                         <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000010_R-%T%00001001" />
-                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" />
+                        <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000014_R-%T%00001401" />
+                        <choose ParamRefId="M-00FA_A-0001-01-0000_UP-%T%000014_R-%T%00001401">
+                          <when test="0">
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001101" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="M-00FA_A-0001-01-0000_UP-%T%000011_R-%T%00001102" />
+                          </when>
+                        </choose>
                         <!-- Lux send cycle -->
                         <!-- Delay pattern -->
                         <ParameterBlock Id="M-00FA_A-0001-01-0000_PB-nnn" Name="LuxSendCycle" Inline="true" Layout="Grid">

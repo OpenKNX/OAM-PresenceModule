@@ -1,10 +1,15 @@
+# Release indication
+$releaseIndication = $args[0]
 # set product names
 $targetName="PresenceModule"
 $sourceName="PMmodul"
-# for Release-Builds uncomment the following line
-# $releaseName="$sourceName-Release"
-# for Beta-Builds uncomment the following line
-$releaseName="$sourceName"
+if ($releaseIndication) {
+    $releaseName="$sourceName-$releaseIndication"
+    $appRelease=$releaseIndication
+} else {
+    $releaseName="$sourceName"
+    $appRelease="Beta"
+}
 
 # check for working dir
 if (Test-Path -Path release) {
@@ -44,9 +49,21 @@ Copy-Item scripts/Upload-Firmware*.ps1 release/
 # cleanup
 Remove-Item "release/$targetName.knxprod"
 
+# calculate version string
+$appVersion=Select-String -Path src/$sourceName.h -Pattern MAIN_ApplicationVersion
+$appVersion=$appVersion.ToString().Split()[-1]
+$appMajor=[math]::Floor($appVersion/16)
+$appMinor=$appVersion%16
+$appRev=Select-String -Path src/main.cpp -Pattern "const uint8_t firmwareRevision"
+$appRev=$appRev.ToString().Split()[-1].Replace(";","")
+$appVersion="$appMajor.$appMinor"
+if ($appRev -gt 0) {
+    $appVersion="$appVersion.$appRev"
+}
+
 # create package 
 Compress-Archive -Path release/* -DestinationPath Release.zip
 Remove-Item -Recurse release/*
-Move-Item Release.zip "release/$targetName.zip"
+Move-Item Release.zip "release/$targetName-$appRelease-$appVersion.zip"
 
-Write-Host "Release successfully created!"
+Write-Host "Release $targetName-$appRelease-$appVersion successfully created!"
