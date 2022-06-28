@@ -527,6 +527,10 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
     getKo(PM_KoKOpLuxOn)->value(lBrightness, getDPT(VAL_DPT_9));
     // brightness to turn off light
     calculateBrightnessOff();
+
+    // day phase change should resend output if output was on
+    if (pCurrentValue & PM_BIT_OUTPUT_SET)
+        forceOutput(true);
 }
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
