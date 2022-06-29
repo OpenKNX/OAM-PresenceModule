@@ -527,6 +527,9 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
     getKo(PM_KoKOpLuxOn)->value(lBrightness, getDPT(VAL_DPT_9));
     // brightness to turn off light
     calculateBrightnessOff();
+    // if short presence is off, we stop a potential running short presence from other phase
+    if (!paramBit(PM_pAPresenceShort, PM_pAPresenceShortMask, true))
+        endPresenceShort();
 
     // day phase change should resend output if output was on
     forceOutput(true);
@@ -657,10 +660,10 @@ void PresenceChannel::processPresence()
 void PresenceChannel::endPresence(bool iSend /* = true */)
 {
     // presence and short presence determination are stopped
-    pCurrentState &= ~(STATE_PRESENCE | STATE_PRESENCE_SHORT | STATE_AUTO);
+    endPresenceShort();
+    pCurrentState &= ~(STATE_PRESENCE | STATE_AUTO);
     pCurrentValue &= ~PM_BIT_DISABLE_BRIGHTNESS;
     pPresenceDelayTime = 0;
-    pPresenceShortDelayTime = 0;
     if (iSend) onPresenceChange(false);
 }
 
@@ -695,8 +698,7 @@ void PresenceChannel::processPresenceShort()
             bool lPresence = getRawPresence(true);
             if (lPresence) 
             {
-                pCurrentState &= ~STATE_PRESENCE_SHORT;
-                pPresenceShortDelayTime = 0;
+                endPresenceShort();
                 // in case of passageway we turn on ouput after short presence
                 bool lPassageway = paramBit(PM_pAPresenceShortNoSwitch, PM_pAPresenceShortNoSwitchMask, true);
                 if (lPassageway)
@@ -704,6 +706,13 @@ void PresenceChannel::processPresenceShort()
             }
         }
     }
+}
+
+void PresenceChannel::endPresenceShort()
+{
+    // end short presence without ending presence
+    pCurrentState &= ~STATE_PRESENCE_SHORT;
+    pPresenceShortDelayTime = 0;
 }
 
 void PresenceChannel::onPresenceBrightnessChange(bool iOn)

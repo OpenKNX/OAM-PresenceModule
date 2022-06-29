@@ -90,9 +90,9 @@
 #define LOG_Pfingstmontag              8      // 1 Bit, Bit 1
 #define     LOG_PfingstmontagMask 0x02
 #define     LOG_PfingstmontagShift 1
-#define LOG_Frohleichnam               8      // 1 Bit, Bit 0
-#define     LOG_FrohleichnamMask 0x01
-#define     LOG_FrohleichnamShift 0
+#define LOG_Fronleichnam               8      // 1 Bit, Bit 0
+#define     LOG_FronleichnamMask 0x01
+#define     LOG_FronleichnamShift 0
 #define LOG_Friedensfest               9      // 1 Bit, Bit 7
 #define     LOG_FriedensfestMask 0x80
 #define     LOG_FriedensfestShift 7
@@ -1323,5 +1323,5 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 4
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 73

@@ -151,6 +151,7 @@ class PresenceChannel
     void endPresence(bool iSend = true);
     void startPresenceShort();
     void processPresenceShort();
+    void endPresenceShort();
     void onPresenceBrightnessChange(bool iOn);
     void onPresenceChange(bool iOn);
 
