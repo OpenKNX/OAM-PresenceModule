@@ -529,8 +529,7 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
     calculateBrightnessOff();
 
     // day phase change should resend output if output was on
-    if (pCurrentValue & PM_BIT_OUTPUT_SET)
-        forceOutput(true);
+    forceOutput(true);
 }
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
@@ -590,7 +589,7 @@ void PresenceChannel::startHardwarePresence()
 void PresenceChannel::startHardwareBrightness() 
 {
     // if hardware brightness is handled, no external brightness is available
-    if (paramByte(PM_HWLux) > 0 && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
+    if (paramByte(PM_HWLux, PM_HWLuxMask, PM_HWLuxShift) > 0 && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask))
     {
         // we have to poll here
         if (delayCheck(mBrightnessPollDelay, 1500))

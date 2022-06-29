@@ -366,10 +366,14 @@ void Presence::processHardwareLux()
             bool lDeltaAbsRel = knx.paramByte(PM_LuxSendDeltaAbsRel) & PM_LuxSendDeltaAbsRelMask;
             lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
             uint16_t lDelta = knx.paramWord(PM_LuxSendDelta) & 0x7FFF; // just 15 bits
-            if (lDelta > 0) 
+            if (lDelta > 0)
             {
                 if (lDeltaAbsRel)
-                    lSend = lSend || abs((mLux - mLuxLast) / (mLuxLast ? mLuxLast : mLux)) * 100 >= lDelta; // Rel
+                {
+                    // Rel
+                    if (abs(mLux - mLuxLast) > 0.1)
+                        lSend = lSend || (mLuxLast == 0) ? true : (abs((mLux - mLuxLast) / mLuxLast) * 100 >= lDelta); // Rel
+                }
                 else
                     lSend = lSend || abs(mLux - mLuxLast) >= lDelta; // Abs
             }
