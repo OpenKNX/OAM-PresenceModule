@@ -90,6 +90,7 @@
             "args": [
                 "create",
                 "--Debug",
+                "--Xsd=../../knx_20.xsd",
                 "src/PMmodul.xml"
             ],
             "problemMatcher": [],
