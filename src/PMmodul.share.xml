@@ -107,7 +107,7 @@
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht Verwenden" Value="0" Id="%AID%_PT-PresenceUsage_EN-0" />
                   <Enumeration Text="Bewegung" Value="1" Id="%AID%_PT-PresenceUsage_EN-1" />
-                  <Enumeration Text="Bewegung und Präsenz" Value="2" Id="%AID%_PT-PresenceUsage_EN-2" />
+                  <Enumeration Text="Präsenz und Bewegung" Value="2" Id="%AID%_PT-PresenceUsage_EN-2" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-PresenceUsagePIR" Name="PresenceUsagePIR">
