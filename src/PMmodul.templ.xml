@@ -712,7 +712,7 @@
   </ComObjectRefs>
   <Dynamic>
     <ParameterBlock Id="%AID%_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
-      <Channel Id="%AID%_CH-PM%C%" Name="f%C%PM" Number="PM%C%" Text="PM %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+      <Channel Id="%AID%_CH-PM%CC%" Name="f%CC%PM" Number="PM%CC%" Text="PM %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
         <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="PM%C%Wrapper" Inline="true">
           <!-- hidden, but necessary -->
           <ParameterRefRef RefId="%AID%_P-%T%%CCC%084_R-%T%%CCC%08401" />
@@ -971,28 +971,6 @@
                 <when test="4">
                   <ComObjectRefRef RefId="%AID%_O-%T%%CCC%013_R-%T%%CCC%01304" />
                 </when>
-                <!-- <when test=">0"> -->
-                  <!-- <ParameterRefRef RefId="%AID%_UP-%T%%CCC%010_R-%T%%CCC%01001" /> -->
-                  <!-- <choose ParamRefId="%AID%_UP-%T%%CCC%010_R-%T%%CCC%01001"> -->
-                    <!-- <when test="1"> -->
-                      <!-- Delay pattern: Output 1 Cyclic Send -->
-                      <!-- <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%Output1Cyclic" Inline="true" Layout="Grid"> -->
-                        <!-- <Rows> -->
-                          <!-- <Row Id="%AID%_PB-nnn_R-1" Name="Row1" /> -->
-                        <!-- </Rows> -->
-                        <!-- <Columns> -->
-                          <!-- <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" /> -->
-                          <!-- <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" /> -->
-                          <!-- <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" /> -->
-                        <!-- </Columns> -->
-                        <!-- <ParameterSeparator Id="%AID%_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" /> -->
-                        <!-- <ParameterRefRef RefId="%AID%_UP-%T%%CCC%021_R-%T%%CCC%02101" Cell="1,2" /> -->
-                        <!-- <ParameterRefRef RefId="%AID%_UP-%T%%CCC%020_R-%T%%CCC%02001" Cell="1,3" /> -->
-                      <!-- </ParameterBlock> -->
-                      <!-- end of delay pattern -->
-                    <!-- </when> -->
-                  <!-- </choose> -->
-                <!-- </when> -->
               </choose>
               <ParameterRefRef RefId="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701" />
               <choose ParamRefId="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701">
@@ -1008,28 +986,6 @@
                 <when test="4">
                   <ComObjectRefRef RefId="%AID%_O-%T%%CCC%014_R-%T%%CCC%01404" />
                 </when>
-                <!-- <when test=">0"> -->
-                  <!-- <ParameterRefRef RefId="%AID%_UP-%T%%CCC%011_R-%T%%CCC%01101" /> -->
-                  <!-- <choose ParamRefId="%AID%_UP-%T%%CCC%011_R-%T%%CCC%01101"> -->
-                    <!-- <when test="1"> -->
-                      <!-- Delay pattern: Output 2 Cyclic Send -->
-                      <!-- <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%Output2Cyclic" Inline="true" Layout="Grid"> -->
-                        <!-- <Rows> -->
-                          <!-- <Row Id="%AID%_PB-nnn_R-1" Name="Row1" /> -->
-                        <!-- </Rows> -->
-                        <!-- <Columns> -->
-                          <!-- <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" /> -->
-                          <!-- <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" /> -->
-                          <!-- <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" /> -->
-                        <!-- </Columns> -->
-                        <!-- <ParameterSeparator Id="%AID%_PS-nnn" Text="        zyklisch senden alle" Cell="1,1" /> -->
-                        <!-- <ParameterRefRef RefId="%AID%_UP-%T%%CCC%023_R-%T%%CCC%02301" Cell="1,2" /> -->
-                        <!-- <ParameterRefRef RefId="%AID%_UP-%T%%CCC%022_R-%T%%CCC%02201" Cell="1,3" /> -->
-                      <!-- </ParameterBlock> -->
-                      <!-- end of delay pattern -->
-                    <!-- </when> -->
-                  <!-- </choose> -->
-                <!-- </when> -->
               </choose>
               <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
               <!-- Lock -->
