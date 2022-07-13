@@ -1673,7 +1673,16 @@
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%137_R-%T%%CCC%13701" />
                         </when>
                       </choose>
-                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
+                      <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                        <when test=">0">
+                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
+                        </when>
+                      </choose>
+                      <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                        <when test=">0">
+                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
+                        </when>
+                      </choose>
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                       <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">

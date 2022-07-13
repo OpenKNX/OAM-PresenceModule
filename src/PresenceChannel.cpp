@@ -461,7 +461,7 @@ int8_t PresenceChannel::getDayPhaseFromKO()
     }
     else 
     {
-        uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_17));
+        uint8_t lScene = (uint8_t)getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_17)) + 1;
         for (; lPhaseCount >= 0; lPhaseCount--)
             if (paramByte(PM_pPhase1Scene + lPhaseCount) == lScene)
                 break;

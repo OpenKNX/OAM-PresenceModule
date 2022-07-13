@@ -192,7 +192,7 @@
 #define PM_KoSensitivity 27
 #define PM_KoHfReset 28
 
-#define LOG_ChannelCount 2
+#define LOG_ChannelCount 30
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 48
@@ -859,10 +859,10 @@
 #define LOG_KoKOfE2 1
 #define LOG_KoKOfO 2
 
-#define PM_ChannelCount 2
+#define PM_ChannelCount 20
 
 // Parameter per channel
-#define PM_ParamBlockOffset 220
+#define PM_ParamBlockOffset 2628
 #define PM_ParamBlockSize 133
 #define PM_pPresenceInputs            0      // 3 Bits, Bit 7-5
 #define     PM_pPresenceInputsMask 0xE0
@@ -1322,6 +1322,6 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 77
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 5
 #define MAIN_OrderNumber "OpenKnxPresence"
