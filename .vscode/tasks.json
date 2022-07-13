@@ -86,12 +86,14 @@
         {
             "label": "OpenKNXproducer",
             "type": "shell",
-            "command": "${env:USERPROFILE}\\bin\\OpenKNXproducer.exe",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "command": "${env:USERPROFILE}/bin/OpenKNXproducer.exe",
             "args": [
                 "create",
                 "--Debug",
-                "--Xsd=../../knx_20.xsd",
-                "src/PMmodul.xml"
+                "PMmodul.xml"
             ],
             "problemMatcher": [],
             "group": "test"

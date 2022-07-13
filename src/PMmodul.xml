@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-model href="../../../knx_20.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/14" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
       <Catalog>
@@ -19,8 +19,8 @@
               <RelativeSegment Id="%AID%_RS-04-00000" Name="Parameters" Offset="0" Size="%MemorySize%" LoadStateMachine="4" />
             </Code>
             <!-- 80 Kanäle klappen nicht, Abbruch bei 72 -->
-            <op:define prefix="LOG" header="PMmodul.h" NumChannels="30" KoOffset="450" ModuleType="1" />
-            <op:define prefix="PM" header="PMmodul.h" NumChannels="20" KoOffset="50" ModuleType="2" />
+            <op:define prefix="LOG" header="PMmodul.h" NumChannels="2" KoOffset="450" ModuleType="1" />
+            <op:define prefix="PM" header="PMmodul.h" NumChannels="2" KoOffset="50" ModuleType="2" />
             <ParameterTypes>
               <!-- generic parameter types from logicmodule -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//ParameterTypes/ParameterType" prefix="LOG" />
@@ -93,13 +93,13 @@
               <!-- PM channel independent settings -->
               <op:include href="PMmodul.share.xml" xpath="//Dynamic/Channel/*" prefix="PM" />
               <!-- PM channel settings -->
-              <op:include href="PMmodul.templ.xml" xpath="//Dynamic/*" type="template" prefix="PM" />
+              <op:include href="PMmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="PM" />
             </Channel>
             <Channel Name="Logikkanaele" Text="Logikkanäle" Number="5" Id="%AID%_CH-5">
               <!-- compose logicmodule channel from some static blocks... -->
               <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//Dynamic/Channel/*" prefix="LOG" />
               <!-- followed by all logic channels -->
-              <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Dynamic/*" type="template" prefix="LOG" />
+              <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="LOG" />
             </Channel>
           </Dynamic>
         </ApplicationProgram>
@@ -119,66 +119,6 @@
           </Hardware2Programs>
         </Hardware>
       </Hardware>
-      <Languages>
-        <Language Identifier="en-US">
-          <!-- we start with translations in this (root) file -->
-          <TranslationUnit RefId="%HardwareId%">
-            <TranslationElement RefId="%HardwareId%">
-              <Translation AttributeName="Name" Text="Temperature Sensor Hardware translated" />
-            </TranslationElement>
-            <TranslationElement RefId="%ProductId%">
-              <Translation AttributeName="Name" Text="Temperature Sensor Program translated" />
-            </TranslationElement>
-          </TranslationUnit>
-          <TranslationUnit RefId="M-00FA_CS-OpenKNX">
-            <TranslationElement RefId="M-00FA_CS-OpenKNX">
-              <Translation AttributeName="Name" Text="Devices translated" />
-            </TranslationElement>
-            <TranslationElement RefId="%CatalogItemId%">
-              <Translation AttributeName="Name" Text="Catalog TranslatedTempSensor" />
-            </TranslationElement>
-          </TranslationUnit>
-          <TranslationUnit RefId="%AID%">
-            <TranslationElement RefId="%AID%">
-              <Translation AttributeName="Name" Text="ApplicationPrograms TranslatedTempSensor" />
-            </TranslationElement>
-            <!-- and include all other files just in the needed language -->
-            <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//Languages/Language[@Identifier='en-US']/TranslationUnit/*" prefix="LOG" />
-            <op:include href="PMmodul.share.xml" xpath="//Languages/Language[@Identifier='en-US']/TranslationUnit/*" prefix="PM" />
-            <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Languages/Language[@Identifier='en-US']/TranslationUnit/*" type="template" prefix="LOG" />
-            <op:include href="PMmodul.templ.xml" xpath="//Languages/Language[@Identifier='en-US']/TranslationUnit/*" type="template" prefix="PM" />
-          </TranslationUnit>
-        </Language>
-        <Language Identifier="de-DE">
-          <!-- we start with translations in this (root) file -->
-          <TranslationUnit RefId="%HardwareId%">
-            <TranslationElement RefId="%HardwareId%">
-              <Translation AttributeName="Name" Text="Temperatur Sensor Hardware Übersetzt" />
-            </TranslationElement>
-            <TranslationElement RefId="%ProductId%">
-              <Translation AttributeName="Name" Text="Temperatur Sensor Program Übersetzt" />
-            </TranslationElement>
-          </TranslationUnit>
-          <TranslationUnit RefId="M-00FA_CS-OpenKNX">
-            <TranslationElement RefId="M-00FA_CS-OpenKNX">
-              <Translation AttributeName="Name" Text="Geräte Übersetzt" />
-            </TranslationElement>
-            <TranslationElement RefId="%CatalogItemId%">
-              <Translation AttributeName="Name" Text="Katalog Übersetzt TempSensor" />
-            </TranslationElement>
-          </TranslationUnit>
-          <TranslationUnit RefId="%AID%">
-            <TranslationElement RefId="%AID%">
-              <Translation AttributeName="Name" Text="ApplikationProgramme ÜbersetztTempSensor" />
-            </TranslationElement>
-            <!-- and include all other files just in the needed language -->
-            <op:include href="../../OAM-LogicModule/src/Logikmodul.share.xml" xpath="//Languages/Language[@Identifier='de-DE']/TranslationUnit/*" prefix="LOG" />
-            <op:include href="PMmodul.share.xml" xpath="//Languages/Language[@Identifier='de-DE']/TranslationUnit/*" prefix="PM" />
-            <op:include href="../../OAM-LogicModule/src/Logikmodul.templ.xml" xpath="//Languages/Language[@Identifier='de-DE']/TranslationUnit/*" type="template" prefix="LOG" />
-            <op:include href="PMmodul.templ.xml" xpath="//Languages/Language[@Identifier='de-DE']/TranslationUnit/*" type="template" prefix="PM" />
-          </TranslationUnit>
-        </Language>
-      </Languages>
     </Manufacturer>
   </ManufacturerData>
 </KNX>

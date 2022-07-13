@@ -1,7 +1,6 @@
 #pragma once
-#include <knx.h>
 
-// Parameter with single occurance
+// Parameter with single occurrence
 
 #define LOG_NumChannels                0      // uint8_t
 #define LOG_StartupDelayBase           1      // 2 Bits, Bit 7-6
@@ -193,7 +192,7 @@
 #define PM_KoSensitivity 27
 #define PM_KoHfReset 28
 
-#define LOG_ChannelCount 3
+#define LOG_ChannelCount 2
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 48
@@ -853,7 +852,7 @@
 #define     LOG_fE2UseOtherKOShift 7
 #define LOG_fE2OtherKO                84      // uint15_t
 
-// Communication objects per channel (multiple occurance)
+// Communication objects per channel (multiple occurrence)
 #define LOG_KoOffset 450
 #define LOG_KoBlockSize 3
 #define LOG_KoKOfE1 0
@@ -863,7 +862,7 @@
 #define PM_ChannelCount 2
 
 // Parameter per channel
-#define PM_ParamBlockOffset 306
+#define PM_ParamBlockOffset 220
 #define PM_ParamBlockSize 133
 #define PM_pPresenceInputs            0      // 3 Bits, Bit 7-5
 #define     PM_pPresenceInputsMask 0xE0
@@ -1298,7 +1297,7 @@
 #define PM_pDOutput2OffScene         132      // 8 Bits, Bit 7-0
 #define PM_pDOutput2OffDim           132      // uint8_t
 
-// Communication objects per channel (multiple occurance)
+// Communication objects per channel (multiple occurrence)
 #define PM_KoOffset 50
 #define PM_KoBlockSize 20
 #define PM_KoKOpLux 0
@@ -1324,5 +1323,5 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 76
+#define MAIN_ApplicationVersion 77
 #define MAIN_OrderNumber "OpenKnxPresence"
