@@ -1274,284 +1274,6 @@
                         <!-- Manual mode number of keys -->
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuell übersteuern" UIHint="Headline" />
                         <ParameterRefRef RefId="%AID%_UP-%T%%CCC%060_R-%T%%CCC%06001" />
-                        <!-- Internal inputs -->
-                        <ParameterBlock Id="%AID%_PB-%C%14" Name="PM%C%IntInput" Text="Eingänge">
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingänge" UIHint="Headline" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Im Folgenden werden weitere Einstellungen für Eingänge vorgenommen. Dazu gehört das Lesen von Eingangswerten nach einem Neustart und die interne Verknüpfung von Eingängen. Details bitte in der Applikationsbeschreibung nachlesen. " />
-                          <ParameterBlock Id="%AID%_PB-%C%15" Name="Grid%C%IntInput" Inline="true" Layout="Grid">
-                            <Rows>
-                              <Row Id="%AID%_PB-%C%15_R-1" Name="Row1" Text="1" />
-                              <Row Id="%AID%_PB-%C%15_R-2" Name="Row2" Text="2" />
-                              <Row Id="%AID%_PB-%C%15_R-3" Name="Row3" Text="3" />
-                              <Row Id="%AID%_PB-%C%15_R-4" Name="Row4" Text="4" />
-                              <Row Id="%AID%_PB-%C%15_R-5" Name="Row5" Text="5" />
-                              <Row Id="%AID%_PB-%C%15_R-6" Name="Row6" Text="6" />
-                              <Row Id="%AID%_PB-%C%15_R-7" Name="Row7" Text="7" />
-                              <Row Id="%AID%_PB-%C%15_R-8" Name="Row8" Text="8" />
-                              <Row Id="%AID%_PB-%C%15_R-9" Name="Row9" Text="9" />
-                              <Row Id="%AID%_PB-%C%15_R-10" Name="Row10" Text="10" />
-                              <Row Id="%AID%_PB-%C%15_R-11" Name="Row11" Text="11" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-%C%15_C-1" Name="Col1" Width="40%" />
-                              <Column Id="%AID%_PB-%C%15_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-%C%15_C-3" Name="Col3" Width="50%" />
-                              <Column Id="%AID%_PB-%C%15_C-4" Name="Col4" Width="10%" />
-                              <Column Id="%AID%_PB-%C%15_C-5" Name="Col5" Width="10%" />
-                            </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;Eingang" Cell="1,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;Lesen *)" Cell="1,2" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="Neues KO erzeugen oder&#10;bestehendes KO nutzen" Cell="1,3" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;KO-Nr." Cell="1,4" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;DPT" Cell="1,5" />
-                            <!-- constant texts -->
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit extern" Cell="2,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz" Cell="3,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Automatik übersteuern" Cell="5,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuell übersteuern" Cell="6,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Aktorstatus" Cell="7,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Reset" Cell="9,1" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="PM über Szene steuern" Cell="11,1" />
-
-                            <choose ParamRefId="%AID%_P-%T%%CCC%084_R-%T%%CCC%08401">
-                              <when test="0">
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="2,3" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%064_R-%T%%CCC%06401" Cell="2,3" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" 9.004" Cell="2,5" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%900_R-%T%%CCC%90001">
-                              <when test="1 3 4">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601" Cell="3,3" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="3,5" />
-                              </when>
-                              <when test="0 2">
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="3,3" />
-                              </when>
-                              <when test="0 1 2 3">
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Bewegung" Cell="4,1" />
-                              </when>
-                              <when test="4">
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Weitere Präsenz" Cell="4,1" />
-                              </when>
-                              <when test="2 3 4">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%068_R-%T%%CCC%06801" Cell="4,3" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="4,5" />
-                              </when>
-                              <when test="0 1">
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="4,3" />
-                              </when>
-                            </choose>
-
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001" Cell="5,3" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="5,5" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%072_R-%T%%CCC%07201" Cell="6,3" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="6,5" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%074_R-%T%%CCC%07401" Cell="7,3" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="7,5" />
-
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%012_R-%T%%CCC%01201">
-                              <when test="0">
-                                <!-- inaktiv -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" Cell="8,1" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="8,3" />
-                              </when>
-                              <when test="1">
-                                <!-- Zwangsführung -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Zwangsführung" Cell="8,1" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" 2.001" Cell="8,5" />
-                              </when>
-                              <when test="2">
-                                <!-- Lock -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" Cell="8,1" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="8,5" />
-                              </when>
-                              <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%076_R-%T%%CCC%07601" Cell="8,3" />
-                              </when>
-                            </choose>
-
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%078_R-%T%%CCC%07801" Cell="9,3" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.015" Cell="9,5" />
-
-                            <choose ParamRefId="%AID%_P-%T%%CCC%085_R-%T%%CCC%08501">
-                              <when test="0">
-                                <!-- inaktiv -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="10,3" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphase" Cell="10,1" />
-                              </when>
-                              <when test="1">
-                                <!-- Tagesphase -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphase" Cell="10,1" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="17.001" Cell="10,5" />
-                              </when>
-                              <when test="2">
-                                <!-- Tag/Nacht -->
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Tag/Nacht" Cell="10,1" />
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="10,5" />
-                              </when>
-                              <when test=">0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" Cell="10,3" />
-                              </when>
-                            </choose>
-
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%082_R-%T%%CCC%08201" Cell="11,3" />
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="17.001" Cell="11,5" />
-
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%064_R-%T%%CCC%06401">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%065_R-%T%%CCC%06501" Cell="2,4" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%086_R-%T%%CCC%08601" Cell="2,2" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%065_R-%T%%CCC%06502" Cell="2,4" />
-                              </when>
-                              <when default="true">
-                                <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="X" Cell="2,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%067_R-%T%%CCC%06701" Cell="3,4" />
-                                <choose ParamRefId="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101">
-                                  <when test="0">
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%087_R-%T%%CCC%08701" Cell="3,2" />
-                                  </when>
-                                </choose>
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%067_R-%T%%CCC%06702" Cell="3,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%068_R-%T%%CCC%06801">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%069_R-%T%%CCC%06901" Cell="4,4" />
-                                <choose ParamRefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90201">
-                                  <when test="0">
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%088_R-%T%%CCC%08801" Cell="4,2" />
-                                  </when>
-                                </choose>
-                                <choose ParamRefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90202">
-                                  <when test="0">
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%088_R-%T%%CCC%08801" Cell="4,2" />
-                                  </when>
-                                </choose>
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%069_R-%T%%CCC%06902" Cell="4,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%071_R-%T%%CCC%07101" Cell="5,4" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%071_R-%T%%CCC%07102" Cell="5,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%072_R-%T%%CCC%07201">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%073_R-%T%%CCC%07301" Cell="6,4" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%073_R-%T%%CCC%07302" Cell="6,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%074_R-%T%%CCC%07401">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%075_R-%T%%CCC%07501" Cell="7,4" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%089_R-%T%%CCC%08901" Cell="7,2" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%075_R-%T%%CCC%07502" Cell="7,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%076_R-%T%%CCC%07601">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%077_R-%T%%CCC%07701" Cell="8,4" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%090_R-%T%%CCC%09001" Cell="8,2" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%077_R-%T%%CCC%07702" Cell="8,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%078_R-%T%%CCC%07801">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%079_R-%T%%CCC%07901" Cell="9,4" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%079_R-%T%%CCC%07902" Cell="9,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%081_R-%T%%CCC%08101" Cell="10,4" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" Cell="10,2" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%081_R-%T%%CCC%08102" Cell="10,4" />
-                              </when>
-                            </choose>
-                            <choose ParamRefId="%AID%_UP-%T%%CCC%082_R-%T%%CCC%08201">
-                              <when test="0">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%083_R-%T%%CCC%08301" Cell="11,4" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" Cell="11,2" />
-                              </when>
-                              <when test="1">
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%083_R-%T%%CCC%08302" Cell="11,4" />
-                              </when>
-                            </choose>
-                          </ParameterBlock>
-                          <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="*) Lesen meint hier 'Lesen nach Neustart'" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Man kann die Eingänge vom PM statt über Gruppenadressen auch intern mit anderen Kommunikationsobjekten verbinden. Das bietet sich vor allem für Logikausgänge, aber auch für die Verbindung mit anderen PM-Kanälen an." />
-                          <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Information" Text="Achtung: Alle DPT der intern verknüpften KO müssen zum Original-KO passen. Weder die Applikation noch die Firmware haben eine Möglichkeit, das zu überprüfen. Falsche DPT können zu einem Hänger des Moduls führen!" />
-                        </ParameterBlock>
-                        <!-- Scenes -->
-                        <ParameterBlock Id="%AID%_PB-%C%12" Name="PM%C%Scenes" Text="Szenensteuerung">
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Viele Funktionen, für die ein Kommunikaitonsobjekt zur Verfügung steht, können auch über Szenen gesteuert werden." />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Im folgenden können diese Funktionen mit entsprechenden Szenen verknüpft werden." />
-                          <ParameterBlock Id="%AID%_PB-%C%13" Name="Table%C%Scenes" Text="#" Inline="true" Layout="Table">
-                            <Rows>
-                              <Row Id="%AID%_PB-%C%13_R-1" Name="Row1" Text="1" />
-                              <Row Id="%AID%_PB-%C%13_R-2" Name="Row2" Text="2" />
-                              <Row Id="%AID%_PB-%C%13_R-3" Name="Row3" Text="3" />
-                              <Row Id="%AID%_PB-%C%13_R-4" Name="Row4" Text="4" />
-                              <Row Id="%AID%_PB-%C%13_R-5" Name="Row5" Text="5" />
-                              <Row Id="%AID%_PB-%C%13_R-6" Name="Row6" Text="6" />
-                              <Row Id="%AID%_PB-%C%13_R-7" Name="Row7" Text="7" />
-                              <Row Id="%AID%_PB-%C%13_R-8" Name="Row8" Text="8" />
-                              <Row Id="%AID%_PB-%C%13_R-9" Name="Row9" Text="9" />
-                              <Row Id="%AID%_PB-%C%13_R-10" Name="Row10" Text="10" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-%C%13_C-1" Name="Col1" Text="Szene" Width="25%" />
-                              <Column Id="%AID%_PB-%C%13_C-2" Name="Col2" Text="Funktion" Width="50%" />
-                            </Columns>
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%040_R-%T%%CCC%04001" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%041_R-%T%%CCC%04101" Cell="2,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%042_R-%T%%CCC%04201" Cell="3,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%043_R-%T%%CCC%04301" Cell="4,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%044_R-%T%%CCC%04401" Cell="5,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%045_R-%T%%CCC%04501" Cell="6,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%046_R-%T%%CCC%04601" Cell="7,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%047_R-%T%%CCC%04701" Cell="8,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%048_R-%T%%CCC%04801" Cell="9,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%049_R-%T%%CCC%04901" Cell="10,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%050_R-%T%%CCC%05001" Cell="1,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%051_R-%T%%CCC%05101" Cell="2,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%052_R-%T%%CCC%05201" Cell="3,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%053_R-%T%%CCC%05301" Cell="4,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%054_R-%T%%CCC%05401" Cell="5,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%055_R-%T%%CCC%05501" Cell="6,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%056_R-%T%%CCC%05601" Cell="7,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%057_R-%T%%CCC%05701" Cell="8,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%058_R-%T%%CCC%05801" Cell="9,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%059_R-%T%%CCC%05901" Cell="10,2" />
-                          </ParameterBlock>
-                        </ParameterBlock>
                       </when>
                     </choose>
                     <choose ParamRefId="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001">
@@ -1577,10 +1299,288 @@
                   </ParameterBlock>
                 </Channel>
                 <!-- ************************************************************ -->
-                <!-- DAY PHASES -->
+                <!-- Additional parameter blocks (subtree) -->
                 <!-- ************************************************************ -->
                 <choose ParamRefId="%AID%_UP-%T%%CCC%008_R-%T%%CCC%00801">
                   <when test=">0">
+                    <!-- Internal inputs -->
+                    <ParameterBlock Id="%AID%_PB-%C%14" Name="PM%C%IntInput" Text="Eingänge">
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingänge" UIHint="Headline" />
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Im Folgenden werden weitere Einstellungen für Eingänge vorgenommen. Dazu gehört das Lesen von Eingangswerten nach einem Neustart und die interne Verknüpfung von Eingängen. Details bitte in der Applikationsbeschreibung nachlesen. " />
+                      <ParameterBlock Id="%AID%_PB-%C%15" Name="Grid%C%IntInput" Inline="true" Layout="Grid">
+                        <Rows>
+                          <Row Id="%AID%_PB-%C%15_R-1" Name="Row1" Text="1" />
+                          <Row Id="%AID%_PB-%C%15_R-2" Name="Row2" Text="2" />
+                          <Row Id="%AID%_PB-%C%15_R-3" Name="Row3" Text="3" />
+                          <Row Id="%AID%_PB-%C%15_R-4" Name="Row4" Text="4" />
+                          <Row Id="%AID%_PB-%C%15_R-5" Name="Row5" Text="5" />
+                          <Row Id="%AID%_PB-%C%15_R-6" Name="Row6" Text="6" />
+                          <Row Id="%AID%_PB-%C%15_R-7" Name="Row7" Text="7" />
+                          <Row Id="%AID%_PB-%C%15_R-8" Name="Row8" Text="8" />
+                          <Row Id="%AID%_PB-%C%15_R-9" Name="Row9" Text="9" />
+                          <Row Id="%AID%_PB-%C%15_R-10" Name="Row10" Text="10" />
+                          <Row Id="%AID%_PB-%C%15_R-11" Name="Row11" Text="11" />
+                        </Rows>
+                        <Columns>
+                          <Column Id="%AID%_PB-%C%15_C-1" Name="Col1" Width="40%" />
+                          <Column Id="%AID%_PB-%C%15_C-2" Name="Col2" Width="15%" />
+                          <Column Id="%AID%_PB-%C%15_C-3" Name="Col3" Width="50%" />
+                          <Column Id="%AID%_PB-%C%15_C-4" Name="Col4" Width="10%" />
+                          <Column Id="%AID%_PB-%C%15_C-5" Name="Col5" Width="10%" />
+                        </Columns>
+                        <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;Eingang" Cell="1,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;Lesen *)" Cell="1,2" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="Neues KO erzeugen oder&#10;bestehendes KO nutzen" Cell="1,3" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;KO-Nr." Cell="1,4" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="&#10;DPT" Cell="1,5" />
+                        <!-- constant texts -->
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit extern" Cell="2,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz" Cell="3,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Automatik übersteuern" Cell="5,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuell übersteuern" Cell="6,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Aktorstatus" Cell="7,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Reset" Cell="9,1" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="PM über Szene steuern" Cell="11,1" />
+
+                        <choose ParamRefId="%AID%_P-%T%%CCC%084_R-%T%%CCC%08401">
+                          <when test="0">
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="2,3" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%064_R-%T%%CCC%06401" Cell="2,3" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 9.004" Cell="2,5" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%900_R-%T%%CCC%90001">
+                          <when test="1 3 4">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601" Cell="3,3" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="3,5" />
+                          </when>
+                          <when test="0 2">
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="3,3" />
+                          </when>
+                          <when test="0 1 2 3">
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Bewegung" Cell="4,1" />
+                          </when>
+                          <when test="4">
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Weitere Präsenz" Cell="4,1" />
+                          </when>
+                          <when test="2 3 4">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%068_R-%T%%CCC%06801" Cell="4,3" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="4,5" />
+                          </when>
+                          <when test="0 1">
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="4,3" />
+                          </when>
+                        </choose>
+
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001" Cell="5,3" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="5,5" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%072_R-%T%%CCC%07201" Cell="6,3" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="6,5" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%074_R-%T%%CCC%07401" Cell="7,3" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="7,5" />
+
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%012_R-%T%%CCC%01201">
+                          <when test="0">
+                            <!-- inaktiv -->
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" Cell="8,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="8,3" />
+                          </when>
+                          <when test="1">
+                            <!-- Zwangsführung -->
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Zwangsführung" Cell="8,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 2.001" Cell="8,5" />
+                          </when>
+                          <when test="2">
+                            <!-- Lock -->
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Sperre" Cell="8,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="8,5" />
+                          </when>
+                          <when test=">0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%076_R-%T%%CCC%07601" Cell="8,3" />
+                          </when>
+                        </choose>
+
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%078_R-%T%%CCC%07801" Cell="9,3" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.015" Cell="9,5" />
+
+                        <choose ParamRefId="%AID%_P-%T%%CCC%085_R-%T%%CCC%08501">
+                          <when test="0">
+                            <!-- inaktiv -->
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Eingang deaktiviert" Cell="10,3" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphase" Cell="10,1" />
+                          </when>
+                          <when test="1">
+                            <!-- Tagesphase -->
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Tagesphase" Cell="10,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="17.001" Cell="10,5" />
+                          </when>
+                          <when test="2">
+                            <!-- Tag/Nacht -->
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Tag/Nacht" Cell="10,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text=" 1.001" Cell="10,5" />
+                          </when>
+                          <when test=">0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001" Cell="10,3" />
+                          </when>
+                        </choose>
+
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%082_R-%T%%CCC%08201" Cell="11,3" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="17.001" Cell="11,5" />
+
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%064_R-%T%%CCC%06401">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%065_R-%T%%CCC%06501" Cell="2,4" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%086_R-%T%%CCC%08601" Cell="2,2" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%065_R-%T%%CCC%06502" Cell="2,4" />
+                          </when>
+                          <when default="true">
+                            <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="X" Cell="2,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%067_R-%T%%CCC%06701" Cell="3,4" />
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101">
+                              <when test="0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%087_R-%T%%CCC%08701" Cell="3,2" />
+                              </when>
+                            </choose>
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%067_R-%T%%CCC%06702" Cell="3,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%068_R-%T%%CCC%06801">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%069_R-%T%%CCC%06901" Cell="4,4" />
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90201">
+                              <when test="0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%088_R-%T%%CCC%08801" Cell="4,2" />
+                              </when>
+                            </choose>
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90202">
+                              <when test="0">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%088_R-%T%%CCC%08801" Cell="4,2" />
+                              </when>
+                            </choose>
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%069_R-%T%%CCC%06902" Cell="4,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%071_R-%T%%CCC%07101" Cell="5,4" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%071_R-%T%%CCC%07102" Cell="5,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%072_R-%T%%CCC%07201">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%073_R-%T%%CCC%07301" Cell="6,4" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%073_R-%T%%CCC%07302" Cell="6,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%074_R-%T%%CCC%07401">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%075_R-%T%%CCC%07501" Cell="7,4" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%089_R-%T%%CCC%08901" Cell="7,2" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%075_R-%T%%CCC%07502" Cell="7,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%076_R-%T%%CCC%07601">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%077_R-%T%%CCC%07701" Cell="8,4" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%090_R-%T%%CCC%09001" Cell="8,2" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%077_R-%T%%CCC%07702" Cell="8,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%078_R-%T%%CCC%07801">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%079_R-%T%%CCC%07901" Cell="9,4" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%079_R-%T%%CCC%07902" Cell="9,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%080_R-%T%%CCC%08001">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%081_R-%T%%CCC%08101" Cell="10,4" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%091_R-%T%%CCC%09101" Cell="10,2" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%081_R-%T%%CCC%08102" Cell="10,4" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%082_R-%T%%CCC%08201">
+                          <when test="0">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%083_R-%T%%CCC%08301" Cell="11,4" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" Cell="11,2" />
+                          </when>
+                          <when test="1">
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%083_R-%T%%CCC%08302" Cell="11,4" />
+                          </when>
+                        </choose>
+                      </ParameterBlock>
+                      <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Headline" Text="*) Lesen meint hier 'Lesen nach Neustart'" />
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Man kann die Eingänge vom PM statt über Gruppenadressen auch intern mit anderen Kommunikationsobjekten verbinden. Das bietet sich vor allem für Logikausgänge, aber auch für die Verbindung mit anderen PM-Kanälen an." />
+                      <ParameterSeparator Id="%AID%_PS-nnn" UIHint="Information" Text="Achtung: Alle DPT der intern verknüpften KO müssen zum Original-KO passen. Weder die Applikation noch die Firmware haben eine Möglichkeit, das zu überprüfen. Falsche DPT können zu einem Hänger des Moduls führen!" />
+                    </ParameterBlock>
+                    <!-- Scenes -->
+                    <ParameterBlock Id="%AID%_PB-%C%12" Name="PM%C%Scenes" Text="Szenensteuerung">
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Szenensteuerung" UIHint="Headline" />
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Viele Funktionen, für die ein Kommunikaitonsobjekt zur Verfügung steht, können auch über Szenen gesteuert werden." />
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Im folgenden können diese Funktionen mit entsprechenden Szenen verknüpft werden." />
+                      <ParameterBlock Id="%AID%_PB-%C%13" Name="Table%C%Scenes" Text="#" Inline="true" Layout="Table">
+                        <Rows>
+                          <Row Id="%AID%_PB-%C%13_R-1" Name="Row1" Text="1" />
+                          <Row Id="%AID%_PB-%C%13_R-2" Name="Row2" Text="2" />
+                          <Row Id="%AID%_PB-%C%13_R-3" Name="Row3" Text="3" />
+                          <Row Id="%AID%_PB-%C%13_R-4" Name="Row4" Text="4" />
+                          <Row Id="%AID%_PB-%C%13_R-5" Name="Row5" Text="5" />
+                          <Row Id="%AID%_PB-%C%13_R-6" Name="Row6" Text="6" />
+                          <Row Id="%AID%_PB-%C%13_R-7" Name="Row7" Text="7" />
+                          <Row Id="%AID%_PB-%C%13_R-8" Name="Row8" Text="8" />
+                          <Row Id="%AID%_PB-%C%13_R-9" Name="Row9" Text="9" />
+                          <Row Id="%AID%_PB-%C%13_R-10" Name="Row10" Text="10" />
+                        </Rows>
+                        <Columns>
+                          <Column Id="%AID%_PB-%C%13_C-1" Name="Col1" Text="Szene" Width="25%" />
+                          <Column Id="%AID%_PB-%C%13_C-2" Name="Col2" Text="Funktion" Width="50%" />
+                        </Columns>
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%040_R-%T%%CCC%04001" Cell="1,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%041_R-%T%%CCC%04101" Cell="2,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%042_R-%T%%CCC%04201" Cell="3,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%043_R-%T%%CCC%04301" Cell="4,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%044_R-%T%%CCC%04401" Cell="5,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%045_R-%T%%CCC%04501" Cell="6,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%046_R-%T%%CCC%04601" Cell="7,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%047_R-%T%%CCC%04701" Cell="8,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%048_R-%T%%CCC%04801" Cell="9,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%049_R-%T%%CCC%04901" Cell="10,1" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%050_R-%T%%CCC%05001" Cell="1,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%051_R-%T%%CCC%05101" Cell="2,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%052_R-%T%%CCC%05201" Cell="3,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%053_R-%T%%CCC%05301" Cell="4,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%054_R-%T%%CCC%05401" Cell="5,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%055_R-%T%%CCC%05501" Cell="6,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%056_R-%T%%CCC%05601" Cell="7,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%057_R-%T%%CCC%05701" Cell="8,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%058_R-%T%%CCC%05801" Cell="9,2" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%059_R-%T%%CCC%05901" Cell="10,2" />
+                      </ParameterBlock>
+                    </ParameterBlock>
                     <!-- Phase 1 -->
                     <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%026_R-%T%%CCC%02601">
                       <choose ParamRefId="%AID%_UP-%T%%CCC%009_R-%T%%CCC%00901">
@@ -1744,9 +1744,6 @@
                                 </when>
                               </choose>
                             </when>
-                            <!-- <when test=">0">
-                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%102_R-%T%%CCC%10201" />
-                  </when> -->
                           </choose>
                         </when>
                       </choose>
@@ -1810,9 +1807,6 @@
                                 </when>
                               </choose>
                             </when>
-                            <!-- <when test=">0">
-                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%103_R-%T%%CCC%10301" />
-                  </when> -->
                           </choose>
                         </when>
                       </choose>

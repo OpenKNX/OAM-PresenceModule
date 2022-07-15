@@ -41,6 +41,9 @@ if (!$?) { exit 1 }
 scripts/Build-Step.ps1 release_SAMD_v31 firmware-v31 bin
 if (!$?) { exit 1 }
 
+scripts/Build-Step.ps1 release_SAMD_v30 firmware-v30 bin
+if (!$?) { exit 1 }
+
 # add necessary scripts
 Copy-Item scripts/Readme-Release.txt release/
 Copy-Item scripts/Build-knxprod.ps1 release/

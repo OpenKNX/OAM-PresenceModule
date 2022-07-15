@@ -307,17 +307,17 @@ void Presence::processHardwarePresence()
         if (Sensor::measureValue(MeasureType::Scenario, lValue))
         {
             GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
-            if (mScenario != (uint8_t)lValue) {
-                mScenario = (uint8_t)lValue;
+            if (mScenario != (int8_t)lValue) {
+                mScenario = (int8_t)lValue;
                 lKo.value(mScenario, getDPT(VAL_DPT_5));
             }
         }
         if (Sensor::measureValue(MeasureType::Sensitivity, lValue))
         {
             GroupObject &lKo = knx.getGroupObject(PM_KoSensitivity);
-            if (mSensitivity != (uint8_t)lValue)
+            if (mSensitivity != (int8_t)lValue)
             {
-                mSensitivity = (uint8_t)lValue;
+                mSensitivity = (int8_t)lValue;
                 lKo.value(mSensitivity, getDPT(VAL_DPT_5));
             }
         }

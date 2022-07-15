@@ -64,8 +64,8 @@ private:
   bool mPresenceLedOn = false;
   bool mInfoLedOn = false;
   bool mPresenceChanged = false;
-  uint8_t mScenario = 0;
-  uint8_t mSensitivity = 0;
+  int8_t mScenario = -1;
+  int8_t mSensitivity = 1;
   // brightness is missing
   #ifdef HF_POWER_PIN
   SensorMR24xxB1 *mPresenceSensor;
