@@ -153,34 +153,34 @@
 #define LOG_KoLedLock 8
 #define LOG_KoBuzzerLock 9
 
-#define PM_PMChannels                40      // uint8_t
-#define PM_SendRAW                   41      // 1 Bit, Bit 7
+#define PM_PMChannels                26      // uint8_t
+#define PM_SendRAW                   27      // 1 Bit, Bit 7
 #define     PM_SendRAWMask 0x80
 #define     PM_SendRAWShift 7
-#define PM_LEDPresence               41      // 2 Bits, Bit 6-5
+#define PM_LEDPresence               27      // 2 Bits, Bit 6-5
 #define     PM_LEDPresenceMask 0x60
 #define     PM_LEDPresenceShift 5
-#define PM_LEDMove                   41      // 2 Bits, Bit 4-3
+#define PM_LEDMove                   27      // 2 Bits, Bit 4-3
 #define     PM_LEDMoveMask 0x18
 #define     PM_LEDMoveShift 3
-#define PM_HWPresence                41      // 3 Bits, Bit 2-0
+#define PM_HWPresence                27      // 3 Bits, Bit 2-0
 #define     PM_HWPresenceMask 0x07
 #define     PM_HWPresenceShift 0
-#define PM_HWLux                     42      // 2 Bits, Bit 7-6
+#define PM_HWLux                     28      // 2 Bits, Bit 7-6
 #define     PM_HWLuxMask 0xC0
 #define     PM_HWLuxShift 6
-#define PM_ReadLed                   42      // 1 Bit, Bit 5
+#define PM_ReadLed                   28      // 1 Bit, Bit 5
 #define     PM_ReadLedMask 0x20
 #define     PM_ReadLedShift 5
-#define PM_LuxOffsetPM               43      // int8_t
-#define PM_LuxSendDeltaAbsRel        44      // 1 Bit, Bit 7
+#define PM_LuxOffsetPM               29      // int8_t
+#define PM_LuxSendDeltaAbsRel        30      // 1 Bit, Bit 7
 #define     PM_LuxSendDeltaAbsRelMask 0x80
 #define     PM_LuxSendDeltaAbsRelShift 7
-#define PM_LuxSendDelta              44      // uint15_t
-#define PM_LuxSendCycleDelayBase     46      // 2 Bits, Bit 7-6
+#define PM_LuxSendDelta              30      // uint15_t
+#define PM_LuxSendCycleDelayBase     32      // 2 Bits, Bit 7-6
 #define     PM_LuxSendCycleDelayBaseMask 0xC0
 #define     PM_LuxSendCycleDelayBaseShift 6
-#define PM_LuxSendCycleDelayTime     46      // uint14_t
+#define PM_LuxSendCycleDelayTime     32      // uint14_t
 
 #define PM_KoLuxOut 20
 #define PM_KoPresenceOut 21
@@ -195,7 +195,7 @@
 #define LOG_ChannelCount 30
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 48
+#define LOG_ParamBlockOffset 34
 #define LOG_ParamBlockSize 86
 #define LOG_fChannelDelayBase          0      // 2 Bits, Bit 7-6
 #define     LOG_fChannelDelayBaseMask 0xC0
@@ -862,7 +862,7 @@
 #define PM_ChannelCount 20
 
 // Parameter per channel
-#define PM_ParamBlockOffset 2628
+#define PM_ParamBlockOffset 2614
 #define PM_ParamBlockSize 133
 #define PM_pPresenceInputs            0      // 3 Bits, Bit 7-5
 #define     PM_pPresenceInputsMask 0xE0
@@ -1322,6 +1322,6 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 6
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 80
 #define MAIN_OrderNumber "OpenKnxPresence"

@@ -218,10 +218,10 @@
               <!-- Logic share parameters go from 0 to 29? We leave some space -->
               <!-- Here we start with non-multiplied parameters -->
               <Parameter Id="%AID%_P-%T%000001" Name="PMChannels" ParameterType="%AID%_PT-PMChannels" Text="PM-Kanäle" Value="%N%" Access="Read">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="40" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
               </Parameter>
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="41" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%000002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" /> -->
                 <Parameter Id="%AID%_UP-%T%000003" Name="SendRAW" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Rohdaten auf den Bus senden?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000004" Name="LEDPresence" Offset="0" BitOffset="1" ParameterType="%AID%_PT-StatusLED" Text="LED Präsenz" Value="0" />
@@ -235,14 +235,14 @@
               <Parameter Id="%AID%_P-%T%000009" Name="LedFromKO" ParameterType="%AID%_PT-CheckBox" Text="Irgendeine Led vom KO lesen" Value="0" Access="None" />
               <!-- Brightness related settings (local hardware) -->
               <Union SizeInBit="24">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="43" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="3" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%000010" Name="LuxOffsetPM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OffsetLuxPM" Text="Korrektur Luxwert" SuffixText="Lux" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000014" Name="LuxSendDeltaAbsRel" Offset="1" BitOffset="0" ParameterType="%AID%_PT-LuxAbsRel" Text="Helligkeitsänderung wird angegeben in" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000011" Name="LuxSendDelta" Offset="1" BitOffset="1" ParameterType="%AID%_PT-AbsLux" Text="Senden der Helligkeit bei Änderung um" Value="0" />
               </Union>
               <!-- send cyclic brightness (delay pattern) -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="46" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%000012" Name="LuxSendCycleDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000013" Name="LuxSendCycleDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
               </Union>
