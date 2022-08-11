@@ -166,6 +166,7 @@ void Presence::startSensors()
     {
 #ifdef HF_POWER_PIN
         mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
+        mPresenceSensor->defaultSensorParameters(((knx.paramByte(PM_HfScenario) & PM_HfScenarioMask) >> PM_HfScenarioShift) - 1, (knx.paramByte(PM_HfSensitivity) & PM_HfSensitivityMask) >> PM_HfSensitivityShift );
 #endif
     }
     

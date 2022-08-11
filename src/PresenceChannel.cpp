@@ -695,7 +695,8 @@ void PresenceChannel::processPresenceShort()
         else 
         {
             // if we get any further presence information, we stop short presence without ending normal presence
-            bool lPresence = getRawPresence(true);
+            bool lJustMove = !paramBit(PM_pAPresenceShortCalculation, PM_pAPresenceShortCalculationMask, true);
+            bool lPresence = getRawPresence(lJustMove);
             if (lPresence) 
             {
                 endPresenceShort();

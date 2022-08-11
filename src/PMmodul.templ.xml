@@ -20,8 +20,6 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%007" Name="p%C%Output2Type" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OutputType" Text="Ausgang 2 ist vom Typ" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%008" Name="p%C%ChannelActive" Offset="1" BitOffset="6" ParameterType="%AID%_PT-ChannelActive" Text="Kanalaktivität" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%009" Name="p%C%BrightnessIndependent" Offset="2" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNoInverted" Text="Kanal ist Helligkeitsabhängig" Value="0" />
-                <!-- <Parameter Id="%AID%_UP-%T%%CCC%010" Name="p%C%Output1Cyclic" Offset="2" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Ausgang 1 sendet zyklisch" Value="0" /> -->
-                <!-- <Parameter Id="%AID%_UP-%T%%CCC%011" Name="p%C%Output2Cyclic" Offset="2" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Ausgang 2 sendet zyklisch" Value="0" /> -->
                 <Parameter Id="%AID%_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="2" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="2" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%012" Name="p%C%LockType" Offset="2" BitOffset="3" ParameterType="%AID%_PT-LockType" Text="Sperrobjekt" Value="0" />
@@ -63,9 +61,6 @@
                 <!-- Brightness Adaptive Calculation Delay -->
                 <Parameter Id="%AID%_UP-%T%%CCC%061" Name="p%C%AdaptiveDelayBase" ParameterType="%AID%_PT-DelayBase10" Offset="6" BitOffset="0" Text="Zeitbasis" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%062" Name="p%C%AdaptiveDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="6" BitOffset="2" Text="Zeit" Value="5" />
-                <!-- Cyclic Output 1 send -->
-                <!-- <Parameter Id="%AID%_UP-%T%%CCC%020" Name="p%C%Output1CyclicBase" ParameterType="%AID%_PT-DelayBase" Offset="8" BitOffset="0" Text="Zeitbasis" Value="1" /> -->
-                <!-- <Parameter Id="%AID%_UP-%T%%CCC%021" Name="p%C%Output1CyclicTime" ParameterType="%AID%_PT-DelayTime" Offset="8" BitOffset="2" Text="Zeit" Value="5" /> -->
                 <!-- Cyclic Output 2 send -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%022" Name="p%C%Output2CyclicBase" ParameterType="%AID%_PT-DelayBase" Offset="10" BitOffset="0" Text="Zeitbasis" Value="1" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%023" Name="p%C%Output2CyclicTime" ParameterType="%AID%_PT-DelayTime" Offset="10" BitOffset="2" Text="Zeit" Value="5" /> -->
@@ -139,7 +134,14 @@
               <!-- <Parameter Id="%AID%_P-%T%%CCC%095" Name="p%C%ExternalPMExist" ParameterType="%AID%_PT-CheckBox" Text="External PM" Value="0" /> -->
               <Parameter Id="%AID%_P-%T%%CCC%096" Name="p%C%LeaveRoom" ParameterType="%AID%_PT-ValueDpt5" Text="Leave room possible - with mode" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%003" Name="p%C%LeaveRoomModeChosen" ParameterType="%AID%_PT-ValueDpt5" Text="Leave room mode chosen" Value="0" />
-              <!-- Phase 1 -->
+              <!-- Calculate existence of move or presence signal -->
+              <Parameter Id="%AID%_P-%T%%CCC%001" Name="p%C%SignalMove" ParameterType="%AID%_PT-CheckBox" Text="Move signal exists" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%002" Name="p%C%SignalPresence" ParameterType="%AID%_PT-CheckBox" Text="Presence signal exists" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%010" Name="p%C%ExternalSignalMove" ParameterType="%AID%_PT-CheckBox" Text="External move signal exists" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%011" Name="p%C%ExternalSignalPresence" ParameterType="%AID%_PT-CheckBox" Text="External presence signal exists" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%020" Name="p%C%HardwareSignalMove" ParameterType="%AID%_PT-CheckBox" Text="External move signal exists" Value="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%021" Name="p%C%HardwareSignalPresence" ParameterType="%AID%_PT-CheckBox" Text="External presence signal exists" Value="0" />
+            <!-- Phase 1 -->
               <!-- Bitfield settings (per day phase) -->
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="53" BitOffset="0" />
@@ -150,6 +152,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%106" Name="pA%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="%AID%_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
                 <Parameter Id="%AID%_UP-%T%%CCC%135" Name="pA%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%137" Name="pA%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%138" Name="pA%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%102" Name="pA%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%103" Name="pA%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%104" Name="pA%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
@@ -211,6 +214,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%206" Name="pB%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="%AID%_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
                 <Parameter Id="%AID%_UP-%T%%CCC%235" Name="pB%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%237" Name="pB%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%238" Name="pB%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%202" Name="pB%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%203" Name="pB%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%204" Name="pB%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
@@ -272,6 +276,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%306" Name="pC%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="%AID%_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
                 <Parameter Id="%AID%_UP-%T%%CCC%335" Name="pC%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%337" Name="pC%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%338" Name="pC%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%302" Name="pC%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%303" Name="pC%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%304" Name="pC%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
@@ -333,6 +338,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%406" Name="pD%C%Output2Filter" Offset="0" BitOffset="6" ParameterType="%AID%_PT-OutputFilterPM" Text="Ausgang 2 sendet" Value="3" />
                 <Parameter Id="%AID%_UP-%T%%CCC%435" Name="pD%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%437" Name="pD%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%438" Name="pD%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%402" Name="pD%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%403" Name="pD%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%404" Name="pD%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
@@ -385,8 +391,8 @@
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_P-%T%%CCC%000" />
-              <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_UP-%T%%CCC%001" /> -->
-              <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_UP-%T%%CCC%002" /> -->
+              <ParameterRef Id="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_P-%T%%CCC%001" Access="None" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_P-%T%%CCC%002" Access="None" />
               <ParameterRef Id="%AID%_P-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_P-%T%%CCC%003" Access="None" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_UP-%T%%CCC%004" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_UP-%T%%CCC%005" />
@@ -394,8 +400,8 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%007_R-%T%%CCC%00701" RefId="%AID%_UP-%T%%CCC%007" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%008_R-%T%%CCC%00801" RefId="%AID%_UP-%T%%CCC%008" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%009_R-%T%%CCC%00901" RefId="%AID%_UP-%T%%CCC%009" />
-              <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%010_R-%T%%CCC%01001" RefId="%AID%_UP-%T%%CCC%010" /> -->
-              <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%011_R-%T%%CCC%01101" RefId="%AID%_UP-%T%%CCC%011" /> -->
+              <ParameterRef Id="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001" RefId="%AID%_P-%T%%CCC%010" Access="None" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" RefId="%AID%_P-%T%%CCC%011" Access="None" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%012_R-%T%%CCC%01201" RefId="%AID%_UP-%T%%CCC%012" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%013_R-%T%%CCC%01301" RefId="%AID%_UP-%T%%CCC%013" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%014_R-%T%%CCC%01401" RefId="%AID%_UP-%T%%CCC%014" />
@@ -404,8 +410,8 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%017_R-%T%%CCC%01701" RefId="%AID%_UP-%T%%CCC%017" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%018_R-%T%%CCC%01801" RefId="%AID%_UP-%T%%CCC%018" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%019_R-%T%%CCC%01901" RefId="%AID%_UP-%T%%CCC%019" />
-              <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%020_R-%T%%CCC%02001" RefId="%AID%_UP-%T%%CCC%020" /> -->
-              <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%021_R-%T%%CCC%02101" RefId="%AID%_UP-%T%%CCC%021" /> -->
+              <ParameterRef Id="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" RefId="%AID%_P-%T%%CCC%020" Access="None" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" RefId="%AID%_P-%T%%CCC%021" Access="None" />
               <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%022_R-%T%%CCC%02201" RefId="%AID%_UP-%T%%CCC%022" /> -->
               <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%023_R-%T%%CCC%02301" RefId="%AID%_UP-%T%%CCC%023" /> -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%024_R-%T%%CCC%02401" RefId="%AID%_UP-%T%%CCC%024" />
@@ -538,6 +544,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%135_R-%T%%CCC%13501" RefId="%AID%_UP-%T%%CCC%135" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" RefId="%AID%_UP-%T%%CCC%136" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%137_R-%T%%CCC%13701" RefId="%AID%_UP-%T%%CCC%137" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%138_R-%T%%CCC%13801" RefId="%AID%_UP-%T%%CCC%138" />
               <!-- Phase 2 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001" RefId="%AID%_UP-%T%%CCC%200" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" RefId="%AID%_UP-%T%%CCC%201" />
@@ -578,6 +585,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%235_R-%T%%CCC%23501" RefId="%AID%_UP-%T%%CCC%235" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" RefId="%AID%_UP-%T%%CCC%236" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%237_R-%T%%CCC%23701" RefId="%AID%_UP-%T%%CCC%237" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%238_R-%T%%CCC%23801" RefId="%AID%_UP-%T%%CCC%238" />
               <!-- Phase 3 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001" RefId="%AID%_UP-%T%%CCC%300" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101" RefId="%AID%_UP-%T%%CCC%301" />
@@ -618,6 +626,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%335_R-%T%%CCC%33501" RefId="%AID%_UP-%T%%CCC%335" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" RefId="%AID%_UP-%T%%CCC%336" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%337_R-%T%%CCC%33701" RefId="%AID%_UP-%T%%CCC%337" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%338_R-%T%%CCC%33801" RefId="%AID%_UP-%T%%CCC%338" />
               <!-- Phase 4 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001" RefId="%AID%_UP-%T%%CCC%400" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101" RefId="%AID%_UP-%T%%CCC%401" />
@@ -658,6 +667,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%435_R-%T%%CCC%43501" RefId="%AID%_UP-%T%%CCC%435" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" RefId="%AID%_UP-%T%%CCC%436" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%437_R-%T%%CCC%43701" RefId="%AID%_UP-%T%%CCC%437" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%438_R-%T%%CCC%43801" RefId="%AID%_UP-%T%%CCC%438" />
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%T%%CCC%000" Name="KOp%C%Lux" Number="%K0%" Text="Helligkeit extern" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -723,7 +733,13 @@
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%084_R-%T%%CCC%08401" />
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%085_R-%T%%CCC%08501" />
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" />
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%003_R-%T%%CCC%00301" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" />
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanaldefinition" UIHint="Headline" />
                     <!-- Channel name -->
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
@@ -958,6 +974,107 @@
                             <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
                           </when>
                         </choose>
+
+                        <!-- calculate, if move and presence signal is available -->
+                        <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
+                          <when default="true">
+                            <!-- initialize -->
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" Value="0" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" Value="0" />
+                          </when>
+                        </choose>
+                        <!-- if internal hf sensor is used, we take this into account -->
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                          <when test="0">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" Value="0" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" Value="0" />
+                          </when>
+                          <when test="1">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" Value="1" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" Value="0" />
+                          </when>
+                          <when test="2">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" Value="1" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" Value="1" />
+                          </when>
+                        </choose>
+                        <!-- if internal PIR sensor is used, we take this into account -->
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                          <when test="0">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" Value="0" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" Value="0" />
+                          </when>
+                          <when test="1">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" Value="1" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" Value="0" />
+                          </when>
+                        </choose>
+                        <!-- if externals sensors are used, we take this into account -->
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%900_R-%T%%CCC%90001">
+                          <when test="0">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001" Value="0" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" Value="0" />
+                          </when>
+                          <when test="1 4">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001" Value="0" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" Value="1" />
+                          </when>
+                          <when test="2">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001" Value="1" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" Value="0" />
+                          </when>
+                          <when test="3">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001" Value="1" />
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" Value="1" />
+                          </when>
+                        </choose>
+                        <!-- Now we create an OR of Hardware- and External-Signals -->
+                        <!-- Move-External -->
+                        <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001">
+                          <when test="1">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" Value="1" />
+                          </when>
+                        </choose>
+                        <!-- OR Move-Hardware -->
+                        <choose ParamRefId="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001">
+                          <when test="1">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" Value="1" />
+                          </when>
+                        </choose>
+                        <!-- reset Move-External -->
+                        <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001">
+                          <when test="0">
+                            <choose ParamRefId="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001">
+                              <when test="0">
+                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" Value="0" />
+                              </when>
+                            </choose>
+                          </when>
+                        </choose>
+                        <!-- Presence-External -->
+                        <choose ParamRefId="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101">
+                          <when test="1">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" Value="1" />
+                          </when>
+                        </choose>
+                        <!-- OR Presence-Hardware -->
+                        <choose ParamRefId="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101">
+                          <when test="1">
+                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" Value="1" />
+                          </when>
+                        </choose>
+                        <!-- reset Presence-Hardware -->
+                        <choose ParamRefId="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101">
+                          <when test="0">
+                            <choose ParamRefId="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101">
+                              <when test="0">
+                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" Value="0" />
+                              </when>
+                            </choose>
+                          </when>
+                        </choose>
+                        <!-- End of OR -->
+                        
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         <!-- General output settings -->
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgänge" UIHint="Headline" />
@@ -1640,6 +1757,16 @@
                       <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" />
                       <choose ParamRefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101">
                         <when test=">0">
+                          <!-- choose move or presence signal for short presence, but only if both are available -->
+                          <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                            <when test="1">
+                              <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                <when test="1">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%138_R-%T%%CCC%13801"/>
+                                </when>
+                              </choose>
+                            </when>
+                          </choose>
                           <!-- Delay pattern PresenceShortDuration -->
                           <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration" Inline="true" Layout="Grid">
                             <Rows>
@@ -1894,6 +2021,16 @@
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101">
                             <when test=">0">
+                              <!-- choose move or presence signal for short presence, but only if both are available -->
+                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                <when test="1">
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                    <when test="1">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%238_R-%T%%CCC%23801"/>
+                                    </when>
+                                  </choose>
+                                </when>
+                              </choose>
                               <!-- Delay pattern PresenceShortDuration -->
                               <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
                                 <Rows>
@@ -1927,7 +2064,16 @@
                               <ParameterRefRef RefId="%AID%_UP-%T%%CCC%237_R-%T%%CCC%23701" />
                             </when>
                           </choose>
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
+                            </when>
+                          </choose>
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">
@@ -2145,6 +2291,16 @@
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101">
                             <when test=">0">
+                              <!-- choose move or presence signal for short presence, but only if both are available -->
+                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                <when test="1">
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                    <when test="1">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%338_R-%T%%CCC%33801"/>
+                                    </when>
+                                  </choose>
+                                </when>
+                              </choose>
                               <!-- Delay pattern PresenceShortDuration -->
                               <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
                                 <Rows>
@@ -2178,7 +2334,16 @@
                               <ParameterRefRef RefId="%AID%_UP-%T%%CCC%337_R-%T%%CCC%33701" />
                             </when>
                           </choose>
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
+                            </when>
+                          </choose>
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">
@@ -2396,6 +2561,16 @@
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101">
                             <when test=">0">
+                              <!-- choose move or presence signal for short presence, but only if both are available -->
+                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                <when test="1">
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                    <when test="1">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%438_R-%T%%CCC%43801"/>
+                                    </when>
+                                  </choose>
+                                </when>
+                              </choose>
                               <!-- Delay pattern PresenceShortDuration -->
                               <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
                                 <Rows>
@@ -2429,7 +2604,16 @@
                               <ParameterRefRef RefId="%AID%_UP-%T%%CCC%437_R-%T%%CCC%43701" />
                             </when>
                           </choose>
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
+                            </when>
+                          </choose>
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">

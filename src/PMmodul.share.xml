@@ -109,6 +109,12 @@
                   <Enumeration Text="Bewegung" Value="1" Id="%AID%_PT-PresenceUsagePIR_EN-1" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-PresenceShortCalculation" Name="PresenceShortCalculation">
+                <TypeRestriction Base="Value" SizeInBit="1">
+                  <Enumeration Text="Bewegungssignal" Value="0" Id="%AID%_PT-PresenceShortCalculation_EN-0" />
+                  <Enumeration Text="Präsenz- und Bewegungssignal" Value="1" Id="%AID%_PT-PresenceShortCalculation_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-BrightnessAuto" Name="BrightnessAuto">
                 <TypeRestriction Base="Value" SizeInBit="2">
                   <Enumeration Text="nicht aktiv" Value="0" Id="%AID%_PT-BrightnessAuto_EN-0" />
@@ -213,6 +219,33 @@
                   <Enumeration Text="in % (relativ)" Value="1" Id="%AID%_PT-LuxAbsRel_EN-1" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-HfScenario" Name="HfScenario">
+                <TypeRestriction Base="Value" SizeInBit="3">
+                  <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%AID%_PT-HfScenario_EN-0" />
+                  <Enumeration Text="0 - Standard (96 m²)" Value="1" Id="%AID%_PT-HfScenario_EN-1" />
+                  <Enumeration Text="1 - Bereichsüberwachung (Wandmontage, 20 m²)" Value="2" Id="%AID%_PT-HfScenario_EN-2" />
+                  <Enumeration Text="2 - Badezimmer (Deckenmontage, 4,5 m²)" Value="3" Id="%AID%_PT-HfScenario_EN-3" />
+                  <Enumeration Text="3 - Schlafzimmer (Wandmontage, 24 m²)" Value="4" Id="%AID%_PT-HfScenario_EN-4" />
+                  <Enumeration Text="4 - Wohnzimmer (Deckenmontage, 32 m²)" Value="5" Id="%AID%_PT-HfScenario_EN-5" />
+                  <Enumeration Text="5 - Büro (Wandmontage, 77 m²)" Value="6" Id="%AID%_PT-HfScenario_EN-6" />
+                  <Enumeration Text="6 - Hotelzimmer (Wandmontage, 66 m²)" Value="7" Id="%AID%_PT-HfScenario_EN-7" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-HfSensitivity" Name="HfSensitivity">
+                <TypeRestriction Base="Value" SizeInBit="4">
+                  <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%AID%_PT-HfSensitivity_EN-0" />
+                  <Enumeration Text="10% Empfindlichkeit" Value="1" Id="%AID%_PT-HfSensitivity_EN-1" />
+                  <Enumeration Text="20% Empfindlichkeit" Value="2" Id="%AID%_PT-HfSensitivity_EN-2" />
+                  <Enumeration Text="30% Empfindlichkeit" Value="3" Id="%AID%_PT-HfSensitivity_EN-3" />
+                  <Enumeration Text="40% Empfindlichkeit" Value="4" Id="%AID%_PT-HfSensitivity_EN-4" />
+                  <Enumeration Text="50% Empfindlichkeit" Value="5" Id="%AID%_PT-HfSensitivity_EN-5" />
+                  <Enumeration Text="60% Empfindlichkeit" Value="6" Id="%AID%_PT-HfSensitivity_EN-6" />
+                  <Enumeration Text="70% Empfindlichkeit" Value="7" Id="%AID%_PT-HfSensitivity_EN-7" />
+                  <Enumeration Text="80% Empfindlichkeit" Value="8" Id="%AID%_PT-HfSensitivity_EN-8" />
+                  <Enumeration Text="90% Empfindlichkeit" Value="9" Id="%AID%_PT-HfSensitivity_EN-9" />
+                  <Enumeration Text="100% Empfindlichkeit" Value="10" Id="%AID%_PT-HfSensitivity_EN-10" />
+                </TypeRestriction>
+              </ParameterType>
             </ParameterTypes>
             <Parameters>
               <!-- Logic share parameters go from 0 to 29? We leave some space -->
@@ -223,7 +256,7 @@
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%000002" Name="HardwarePM" Offset="0" BitOffset="0" ParameterType="%AID%_PT-CheckBox" Text="PM-Hardware ist vorhanden" Value="0" /> -->
-                <Parameter Id="%AID%_UP-%T%000003" Name="SendRAW" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Rohdaten auf den Bus senden?" Value="0" />
+                <Parameter Id="%AID%_UP-%T%000003" Name="SendRAW" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Präsenz-Rohdaten auf den Bus senden?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000004" Name="LEDPresence" Offset="0" BitOffset="1" ParameterType="%AID%_PT-StatusLED" Text="LED Präsenz" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000005" Name="LEDMove" Offset="0" BitOffset="3" ParameterType="%AID%_PT-StatusLED" Text="LED Bewegung" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000006" Name="HWPresence" Offset="0" BitOffset="5" ParameterType="%AID%_PT-PresenceSensor" Text="Präsenz-Sensor" Value="0" />
@@ -246,6 +279,13 @@
                 <Parameter Id="%AID%_UP-%T%000012" Name="LuxSendCycleDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="0" />
                 <Parameter Id="%AID%_UP-%T%000013" Name="LuxSendCycleDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="0" />
               </Union>
+              <!-- Hardware HF-Sensor settings -->
+              <Union SizeInBit="8">
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
+                <Parameter Id="%AID%_UP-%T%000015" Name="HfScenario" ParameterType="%AID%_PT-HfScenario" Offset="0" BitOffset="0" Text="Detektions-Szenario" Value="0" />
+                <Parameter Id="%AID%_UP-%T%000016" Name="HfSensitivity" ParameterType="%AID%_PT-HfSensitivity" Offset="0" BitOffset="3" Text="Sensor-Empfindlichkeit" Value="0" />
+                <!-- 1 Bit frei -->
+              </Union>
             </Parameters>
             <ParameterRefs>
               <ParameterRef Id="%AID%_P-%T%000001_R-%T%00000101" RefId="%AID%_P-%T%000001" />
@@ -263,6 +303,8 @@
               <ParameterRef Id="%AID%_UP-%T%000012_R-%T%00001201" RefId="%AID%_UP-%T%000012" />
               <ParameterRef Id="%AID%_UP-%T%000013_R-%T%00001301" RefId="%AID%_UP-%T%000013" />
               <ParameterRef Id="%AID%_UP-%T%000014_R-%T%00001401" RefId="%AID%_UP-%T%000014" />
+              <ParameterRef Id="%AID%_UP-%T%000015_R-%T%00001501" RefId="%AID%_UP-%T%000015" />
+              <ParameterRef Id="%AID%_UP-%T%000016_R-%T%00001601" RefId="%AID%_UP-%T%000016" />
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%T%000001" Name="LuxOut" Text="Ausgang Helligkeitssensor" Number="20" FunctionText="Messwert in Lux" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -300,7 +342,13 @@
                     <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
                       <when test="!=0">
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenz-Rohdaten" UIHint="Headline" />
+                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Einstellungen Präsenz-Hardware" UIHint="Headline" />
+                      </when>
+                      <when test="2">
+                        <ParameterRefRef RefId="%AID%_UP-%T%000015_R-%T%00001501" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%000016_R-%T%00001601" />
+                      </when>
+                      <when test="!=0">
                         <ParameterRefRef RefId="%AID%_UP-%T%000003_R-%T%00000301" />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="Auch wenn die Rohdaten nicht auf den Bus gesendet werden, können sie intern für PM-Kanäle genutzt werden." />
                         <ParameterSeparator Id="%AID%_PS-nnn" Text="In der gesamten Applikation wird vom Präsenzmelder gesprochen. Ob sich die Applikation als Präsenz- oder als Bewegungsmelder verhält, wird von der verwendeten Hardware (Präsenz-Sensor) bestimmt." />
