@@ -539,6 +539,7 @@ bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
 {
     // iJustMove is ignored, if there is only presence available
     bool lJustMove = false;
+    // are external inputs offering presence and move?
     if (paramByte(PM_pPresenceInputs, PM_pPresenceInputsMask, PM_pPresenceInputsShift) == VAL_PM_PI_PresenceMove)
         lJustMove = iJustMove;
     bool lPresence = getKo(PM_KoKOpPresence2)->value(getDPT(VAL_DPT_1));
@@ -581,12 +582,32 @@ void PresenceChannel::startPresenceTrigger()
 
 void PresenceChannel::startHardwarePresence()
 {
-    bool lPresence = getHardwarePresence();
-    if (mHardwarePresence != lPresence)
+    // we derive here a presence trigger from hardware sensor by polling
+    // we have to eval Hardware move if required
+    bool lValue = false;
+    bool lTrigger = false;
+    if (paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsageMove)
     {
-        mHardwarePresence = lPresence;
-        startPresence(lPresence);
+        lValue = sPresence->getHardwareMove();
+        if (mHardwareMove != lValue)
+        {
+            mHardwareMove = lValue;
+            lTrigger = true;
+        }
     }
+    // and we eval hardware presence if required
+    if (!lValue && paramByte(PM_pPresenceUsage, PM_pPresenceUsageMask, PM_pPresenceUsageShift) == VAL_PM_PresenceUsagePresence)
+    {
+        lValue = sPresence->getHardwarePresence();
+        if (mHardwarePresence != lValue)
+        {
+            mHardwarePresence = lValue;
+            lTrigger = true;
+        }
+    }
+    // but we trigger just once
+    if (lTrigger)
+        startPresence(lValue);
 }
 
 void PresenceChannel::startHardwareBrightness() 
@@ -633,6 +654,8 @@ void PresenceChannel::startPresence(bool iForce /* = false */)
         if (!(pCurrentState & STATE_PRESENCE)) {
             startPresenceShort();
             onPresenceBrightnessChange(true);
+        } else if (pCurrentState & STATE_PRESENCE_SHORT) {
+            processPresenceShort();
         }
         // presence is turned on, we set the state and delete delay timer
         pCurrentState |= STATE_PRESENCE;
@@ -687,7 +710,8 @@ void PresenceChannel::processPresenceShort()
     if (delayCheck(pPresenceShortDelayTime, paramTimeDelay(PM_pAPresenceShortDurationBase, true))) 
     {
         // now short presence duration passed, check of also short presence delay passed
-        if (delayCheck(pPresenceShortDelayTime, (paramTimeDelay(PM_pAPresenceShortDurationBase, true) + paramTimeDelay(PM_pAPresenceShortDelayBase, true) + 300)))
+        uint32_t lEndTime = paramTimeDelay(PM_pAPresenceShortDurationBase, true) + paramTimeDelay(PM_pAPresenceShortDelayBase, true);
+        if (delayCheck(pPresenceShortDelayTime, lEndTime + 300))
         {
             // there was no new presence evaluation during short presence delay, so we know, short presence is valid here
             endPresence();
@@ -695,8 +719,9 @@ void PresenceChannel::processPresenceShort()
         else 
         {
             // if we get any further presence information, we stop short presence without ending normal presence
-            bool lJustMove = !paramBit(PM_pAPresenceShortCalculation, PM_pAPresenceShortCalculationMask, true);
-            bool lPresence = getRawPresence(lJustMove);
+            // in addition, we check if move or move+presence is used for presence evaluation
+            bool lUsePresence = paramBit(PM_pAPresenceShortCalculation, PM_pAPresenceShortCalculationMask, true);
+            bool lPresence = getRawPresence(!lUsePresence);
             if (lPresence) 
             {
                 endPresenceShort();

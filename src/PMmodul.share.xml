@@ -223,7 +223,7 @@
                 <TypeRestriction Base="Value" SizeInBit="3">
                   <Enumeration Text="Letzter gesetzter Wert" Value="0" Id="%AID%_PT-HfScenario_EN-0" />
                   <Enumeration Text="0 - Standard (96 m²)" Value="1" Id="%AID%_PT-HfScenario_EN-1" />
-                  <Enumeration Text="1 - Bereichsüberwachung (Wandmontage, 20 m²)" Value="2" Id="%AID%_PT-HfScenario_EN-2" />
+                  <Enumeration Text="1 - Bereich (Wandmontage, 20 m²)" Value="2" Id="%AID%_PT-HfScenario_EN-2" />
                   <Enumeration Text="2 - Badezimmer (Deckenmontage, 4,5 m²)" Value="3" Id="%AID%_PT-HfScenario_EN-3" />
                   <Enumeration Text="3 - Schlafzimmer (Wandmontage, 24 m²)" Value="4" Id="%AID%_PT-HfScenario_EN-4" />
                   <Enumeration Text="4 - Wohnzimmer (Deckenmontage, 32 m²)" Value="5" Id="%AID%_PT-HfScenario_EN-5" />

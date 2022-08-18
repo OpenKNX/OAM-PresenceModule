@@ -122,6 +122,7 @@ class PresenceChannel
     uint8_t mChannelId = 0; // zero based
     uint8_t mCurrentDayPhase = 0; // zero based
     bool mHardwarePresence = false;
+    bool mHardwareMove = false;
     uint32_t mBrightnessPollDelay = 0;
 
     uint32_t calcParamIndex(uint16_t iParamIndex, bool iWithPhase);
