@@ -573,10 +573,10 @@ bool PresenceChannel::getHardwarePresence(bool iJustMove /* false */)
 }
 
 // entry point for presence trigger (means start or restart presence delay)
-void PresenceChannel::startPresenceTrigger()
+void PresenceChannel::startPresenceTrigger(bool iManual)
 {
-    startPresence(true);
-    startPresence(false);
+    startPresence(true, iManual);
+    startPresence(false, iManual);
     // pPresenceDelayTime = delayTimerInit(); // diese Variante führt zu Issue #12
 }
 
@@ -607,7 +607,7 @@ void PresenceChannel::startHardwarePresence()
     }
     // but we trigger just once
     if (lTrigger)
-        startPresence(lValue);
+        startPresence(lValue, false);
 }
 
 void PresenceChannel::startHardwareBrightness() 
@@ -631,18 +631,18 @@ void PresenceChannel::startPresence(bool iIsTrigger, GroupObject &iKo)
     // we ignore explicitly OFF telegrams of triggered input
     if (iIsTrigger && !lPresenceValue)
         return;
-    startPresence();
+    startPresence(false, false);
     if (iIsTrigger && lPresenceValue)
     {
         // triggered input sent a 1, we immediately set it to 0
         iKo.value(false, getDPT(VAL_DPT_1));
         // afterwards we call ourself to evaluate 0 action
-        startPresence();
+        startPresence(false, false);
     }
 }
 
 // main entry point for presence calculation (KO independent), implemented as switching presence channel 
-void PresenceChannel::startPresence(bool iForce /* = false */)
+void PresenceChannel::startPresence(bool iForce, bool iManual)
 {
     // during leave room we ignore any presence processing
     if (isLeaveRoom())
@@ -652,7 +652,7 @@ void PresenceChannel::startPresence(bool iForce /* = false */)
     if (iForce || getRawPresence()) {
         // do according actions if presence changes
         if (!(pCurrentState & STATE_PRESENCE)) {
-            startPresenceShort();
+            if (!iManual) startPresenceShort();
             onPresenceBrightnessChange(true);
         } else if (pCurrentState & STATE_PRESENCE_SHORT) {
             processPresenceShort();
@@ -806,7 +806,7 @@ void PresenceChannel::processLeaveRoom()
             if (getRawPresence(true))
             {
                 endLeaveRoom();
-                startPresence();
+                startPresence(false, false);
             }
             // if somewhen presence vanishes, we also continue in normal mode
             if (!getRawPresence())
@@ -880,9 +880,10 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
     else
     {
         // we start presence delay
-        startPresenceTrigger();
+        startPresenceTrigger(true);
         // and we also start/reset short presence here
-        startPresenceShort();
+        // new: for manual usage we don't want short presence
+        // startPresenceShort();
         // disable brightness handling according to current brightness
         disableBrightness(iOn);
         // set state
@@ -1026,7 +1027,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
         case VAL_PM_LockOutputCurrent:
             // we send current state by reevaluation
             lPresenceDelayTime = pPresenceDelayTime;
-            startPresence();
+            startPresence(false, false);
             pPresenceDelayTime = lPresenceDelayTime;
             forceOutput(true);
             break;
@@ -1068,7 +1069,7 @@ void PresenceChannel::startReset()
     // Unclear: do we restore here also day phase settings?
 
     // finally we look if current presence signal is there
-    startPresence();
+    startPresence(false, false);
     forceOutput(true);
 }
 
