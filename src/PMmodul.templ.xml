@@ -2219,7 +2219,7 @@
                               <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
                               <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                             </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%234_R-%T%%CCC%23401" Cell="1,2" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%233_R-%T%%CCC%23301" Cell="1,3" />
                           </ParameterBlock>
@@ -2489,7 +2489,7 @@
                               <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
                               <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                             </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%334_R-%T%%CCC%33401" Cell="1,2" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%333_R-%T%%CCC%33301" Cell="1,3" />
                           </ParameterBlock>
@@ -2759,7 +2759,7 @@
                               <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
                               <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                             </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach (0=nicht beenden)" Cell="1,1" />
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Manuellen Modus beenden nach&#10;(0=nicht beenden)" Cell="1,1" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%434_R-%T%%CCC%43401" Cell="1,2" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%433_R-%T%%CCC%43301" Cell="1,3" />
                           </ParameterBlock>

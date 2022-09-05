@@ -3,7 +3,7 @@
 cSpell:words Präsenzmelder Präsenzkanäle Präsenzerkennung Präsenzinformationen Präsenzsensor Präsenzkanälen Präsenzsignal Präsenzinformation Präsenzeingänge präsenzerfassende Präsenzeinstellungen Präsenzsignals präsenzabhängig Präsenzmodul Präsenzmoduls Praesenz
 cSpell:words Helligkeitsgesteuert Helligkeitsunabhängig helligkeitsbasierte Luxwert helligkeitsbezogenen Helligkeitsabhängig helligkeitsverändernden
 cSpell:words Szenennutzung Szenensteuerung szenensteuerung
-cSpell:words Dimmwert Dimmadressen Dimmstatus Dimmaktor Dimmvorgänge Aktorstatus Aktorstatuswechsel
+cSpell:words Dimmwert Dimmadressen Dimmstatus Dimmaktor Dimmvorgänge Aktorstatus Aktorstatuswechsel Detektions
 cSpell:words Moduswechsel Manuellmodus Tagesphasenabhängig Kommunikaitonsobjekte Melderkanal priorität erwartungskonform VEML Eingaenge
 -->
 
@@ -151,7 +151,7 @@ Eine Sperre ist aber in einer solchen Situation meist ein viel zu grobes Werkzeu
 
 ## **Allgemeine Parameter**
 
-![Allgemeine Parameter](pics/AllgemeineParameter.PNG)
+<kbd>![Allgemeine Parameter](pics/AllgemeineParameter.PNG)</kbd>
 Hier werden Einstellungen getroffen, die die generelle Arbeitsweise des Präsenzmelder-Moduls bestimmen.
 
 ## Gerätestart
@@ -190,7 +190,7 @@ Da diese Applikation auch als virtueller Präsenzmelder fungieren kann, ist kein
 
 ### Präsenz-Hardware
 
-![Präsenz-Hardware](pics/PraesenzHardware.png)
+<kbd>![Präsenz-Hardware](pics/PraesenzHardware.png)</kbd>
 
 #### **Präsenz-Sensor**
 
@@ -200,13 +200,35 @@ Der vorhandene Präsenz-Sensor kann hier ausgewählt werden. Derzeit werden entw
 
 Der vorhandene Helligkeits-Sensor kann hier ausgewählt werden. Derzeit werden entweder der VEML7700 oder der OPT3001 unterstützt.
 
-### Präsenz-Rohdaten
+### Einstellungen Präsenz-Hardware
 
 Erscheint nur, wenn ein Hardware-Präsenzsensor ausgewählt ist.
 
-![Präsenz-Rohdaten](pics/PraesenzRohdaten.png)
+<kbd>![Präsenz-Rohdaten](pics/PraesenzRohdaten.png)</kbd>
 
-#### **Rohdaten auf den Bus senden?**
+#### **Detektions-Szenario**
+
+Erscheint nur, wenn als Hardware-Präsenzsensor der HF-Sensor ausgewählt worden ist.
+
+Hier kann man das vom Hersteller des HF-Sensors vorgesehene Szenario für die Detektion von Präsenz auswählen, das nach einem Neustart zur Verfügung steht. Die aufgeführten Werte sind dem technischen Dokument entnommen, inclusive der angenommenen Montage. Inwiefern das zum realen Einsatzort passt, können wir derzeit nicht beurteilen. Aktuelle Empfehlung ist, die Werte durchzuprobieren, bis man ein für sich passendes Erfassungsszenario gefunden hat. 
+
+Der Wert "Letzter gesetzter Wert" nimmt bei einem Neustart den Wert für Szenario, der vor dem Neustart gesetzt war.
+
+Der Wert für das Szenario kann auch über das KO 26 (Eingang Szenario) gesetzt werden mit den Werten 0 bis 6. Das KO 26 erscheint nur, wenn "Präsenz-Rohdaten auf den Bus senden" ausgewählt ist.
+
+#### **Sensor-Empfindlichkeit**
+
+Erscheint nur, wenn als Hardware-Präsenzsensor der HF-Sensor ausgewählt worden ist.
+
+Hier kann die Sensor-Empfindlichkeit in 10%-Stufen eingestellt werden. 100% ist volle Empfindlichkeit, 10% ist 1/10 der vollen Empfindlichkeit. Eine niedrige Empfindlichkeit bedeutet geringe Präsenzerkennung, aber auch geringe Störeinflüsse. Eine hohe Empfindlichkeit bedeutet gute Präsenzerkennung, aber auch eine hohe Wahrscheinlichkeit von Störeinflüssen (z.B. Wind, Luftzug). Man sollte die Empfindlichkeit nach dem Motto 
+
+> So empfindlich wie nötig, aber so gering wie möglich
+
+wählen.
+
+Die Empfindlichkeit kann auch über das KO 27 (Eingang Empfindlichkeit) mit den Werten 1-10 gesetzt werden (wobei 1=10% bis 10=100% ist). Das KO 27 erscheint nur, wenn "Präsenz-Rohdaten auf den Bus senden" ausgewählt ist.
+
+#### **Präsenz-Rohdaten auf den Bus senden?**
 
 Der Präsenzsensor kann seine Daten direkt auf den Bus senden, ohne jegliche Präsenzmelder-Funktionalität "dazwischen". Diese Daten umfassen Informationen wie Präsenz, Bewegung, Bewegungsmoment, Bewegungsrichtung (auf den Sensor zu oder von ihm weg). Mit einem Ja werden entsprechende Kommunikationsobjekte freigeschaltet, die diese Daten senden.
 
@@ -214,7 +236,7 @@ Der Präsenzsensor kann seine Daten direkt auf den Bus senden, ohne jegliche Pr�
 
 Erscheint nur, wenn ein Hardware-Helligkeitssensor ausgewählt ist.
 
-![Helligkeit](pics/Helligkeit.png)
+<kbd>![Helligkeit](pics/Helligkeit.png)</kbd>
 
 #### **Korrektur Luxwert**
 
@@ -224,11 +246,21 @@ Wird 10 Lux eingestellt und 20 Lux gemessen, wird auf den Bus 30 Lux gesendet.
 Wird -10 Lux eingestellt und 50 Lux gemessen, wird auf den Bus 40 Lux gesendet.
 Für alle Werte, die rechnerisch einen negativen Wert ergeben, wird 0 Lux gesendet.
 
+#### **Helligkeitsänderung wird angegeben in**
+
+Die gemessene Helligkeit kann auf den Bus gesendet werden. Dazu muss man im nächsten Feld angeben, um welchen Wert sich die Helligkeit ändern muss, bevor sie gesendet wird. Die Änderung kann man absolut (in Lux) oder relativ (in %) angeben. Hier wählt man diese Angabe aus.
+
 #### **Senden der Helligkeit bei Änderung um**
 
-Die gemessene Helligkeit kann auf den Bus gesendet werden. Mit dieser Einstellung wird festgelegt, um wie viel Lux sich der Wert ändern muss, damit dieser auf den Bus gesendet wird.
+Die gemessene Helligkeit kann auf den Bus gesendet werden. Je nach Auswahl im vorherigen Feld (relativ oder absolut) kann man hier den Änderungswert eingeben bei dessen überschreiten auf den Bus gesendet wird.
+
+##### **absolut (in Lux)**
 
 Wird 10 Lux eingestellt und der letzte gesendete Wert war 50 Lux, dann wird ein neues Telegramm gesendet, sobald ein Wert kleiner oder gleich 40 Lux bzw. größer oder gleich 60 Lux gemessen wird.
+
+##### **relativ (in %)**
+
+Wird 10 % eingestellt und der letzte gesendete Wert war 50 Lux, dann wird ein neues Telegramm gesendet, sobald ein Wert kleiner oder gleich 45 Lux bzw. größer oder gleich 55 Lux gemessen wird, da 10% von 50 Lux genau 5 Lux entsprechen.
 
 Unabhängig vom Senden der Werte auf den Bus kann die Helligkeit bei den Präsenzkanälen herangezogen werden.
 
@@ -240,13 +272,13 @@ Wird das Zeitintervall von 2 Minuten eingestellt, wird alle 2 Minuten die aktuel
 
 Wird während eines Zeitintervalls die Helligkeit wegen Änderung gesendet, so beeinflusst das nicht das Zeitintervall. Es kann somit passieren, dass kurz vor oder nach dem zyklischen Senden erneut wegen einer Änderung der Helligkeit gesendet wird.
 
-> Wenn weder zyklisch noch aufgrund von einer Änderung gesendet werden soll (beide Werte auf 0), wird die Helligkeit gar nicht aktiv auf dem Bus gesendet. Sie kann immer noch aktiv über ein Lesetelegramm gelesen werden.
+> Wenn weder zyklisch noch aufgrund von einer Änderung gesendet werden soll (beide Werte auf 0), wird die Helligkeit gar nicht aktiv auf dem Bus gesendet. Sie kann immer noch über ein Lesetelegramm gelesen werden.
 
 ### LED
 
 Erscheint nur, wenn irgendeine Präsenz-Hardware ausgewählt wurde.
 
-![LED](pics/LED.png)
+<kbd>![LED](pics/LED.png)</kbd>
 
 Die beiden Auswahlfelder **LED Präsenz** und **LED Bewegung** steuern vorhandene Hardware-LED. Für beide stehen folgende Auswahlmöglichkeiten zur Verfügung.
 
@@ -278,7 +310,7 @@ Das *x* ist eine Zahl und steht für die Nummer des Kanals, der definiert wird.
 
 Der Text *unbekannt* wird durch die Beschreibung des Kanals ersetzt, sobald eine Beschreibung vergeben wurde.
 
-![PM-Kanal](pics/PM-Kanal.png)
+<kbd>![PM-Kanal](pics/PM-Kanal.png)</kbd>
 
 Auf der Hauptseite werden globale Einstellungen für den gesamten Kanal vorgenommen und die Anzahl der Tagesphasen definiert. Spezielle Tagesphasen-Einstellungen werden auf weiteres Unterseiten vorgenommen.
 
@@ -290,7 +322,7 @@ Für erfahrene Benutzer besteht noch die Möglichkeit, Präsenzmelder-Funktionen
 
 Die Angaben hier gelten zur Identifizierung und für das Grundverhalten des Kanals.
 
-![Kanaldefinition](pics/Kanaldefinition.png)
+<kbd>![Kanaldefinition](pics/Kanaldefinition.png)</kbd>
 
 ### **Beschreibung des PM**
 
@@ -329,7 +361,7 @@ Dieser Kanal ist inaktiv. Er kann vollständig definiert sein und keine Einstell
 
 Hier erfolgen die helligkeitsbezogenen Einstellungen für diesen Kanal.
 
-![Helligkeit](pics/HelligkeitKanal.png)
+<kbd>![Helligkeit](pics/HelligkeitKanal.png)</kbd>
 
 ### **Kanal ist Helligkeitsabhängig**
 
@@ -338,6 +370,12 @@ Ein PM-Kanal berücksichtigt normalerweise eine gemessene Helligkeit bei seinen 
 Wählt man hier Ja, wird die Helligkeit in den vorgegebenen Grenzen zum Schalten berücksichtigt, bei einem Nein wird keine Helligkeit berücksichtigt.
 
 Die eigentlichen Helligkeitsgrenzen zum Ein- und Ausschalten sind abhängig von der Tagesphase und werden dort definiert.
+
+### **Eingebauten Helligkeitssensor verwenden?**
+
+Erscheint nur, wenn unter PM-Hardware ein Helligkeitssensor ausgewählt wurde.
+
+
 
 ### **Totzeit bis zur Helligkeitsanpassung**
 
@@ -357,7 +395,7 @@ Eine neue Ausschaltschwelle wird erst berechnet, wenn ein neuer Helligkeitswert 
 
 Hier kann bestimmt werden, ob und wie die Präsenzinformation von externer oder interner Hardware zu dem Melderkanal gelangt.
 
-![Präsenzeingänge](pics/PresenceKanal.png)
+<kbd>![Präsenzeingänge](pics/PresenceKanal.png)</kbd>
 
 Alle Präsenzinformationen werden über ein logisches ODER verarbeitet, eine Nachlaufzeit beginnt erst, wenn alle Präsenzeingänge eine 0 liefern.
 
@@ -385,7 +423,7 @@ Der externe Sensor muss sicherstellen, dass er valide Präsenzinformationen häu
 
 Hier definiert man die Ausgänge für diesen Kanal.
 
-![Ausgänge](pics/Output.png)
+<kbd>![Ausgänge](pics/Output.png)</kbd>
 
 Es gibt 2 Ausgänge, die identisch funktionieren. Hier werden nur die technischen Eigenschaften der Ausgänge spezifiziert. Welche konkreten Werte vom PM gesendet werden, wird von der jeweiligen Tagesphase bestimmt.
 
@@ -427,7 +465,7 @@ Hier wird das Zeitintervall angegeben, in dem der Ausgangswert wiederholt werden
 
 Hier wird eingestellt, auf welche Art und Weise der Kanal gesperrt werden kann.
 
-![Sperre](pics/Sperre.png)
+<kbd>![Sperre](pics/Sperre.png)</kbd>
 
 ### **Sperrobjekt**
 
@@ -525,7 +563,7 @@ Hier wird die Rückfallzeit angegeben.
 
 Die Definition der Tagesphasen macht eine wesentliche Funktion des Melders aus.
 
-![Tagesphasen](pics/Tagesphasen.png)
+<kbd>![Tagesphasen](pics/Tagesphasen.png)</kbd>
 
 Hier werden nur die Anzahl, die Namen und das Verhalten der Tagesphasen definiert, die einzelnen Tagesphasen werden auf eigenen Seiten festgelegt.
 
@@ -559,7 +597,7 @@ In der folgenden Tabelle kann jeder Phase ein Name zugewiesen werden und eine Sz
 
 Die Namen der Phasen können frei gewählt werden und sollten möglichst sprechend die Rolle der Phase repräsentieren. Eine Phase, die lange Nachlaufzeiten hat, weil sie für langes und ruhiges Sitzen am Schreibtisch gedacht ist sollte eher "Büroarbeit" oder "Hausaufgaben" heißen als "Szene 7".
 
-![Phasenbeispiel](pics/Phasenbeispiel.png)
+<kbd>![Phasenbeispiel](pics/Phasenbeispiel.png)</kbd>
 
 Zur Orientierung erscheinen die Namen auf den Seiten, die diese Phasen definieren.
 
@@ -567,7 +605,7 @@ Zur Orientierung erscheinen die Namen auf den Seiten, die diese Phasen definiere
 
 Für diejenigen, die nur ein einfaches Tag-/Nacht-Objekt haben wollen, das über ein normales Schaltobjekt umgeschaltet werden kann, bieten die Tagesphasen eine zusätzliche Einstellmöglichkeit.
 
-![Tag-Nacht-Objekt](pics/TagNachtObjekt.png)
+<kbd>![Tag-Nacht-Objekt](pics/TagNachtObjekt.png)</kbd>
 
 Hier müssen genau 2 Tagesphasen gewählt werden. Ferner muss die Einstellung **Tagesphasen über Tag-/Nacht-Objekt verfügbar machen?** auf Ja gestellt werden.
 
@@ -590,7 +628,7 @@ Der Abschnitt erscheint nur, wenn
 
 Mit "Bewegung melden" sind kurzzeitige Bewegungsmeldungen gemeint, die schaltend sind und idealerweise schon nach weniger als 5 Sekunden, spätestens nach 15 Sekunden stillstand melden.
 
-![Raum verlassen](pics/LeaveRoom.png)
+<kbd>![Raum verlassen](pics/LeaveRoom.png)</kbd>
 
 Folgende Situation wird adressiert: Man verlässt einen Raum oder einen Bereich und macht per Taster das Licht aus. Wenn man z.B. abends zu Bett geht, spricht nichts dagegen, das Licht auszumachen anstatt die entsprechenden Nachlaufzeiten abzuwarten. Kaum ist man im Schlafzimmer angelangt, stellt man fest, dass man sein Handy vergessen hat. Jetzt geht man in den Raum zurück und möchte eigentlich dass jetzt erneut das Licht angeht, genauer gesagt sogar dass die Kurzzeitpräsenz wirkt.
 
@@ -634,7 +672,7 @@ Der Melder erlaubt es auch, ein ähnliches Konzept mit einer Ein-Tasten-Bedienun
 * Manuell-Modus ist aus - Lang drücken - Das Licht bleibt im aktuellen Zustand (AN oder AUS), Melder geht in den Manuell-Modus und schaltet so das Licht nicht mehr, bis Manuell-Modus aufgehoben wurde.
 * Manuell-Modus ist an - Lang drücken - Das Licht bleibt im aktuellen Zustand (AN oder AUS), Melder geht in den Automatik-Modus und macht das Licht nach entsprechender Präsenz + Nachlaufzeit wieder AUS/AN.
 
-![Manuell übersteuern](pics/ManualOverride.png)
+<kbd>![Manuell übersteuern](pics/ManualOverride.png)</kbd>
 
 Der Manuell-Modus wir immer verlassen, wenn durch eine Taste der Automatik-Modus gewählt wird.
 
@@ -654,7 +692,7 @@ Bei der Zweitastenbedienung schaltet jedes Telegramm am Kommunikationsobjekt 'Ma
 
 Der Platzhalter *n* wird ersetzt durch die Nummer der Tagesphase (1 bis 4), der *Phasenname* durch den vom Benutzer gewählten Namen der Phase. Von der Applikation vorgegebene Namen sind "Tag", "Nacht", "Morgen" und "Abend".
 
-![Seite Tagesphase](pics/TagesphasePage.png)
+<kbd>![Seite Tagesphase](pics/TagesphasePage.png)</kbd>
 
 Da alle Seiten zur Definition von Tagesphasen gleich sind, wird hier nur eine Seite beschrieben.
 
@@ -662,7 +700,7 @@ Da alle Seiten zur Definition von Tagesphasen gleich sind, wird hier nur eine Se
 
 Die Helligkeitsangaben pro Tagesphase beziehen sich nur noch auf ein Ein- uns Ausschaltschwelle.
 
-![Helligkeit](pics/HelligkeitPhase.png)
+<kbd>![Helligkeit](pics/HelligkeitPhase.png)</kbd>
 
 ### **Einschalten: Unterhalb welcher Helligkeit**
 
@@ -710,7 +748,7 @@ Wird in der Zeit die Ausschaltschwelle wieder unterschritten, wird natürlich ni
 
 Die Präsenzeinstellungen pro Tagesphase beziehen sich nur auf die Nachlaufzeiten und die Kurzzeitpräsenz.
 
-![Präsenzeinstellungen](pics/PraesenzPhase.png)
+<kbd>![Präsenzeinstellungen](pics/PraesenzPhase.png)</kbd>
 
 ### **Nachlaufzeit**
 
@@ -742,7 +780,7 @@ Wird hier ein "Ja" gewählt und ist diese Tagesphase aktiv, werden vorhandene Ha
 
 Beim Ausgang werden die Einstellungen vorgenommen, die abhängig von den Tagesphasen sind.
 
-![Ausgang](pics/AusgangPhase.png)
+<kbd>![Ausgang](pics/AusgangPhase.png)</kbd>
 
 Da beide Ausgänge gleich definiert werden, wird hier nur einer beschrieben.
 
@@ -791,7 +829,7 @@ Es wird der zu sendende KNX-Telegramm-Wert für ein AUS-Signal eingegeben.
 
 Der Manuell-Modus kann Tagesphasenabhängig beeinflusst werden.
 
-![Manuelle Bedienung](pics/ManuellPhase.png)
+<kbd>![Manuelle Bedienung](pics/ManuellPhase.png)</kbd>
 
 Wird über das Kommunikationsobjekt 'Manuell übersteuern' in den Manuell-Modus gewechselt, Verbleibt der Melder in diesem Modus, bis der manuelle Modus über ein Telegramm auf das Kommunikationsobjekt 'Automatik übersteuern' verlassen wird.
 
@@ -814,7 +852,7 @@ Ein "Ja" erlaubt kürzere Zeiten für das Rücksetzen und versetzt einen Raum be
 
 Viele Funktionen, für die ein Kommunikationsobjekt zur Verfügung steht, können auch über Szenen aufgerufen werden.
 
-![Szenensteuerung](pics/Szenensteuerung.png)
+<kbd>![Szenensteuerung](pics/Szenensteuerung.png)</kbd>
 
 In der Tabelle können bis zu 10 Szenen ausgewählt werden, die mit entsprechenden Funktionen verbunden werden. Sobald eine der ausgewählten Szenen am Kommunikationsobjekt "PM über Szenen steuern" empfangen wird, wird die verknüpfte Funktion ausgeführt.
 
@@ -882,7 +920,7 @@ Es wird ein interner Reset des Melders durchgeführt. Die Funktion ist identisch
 
 Dies ist eine Funktion für erfahrene Benutzer.
 
-![Eingänge](pics/InterneEingaenge.png)
+<kbd>![Eingänge](pics/InterneEingaenge.png)</kbd>
 
 Normalerweise werden in KNX alle Kommunikationsobjekte über Gruppenadressen verbunden. Zwischen verschiedenen Geräten ist es anders gar nicht möglich.
 
