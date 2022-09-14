@@ -652,22 +652,22 @@ void PresenceChannel::startPresence(bool iForce, bool iManual)
     if (iForce || getRawPresence()) {
         // do according actions if presence changes
         if (!(pCurrentState & STATE_PRESENCE)) {
-            if (!iManual) startPresenceShort();
             // the following is just allowed for full automatic on (Vollautomat)
             // or if manual on is requested an manual on is done.
-            bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pAdaptiveDelayBaseShift, true);
+            bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pADayPhaseFunctionShift, true);
             bool lTurnOn = (lDayPhaseFunction == VAL_PM_PHASE_FULL || lDayPhaseFunction == VAL_PM_PHASE_HALF_OFF);
             if (!lTurnOn) lTurnOn = (lDayPhaseFunction == VAL_PM_PHASE_HALF_ON && iManual);
             if (lTurnOn)
             {
+                if (!iManual) startPresenceShort();
                 onPresenceBrightnessChange(true);
                 // presence is turned on, we set the state and delete delay timer
                 pCurrentState |= STATE_PRESENCE;
-                pPresenceDelayTime = 0; // there is no action because of this, the delay time is just "off"
             }
         } else if (pCurrentState & STATE_PRESENCE_SHORT) {
             processPresenceShort();
         }
+        pPresenceDelayTime = 0; // there is no action because of this, the delay time is just "off"
     } else if (pCurrentState & STATE_PRESENCE) {
         // presence is turned off, we start delay timer, but just if we are in presence mode
         // Why check for presence state here? Because multiple off would restart presence delay even if there is no presence
@@ -773,7 +773,7 @@ void PresenceChannel::onPresenceChange(bool iOn)
     if (!(pCurrentState & STATE_MANUAL))
     {
         // We turn on or off, but only if automatic off is not forbidden
-        bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pAdaptiveDelayBaseShift, true);
+        bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pADayPhaseFunctionShift, true);
         bool lTurnOff = (lDayPhaseFunction == VAL_PM_PHASE_FULL || lDayPhaseFunction == VAL_PM_PHASE_HALF_ON);
         lTurnOff = lTurnOff || iOn; // turn on is always allowed
         if (lTurnOff)
