@@ -1090,6 +1090,9 @@
 #define PM_pAPresenceShortCalculation 54      // 1 Bit, Bit 5
 #define     PM_pAPresenceShortCalculationMask 0x20
 #define     PM_pAPresenceShortCalculationShift 5
+#define PM_pADayPhaseFunction        54      // 2 Bits, Bit 4-3
+#define     PM_pADayPhaseFunctionMask 0x18
+#define     PM_pADayPhaseFunctionShift 3
 #define PM_pAPresenceDelayBase       55      // 2 Bits, Bit 7-6
 #define     PM_pAPresenceDelayBaseMask 0xC0
 #define     PM_pAPresenceDelayBaseShift 6
@@ -1152,6 +1155,9 @@
 #define PM_pBPresenceShortCalculation 74      // 1 Bit, Bit 5
 #define     PM_pBPresenceShortCalculationMask 0x20
 #define     PM_pBPresenceShortCalculationShift 5
+#define PM_pBDayPhaseFunction        74      // 2 Bits, Bit 4-3
+#define     PM_pBDayPhaseFunctionMask 0x18
+#define     PM_pBDayPhaseFunctionShift 3
 #define PM_pBPresenceDelayBase       75      // 2 Bits, Bit 7-6
 #define     PM_pBPresenceDelayBaseMask 0xC0
 #define     PM_pBPresenceDelayBaseShift 6
@@ -1214,6 +1220,9 @@
 #define PM_pCPresenceShortCalculation 94      // 1 Bit, Bit 5
 #define     PM_pCPresenceShortCalculationMask 0x20
 #define     PM_pCPresenceShortCalculationShift 5
+#define PM_pCDayPhaseFunction        94      // 2 Bits, Bit 4-3
+#define     PM_pCDayPhaseFunctionMask 0x18
+#define     PM_pCDayPhaseFunctionShift 3
 #define PM_pCPresenceDelayBase       95      // 2 Bits, Bit 7-6
 #define     PM_pCPresenceDelayBaseMask 0xC0
 #define     PM_pCPresenceDelayBaseShift 6
@@ -1276,6 +1285,9 @@
 #define PM_pDPresenceShortCalculation 114      // 1 Bit, Bit 5
 #define     PM_pDPresenceShortCalculationMask 0x20
 #define     PM_pDPresenceShortCalculationShift 5
+#define PM_pDDayPhaseFunction        114      // 2 Bits, Bit 4-3
+#define     PM_pDDayPhaseFunctionMask 0x18
+#define     PM_pDDayPhaseFunctionShift 3
 #define PM_pDPresenceDelayBase       115      // 2 Bits, Bit 7-6
 #define     PM_pDPresenceDelayBaseMask 0xC0
 #define     PM_pDPresenceDelayBaseShift 6
@@ -1341,5 +1353,5 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 7
+#define MAIN_ApplicationVersion 8
 #define MAIN_OrderNumber "OpenKnxPresence"

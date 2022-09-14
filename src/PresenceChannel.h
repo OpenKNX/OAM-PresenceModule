@@ -113,6 +113,11 @@
 #define VAL_PM_LUX_VEML 1
 #define VAL_PM_LUX_OPT 2
 
+// Full- or half-automatic function of a day phase
+#define VAL_PM_PHASE_FULL 0
+#define VAL_PM_PHASE_HALF_ON 1
+#define VAL_PM_PHASE_HALF_OFF 2
+
 // forward declaration
 class Presence;
 

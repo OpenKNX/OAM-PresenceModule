@@ -246,6 +246,13 @@
                   <Enumeration Text="100% Empfindlichkeit" Value="10" Id="%AID%_PT-HfSensitivity_EN-10" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-DayPhaseFunction" Name="DayPhaseFunction">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Automatisch Ein- und Ausschalten" Value="0" Id="%AID%_PT-DayPhaseFunction_EN-0" />
+                  <Enumeration Text="Manuell Ein-, automatisch Ausschalten" Value="1" Id="%AID%_PT-DayPhaseFunction_EN-1" />
+                  <Enumeration Text="Automatisch Ein-, manuell Ausschalten" Value="2" Id="%AID%_PT-DayPhaseFunction_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
             </ParameterTypes>
             <Parameters>
               <!-- Logic share parameters go from 0 to 29? We leave some space -->

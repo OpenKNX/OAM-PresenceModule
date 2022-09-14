@@ -653,13 +653,21 @@ void PresenceChannel::startPresence(bool iForce, bool iManual)
         // do according actions if presence changes
         if (!(pCurrentState & STATE_PRESENCE)) {
             if (!iManual) startPresenceShort();
-            onPresenceBrightnessChange(true);
+            // the following is just allowed for full automatic on (Vollautomat)
+            // or if manual on is requested an manual on is done.
+            bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pAdaptiveDelayBaseShift, true);
+            bool lTurnOn = (lDayPhaseFunction == VAL_PM_PHASE_FULL || lDayPhaseFunction == VAL_PM_PHASE_HALF_OFF);
+            if (!lTurnOn) lTurnOn = (lDayPhaseFunction == VAL_PM_PHASE_HALF_ON && iManual);
+            if (lTurnOn)
+            {
+                onPresenceBrightnessChange(true);
+                // presence is turned on, we set the state and delete delay timer
+                pCurrentState |= STATE_PRESENCE;
+                pPresenceDelayTime = 0; // there is no action because of this, the delay time is just "off"
+            }
         } else if (pCurrentState & STATE_PRESENCE_SHORT) {
             processPresenceShort();
         }
-        // presence is turned on, we set the state and delete delay timer
-        pCurrentState |= STATE_PRESENCE;
-        pPresenceDelayTime = 0; // there is no action because of this, the delay time is just "off"
     } else if (pCurrentState & STATE_PRESENCE) {
         // presence is turned off, we start delay timer, but just if we are in presence mode
         // Why check for presence state here? Because multiple off would restart presence delay even if there is no presence
@@ -760,13 +768,21 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
 
 void PresenceChannel::onPresenceChange(bool iOn)
 {
+    
     // Output is only influenced in auto mode
     if (!(pCurrentState & STATE_MANUAL))
     {
-        bool lPassageway = paramBit(PM_pAPresenceShortNoSwitch, PM_pAPresenceShortNoSwitchMask, true);
-        // in a passageway we do not turn on during short presence
-        if (!(iOn && lPassageway && (pCurrentState & STATE_PRESENCE_SHORT)))
-            startOutput(iOn);
+        // We turn on or off, but only if automatic off is not forbidden
+        bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pAdaptiveDelayBaseShift, true);
+        bool lTurnOff = (lDayPhaseFunction == VAL_PM_PHASE_FULL || lDayPhaseFunction == VAL_PM_PHASE_HALF_ON);
+        lTurnOff = lTurnOff || iOn; // turn on is always allowed
+        if (lTurnOff)
+        {
+            bool lPassageway = paramBit(PM_pAPresenceShortNoSwitch, PM_pAPresenceShortNoSwitchMask, true);
+            // in a passageway we do not turn on during short presence
+            if (!(iOn && lPassageway && (pCurrentState & STATE_PRESENCE_SHORT)))
+                startOutput(iOn);
+        }
     }
 }
 
@@ -1185,7 +1201,6 @@ void PresenceChannel::disableBrightness(bool iOn)
     {
         // get current brightness
         uint32_t lBrightness = getRawBrightness();
-        ;
         // we disable brightness handling according to current brightness and current output state
         // turn on even though there is enough light
         bool lDisable1 = iOn && (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)));

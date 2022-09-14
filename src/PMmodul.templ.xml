@@ -141,7 +141,7 @@
               <Parameter Id="%AID%_P-%T%%CCC%011" Name="p%C%ExternalSignalPresence" ParameterType="%AID%_PT-CheckBox" Text="External presence signal exists" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%020" Name="p%C%HardwareSignalMove" ParameterType="%AID%_PT-CheckBox" Text="External move signal exists" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%021" Name="p%C%HardwareSignalPresence" ParameterType="%AID%_PT-CheckBox" Text="External presence signal exists" Value="0" />
-            <!-- Phase 1 -->
+              <!-- Phase 1 -->
               <!-- Bitfield settings (per day phase) -->
               <Union SizeInBit="16">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="53" BitOffset="0" />
@@ -153,10 +153,11 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%135" Name="pA%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%137" Name="pA%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%138" Name="pA%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%139" Name="pA%C%DayPhaseFunction" Offset="1" BitOffset="3" ParameterType="%AID%_PT-DayPhaseFunction" Text="Funktion der Tagesphase" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%102" Name="pA%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%103" Name="pA%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%104" Name="pA%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-                <!-- 6 Bit free -->
+                <!-- 3 Bit free -->
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -215,10 +216,11 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%235" Name="pB%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%237" Name="pB%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%238" Name="pB%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%239" Name="pB%C%DayPhaseFunction" Offset="1" BitOffset="3" ParameterType="%AID%_PT-DayPhaseFunction" Text="Funktion der Tagesphase" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%202" Name="pB%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%203" Name="pB%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%204" Name="pB%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-                <!-- 6 Bit free -->
+                <!-- 3 Bit free -->
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -277,10 +279,11 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%335" Name="pC%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%337" Name="pC%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%338" Name="pC%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%339" Name="pC%C%DayPhaseFunction" Offset="1" BitOffset="3" ParameterType="%AID%_PT-DayPhaseFunction" Text="Funktion der Tagesphase" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%302" Name="pC%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%303" Name="pC%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%304" Name="pC%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
-                <!-- 6 Bit free -->
+                <!-- 3 Bit free -->
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
@@ -339,6 +342,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%435" Name="pD%C%ManualWithPresence" Offset="1" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Manueller Modus ist präsenzabhängig?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%437" Name="pD%C%PresenceShortNoSwitch" Offset="1" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Erst nach der Kurzzeitpräsenz schalten&#10;(z.B. Durchgangsraum)" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%438" Name="pD%C%PresenceShortCalculation" Offset="1" BitOffset="2" ParameterType="%AID%_PT-PresenceShortCalculation" Text="Kurzzeitpräsenz wird ermittelt anhand vom" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%439" Name="pD%C%DayPhaseFunction" Offset="1" BitOffset="3" ParameterType="%AID%_PT-DayPhaseFunction" Text="Funktion der Tagesphase" Value="0" />
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%402" Name="pD%C%Output1Send" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%403" Name="pD%C%Output2Send" Offset="0" BitOffset="4" ParameterType="%AID%_PT-OutputSendPM" Text="Ausgang sendet" Value="0" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%404" Name="pD%C%BrightnessRead" Offset="1" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" /> -->
@@ -545,6 +549,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" RefId="%AID%_UP-%T%%CCC%136" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%137_R-%T%%CCC%13701" RefId="%AID%_UP-%T%%CCC%137" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%138_R-%T%%CCC%13801" RefId="%AID%_UP-%T%%CCC%138" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901" RefId="%AID%_UP-%T%%CCC%139" />
               <!-- Phase 2 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001" RefId="%AID%_UP-%T%%CCC%200" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" RefId="%AID%_UP-%T%%CCC%201" />
@@ -586,6 +591,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" RefId="%AID%_UP-%T%%CCC%236" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%237_R-%T%%CCC%23701" RefId="%AID%_UP-%T%%CCC%237" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%238_R-%T%%CCC%23801" RefId="%AID%_UP-%T%%CCC%238" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901" RefId="%AID%_UP-%T%%CCC%239" />
               <!-- Phase 3 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001" RefId="%AID%_UP-%T%%CCC%300" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101" RefId="%AID%_UP-%T%%CCC%301" />
@@ -627,6 +633,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" RefId="%AID%_UP-%T%%CCC%336" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%337_R-%T%%CCC%33701" RefId="%AID%_UP-%T%%CCC%337" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%338_R-%T%%CCC%33801" RefId="%AID%_UP-%T%%CCC%338" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901" RefId="%AID%_UP-%T%%CCC%339" />
               <!-- Phase 4 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001" RefId="%AID%_UP-%T%%CCC%400" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101" RefId="%AID%_UP-%T%%CCC%401" />
@@ -668,6 +675,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" RefId="%AID%_UP-%T%%CCC%436" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%437_R-%T%%CCC%43701" RefId="%AID%_UP-%T%%CCC%437" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%438_R-%T%%CCC%43801" RefId="%AID%_UP-%T%%CCC%438" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901" RefId="%AID%_UP-%T%%CCC%439" />
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%T%%CCC%000" Name="KOp%C%Lux" Number="%K0%" Text="Helligkeit extern" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
@@ -1700,117 +1708,130 @@
                     </ParameterBlock>
                     <!-- Phase 1 -->
                     <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%026_R-%T%%CCC%02601">
+                      <!-- Phase function -->
+                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
+                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901" />
                       <choose ParamRefId="%AID%_UP-%T%%CCC%009_R-%T%%CCC%00901">
                         <when test="0">
                           <!-- Lux send cycle -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%115_R-%T%%CCC%11501" />
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001" />
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001">
-                            <when test="1">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11601" />
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901">
+                            <when test="0 2">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%115_R-%T%%CCC%11501" />
                             </when>
-                            <when test="2">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11602" />
+                            <when test="0 1">
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001">
+                                <when test="1">
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11601" />
+                                </when>
+                                <when test="2">
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11602" />
+                                </when>
+                                <when test=">0">
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                  <!-- Delay pattern brightness off -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay1" Inline="true" Layout="Grid">
+                                    <Rows>
+                                      <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                    </Rows>
+                                    <Columns>
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                    </Columns>
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%114_R-%T%%CCC%11401" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%113_R-%T%%CCC%11301" Cell="1,3" />
+                                  </ParameterBlock>
+                                  <!-- end of delay pattern -->
+                                </when>
+                              </choose>
                             </when>
+                          </choose>
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                        </when>
+                      </choose>
+                      <choose ParamRefId="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901">
+                        <when test="0 1">
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                          <!-- Delay pattern Presence -->
+                          <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay" Inline="true" Layout="Grid">
+                            <Rows>
+                              <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                            </Rows>
+                            <Columns>
+                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                            </Columns>
+                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%108_R-%T%%CCC%10801" Cell="1,2" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%107_R-%T%%CCC%10701" Cell="1,3" />
+                          </ParameterBlock>
+                          <!-- end of delay pattern -->
+                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" />
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101">
                             <when test=">0">
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
-                              <!-- Delay pattern brightness off -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay1" Inline="true" Layout="Grid">
+                              <!-- choose move or presence signal for short presence, but only if both are available -->
+                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                <when test="1">
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                    <when test="1">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%138_R-%T%%CCC%13801"/>
+                                    </when>
+                                  </choose>
+                                </when>
+                              </choose>
+                              <!-- Delay pattern PresenceShortDuration -->
+                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration" Inline="true" Layout="Grid">
                                 <Rows>
                                   <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                 </Rows>
                                 <Columns>
                                   <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
                                   <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                                 </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%114_R-%T%%CCC%11401" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%113_R-%T%%CCC%11301" Cell="1,3" />
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%110_R-%T%%CCC%11001" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%109_R-%T%%CCC%10901" Cell="1,3" />
                               </ParameterBlock>
                               <!-- end of delay pattern -->
+                              <!-- Delay pattern PresenceShortDelay -->
+                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay" Inline="true" Layout="Grid">
+                                <Rows>
+                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                </Rows>
+                                <Columns>
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                </Columns>
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%112_R-%T%%CCC%11201" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%111_R-%T%%CCC%11101" Cell="1,3" />
+                              </ParameterBlock>
+                              <!-- end of delay pattern -->
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%137_R-%T%%CCC%13701" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                            <when test=">0">
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
                             </when>
                           </choose>
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                         </when>
                       </choose>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                      <!-- Delay pattern Presence -->
-                      <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay" Inline="true" Layout="Grid">
-                        <Rows>
-                          <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                        </Rows>
-                        <Columns>
-                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                        </Columns>
-                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%108_R-%T%%CCC%10801" Cell="1,2" />
-                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%107_R-%T%%CCC%10701" Cell="1,3" />
-                      </ParameterBlock>
-                      <!-- end of delay pattern -->
-                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" />
-                      <choose ParamRefId="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101">
-                        <when test=">0">
-                          <!-- choose move or presence signal for short presence, but only if both are available -->
-                          <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
-                            <when test="1">
-                              <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
-                                <when test="1">
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%138_R-%T%%CCC%13801"/>
-                                </when>
-                              </choose>
-                            </when>
-                          </choose>
-                          <!-- Delay pattern PresenceShortDuration -->
-                          <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration" Inline="true" Layout="Grid">
-                            <Rows>
-                              <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                            </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%110_R-%T%%CCC%11001" Cell="1,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%109_R-%T%%CCC%10901" Cell="1,3" />
-                          </ParameterBlock>
-                          <!-- end of delay pattern -->
-                          <!-- Delay pattern PresenceShortDelay -->
-                          <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay" Inline="true" Layout="Grid">
-                            <Rows>
-                              <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                            </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%112_R-%T%%CCC%11201" Cell="1,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%111_R-%T%%CCC%11101" Cell="1,3" />
-                          </ParameterBlock>
-                          <!-- end of delay pattern -->
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%137_R-%T%%CCC%13701" />
-                        </when>
-                      </choose>
-                      <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
-                        <when test=">0">
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
-                        </when>
-                      </choose>
-                      <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
-                        <when test=">0">
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%136_R-%T%%CCC%13601" />
-                        </when>
-                      </choose>
-                      <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                       <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">
                         <when test="0">
@@ -1964,117 +1985,130 @@
                       <!-- Phase 2 -->
                       <when test=">0">
                         <ParameterBlock Id="%AID%_PB-%C%12" Name="PM%C%Phase2" Text="Phase 2: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%027_R-%T%%CCC%02701">
+                          <!-- Phase function -->
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
+                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%009_R-%T%%CCC%00901">
                             <when test="0">
                               <!-- Lux send cycle -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%215_R-%T%%CCC%21501" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001" />
-                              <choose ParamRefId="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001">
-                                <when test="1">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21601" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901">
+                                <when test="0 2">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%215_R-%T%%CCC%21501" />
                                 </when>
-                                <when test="2">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21602" />
+                                <when test="0 1">
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001" />
+                                  <choose ParamRefId="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001">
+                                    <when test="1">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21601" />
+                                    </when>
+                                    <when test="2">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21602" />
+                                    </when>
+                                    <when test=">0">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                      <!-- Delay pattern brightness off  -->
+                                      <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay2" Inline="true" Layout="Grid">
+                                        <Rows>
+                                          <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                        </Rows>
+                                        <Columns>
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                        </Columns>
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
+                                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%214_R-%T%%CCC%21401" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%213_R-%T%%CCC%21301" Cell="1,3" />
+                                      </ParameterBlock>
+                                      <!-- end of delay pattern -->
+                                    </when>
+                                  </choose>
                                 </when>
+                              </choose>
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901">
+                            <when test="0 1">
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                              <!-- Delay pattern Presence -->
+                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
+                                <Rows>
+                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                </Rows>
+                                <Columns>
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                </Columns>
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%208_R-%T%%CCC%20801" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%207_R-%T%%CCC%20701" Cell="1,3" />
+                              </ParameterBlock>
+                              <!-- end of delay pattern -->
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101">
                                 <when test=">0">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
-                                  <!-- Delay pattern brightness off  -->
-                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay2" Inline="true" Layout="Grid">
+                                  <!-- choose move or presence signal for short presence, but only if both are available -->
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                    <when test="1">
+                                      <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%238_R-%T%%CCC%23801"/>
+                                        </when>
+                                      </choose>
+                                    </when>
+                                  </choose>
+                                  <!-- Delay pattern PresenceShortDuration -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
                                     <Rows>
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
                                       <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
                                       <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%214_R-%T%%CCC%21401" Cell="1,2" />
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%213_R-%T%%CCC%21301" Cell="1,3" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%210_R-%T%%CCC%21001" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%209_R-%T%%CCC%20901" Cell="1,3" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
+                                  <!-- Delay pattern PresenceShortDelay -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
+                                    <Rows>
+                                      <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                    </Rows>
+                                    <Columns>
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                    </Columns>
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%212_R-%T%%CCC%21201" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%211_R-%T%%CCC%21101" Cell="1,3" />
+                                  </ParameterBlock>
+                                  <!-- end of delay pattern -->
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%237_R-%T%%CCC%23701" />
+                                </when>
+                              </choose>
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                                <when test=">0">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
+                                </when>
+                              </choose>
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                                <when test=">0">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
                                 </when>
                               </choose>
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                             </when>
                           </choose>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                          <!-- Delay pattern Presence -->
-                          <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
-                            <Rows>
-                              <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                            </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%208_R-%T%%CCC%20801" Cell="1,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%207_R-%T%%CCC%20701" Cell="1,3" />
-                          </ParameterBlock>
-                          <!-- end of delay pattern -->
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101" />
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%201_R-%T%%CCC%20101">
-                            <when test=">0">
-                              <!-- choose move or presence signal for short presence, but only if both are available -->
-                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
-                                <when test="1">
-                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
-                                    <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%238_R-%T%%CCC%23801"/>
-                                    </when>
-                                  </choose>
-                                </when>
-                              </choose>
-                              <!-- Delay pattern PresenceShortDuration -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
-                                <Rows>
-                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                </Rows>
-                                <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%210_R-%T%%CCC%21001" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%209_R-%T%%CCC%20901" Cell="1,3" />
-                              </ParameterBlock>
-                              <!-- end of delay pattern -->
-                              <!-- Delay pattern PresenceShortDelay -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
-                                <Rows>
-                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                </Rows>
-                                <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%212_R-%T%%CCC%21201" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%211_R-%T%%CCC%21101" Cell="1,3" />
-                              </ParameterBlock>
-                              <!-- end of delay pattern -->
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%237_R-%T%%CCC%23701" />
-                            </when>
-                          </choose>
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
-                            <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
-                            </when>
-                          </choose>
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
-                            <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%236_R-%T%%CCC%23601" />
-                            </when>
-                          </choose>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">
                             <when test="0">
@@ -2234,117 +2268,130 @@
                       <!-- Phase 3 -->
                       <when test=">1">
                         <ParameterBlock Id="%AID%_PB-%C%13" Name="PM%C%Phase3" Text="Phase 3: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%028_R-%T%%CCC%02801">
+                          <!-- Phase function -->
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
+                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%009_R-%T%%CCC%00901">
                             <when test="0">
                               <!-- Lux send cycle -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%315_R-%T%%CCC%31501" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001" />
-                              <choose ParamRefId="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001">
-                                <when test="1">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31601" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901">
+                                <when test="0 2">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%315_R-%T%%CCC%31501" />
                                 </when>
-                                <when test="2">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31602" />
+                                <when test="0 1">
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001" />
+                                  <choose ParamRefId="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001">
+                                    <when test="1">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31601" />
+                                    </when>
+                                    <when test="2">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31602" />
+                                    </when>
+                                    <when test=">0">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                      <!-- Delay pattern brightness off  -->
+                                      <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay3" Inline="true" Layout="Grid">
+                                        <Rows>
+                                          <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                        </Rows>
+                                        <Columns>
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                        </Columns>
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
+                                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%314_R-%T%%CCC%31401" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%313_R-%T%%CCC%31301" Cell="1,3" />
+                                      </ParameterBlock>
+                                      <!-- end of delay pattern -->
+                                    </when>
+                                  </choose>
                                 </when>
+                              </choose>
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901">
+                            <when test="0 1">
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                              <!-- Delay pattern Presence -->
+                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
+                                <Rows>
+                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                </Rows>
+                                <Columns>
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                </Columns>
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%308_R-%T%%CCC%30801" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%307_R-%T%%CCC%30701" Cell="1,3" />
+                              </ParameterBlock>
+                              <!-- end of delay pattern -->
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101">
                                 <when test=">0">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
-                                  <!-- Delay pattern brightness off  -->
-                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay3" Inline="true" Layout="Grid">
+                                  <!-- choose move or presence signal for short presence, but only if both are available -->
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                    <when test="1">
+                                      <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%338_R-%T%%CCC%33801"/>
+                                        </when>
+                                      </choose>
+                                    </when>
+                                  </choose>
+                                  <!-- Delay pattern PresenceShortDuration -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
                                     <Rows>
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
                                       <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
                                       <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%314_R-%T%%CCC%31401" Cell="1,2" />
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%313_R-%T%%CCC%31301" Cell="1,3" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%310_R-%T%%CCC%31001" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%309_R-%T%%CCC%30901" Cell="1,3" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
+                                  <!-- Delay pattern PresenceShortDelay -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
+                                    <Rows>
+                                      <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                    </Rows>
+                                    <Columns>
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                    </Columns>
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%312_R-%T%%CCC%31201" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%311_R-%T%%CCC%31101" Cell="1,3" />
+                                  </ParameterBlock>
+                                  <!-- end of delay pattern -->
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%337_R-%T%%CCC%33701" />
+                                </when>
+                              </choose>
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                                <when test=">0">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
+                                </when>
+                              </choose>
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                                <when test=">0">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
                                 </when>
                               </choose>
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                             </when>
                           </choose>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                          <!-- Delay pattern Presence -->
-                          <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
-                            <Rows>
-                              <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                            </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%308_R-%T%%CCC%30801" Cell="1,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%307_R-%T%%CCC%30701" Cell="1,3" />
-                          </ParameterBlock>
-                          <!-- end of delay pattern -->
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101" />
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%301_R-%T%%CCC%30101">
-                            <when test=">0">
-                              <!-- choose move or presence signal for short presence, but only if both are available -->
-                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
-                                <when test="1">
-                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
-                                    <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%338_R-%T%%CCC%33801"/>
-                                    </when>
-                                  </choose>
-                                </when>
-                              </choose>
-                              <!-- Delay pattern PresenceShortDuration -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
-                                <Rows>
-                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                </Rows>
-                                <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%310_R-%T%%CCC%31001" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%309_R-%T%%CCC%30901" Cell="1,3" />
-                              </ParameterBlock>
-                              <!-- end of delay pattern -->
-                              <!-- Delay pattern PresenceShortDelay -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
-                                <Rows>
-                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                </Rows>
-                                <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%312_R-%T%%CCC%31201" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%311_R-%T%%CCC%31101" Cell="1,3" />
-                              </ParameterBlock>
-                              <!-- end of delay pattern -->
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%337_R-%T%%CCC%33701" />
-                            </when>
-                          </choose>
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
-                            <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
-                            </when>
-                          </choose>
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
-                            <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%336_R-%T%%CCC%33601" />
-                            </when>
-                          </choose>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">
                             <when test="0">
@@ -2504,117 +2551,130 @@
                       <!-- Phase 4 -->
                       <when test=">2">
                         <ParameterBlock Id="%AID%_PB-%C%14" Name="PM%C%Phase4" Text="Phase 4: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%029_R-%T%%CCC%02901">
+                          <!-- Phase function -->
+                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
+                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%009_R-%T%%CCC%00901">
                             <when test="0">
                               <!-- Lux send cycle -->
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Helligkeit" UIHint="Headline" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%415_R-%T%%CCC%41501" />
-                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001" />
-                              <choose ParamRefId="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001">
-                                <when test="1">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41601" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901">
+                                <when test="0 2">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%415_R-%T%%CCC%41501" />
                                 </when>
-                                <when test="2">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41602" />
+                                <when test="0 1">
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Hier kann man wählen, ob und wann das Licht ausgeht, wenn es im Raum heller wird (z.B. durch Sonneneinstrahlung)" />
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001" />
+                                  <choose ParamRefId="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001">
+                                    <when test="1">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41601" />
+                                    </when>
+                                    <when test="2">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41602" />
+                                    </when>
+                                    <when test=">0">
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                      <!-- Delay pattern brightness off  -->
+                                      <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay4" Inline="true" Layout="Grid">
+                                        <Rows>
+                                          <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                        </Rows>
+                                        <Columns>
+                                          <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                          <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                          <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                        </Columns>
+                                        <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
+                                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%414_R-%T%%CCC%41401" Cell="1,2" />
+                                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%413_R-%T%%CCC%41301" Cell="1,3" />
+                                      </ParameterBlock>
+                                      <!-- end of delay pattern -->
+                                    </when>
+                                  </choose>
                                 </when>
+                              </choose>
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                            </when>
+                          </choose>
+                          <choose ParamRefId="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901">
+                            <when test="0 1">
+                              <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
+                              <!-- Delay pattern Presence -->
+                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
+                                <Rows>
+                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                </Rows>
+                                <Columns>
+                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                </Columns>
+                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%408_R-%T%%CCC%40801" Cell="1,2" />
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%407_R-%T%%CCC%40701" Cell="1,3" />
+                              </ParameterBlock>
+                              <!-- end of delay pattern -->
+                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101" />
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101">
                                 <when test=">0">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
-                                  <!-- Delay pattern brightness off  -->
-                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay4" Inline="true" Layout="Grid">
+                                  <!-- choose move or presence signal for short presence, but only if both are available -->
+                                  <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                                    <when test="1">
+                                      <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%438_R-%T%%CCC%43801"/>
+                                        </when>
+                                      </choose>
+                                    </when>
+                                  </choose>
+                                  <!-- Delay pattern PresenceShortDuration -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
                                     <Rows>
                                       <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                                     </Rows>
                                     <Columns>
                                       <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
                                       <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="25%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
                                     </Columns>
-                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausschalten verzögern um" Cell="1,1" />
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%414_R-%T%%CCC%41401" Cell="1,2" />
-                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%413_R-%T%%CCC%41301" Cell="1,3" />
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%410_R-%T%%CCC%41001" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%409_R-%T%%CCC%40901" Cell="1,3" />
                                   </ParameterBlock>
                                   <!-- end of delay pattern -->
+                                  <!-- Delay pattern PresenceShortDelay -->
+                                  <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
+                                    <Rows>
+                                      <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
+                                    </Rows>
+                                    <Columns>
+                                      <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
+                                      <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
+                                      <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
+                                    </Columns>
+                                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%412_R-%T%%CCC%41201" Cell="1,2" />
+                                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%411_R-%T%%CCC%41101" Cell="1,3" />
+                                  </ParameterBlock>
+                                  <!-- end of delay pattern -->
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%437_R-%T%%CCC%43701" />
+                                </when>
+                              </choose>
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                                <when test=">0">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
+                                </when>
+                              </choose>
+                              <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                                <when test=">0">
+                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
                                 </when>
                               </choose>
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                             </when>
                           </choose>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="Präsenzeinstellungen" UIHint="Headline" />
-                          <!-- Delay pattern Presence -->
-                          <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceDelay2" Inline="true" Layout="Grid">
-                            <Rows>
-                              <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                            </Rows>
-                            <Columns>
-                              <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                              <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                              <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                            </Columns>
-                            <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit" Cell="1,1" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%408_R-%T%%CCC%40801" Cell="1,2" />
-                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%407_R-%T%%CCC%40701" Cell="1,3" />
-                          </ParameterBlock>
-                          <!-- end of delay pattern -->
-                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101" />
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%401_R-%T%%CCC%40101">
-                            <when test=">0">
-                              <!-- choose move or presence signal for short presence, but only if both are available -->
-                              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
-                                <when test="1">
-                                  <choose ParamRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
-                                    <when test="1">
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%438_R-%T%%CCC%43801"/>
-                                    </when>
-                                  </choose>
-                                </when>
-                              </choose>
-                              <!-- Delay pattern PresenceShortDuration -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDuration2" Inline="true" Layout="Grid">
-                                <Rows>
-                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                </Rows>
-                                <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Dauer der kurzen Anwesenheit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%410_R-%T%%CCC%41001" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%409_R-%T%%CCC%40901" Cell="1,3" />
-                              </ParameterBlock>
-                              <!-- end of delay pattern -->
-                              <!-- Delay pattern PresenceShortDelay -->
-                              <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%PresenceShortDelay2" Inline="true" Layout="Grid">
-                                <Rows>
-                                  <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
-                                </Rows>
-                                <Columns>
-                                  <Column Id="%AID%_PB-nnn_C-1" Name="Col1" Width="45%" />
-                                  <Column Id="%AID%_PB-nnn_C-2" Name="Col2" Width="15%" />
-                                  <Column Id="%AID%_PB-nnn_C-3" Name="Col3" Width="20%" />
-                                </Columns>
-                                <ParameterSeparator Id="%AID%_PS-nnn" Text="Nachlaufzeit bei kurzer Anwesenheit" Cell="1,1" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%412_R-%T%%CCC%41201" Cell="1,2" />
-                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%411_R-%T%%CCC%41101" Cell="1,3" />
-                              </ParameterBlock>
-                              <!-- end of delay pattern -->
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%437_R-%T%%CCC%43701" />
-                            </when>
-                          </choose>
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
-                            <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
-                            </when>
-                          </choose>
-                          <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
-                            <when test=">0">
-                              <ParameterRefRef RefId="%AID%_UP-%T%%CCC%436_R-%T%%CCC%43601" />
-                            </when>
-                          </choose>
-                          <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Ausgang 1" UIHint="Headline" />
                           <choose ParamRefId="%AID%_UP-%T%%CCC%006_R-%T%%CCC%00601">
                             <when test="0">
