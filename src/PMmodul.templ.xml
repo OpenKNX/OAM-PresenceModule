@@ -679,11 +679,11 @@
             </ParameterRefs>
             <ComObjectTable>
               <ComObject Id="%AID%_O-%T%%CCC%000" Name="KOp%C%Lux" Number="%K0%" Text="Helligkeit extern" ObjectSize="2 Bytes" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-4" />
-              <ComObject Id="%AID%_O-%T%%CCC%001" Name="KOp%C%Presence1" Number="%K1%" Text="Präsenz A" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%%CCC%002" Name="KOp%C%Presence2" Number="%K2%" Text="Präsenz B" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%001" Name="KOp%C%Presence1" Number="%K1%" Text="Präsenz" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%002" Name="KOp%C%Presence2" Number="%K2%" Text="Bewegung" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%%CCC%003" Name="KOp%C%SetAuto" Number="%K3%" Text="Automatik übersteuern" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%%CCC%004" Name="KOp%C%SetManual" Number="%K4%" Text="Manuell übersteuern" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%%CCC%005" Name="KOp%C%AktorState" Number="%K5%" Text="Aktorstatus" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%005" Name="KOp%C%AktorState" Number="%K5%" Text="Aktorstatus" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%%CCC%007" Name="KOp%C%Lock" Number="%K6%" Text="Sperre" ObjectSize="1 Bit" FunctionText="PM %C%, Ein-/Ausgang" ReadFlag="Enabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
               <ComObject Id="%AID%_O-%T%%CCC%008" Name="KOp%C%Reset" Number="%K7%" Text="Reset" ObjectSize="1 Bit" FunctionText="PM %C%, Eingang, Trigger" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-15" />
               <ComObject Id="%AID%_O-%T%%CCC%009" Name="KOp%C%DayPhase" Number="%K8%" Text="Tagesphase" ObjectSize="1 Byte" FunctionText="PM %C%, Eingang" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" DatapointType="DPST-17-1" />
@@ -701,9 +701,12 @@
             </ComObjectTable>
             <ComObjectRefs>
               <ComObjectRef Id="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" RefId="%AID%_O-%T%%CCC%000" Text="{{0:PM %C%}}: Helligkeit extern" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_O-%T%%CCC%001" Text="{{0:PM %C%}}: Präsenz" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_O-%T%%CCC%002" Text="{{0:PM %C%}}: Bewegung" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" RefId="%AID%_O-%T%%CCC%002" Text="{{0:PM %C%}}: Weitere Präsenz" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" RefId="%AID%_O-%T%%CCC%001" Text="{{0:PM %C%}}: Präsenz" FunctionText="PM %C%, Eingang"  TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" UpdateFlag="Enabled" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%001_R-%T%%CCC%00102" RefId="%AID%_O-%T%%CCC%001" Text="{{0:PM %C%}}: Präsenz" FunctionText="PM %C%, Eingang, Trigger" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" UpdateFlag="Disabled" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" RefId="%AID%_O-%T%%CCC%002" Text="{{0:PM %C%}}: Bewegung" FunctionText="PM %C%, Eingang" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" UpdateFlag="Enabled" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" RefId="%AID%_O-%T%%CCC%002" Text="{{0:PM %C%}}: Weitere Präsenz" FunctionText="PM %C%, Eingang" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" UpdateFlag="Enabled" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00203" RefId="%AID%_O-%T%%CCC%002" Text="{{0:PM %C%}}: Bewegung" FunctionText="PM %C%, Eingang, Trigger" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" UpdateFlag="Disabled" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%002_R-%T%%CCC%00204" RefId="%AID%_O-%T%%CCC%002" Text="{{0:PM %C%}}: Weitere Präsenz" FunctionText="PM %C%, Eingang, Trigger" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" UpdateFlag="Disabled" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%003_R-%T%%CCC%00301" RefId="%AID%_O-%T%%CCC%003" Text="{{0:PM %C%}}: Automatik übersteuern" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_O-%T%%CCC%004" Text="{{0:PM %C%}}: Manuell übersteuern" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_O-%T%%CCC%005" Text="{{0:PM %C%}}: Aktorstatus" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001" />
@@ -898,7 +901,16 @@
                             <choose ParamRefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601">
                               <when test="0">
                                 <!-- but only, if it is not connected internally -->
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                                <choose ParamRefId="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101">
+                                  <when test="0">
+                                    <!-- Input as switching input -->
+                                    <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00101" />
+                                  </when>
+                                  <when test="1">
+                                    <!-- Input as triggering input -->
+                                    <ComObjectRefRef RefId="%AID%_O-%T%%CCC%001_R-%T%%CCC%00102" />
+                                  </when>
+                                </choose>
                               </when>
                             </choose>
                           </when>
@@ -910,11 +922,29 @@
                                 <choose ParamRefId="%AID%_UP-%T%%CCC%900_R-%T%%CCC%90001">
                                   <when test="4">
                                     <!-- input is additional presence -->
-                                    <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" />
+                                    <choose ParamRefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90202">
+                                      <when test="0">
+                                        <!-- Input as switching input -->
+                                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00202" />
+                                      </when>
+                                      <when test="1">
+                                        <!-- Input as triggering input -->
+                                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00204" />
+                                      </when>
+                                    </choose>
                                   </when>
                                   <when test="2 3">
                                     <!-- input is move -->
-                                    <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                                    <choose ParamRefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90201">
+                                      <when test="0">
+                                        <!-- Input as switching input -->
+                                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00201" />
+                                      </when>
+                                      <when test="1">
+                                        <!-- Input as triggering input -->
+                                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%002_R-%T%%CCC%00203" />
+                                      </when>
+                                    </choose>
                                   </when>
                                 </choose>
                               </when>

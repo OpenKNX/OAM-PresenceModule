@@ -503,7 +503,7 @@ void PresenceChannel::processDayPhase()
     }
 }
 
-void PresenceChannel::onDayPhase(uint8_t iPhase)
+void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
 {
     // cleanup old day phase, here we are still in old day phase
     // remove hardware LED lock
@@ -531,8 +531,9 @@ void PresenceChannel::onDayPhase(uint8_t iPhase)
     if (!paramBit(PM_pAPresenceShort, PM_pAPresenceShortMask, true))
         endPresenceShort();
 
-    // day phase change should resend output if output was on
-    forceOutput(true);
+    // day phase change should resend except on startup
+    if (!iIsStartup)
+        forceOutput(true);
 }
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
@@ -1157,7 +1158,8 @@ void PresenceChannel::startBrightness()
     {
         // first check for upper value, if higher, then switch off
         uint32_t lBrightness = getRawBrightness();
-        if (lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
+        // but only, if we are not calculating a new off value
+        if (!(pCurrentState & STATE_ADAPTIVE) && lBrightness > (uint32_t)getKo(PM_KoKOpLuxOff)->value(getDPT(VAL_DPT_9)))
         {
             // we start timer off delay
             if (pBrightnessOffDelayTime == 0 && paramByte(PM_pABrightnessAuto, PM_pABrightnessAutoMask, PM_pABrightnessAutoShift, true) > 0)
@@ -1421,7 +1423,11 @@ void PresenceChannel::setup()
 {
     prepareInternalKo();
     // at the beginning we are on day phase 1
-    onDayPhase(0);
+    onDayPhase(0, true);
+    // init output
+    startOutput(false);
+    forceOutput(false);
+    syncOutput();
     // init auto state
     getKo(PM_KoKOpIsManual)->valueNoSend(false, getDPT(VAL_DPT_1));
     // init lock state

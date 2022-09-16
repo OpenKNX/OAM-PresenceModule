@@ -193,7 +193,7 @@ class PresenceChannel
     int8_t getDayPhaseFromKO();
     void startDayPhase();
     void processDayPhase();
-    void onDayPhase(uint8_t iPhase);
+    void onDayPhase(uint8_t iPhase, bool iIsStartup = false);
 
     void startOutput(bool iOn);
     void forceOutput(bool iOn);

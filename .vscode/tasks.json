@@ -42,6 +42,20 @@
             "problemMatcher": []
         },
         {
+            "label": "Upload Release JLINK SAMD",
+            "type": "shell",
+            "command": "${env:USERPROFILE}\\.platformio\\penv\\Scripts\\pio.exe",
+            "args": [
+                "run",
+                "-e",
+                "upload_Release_JLINK_SAMD",
+                "--target",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Upload JLINK RP2040",
             "type": "shell",
             "command": "${env:USERPROFILE}\\.platformio\\penv\\Scripts\\pio.exe",
@@ -49,6 +63,20 @@
                 "run",
                 "-e",
                 "upload_JLINK_RP2040",
+                "--target",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Upload Release JLINK RP2040",
+            "type": "shell",
+            "command": "${env:USERPROFILE}\\.platformio\\penv\\Scripts\\pio.exe",
+            "args": [
+                "run",
+                "-e",
+                "upload_Release_JLINK_RP2040",
                 "--target",
                 "upload"
             ],
