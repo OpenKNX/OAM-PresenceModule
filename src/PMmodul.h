@@ -1352,6 +1352,6 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 94
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 10
 #define MAIN_OrderNumber "OpenKnxPresence"

@@ -655,7 +655,7 @@ void PresenceChannel::startPresence(bool iForce, bool iManual)
         if (!(pCurrentState & STATE_PRESENCE)) {
             // the following is just allowed for full automatic on (Vollautomat)
             // or if manual on is requested an manual on is done.
-            bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pADayPhaseFunctionShift, true);
+            uint8_t lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pADayPhaseFunctionShift, true);
             bool lTurnOn = (lDayPhaseFunction == VAL_PM_PHASE_FULL || lDayPhaseFunction == VAL_PM_PHASE_HALF_OFF);
             if (!lTurnOn) lTurnOn = (lDayPhaseFunction == VAL_PM_PHASE_HALF_ON && iManual);
             if (lTurnOn)
@@ -774,7 +774,7 @@ void PresenceChannel::onPresenceChange(bool iOn)
     if (!(pCurrentState & STATE_MANUAL))
     {
         // We turn on or off, but only if automatic off is not forbidden
-        bool lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pADayPhaseFunctionShift, true);
+        uint8_t lDayPhaseFunction = paramByte(PM_pADayPhaseFunction, PM_pADayPhaseFunctionMask, PM_pADayPhaseFunctionShift, true);
         bool lTurnOff = (lDayPhaseFunction == VAL_PM_PHASE_FULL || lDayPhaseFunction == VAL_PM_PHASE_HALF_ON);
         lTurnOff = lTurnOff || iOn; // turn on is always allowed
         if (lTurnOff)
