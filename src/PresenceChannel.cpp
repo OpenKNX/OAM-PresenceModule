@@ -2,7 +2,7 @@
 #include "Presence.h"
 #include "Helper.h"
 #include "KnxHelper.h"
-#include "IncludeManager.h"
+// #include "IncludeManager.h"
 
 Presence *PresenceChannel::sPresence = nullptr;
 uint8_t PresenceChannel::sDayPhaseParameterSize = 0;

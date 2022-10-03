@@ -1,7 +1,7 @@
 #ifdef PMMODULE
 #include "Helper.h"
 
-#include "IncludeManager.h"
+// #include "IncludeManager.h"
 
 #include "Presence.h"
 #include "PresenceChannel.h"
@@ -39,9 +39,9 @@ void ProcessReadRequests() {
     if (!sCalledProcessReadRequests)
     {
         gPresence.processReadRequests();
-        gLogic.processReadRequests();
         sCalledProcessReadRequests = true;
     }
+    gLogic.processReadRequests();
 }
 
 // true solgange der Start des gesamten Moduls verzögert werden soll
