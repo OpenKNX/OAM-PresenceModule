@@ -141,12 +141,12 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
                 if (lPresence >= 0)
                 {
                     // Short presence duration output is "L mm:ss S m:ss"
-                    snprintf(iBuffer + 8, 7, "S %01d:%02d", (lPresence / 60) % 60, lPresence % 60);
+                    snprintf(iBuffer + 8, 7, "S %1d:%02d", (lPresence / 60) % 10, lPresence % 60);
                 }
                 else
                 {
                     // Short presence evaluation output is "L mm:ss D m:ss"
-                    snprintf(iBuffer + 8, 7, "D %01d:%02d", (-lPresence / 60) % 60, -lPresence % 60);
+                    snprintf(iBuffer + 8, 7, "D %1d:%02d", (-lPresence / 60) % 10, -lPresence % 60);
                 }
             }
         }
@@ -183,9 +183,9 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
                 lTime = lTime - (uint16_t)((millis() - pDowntimeDelayTime) / 1000);
                 // Downtime output is "T mm:ss "
                 if (lTime >= 0)
-                    snprintf(iBuffer + lIndex, 8, "T %02d:%02d ", (lTime / 60) % 60, lTime % 60);
+                    snprintf(iBuffer + lIndex, 8, "T %02d:%02d", (lTime / 60) % 60, lTime % 60);
                 else
-                    snprintf(iBuffer + lIndex, 8, "T-%02d:%02d ", (-lTime / 60) % 60, -lTime % 60);
+                    snprintf(iBuffer + lIndex, 8, "T-%02d:%02d", (-lTime / 60) % 60, -lTime % 60);
             }
         }
         else if (pCurrentState & STATE_RUNNING)

@@ -1,8 +1,8 @@
 #ifdef PMMODULE
 #include <OpenKNX.h>
-#include "PMmodul.h"
+// #include "PMmodul.h"
 #include <Logic.h>
-#include "HardwareDevices.h"
+// #include "HardwareDevices.h"
 #include "Sensor.h"
 
 uint8_t mSerial2Active = false;
