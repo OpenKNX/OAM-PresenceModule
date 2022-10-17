@@ -1224,6 +1224,8 @@ void PresenceChannel::startAdaptiveBrightness()
         pCurrentState |= STATE_ADAPTIVE;
         pCurrentState &= ~STATE_ADAPTIVE_READ;
         pAdaptiveDelayTime = delayTimerInit();
+        // if we have to calculate a new brightness off value, we should prevent an off due to new light value
+        pBrightnessOffDelayTime = 0;
     }
 }
 

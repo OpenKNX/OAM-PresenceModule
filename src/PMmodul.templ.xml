@@ -32,7 +32,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%036" Name="p%C%PresenceUsagePIR" Offset="3" BitOffset="4" ParameterType="%AID%_PT-PresenceUsagePIR" Text="Eingebauten Präsenzsensor verwenden?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%039" Name="p%C%AutoOffIsLeave" Offset="3" BitOffset="6" ParameterType="%AID%_PT-OnOffYesNo" Text="'Automatik übersteuern'=AUS heißt 'Raum verlassen'" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%060" Name="p%C%ManualModeKeyCount" Offset="3" BitOffset="7" ParameterType="%AID%_PT-KeyCount" Text="Tastenmodus für 'Manuell übersteuern'" Value="1" />
-                <Parameter Id="%AID%_UP-%T%%CCC%063" Name="p%C%BrightnessRead" Offset="4" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%063" Name="p%C%BrightnessRead" Offset="4" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Nach Totzeit Lesetelegramm senden?" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%086" Name="p%C%StartReadLux" Offset="4" BitOffset="1" ParameterType="%AID%_PT-CheckBox" Text="Helligkeit nach Neustart vom Bus lesen?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%087" Name="p%C%StartReadPresence1" Offset="4" BitOffset="2" ParameterType="%AID%_PT-CheckBox" Text="Präsenz A nach Neustart vom Bus lesen?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%088" Name="p%C%StartReadPresence2" Offset="4" BitOffset="3" ParameterType="%AID%_PT-CheckBox" Text="Präsenz B nach Neustart vom Bus lesen?" Value="0" />
@@ -59,8 +59,8 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%037" Name="p%C%DowntimeOffBase" ParameterType="%AID%_PT-DelayBase" Offset="4" BitOffset="0" Text="Zeitbasis" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%038" Name="p%C%DowntimeOffTime" ParameterType="%AID%_PT-DelayTime" Offset="4" BitOffset="2" Text="Zeit" Value="0" />
                 <!-- Brightness Adaptive Calculation Delay -->
-                <Parameter Id="%AID%_UP-%T%%CCC%061" Name="p%C%AdaptiveDelayBase" ParameterType="%AID%_PT-DelayBase10" Offset="6" BitOffset="0" Text="Zeitbasis" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%062" Name="p%C%AdaptiveDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="6" BitOffset="2" Text="Zeit" Value="5" />
+                <Parameter Id="%AID%_UP-%T%%CCC%061" Name="p%C%AdaptiveDelayBase" ParameterType="%AID%_PT-DelayBase10" Offset="6" BitOffset="0" Text="Zeitbasis" Value="1" />
+                <Parameter Id="%AID%_UP-%T%%CCC%062" Name="p%C%AdaptiveDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="6" BitOffset="2" Text="Zeit" Value="1" />
                 <!-- Cyclic Output 2 send -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%022" Name="p%C%Output2CyclicBase" ParameterType="%AID%_PT-DelayBase" Offset="10" BitOffset="0" Text="Zeitbasis" Value="1" /> -->
                 <!-- <Parameter Id="%AID%_UP-%T%%CCC%023" Name="p%C%Output2CyclicTime" ParameterType="%AID%_PT-DelayTime" Offset="10" BitOffset="2" Text="Zeit" Value="5" /> -->
