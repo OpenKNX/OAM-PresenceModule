@@ -896,6 +896,8 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
         startLeaveRoom(iSuppressOutput);
     else
     {
+        // sollte Auto EIN/AUS auch adaptive Berechnung starten?
+        
         // we start presence delay
         startPresenceTrigger(true);
         // and we also start/reset short presence here

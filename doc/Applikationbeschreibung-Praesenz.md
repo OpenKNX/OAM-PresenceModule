@@ -108,7 +108,7 @@ Es gibt Präsenzmelder, die eine helligkeitsbasierte Ausschaltschwelle erlauben.
 
 Die in diesem Melder eingebaute adaptive Ausschaltschwelle berücksichtigt genau dieses Problem und erlaubt eine smarte Abschaltung des Lichts unter Berücksichtigung beliebig vieler Lichtkreise und verschiedener Möglichkeiten der Helligkeitsänderung mittels schalten, dimmen und Szenennutzung.
 
-Die Grundidee ist einfach: Nach dem Einschalten von einem oder mehreren Lichtkreisen wird ein Moment gewartet, bis der Lichtsensor die aktuelle Helligkeit im Raum gemessen hat und dem PM gemeldet hat. Jetzt wird die Ausschaltschwelle berechnet: Der Benutzer hat in der Applikation festgelegt "Um wie viel heller darf es werden?". Dieser Wert wird zur aktuellen Helligkeit addiert und das als neue Ausschaltschwelle festgelegt. Darf es um 20 Lux heller werden und es wurden 127 Lux gemessen, so ist die Ausschaltschwelle 147 Lux.
+Die Grundidee ist einfach: Nach dem Einschalten von einem oder mehreren Lichtkreisen wird einen Moment gewartet, bis der Lichtsensor die aktuelle Helligkeit im Raum gemessen hat und dem PM gemeldet hat. Jetzt wird die Ausschaltschwelle berechnet: Der Benutzer hat in der Applikation festgelegt "Um wie viel heller darf es werden?". Dieser Wert wird zur aktuellen Helligkeit addiert und das als neue Ausschaltschwelle festgelegt. Darf es um 20 Lux heller werden und es wurden 127 Lux gemessen, so ist die Ausschaltschwelle 147 Lux.
 
 Erhöht sich die Helligkeit im Raum durch das Sonnenlicht auf 150 Lux, würde das Licht ausgeschaltet werden, da es jetzt heller ist als durch die Beleuchtung im Raum.
 
@@ -432,16 +432,12 @@ Diese Einstellung ist nur wichtig, wenn die [adaptive Ausschaltschwelle](#adapti
 
 Die hier angegebene Zeit ist die Pause, in der auf einen neuen Helligkeitswert gewartet wird.
 
-Die Zeit sollte wohlüberlegt sein. Falls der interne Sensor benötigt für eine Lichtmessung ca. 5 Sekunden. Da intern keine Telegramme verloren gehen können, kann in diesem Fall 5 Sekunden angegeben werden.
+Die Zeit sollte wohlüberlegt sein. Der interne Sensor benötigt für eine Lichtmessung ca. 5 Sekunden. Da intern keine Telegramme verloren gehen können, kann in diesem Fall 5 Sekunden angegeben werden.
 
 Bei einem externen Helligkeitssensor sollte die Zeitspanne mindestens die Zeit sein, mit der der externe Sensor seine Helligkeit zyklisch sendet. Da Telegramme verloren gehen können, wird eher die doppelte Zykluszeit empfohlen. 
 Wenn der externe Helligkeitssensor auf Lesetelegramme antwortet und beim lesen wirklich die aktuell gemessene Helligkeit zurückliefert (machen die wenigsten), kann man die Zeit auch kürzer angeben und für die Neuberechnung den Helligkeitswert lesen lassen.
 
 > WICHTIG: Wenn man die [adaptive Ausschaltschwelle](#adaptive-ausschaltschwelle-über-helligkeit) nutzen will, ist es wichtig, dass nach dem einschalten einer neuen Lichtquelle auch ein neuer Helligkeitswert dem Melder vorliegt und er anhand dieses neuen Helligkeitswertes eine neue Ausschaltschwelle berechnen kann. Falls noch mit dem alten Helligkeitswert gerechnet wird, bleibt es bei der alten Ausschaltschwelle und das Licht wird möglicherweise sofort ausgeschaltet.
-
-**Fehlerfall? Licht an/heller, adaptive Schwelle, dann Lichttelegramm während Totzeit mit altem Wert => wird das ausgewertet?**
-
-**Auto EIN / AUS sollte von sich aus Adaptive Berechnung starten**
 
 ### **Nach Totzeit Lesetelegramm senden?**
 
@@ -451,7 +447,7 @@ Eine neue Ausschaltschwelle wird erst berechnet, nachdem ein Helligkeitswert emp
 
 ## Präsenz- und Bewegungseingänge
 
-Hier kann bestimmt werden, ob und eine Präsenz- bzw. Bewegungsinformation von externer oder interner Hardware zu dem Melderkanal gelangt.
+Hier kann bestimmt werden, ob eine Präsenz- bzw. Bewegungsinformation von externer oder interner Hardware zu dem Melderkanal gelangt.
 
 <kbd>![Präsenzeingänge](pics/PresenceKanal.png)</kbd>
 
@@ -470,7 +466,7 @@ Die Auswahlliste erlaubt folgende Auswahl:
 * **Präsenz** - Es wird nur ein Präsenzsignal vom externen Melder geliefert
 * **Bewegung** - Es wird nur ein Bewegungssignal geliefert
 * **Präsenz und Bewegung** - Es wird ein Präsenz- und Bewegungssignal vom externen Melder geliefert
-* **Präsenz und weitere Präsenz** - Es werden 2 schaltende Präsenzmelder mit diesem Master verbunden.
+* **Präsenz und weitere Präsenz** - Es werden 2 Präsenzmelder mit diesem Master verbunden.
 
 Die Unterscheidung zwischen Präsenz- und Bewegungssignal ist rein theoretisch, da beides Bewegung im Raum anzeigt. Die Applikation geht davon aus, dass ein Präsenzsignal auf jeden Fall länger EIN ist als ein Bewegungssignal und es auch nicht so oft zwischen EIN und AUS wechselt. Ferner repräsentiert ein Präsenzsignal auch Mikrobewegungen (Hände beim Umblättern eines Buches) und nicht nur starke Bewegungen (aufstehen, gehen).
 Ein Bewegungssignal repräsentiert eher starke Bewegungen und ist nur so lange EIN, wie diese Bewegung stattfindet.
@@ -490,9 +486,9 @@ Melder, die eine an sich gute Präsenzerkennung bieten aber auch kurze Nachlaufz
 
 Einen Sonderfall nimmt hier der True Presence ein. Dieser sollte als **Präsenz und Bewegung** eingebunden werden und die Eingänge sollten mit den rohdaten des TP zur Präsenz und Bewegung verbunden werden (KO 81 und 82 vom TP)
 
-Will man 2 Slaves anschließen und kein extra ODER spendieren, kann man dies über **Präsenz und weitere Präsenz** einbinden.
+Will man 2 schaltende Slaves anschließen und kein extra ODER spendieren, kann man dies über **Präsenz und weitere Präsenz** einbinden. Es sind hier auch triggernde Slaves denkbar, aber triggernde Slaves (auch mehr als 2) können bei **Präsenz** als hörende Adressen eingebunden werden.  
 
-Wenn der virtuelle PM nur Präsenzinformationen bekommt, sind die Funktionen Kurzzeitpräsenz und  Raum verlassen nur mit langen Nachlaufzeiten und somit mit weniger Komfort nutzbar.
+Wenn der virtuelle PM nur Präsenzinformationen bekommt, sind die Funktionen Kurzzeitpräsenz und Raum verlassen nur mit langen Nachlaufzeiten und somit mit weniger Komfort nutzbar.
 
 ### **Eingang Präsenz / Bewegung / weitere Präsenz**
 
@@ -711,7 +707,7 @@ Der Abschnitt erscheint nur, wenn
 
 Mit "Bewegung melden" sind kurzzeitige Bewegungsmeldungen gemeint, die schaltend sind und idealerweise **Stillstand** schon nach weniger als 5 Sekunden, spätestens nach 15 Sekunden melden.
 
-Beim True Presence wird Stillstand erst nach 30-40 Sekunden gemeldet. Deswegen wird die Raum Verlassen Funktion für diesen Melder nicht empfohlen.
+Beim True Presence sollte man an der konkreten Einbaustelle testen, wie schnell der Ausgang für die Bewegungs-Rohdaten nach einer Bewegung wieder auf AUS geht. Aus dem Test ist bekannt, dass hier Werte zwischen 5 und 40 Sekunden erreicht werden. Wird Stillstand erst nach 30-40 Sekunden gemeldet, wird die Raum Verlassen Funktion nicht zufriedenstellend funktionieren und dann nicht empfohlen. Versuchen kann man es natürlich trotzdem, da solche Komfortfunktionen sehr vom eigenem empfinden abhängen.
 
 <kbd>![Raum verlassen](pics/LeaveRoom.png)</kbd>
 
@@ -896,6 +892,12 @@ Es gibt Situationen, in denen man einen Raum nur kurz betritt und schnell danach
 
 Wird hier ein "Ja" gewählt, kann man Einstellungen für Kurzzeitpräsenz vornehmen.
 
+Damit Kurzzeitpräsenz funktioniert, muss das externe Präsenz- bzw. Bewegungssignal auch häufig gesendet werden. Eine Kurzzeitpräsenz von 30 Sekunden kann nicht erkannt werden, wenn Präsenz-Signale nur jede Minute ankommen. Deswegen ist das Timing hier wichtig und man muss darauf achten, wann der externe Melder entsprechende Signale schickt. 
+
+Der Melderkanal ist so programmiert, dass er beim Vorhandensein von Präsenz- und Bewegungs-Signalen das Bewegungssignal für die Kurzzeitpräsenzerkennung benutzt. Das kann aber auch zu unerwarteten Effekten führen: Man kommt in ein Wohnzimmer und setzt sich gleich auf das Sofa. Die Bewegung hört innerhalb von 10 Sekunden auf, es wird somit (unerwünscht) eine 30-Sekunden-Kurzzeitpräsenz erkannt und das Licht geht aus. 
+
+Es kann somit Räume geben, die für Kurzzeitpräsenz nicht geeignet sind oder wo Kurzzeitpräsenz nur zu bestimmten Zeiten sinnvoll ist. Im zweiten Fall sollte man unterschiedliche Tagesphasen nutzen.
+
 ### **Dauer der kurzen Anwesenheit**
 
 Erscheint nur, wenn "Kurze Anwesenheit erkennen?" ausgewählt ist.
@@ -907,6 +909,10 @@ Hier wird die maximale Dauer für eine Kurzzeitpräsenz angegeben.
 Erscheint nur, wenn "Kurze Anwesenheit erkennen?" ausgewählt ist.
 
 Dies ist die Dauer, die nach einer kurzen Anwesenheit keine Präsenz festgestellt werden darf, damit eine Kurzzeitpräsenz erkannt werden kann. Wird in dieser Zeit eine Präsenz erkannt, so wird aus der Kurzzeitpräsenz eine Langzeitpräsenz.
+
+> Wichtig: Diese Zeit muss immer länger als die Zeit sein, die der externe Melder benötigt, um eine erneute Präsenz bzw. Bewegung zu senden. Ist die Zeit zu kurz, wird dem Melder keine Möglichkeit gegeben, eine erneute Bewegung festzustellen und man landet immer in der Kurzzeitpräsenz. 
+
+> Achtung: Obwohl technisch möglich, sollte hier nie der Wert 0 eingetragen werden, da der Kanal dann keine Chance hat, nach der Kurzzeitpräsenz eine Langzeitpräsenz festzustellen.
 
 ### **Diese Tagesphase sperrt Hardware-LEDs**
 
