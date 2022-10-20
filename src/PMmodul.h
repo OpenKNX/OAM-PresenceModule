@@ -1365,5 +1365,5 @@
 
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 12
+#define MAIN_ApplicationVersion 16
 #define MAIN_OrderNumber "OpenKnxPresence"
