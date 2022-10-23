@@ -39,7 +39,7 @@ Die Idee zu dieser Applikation ist bei der Verwendung vom True Presence Präsenz
 
 Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 
-* "Normaler Präsenzmelder" mit
+* "Klassischer Präsenzmelder" mit
   * schalten bei Bewegung
   * ausschalten nach einer gewissen Nachlaufzeit
   * Helligkeitsgesteuert oder Helligkeitsunabhängig
@@ -56,11 +56,12 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
   * Es wird nicht nur Tag/Nacht, sondern bis zu 4 Tagesphasen unterstützt (Morgens, Tag, Abend, Nacht)
   * Tagesphasen können beliebig benannt werden
   * Jede Tagesphase unterstützt eigene Nachlaufzeiten, Helligkeiten, Kurzzeitpräsenz
+  * Falls mehr als 4 Tagesphasen benötigt werden, kann man das durch zusammenschalten von Kanälen erreichen
 
 * Innovative Adaptive Ausschaltschwelle über Helligkeit
   * Erlaubt absolute oder relative Helligkeitsschwellen
   * Abschaltung bei externen Lichteinflüssen
-  * Beachtet mehrere Lichtkanäle
+  * Beachtet mehrere Lichtkanäle pro Raum
 
 * Automatik- und Manuell- und Sperrmodus
   * Der Moduswechsel ist über Ein- und Zweitastenbedienung vorgesehen
@@ -69,7 +70,7 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
 
 * Innovative "Raum verlassen"-Funktion
   * Erlaubt dem Melder die Unterscheidung zwischen "Licht aus und im Raum bleiben" und "Licht aus und Raum verlassen".
-  * Schaltet damit Licht genau dann ein, wenn man es benötigt
+  * Schaltet damit Licht genau erneut dann ein, wenn man es benötigt
 
 * Viele Parameter über GA modifizierbar
   * aktuelle Helligkeitsschwelle
@@ -78,8 +79,14 @@ Diese Präsenzmelder-Applikation implementiert folgende Funktionen:
   * Sensibilität des HF-Sensors
   * Szenario für HF-Sensor
 
+* Erweiterte Steuerungsmöglichkeiten
+  * alle Melderfunktionen sind über Szenen steuerbar
+  * Jeder Eingang kann bei Busspannungswiederkehr Werte lesen
+  * KO können auch intern verknüpft werden (Interne KO) und so die Buslast vermindern
+
 * Logikmodul mit vielen weiteren Funktionen
   * mit dem integrierten Logikmodul können weitere Funktionen in den PM integriert werden
+  * Interne KO können auch zwischen PM und Logik verwendet werden 
 
 ### Tagesphasen
 
