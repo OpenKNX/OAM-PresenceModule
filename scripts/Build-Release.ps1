@@ -21,14 +21,13 @@
 #     "group": "test"
 # }
 
-
+$releaseIndication = $args[0]
 
 # set product names, allows mapping of (devel) name in Project to a more consistent name in release
-$sourceName="PMmodul"
-$targetName="PresenceModule"
+# $settings = scripts/OpenKNX-Build-Settings.ps1
 
 # execute generic pre-build steps
-../OGM-Common/build-scripts/Build-Release-Preprocess.ps1 $sourceName $targetName $args[0]
+../OGM-Common/setup-scripts/reusable/Build-Release-Preprocess.ps1 $args[0]
 if (!$?) { exit 1 }
 
 # build firmware based on generated headerfile for RP2040
@@ -44,13 +43,15 @@ if (!$?) { exit 1 }
 ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_RP2040 firmware-Sensormodul-RP2040 uf2
 if (!$?) { exit 1 }
 
-# build firmware based on generated headerfile for SAMD
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v31 firmware-Sensormodul-v31 bin
-if (!$?) { exit 1 }
+if ($releaseIndication -ne "Big")
+{
+    # build firmware based on generated headerfile for SAMD
+    ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v31 firmware-Sensormodul-v31 bin
+    if (!$?) { exit 1 }
 
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v30 firmware-Sensormodul-v30 bin
-if (!$?) { exit 1 }
-
+    ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v30 firmware-Sensormodul-v30 bin
+    if (!$?) { exit 1 }
+}
 # execute generic post-build steps
-../OGM-Common/build-scripts/Build-Release-Postprocess.ps1 $sourceName $targetName $args[0]
+../OGM-Common/setup-scripts/reusable/Build-Release-Postprocess.ps1 $args[0]
 if (!$?) { exit 1 }
