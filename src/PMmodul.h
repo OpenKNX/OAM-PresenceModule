@@ -912,9 +912,6 @@
 #define PM_pBrightnessIntern          2      // 1 Bit, Bit 6
 #define     PM_pBrightnessInternMask 0x40
 #define     PM_pBrightnessInternShift 6
-#define PM_pExternalSupportsReset     2      // 1 Bit, Bit 5
-#define     PM_pExternalSupportsResetMask 0x20
-#define     PM_pExternalSupportsResetShift 5
 #define PM_pLockType                  2      // 2 Bits, Bit 4-3
 #define     PM_pLockTypeMask 0x18
 #define     PM_pLockTypeShift 3
@@ -978,6 +975,15 @@
 #define PM_pLeaveRoomModeReset        5      // 3 Bits, Bit 7-5
 #define     PM_pLeaveRoomModeResetMask 0xE0
 #define     PM_pLeaveRoomModeResetShift 5
+#define PM_pExternalSupportsReset     5      // 2 Bits, Bit 4-3
+#define     PM_pExternalSupportsResetMask 0x18
+#define     PM_pExternalSupportsResetShift 3
+#define PM_pPresenceKeepAlive         5      // 1 Bit, Bit 2
+#define     PM_pPresenceKeepAliveMask 0x04
+#define     PM_pPresenceKeepAliveShift 2
+#define PM_pMoveKeepAlive             5      // 1 Bit, Bit 1
+#define     PM_pMoveKeepAliveMask 0x02
+#define     PM_pMoveKeepAliveShift 1
 #define PM_pChannelDelayBase          6      // 2 Bits, Bit 7-6
 #define     PM_pChannelDelayBaseMask 0xC0
 #define     PM_pChannelDelayBaseShift 6
@@ -1364,6 +1370,6 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 16
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 99
 #define MAIN_OrderNumber "OpenKnxPresence"

@@ -151,7 +151,7 @@ class PresenceChannel
     bool getHardwarePresence(bool iJustMove = false);
     void startHardwarePresence();
     void startPresenceTrigger(bool iManual);
-    void startPresence(bool iIsTrigger, GroupObject &iKo);
+    void startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObject &iKo);
     void startPresence(bool iForce, bool iManual);
     void processPresence();
     void endPresence(bool iSend = true);

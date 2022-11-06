@@ -213,6 +213,13 @@
                   <Enumeration Text="Totzeit + Reset" Value="2" Id="%AID%_PT-LeaveRoomModeReset_EN-2" />
                 </TypeRestriction>
               </ParameterType>
+              <ParameterType Id="%AID%_PT-SupportsReset" Name="SupportsReset">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Nein" Value="0" Id="%AID%_PT-SupportsReset_EN-0" />
+                  <Enumeration Text="Mit einem EIN-Signal" Value="1" Id="%AID%_PT-SupportsReset_EN-1" />
+                  <Enumeration Text="Mit einem AUS-Signal" Value="2" Id="%AID%_PT-SupportsReset_EN-2" />
+                </TypeRestriction>
+              </ParameterType>
               <ParameterType Id="%AID%_PT-LuxAbsRel" Name="LuxAbsRel">
                 <TypeRestriction Base="Value" SizeInBit="1">
                   <Enumeration Text="in Lux (absolut)" Value="0" Id="%AID%_PT-LuxAbsRel_EN-0" />
