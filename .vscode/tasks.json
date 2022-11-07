@@ -135,6 +135,14 @@
             "group": "test"
         },
         {
+            "label": "Build-Big",
+            "type": "shell",
+            "command": "scripts/Build-Release.ps1 Big",
+            "args": [],
+            "problemMatcher": [],
+            "group": "test"
+        },
+        {
             "label": "Build-Beta",
             "type": "shell",
             "command": "scripts/Build-Release.ps1",
