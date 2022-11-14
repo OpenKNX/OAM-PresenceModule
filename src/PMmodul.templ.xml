@@ -21,7 +21,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%008" Name="p%C%ChannelActive" Offset="1" BitOffset="6" ParameterType="%AID%_PT-ChannelActive" Text="Kanalaktivität" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%009" Name="p%C%BrightnessIndependent" Offset="2" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNoInverted" Text="Kanal ist Helligkeitsabhängig" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%034" Name="p%C%BrightnessIntern" Offset="2" BitOffset="1" ParameterType="%AID%_PT-OnOffYesNo" Text="Eingebauten Helligkeitssensor verwenden?" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="2" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
+                <!-- 1-Bit free -->
                 <Parameter Id="%AID%_UP-%T%%CCC%012" Name="p%C%LockType" Offset="2" BitOffset="3" ParameterType="%AID%_PT-LockType" Text="Sperrobjekt" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%013" Name="p%C%LockActive" Offset="2" BitOffset="5" ParameterType="%AID%_PT-LockActive" Text="    Sperraktivität" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%014" Name="p%C%LockOn" Offset="2" BitOffset="6" ParameterType="%AID%_PT-LockOn" Text="    Beim EINschalten wird" Value="0" />
@@ -44,7 +44,10 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%097" Name="p%C%LeaveRoomModeAll" Offset="5" BitOffset="0" ParameterType="%AID%_PT-LeaveRoomModeAll" Text="Modus für Raum verlassen" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%098" Name="p%C%LeaveRoomModeMove" Offset="5" BitOffset="0" ParameterType="%AID%_PT-LeaveRoomModeMove" Text="Modus für Raum verlassen" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%099" Name="p%C%LeaveRoomModeReset" Offset="5" BitOffset="0" ParameterType="%AID%_PT-LeaveRoomModeReset" Text="Modus für Raum verlassen" Value="0" />
-                <!-- 5 Bit free -->
+                <Parameter Id="%AID%_UP-%T%%CCC%093" Name="p%C%ExternalSupportsReset" Offset="5" BitOffset="3" ParameterType="%AID%_PT-SupportsReset" Text="Externer PM kann über Bus zurückgesetzt werden?" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%903" Name="p%C%PresenceKeepAlive" Offset="5" BitOffset="5" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%904" Name="p%C%MoveKeepAlive" Offset="5" BitOffset="6" ParameterType="%AID%_PT-CheckBox" Text="    Eingang kann nicht einschalten,&#10;    aber bestehende Präsenz verlängern" Value="0" />
+                <!-- 1 Bit free -->
               </Union>
               <!-- Delay patterns (once per channel) -->
               <Union SizeInBit="64">
@@ -131,7 +134,7 @@
               <!-- KO enablement (for internal KO, once per channel, just ets local and invisible) -->
               <Parameter Id="%AID%_P-%T%%CCC%084" Name="p%C%EnableLux" ParameterType="%AID%_PT-CheckBox" Text="Lux" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%085" Name="p%C%EnableDayPhase" ParameterType="%AID%_PT-ValueDpt5" Text="DayPhase" Value="0" />
-              <!-- <Parameter Id="%AID%_P-%T%%CCC%095" Name="p%C%ExternalPMExist" ParameterType="%AID%_PT-CheckBox" Text="External PM" Value="0" /> -->
+              <Parameter Id="%AID%_P-%T%%CCC%095" Name="p%C%InternalHardwareInUse" ParameterType="%AID%_PT-CheckBox" Text="Internal Hardware" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%096" Name="p%C%LeaveRoom" ParameterType="%AID%_PT-ValueDpt5" Text="Leave room possible - with mode" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%003" Name="p%C%LeaveRoomModeChosen" ParameterType="%AID%_PT-ValueDpt5" Text="Leave room mode chosen" Value="0" />
               <!-- Calculate existence of move or presence signal -->
@@ -499,7 +502,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%092_R-%T%%CCC%09201" RefId="%AID%_UP-%T%%CCC%092" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%093_R-%T%%CCC%09301" RefId="%AID%_UP-%T%%CCC%093" />
               <!-- <ParameterRef Id="%AID%_UP-%T%%CCC%094_R-%T%%CCC%09401" RefId="%AID%_UP-%T%%CCC%094" /> -->
-              <!-- <ParameterRef Id="%AID%_P-%T%%CCC%095_R-%T%%CCC%09501" RefId="%AID%_P-%T%%CCC%095" Access="None" /> -->
+              <ParameterRef Id="%AID%_P-%T%%CCC%095_R-%T%%CCC%09501" RefId="%AID%_P-%T%%CCC%095" Access="None" />
               <ParameterRef Id="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" RefId="%AID%_P-%T%%CCC%096" Access="None" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%097_R-%T%%CCC%09701" RefId="%AID%_UP-%T%%CCC%097" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%098_R-%T%%CCC%09801" RefId="%AID%_UP-%T%%CCC%098" />
@@ -508,6 +511,8 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101" RefId="%AID%_UP-%T%%CCC%901" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90201" RefId="%AID%_UP-%T%%CCC%902" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90202" RefId="%AID%_UP-%T%%CCC%902" Text="Eingang weitere Präsenz" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%903_R-%T%%CCC%90301" RefId="%AID%_UP-%T%%CCC%903" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%904_R-%T%%CCC%90401" RefId="%AID%_UP-%T%%CCC%904" />
               <!-- Phase 1 -->
               <ParameterRef Id="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001" RefId="%AID%_UP-%T%%CCC%100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%101_R-%T%%CCC%10101" RefId="%AID%_UP-%T%%CCC%101" />
@@ -870,9 +875,19 @@
                         <choose ParamRefId="%AID%_UP-%T%000006_R-%T%00000601">
                           <when test="1">
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601" />
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%036_R-%T%%CCC%03601">
+                              <when test=">0">
+                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%095_R-%T%%CCC%09501" Value="1" />
+                              </when>
+                            </choose>
                           </when>
                           <when test="2">
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501" />
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%035_R-%T%%CCC%03501">
+                              <when test=">0">
+                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%095_R-%T%%CCC%09501" Value="1" />
+                              </when>
+                            </choose>
                           </when>
                         </choose>
                         <!-- external PM -->
@@ -881,20 +896,36 @@
                           <when test="1">
                             <!-- Presence input exists -->
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101" />
+                            <!-- is there also presence hardware, so we allow just keep alive mode -->
+                            <choose ParamRefId="%AID%_P-%T%%CCC%095_R-%T%%CCC%09501">
+                              <when test="1">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%903_R-%T%%CCC%90301" />
+                              </when>
+                            </choose>
                           </when>
                           <when test="2">
                             <!-- Move input exists -->
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90201" />
+                            <!-- is there also presence hardware, so we allow just keep alive mode -->
+                            <choose ParamRefId="%AID%_P-%T%%CCC%095_R-%T%%CCC%09501">
+                              <when test="1">
+                                <ParameterRefRef RefId="%AID%_UP-%T%%CCC%903_R-%T%%CCC%90301" />
+                              </when>
+                            </choose>
                           </when>
                           <when test="3">
                             <!-- Presence and Move input exists -->
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%903_R-%T%%CCC%90301" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90201" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%904_R-%T%%CCC%90401" />
                           </when>
                           <when test="4">
                             <!-- Presence and additional Presence input exists -->
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%901_R-%T%%CCC%90101" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%903_R-%T%%CCC%90301" />
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%902_R-%T%%CCC%90202" />
+                            <ParameterRefRef RefId="%AID%_UP-%T%%CCC%904_R-%T%%CCC%90401" />
                           </when>
                           <when test="1 3 4">
                             <!-- we use external presence input 1 -->
@@ -985,7 +1016,7 @@
                                 <!-- reset "leave room" -->
                                 <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
                               </when>
-                              <when test="1">
+                              <when test="1 2">
                                 <!-- we activate reset output -->
                                 <ComObjectRefRef RefId="%AID%_O-%T%%CCC%019_R-%T%%CCC%01901" />
                                 <!-- and allow "Leave room" wth mode reset -->
@@ -997,7 +1028,7 @@
                           <when test="2 3">
                             <!-- check if it is also reset -->
                             <choose ParamRefId="%AID%_UP-%T%%CCC%093_R-%T%%CCC%09301">
-                              <when test="1">
+                              <when test="1 2">
                                 <!-- we allow "Leave room" wth mode all -->
                                 <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="3" />
                               </when>

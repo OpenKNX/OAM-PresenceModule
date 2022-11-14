@@ -260,6 +260,7 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
     if (pCurrentState & STATE_RUNNING) {
         // search for correct KO
         bool lIsTrigger;
+        bool lIsKeepAlive;
         uint8_t lKoIndex = (iKoIndex >= 0) ? iKoIndex : calcKoIndex(iKo.asap());
         bool lValue = iKo.value(getDPT(VAL_DPT_1));
         switch (lKoIndex)
@@ -276,12 +277,14 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
             case PM_KoKOpPresence1:
                 // which kind of presence information do we get
                 lIsTrigger = paramBit(PM_pPresenceType, PM_pPresenceTypeMask);
-                startPresence(lIsTrigger, iKo);
+                lIsKeepAlive = paramBit(PM_pPresenceKeepAlive, PM_pPresenceKeepAliveMask);
+                startPresence(lIsTrigger, lIsKeepAlive, iKo);
                 break;
             case PM_KoKOpPresence2:
                 // change of presence information
                 lIsTrigger = paramBit(PM_pMoveType, PM_pMoveTypeMask);
-                startPresence(lIsTrigger, iKo);
+                lIsKeepAlive = paramBit(PM_pMoveKeepAlive, PM_pMoveKeepAliveMask);
+                startPresence(lIsTrigger, lIsKeepAlive, iKo);
                 break;
             case PM_KoKOpSetAuto:
                 // Automatic mode
@@ -626,19 +629,22 @@ void PresenceChannel::startHardwareBrightness()
 }
 
 // helper entry point for presence calculation initiated by a KO
-void PresenceChannel::startPresence(bool iIsTrigger, GroupObject &iKo)
+void PresenceChannel::startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObject &iKo)
 {
     bool lPresenceValue = iKo.value(getDPT(VAL_DPT_1));
+    bool lAllowStartPresence = !iIsKeepAlive || (pCurrentState & STATE_PRESENCE);
     // we ignore explicitly OFF telegrams of triggered input
     if (iIsTrigger && !lPresenceValue)
         return;
-    startPresence(false, false);
+    if (lAllowStartPresence)
+        startPresence(false, false);
     if (iIsTrigger && lPresenceValue)
     {
         // triggered input sent a 1, we immediately set it to 0
         iKo.value(false, getDPT(VAL_DPT_1));
         // afterwards we call ourself to evaluate 0 action
-        startPresence(false, false);
+        if (lAllowStartPresence)
+            startPresence(false, false);
     }
 }
 
@@ -830,10 +836,14 @@ void PresenceChannel::processLeaveRoom()
                 endLeaveRoom();
             break;
         case VAL_PM_LRM_DowntimeReset:
+            {
             // we send a reset to external PM and go to normal mode
-            getKo(PM_KoKOpResetExternalPM)->value(true, getDPT(VAL_DPT_1));
+            uint8_t lResetTrigger = paramByte(PM_pExternalSupportsReset, PM_pExternalSupportsResetMask, PM_pExternalSupportsResetShift);
+            if (lResetTrigger)
+                getKo(PM_KoKOpResetExternalPM)->value((lResetTrigger == 1), getDPT(VAL_DPT_1));
             // TODO: reset internal PIR, as soon as implemented
             endLeaveRoom();
+            }
             break;
         case VAL_PM_LRM_MoveDowntime:
         case VAL_PM_LRM_MoveDowntimeReset:

@@ -35,6 +35,7 @@
 			"vector": "cpp",
 			"initializer_list": "cpp"
 		},
-		"cSpell.language": "en,de-DE"
+		"cSpell.language": "en,de-DE",
+		"powershell.cwd": "c:\\Users\\waldemar.porscha@sap.com\\PlatformIO\\OpenKNX\\OAM-PresenceModule"
 	}
 }
