@@ -244,7 +244,7 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             iBuffer[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
             iBuffer[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
             iBuffer[lIndex++] = (pCurrentValue & PM_BIT_DISABLE_BRIGHTNESS) ? 'X' : '-';
-            iBuffer[lIndex++] = (isLeaveRoom()) ? 'R' : '-';
+            iBuffer[lIndex++] = (pCurrentState & STATE_LEAVE_ROOM) ? 'R' : '-';
             iBuffer[lIndex++] = (pCurrentState & STATE_DOWNTIME) ? 'T' : '-';
             // 3 char free
             iBuffer[lIndex++] = 0;
@@ -796,6 +796,9 @@ void PresenceChannel::onPresenceChange(bool iOn)
 void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
 {
     pLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
+    bool lOn = pCurrentValue & PM_BIT_OUTPUT_SET;
+    // we have to send an OFF signal if requested or current output value is on
+    bool lSend = !iSuppressOutput || lOn;
     switch (pLeaveRoomMode)
     {
         case VAL_PM_LRM_Downtime:
@@ -803,14 +806,14 @@ void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
             // in this case we just wait until downtime passed and afterwards we wait for the first Move
             startDowntime(); // has to be first to set correct state
             onManualChange(false);
-            endPresence(!iSuppressOutput);
+            endPresence(lSend);
             break;
         case VAL_PM_LRM_MoveDowntime:
         case VAL_PM_LRM_MoveDowntimeReset:
             // dispatch to process handler
             pCurrentState |= STATE_LEAVE_ROOM;
             onManualChange(false);
-            endPresence(!iSuppressOutput);
+            endPresence(lSend);
             break;
 
         default:
