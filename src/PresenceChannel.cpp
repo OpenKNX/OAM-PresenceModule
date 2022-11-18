@@ -636,6 +636,9 @@ void PresenceChannel::startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObj
     // we ignore explicitly OFF telegrams of triggered input
     if (iIsTrigger && !lPresenceValue)
         return;
+    // and we ignore OFF telegrams if delay time is already started
+    if (pPresenceDelayTime > 0 && !lPresenceValue)
+        return;
     if (lAllowStartPresence)
         startPresence(false, false);
     if (iIsTrigger && lPresenceValue)
@@ -799,12 +802,14 @@ void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
     bool lOn = pCurrentValue & PM_BIT_OUTPUT_SET;
     // we have to send an OFF signal if requested or current output value is on
     bool lSend = !iSuppressOutput || lOn;
+    bool lIsLeaveRoom = false;
     switch (pLeaveRoomMode)
     {
         case VAL_PM_LRM_Downtime:
         case VAL_PM_LRM_DowntimeReset:
             // in this case we just wait until downtime passed and afterwards we wait for the first Move
             startDowntime(); // has to be first to set correct state
+            lIsLeaveRoom = true;
             onManualChange(false);
             endPresence(lSend);
             break;
@@ -812,14 +817,26 @@ void PresenceChannel::startLeaveRoom(bool iSuppressOutput)
         case VAL_PM_LRM_MoveDowntimeReset:
             // dispatch to process handler
             pCurrentState |= STATE_LEAVE_ROOM;
-            onManualChange(false);
-            endPresence(lSend);
+            lIsLeaveRoom = true;
             break;
 
         default:
             // if there is no leave room configured, we process auto off
             startAuto(false, iSuppressOutput);
             break;
+    }
+    if (lIsLeaveRoom)
+    {
+        // we need to reset manual mode
+        onManualChange(false);
+        // and end presence
+        endPresence(!iSuppressOutput);
+        if (iSuppressOutput)
+        {
+            // if we suppress output, we need to align internal output state
+            pCurrentValue &= ~PM_BIT_OUTPUT_SET;
+            syncOutput();
+        }
     }
 }
 

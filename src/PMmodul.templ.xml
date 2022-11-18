@@ -1012,15 +1012,9 @@
                             <!-- If an external PM is used, we check if it can be resetted -->
                             <ParameterRefRef RefId="%AID%_UP-%T%%CCC%093_R-%T%%CCC%09301" />
                             <choose ParamRefId="%AID%_UP-%T%%CCC%093_R-%T%%CCC%09301">
-                              <when test="0">
-                                <!-- reset "leave room" -->
-                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
-                              </when>
                               <when test="1 2">
                                 <!-- we activate reset output -->
                                 <ComObjectRefRef RefId="%AID%_O-%T%%CCC%019_R-%T%%CCC%01901" />
-                                <!-- and allow "Leave room" wth mode reset -->
-                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
                               </when>
                             </choose>
                           </when>
@@ -1039,8 +1033,19 @@
                             </choose>
                           </when>
                           <when test="1 4">
-                            <!-- reset "leave room" -->
-                            <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
+                            <!-- check if it is also reset -->
+                            <choose ParamRefId="%AID%_UP-%T%%CCC%093_R-%T%%CCC%09301">
+                              <when test="1 2">
+                                <!-- we allow "Leave room" wth mode reset -->
+                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="1" />
+                              </when>
+                              <when test="0">
+                                <!-- else reset "Leave room" -->
+                                <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" />
+                              </when>
+                              <!-- reset "leave room" -->
+                              <!-- <Assign TargetParamRefRef="%AID%_P-%T%%CCC%096_R-%T%%CCC%09601" Value="0" /> -->
+                            </choose>
                           </when>
                         </choose>
 

@@ -37,6 +37,14 @@ if (!$?) { exit 1 }
 ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
 if (!$?) { exit 1 }
 
+# build firmware for 1TE-RP2040-SmartMF
+../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_1TE_RP2040_SmartMF firmware-1TE-RP2040-SmartMF uf2
+if (!$?) { exit 1 }
+
+# build firmware for OpenKNX-REG1-Base
+../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
+if (!$?) { exit 1 }
+
 ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
 if (!$?) { exit 1 }
 

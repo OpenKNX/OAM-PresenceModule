@@ -25,6 +25,16 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+17.11.2022: Firmware 1.2, Applikation 1.2
+
+* FIX: Ein Aktorstatus EIN während der Totzeit von "Raum verlassen" konnte dazu führen, dass der Melder intern EIN blieb, obwohl der Ausgang AUS war. Symptom: Licht wurde nicht mehr automatisch eingeschaltet.
+* FIX: Ein AUS an einem schaltenden Präsenz- oder Bewegungseingang konnte dazu führen, dass die Nachlaufzeit erneut gestartet wurde.  
+* FIX: ETS-Applikation hat "Raum Verlassen" nicht immer angezeigt.
+* NEU: Kapitel [Wichtige Anmerkungen](#wichtige-anmerkungen), das Erkenntnisse aus Tests und User Feedback beschreibt, um andere User vor Fehlern zu bewahren.
+* NEU: Weitere Hardware verfügbar ([Siehe untestützte Hardware](#unterstützte-hardware))
+* Die enthaltene Logik hat den Firmware-Stand 0.13
+
+
 05.11.2022: Firmware 1.1.3, Applikation 1.1
 
 * NEU: Wenn ein externer PM zurückgesetzt werden kann, kann man jetzt wählen, ob dieser mit einem EIN- oder einem AUS-Signal zurückgesetzt wird
@@ -1513,6 +1523,19 @@ Diese 3 KO sind für die korrekte Funktion der adaptiven Helligkeits-Ausschaltsc
 
 Damit eine Neuberechnung passieren kann, muss jede GA, die die Helligkeit beeinflusst (sei es eine Schalt-, Absolut-Dimm- oder Relativ-Dimm-GA) jeweils Typgerecht mit einem der 3 Eingänge verbunden werden. Mit diesen KO können beliebig viele GA verbunden werden. Jedes Telegramm, dass hier eingeht, führt zu einer Neuberechnung der Ausschalt-Helligkeitsschwelle.
 
+## **Wichtige Anmerkungen**
+
+Im folgenden werden in loser Folge Erkenntnisse "aus dem Feld" und aus Tests aufgeführt, die hoffentlich helfen, fehlerhafte Parametrisierungen zu vermeiden.
+
+### **externer Präsenz- und Bewegungseingang, kein Bewegungssignal und Kurzzeitpräsenz**
+
+Wird externe Präsenz- und Bewegung parametrisiert, dann müssen auch beide Eingänge mit GA verbunden werden und es müssen passende Signale ankommen. Es wird davon ausgegangen, dass das Präsenzsignal länger anliegt als das Bewegungssignal. Vor allem wenn Kurzzeitpräsenz parametriert wurde, die das Bewegungssignal nutzt, kann es sonst zu folgendem Verhalten kommen:
+
+* Präsenz EIN (schaltend)
+* Bewegung liefert kein Signal
+* Kurzzeitpräsenz läuft an, wartet auf Bewegung
+* Nach der Kurzzeitpräsenz wird abgeschaltet, obwohl Präsenz noch EIN ist, da während der Nachlaufzeit der Kurzzeitpräsenz kein Bewegungssignal eingegangen ist.
+
 ## **Beispiele**
 
 In diesem Kapitel werden nach und nach mehrere Beispielparametrisierungen aufgeführt, sobald welche verfügbar sind.
@@ -1523,8 +1546,8 @@ Die Software für dieses Release wurde auf folgender Hardware getestet und läuf
 
 * **Smart-MF Sensormodul** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder, um die Applikationen von alten oder unzuverlässigen Präsenzmeldern zu verbessern
 * **PiPico-BCU-Connector** [OpenKNX-Wiki](https://github.com/OpenKNX/OpenKNX/wiki/PiPico-BCU-Connector), als virtueller Präsenzmelder
-
-In Entwicklung:
+* **1TE-RP2040-Smart-MF** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder auf allen Varianten lauffähig
+* **OpenKNX-UP1-System** [OpenKNX-Wiki](https://github.com/OpenKNX/OpenKNX/wiki/OpenKNX-UP1), als virtueller Präsenzmelder auf allen Varianten lauffähig
 * **Smart-MF RealPresence** [www.smart-mf.de](https://www.smart-mf.de), als vollständiger Präsenzmelder, der auch Personen ohne Bewegung zuverlässig erkennt.
 
 Andere Hardware kann genutzt werden, jedoch muss das Projekt dann neu compiliert werden. Alle notwendigen Teile für ein Aufsetzen der Build-Umgebung inclusive aller notwendigen Projekte finden sich im [OpenKNX-Projekt](https://github.com/OpenKNX)
