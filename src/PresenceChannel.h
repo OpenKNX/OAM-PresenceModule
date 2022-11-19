@@ -145,6 +145,7 @@ class PresenceChannel
 
     void startStartup();
     void processStartup();
+    void processSendKoState();
     void processReadRequests();
 
     bool getRawPresence(bool iJustMove = false);

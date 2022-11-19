@@ -404,9 +404,33 @@ void PresenceChannel::processStartup()
         pCurrentState &= ~STATE_STARTUP;
         // set running state if the channel is active
         if (paramByte(PM_pChannelActive, PM_pChannelActiveMask, PM_pChannelActiveShift) == PM_VAL_ActiveYes)
+        {
             pCurrentState |= STATE_RUNNING;
+            processSendKoState();
+        }
         pOnDelay = 0;
     }
+}
+
+// send states after channel startup time, do this only once
+void PresenceChannel::processSendKoState()
+{
+    // init auto state
+    getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
+    // init lock state
+    switch (paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift))
+    {
+        case VAL_PM_LockTypePriority:
+            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
+            break;
+        case VAL_PM_LockTypeLock:
+            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
+            break;
+        default:
+            // do nothing
+            break;
+    }
+
 }
 
 void PresenceChannel::processReadRequests()
@@ -635,6 +659,9 @@ void PresenceChannel::startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObj
     bool lAllowStartPresence = !iIsKeepAlive || (pCurrentState & STATE_PRESENCE);
     // we ignore explicitly OFF telegrams of triggered input
     if (iIsTrigger && !lPresenceValue)
+        return;
+    // and we ignore OFF telegrams if we are not in presence state
+    if ((pCurrentState & STATE_PRESENCE) == 0 && !lPresenceValue)
         return;
     // and we ignore OFF telegrams if delay time is already started
     if (pPresenceDelayTime > 0 && !lPresenceValue)
@@ -1462,19 +1489,4 @@ void PresenceChannel::setup()
     startOutput(false);
     forceOutput(false);
     syncOutput();
-    // init auto state
-    getKo(PM_KoKOpIsManual)->valueNoSend(false, getDPT(VAL_DPT_1));
-    // init lock state
-    switch (paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift))
-    {
-        case VAL_PM_LockTypePriority:
-            getKo(PM_KoKOpLock)->valueNoSend((uint8_t)0, getDPT(VAL_DPT_2));
-            break;
-        case VAL_PM_LockTypeLock:
-            getKo(PM_KoKOpLock)->valueNoSend((uint8_t)0, getDPT(VAL_DPT_1));
-            break;
-        default:
-            // do nothing
-            break;
-    }
 }
