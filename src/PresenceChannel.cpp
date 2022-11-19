@@ -406,31 +406,10 @@ void PresenceChannel::processStartup()
         if (paramByte(PM_pChannelActive, PM_pChannelActiveMask, PM_pChannelActiveShift) == PM_VAL_ActiveYes)
         {
             pCurrentState |= STATE_RUNNING;
-            processSendKoState();
+            afterStartupDelay();
         }
         pOnDelay = 0;
     }
-}
-
-// send states after channel startup time, do this only once
-void PresenceChannel::processSendKoState()
-{
-    // init auto state
-    getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
-    // init lock state
-    switch (paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift))
-    {
-        case VAL_PM_LockTypePriority:
-            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
-            break;
-        case VAL_PM_LockTypeLock:
-            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
-            break;
-        default:
-            // do nothing
-            break;
-    }
-
 }
 
 void PresenceChannel::processReadRequests()
@@ -1483,10 +1462,30 @@ void PresenceChannel::prepareInternalKo()
 void PresenceChannel::setup() 
 {
     prepareInternalKo();
-    // at the beginning we are on day phase 1
-    onDayPhase(0, true);
     // init output
     startOutput(false);
     forceOutput(false);
     syncOutput();
+}
+
+// send states after channel startup time, do this only once
+void PresenceChannel::afterStartupDelay()
+{
+    // at the beginning we are on day phase 1
+    onDayPhase(0, true);
+    // init auto state
+    getKo(PM_KoKOpIsManual)->value(false, getDPT(VAL_DPT_1));
+    // init lock state
+    switch (paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift))
+    {
+        case VAL_PM_LockTypePriority:
+            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_2));
+            break;
+        case VAL_PM_LockTypeLock:
+            getKo(PM_KoKOpLock)->value((uint8_t)0, getDPT(VAL_DPT_1));
+            break;
+        default:
+            // do nothing
+            break;
+    }
 }
