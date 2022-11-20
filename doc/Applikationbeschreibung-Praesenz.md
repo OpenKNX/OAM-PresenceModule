@@ -25,7 +25,7 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
-20.11.2022: Firmware 1.3, Applikation 1.3
+20.11.2022: Firmware 1.3.1, Applikation 1.3
 
 * FIX: Helligkeitsschwellen (zum Ein- und Ausschalten) und Nachlaufzeit werden beim Startup erst nach der Startverzögerung des Kanals gesendet 
 * NEU: Status Manuell und Status Sperre werden jetzt auch beim Startup (nach der Startverzögerung) des Kanals gesendet
