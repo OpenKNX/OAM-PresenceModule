@@ -190,12 +190,12 @@ void Presence::startPowercycleHfSensor()
 #ifdef HF_POWER_PIN
     digitalWrite(HF_POWER_PIN, LOW);
 #endif
-    mHfPowerCycleDelay = millis();
+    mHfPowerCycleDelay = delayTimerInit();
 }
 
 void Presence::processPowercycleHfSensor()
 {
-    if (delayCheck(mHfPowerCycleDelay, 5000))
+    if (mHfPowerCycleDelay > 0 && delayCheck(mHfPowerCycleDelay, 5000))
     {
 #ifdef HF_POWER_PIN
         digitalWrite(HF_POWER_PIN, HIGH);
@@ -441,6 +441,8 @@ void Presence::setup()
             mChannel[lIndex]->setup();
         }
         mDoPresenceHardwareCycle = ((knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) > 0) || ((knx.paramByte(PM_HWLux) & PM_HWLuxMask) > 0);
+        if (mDoPresenceHardwareCycle) 
+            startPowercycleHfSensor();
         startSensors();
     }
 }

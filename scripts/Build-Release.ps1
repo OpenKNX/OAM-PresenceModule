@@ -27,39 +27,39 @@ $releaseIndication = $args[0]
 # $settings = scripts/OpenKNX-Build-Settings.ps1
 
 # execute generic pre-build steps
-../OGM-Common/setup-scripts/reusable/Build-Release-Preprocess.ps1 $args[0]
+lib/OGM-Common/setup-scripts/reusable/Build-Release-Preprocess.ps1 $args[0]
 if (!$?) { exit 1 }
 
 # build firmware based on generated headerfile for RP2040
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2
+lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2
 if (!$?) { exit 1 }
 
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
+lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
 if (!$?) { exit 1 }
 
 # build firmware for 1TE-RP2040-SmartMF
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_1TE_RP2040_SmartMF firmware-1TE-RP2040-SmartMF uf2
+lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_1TE_RP2040_SmartMF firmware-1TE-RP2040-SmartMF uf2
 if (!$?) { exit 1 }
 
 # build firmware for OpenKNX-REG1-Base
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
+lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
 if (!$?) { exit 1 }
 
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
+lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
 if (!$?) { exit 1 }
 
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_RP2040 firmware-Sensormodul-RP2040 uf2
+lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_RP2040 firmware-Sensormodul-RP2040 uf2
 if (!$?) { exit 1 }
 
 if ($releaseIndication -ne "Big")
 {
     # build firmware based on generated headerfile for SAMD
-    ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v31 firmware-Sensormodul-v31 bin
+    lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v31 firmware-Sensormodul-v31 bin
     if (!$?) { exit 1 }
 
-    ../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v30 firmware-Sensormodul-v30 bin
+    lib/OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v30 firmware-Sensormodul-v30 bin
     if (!$?) { exit 1 }
 }
 # execute generic post-build steps
-../OGM-Common/setup-scripts/reusable/Build-Release-Postprocess.ps1 $args[0]
+lib/OGM-Common/setup-scripts/reusable/Build-Release-Postprocess.ps1 $args[0]
 if (!$?) { exit 1 }
