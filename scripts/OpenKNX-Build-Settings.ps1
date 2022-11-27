@@ -1,6 +1,6 @@
 
 # set product names, allows mapping of (devel) name in Project to a more consistent name in release
-$settings = lib/OGM-Common/build-scripts/OpenKNX-Build-Settings.ps1 $args[0] "PMmodul" "PresenceModule"
+$settings = lib/OGM-Common/scripts/build/OpenKNX-Build-Settings.ps1 $args[0] "PMmodul" "PresenceModule"
 
 # $settings.sourceName="PMmodul"  
 # $settings.targetName="PresenceModule" 
