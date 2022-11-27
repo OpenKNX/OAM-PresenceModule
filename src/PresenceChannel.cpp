@@ -238,8 +238,8 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             iBuffer[lIndex++] = (pCurrentValue & PM_BIT_OUTPUT_SET) ? '1' : '0';
             iBuffer[lIndex++] = ' ';
             iBuffer[lIndex++] = 'D';
-            iBuffer[lIndex++] = mCurrentDayPhase + 49;
-            iBuffer[lIndex++] = getDayPhaseFromKO() + 49;
+            iBuffer[lIndex++] = ((mCurrentDayPhase >= 0) ? mCurrentDayPhase : 0) + 49;
+            iBuffer[lIndex++] = ((mNextDayPhase >= 0) ? mNextDayPhase : 0) + 49;
             iBuffer[lIndex++] = ' ';
             iBuffer[lIndex++] = (pCurrentState & STATE_LOCK) ? 'L' : '-';
             iBuffer[lIndex++] = (pCurrentState & STATE_ADAPTIVE) ? 'H' : '-';
@@ -341,9 +341,7 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
         uint8_t lSceneFromParam = paramByte(PM_pScene0 + lIndex);
         if (lSceneFromParam == lSceneFromKo) 
         {
-            uint8_t lAction = paramByte(PM_pSceneAction0 + lIndex / 2);
-            // get high/low nibble as action code
-            lAction = (lIndex % 2) ? (lAction & PM_pSceneAction1Mask) : (lAction & PM_pSceneAction0Mask) >> PM_pSceneAction0Shift;
+            uint8_t lAction = paramByte(PM_pSceneAction0 + lIndex);
             switch (lAction)
             {
                 case VAL_PM_SA_ChangeBrightness:
@@ -360,6 +358,12 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
                     break;
                 case VAL_PM_SA_ManualOn:
                     startManual(true, false);
+                    break;
+                case VAL_PM_SA_ManualActive:
+                    startManual(pCurrentValue & PM_BIT_OUTPUT_SET, true);
+                    break;
+                case VAL_PM_SA_ManualInactive:
+                    startAuto(pCurrentValue & PM_BIT_OUTPUT_SET, true);
                     break;
                 case VAL_PM_SA_LockOff:
                     onLock(true, VAL_PM_LockOutputOff, 0);
@@ -381,6 +385,30 @@ void PresenceChannel::startSceneCommand(GroupObject &iKo)
                     break;
                 case VAL_PM_SA_Reset:
                     startReset();
+                    break;
+                case VAL_PM_SA_Phase1:
+                    startDayPhase(0);
+                    break;
+                case VAL_PM_SA_Phase2:
+                    startDayPhase(1);
+                    break;
+                case VAL_PM_SA_Phase3:
+                    startDayPhase(2);
+                    break;
+                case VAL_PM_SA_Phase4:
+                    startDayPhase(3);
+                    break;
+                case VAL_PM_SA_ForcePhase1:
+                    startDayPhase(0, true);
+                    break;
+                case VAL_PM_SA_ForcePhase2:
+                    startDayPhase(1, true);
+                    break;
+                case VAL_PM_SA_ForcePhase3:
+                    startDayPhase(2, true);
+                    break;
+                case VAL_PM_SA_ForcePhase4:
+                    startDayPhase(3, true);
                     break;
                 default:
                     break;
@@ -475,21 +503,29 @@ int8_t PresenceChannel::getDayPhaseFromKO()
     return lPhaseCount;
 }
 
-void PresenceChannel::startDayPhase() {
+void PresenceChannel::startDayPhase(uint8_t iPhase /* = 255 */, bool iForce /* = false*/) {
 
-    // derive day phase from scene number
-    int8_t lPhase = getDayPhaseFromKO();
+    // derive day phase from scene number of from parameter
+    if (iPhase == 255)
+        mNextDayPhase = getDayPhaseFromKO();
+    else
+        mNextDayPhase = iPhase;
+
+    // get the number of Phases defined
+    int8_t lPhaseCount = paramByte(PM_pPhaseCount, PM_pPhaseCountMask, PM_pPhaseCountShift);
 
     // first check, if day phase is valid and if it really changed
-    if (lPhase < 0 || mCurrentDayPhase == lPhase)
+    if (mNextDayPhase < 0 || mCurrentDayPhase == mNextDayPhase || mNextDayPhase >= lPhaseCount)
         return;
 
     // check if delayed day phase execution is requested
-    if (paramBit(PM_pPhaseChange, PM_pPhaseChangeMask)) {
+    if (iForce || paramBit(PM_pPhaseChange, PM_pPhaseChangeMask)) 
+    {
         // we change immediately
-        onDayPhase(lPhase);
+        onDayPhase(mNextDayPhase);
     }
-    else {
+    else 
+    {
         // we change on next (internal) off at output
         pCurrentState |= STATE_DAY_PHASE_CHANGE;
     }
@@ -497,15 +533,15 @@ void PresenceChannel::startDayPhase() {
 
 void PresenceChannel::processDayPhase()
 {
-    if (!(pCurrentValue & PM_BIT_OUTPUT_SET)) {
+    if (!(pCurrentValue & PM_BIT_OUTPUT_SET)) 
+    {
         // output is OFF, we can safely change day phase
         pCurrentState &= ~STATE_DAY_PHASE_CHANGE;
-        int8_t lPhase = getDayPhaseFromKO();
 
         // first check, if day phase is valid and if it really changed
-        if (lPhase < 0 || mCurrentDayPhase == lPhase)
+        if (mNextDayPhase < 0 || mCurrentDayPhase == mNextDayPhase)
             return;
-        onDayPhase(lPhase);
+        onDayPhase(mNextDayPhase);
     }
 }
 
@@ -1031,8 +1067,9 @@ void PresenceChannel::processLock()
 {
     // check if there is a time given to reset lock
     if ((pCurrentState & STATE_LOCK) && paramBit(PM_pLockFallback, PM_pLockFallbackMask)) {
-        if (delayCheck(pLockDelayTime, paramTimeDelay(PM_pLockFallbackBase))) {
+        if (pLockDelayTime > 0 && delayCheck(pLockDelayTime, paramTimeDelay(PM_pLockFallbackBase))) {
             // end lock
+            pLockDelayTime = 0;
             uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
             if (lLockType == VAL_PM_LockTypePriority)
             {
@@ -1054,6 +1091,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     if (iLockOn)
     {
         pCurrentState |= STATE_LOCK;
+        pLockDelayTime = delayTimerInit();
         // should we send something?
         if (iLockOnSend)
         {
@@ -1064,6 +1102,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     else if (pCurrentState & STATE_LOCK)
     {
         pCurrentState &= ~STATE_LOCK;
+        pLockDelayTime = 0;
         uint32_t lPresenceDelayTime;
         switch (iLockOffSend)
         {

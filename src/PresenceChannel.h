@@ -88,6 +88,16 @@
 #define VAL_PM_SA_Reserve3 13
 #define VAL_PM_SA_LeaveRoom 14
 #define VAL_PM_SA_Reset 15
+#define VAL_PM_SA_Phase1 16
+#define VAL_PM_SA_Phase2 17
+#define VAL_PM_SA_Phase3 18
+#define VAL_PM_SA_Phase4 19
+#define VAL_PM_SA_ForcePhase1 20
+#define VAL_PM_SA_ForcePhase2 21
+#define VAL_PM_SA_ForcePhase3 22
+#define VAL_PM_SA_ForcePhase4 23
+#define VAL_PM_SA_ManualActive 24
+#define VAL_PM_SA_ManualInactive 25
 
 // leave room modes
 #define VAL_PM_LRM_None 0
@@ -126,6 +136,7 @@ class PresenceChannel
   private:
     uint8_t mChannelId = 0; // zero based
     uint8_t mCurrentDayPhase = 0; // zero based
+    uint8_t mNextDayPhase = 0;    // zero based
     bool mHardwarePresence = false;
     bool mHardwareMove = false;
     uint32_t mBrightnessPollDelay = 0;
@@ -192,7 +203,7 @@ class PresenceChannel
     void calculateBrightnessOff();
 
     int8_t getDayPhaseFromKO();
-    void startDayPhase();
+    void startDayPhase(uint8_t iPhase = 255, bool iForce = false);
     void processDayPhase();
     void onDayPhase(uint8_t iPhase, bool iIsStartup = false);
 

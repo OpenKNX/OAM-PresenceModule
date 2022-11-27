@@ -185,11 +185,36 @@ void Presence::startSensors()
     Sensor::beginSensors();
 }
 
-void Presence::startPowercycleHfSensor()
+void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-    digitalWrite(HF_POWER_PIN, LOW);
+    // we check für specific serial numbers, which have an inverted HF_POWER_PIN (hardware bug)
+    const uint8_t specialCount = 1;
+    const uint64_t special[specialCount] = {
+        0x1334842F  // test - Devel Board Waldemar, where power pin has no function
+    };
+    
+    uint32_t lSerial = knx.platform().uniqueSerialNumber();
+    SERIAL_DEBUG.printf("\nswitchHfSensor: Turning Sensor on: %i\n", iOn);
+    SERIAL_DEBUG.printf("Serial HEX 32: %08lX\n", lSerial);
+    // if (0x2F843413 == lSerial) {
+    //     Serial.println("Match Waldemar");
+    // }
+    for (uint8_t i = 0; i < specialCount; i++)
+        if (lSerial == special[i])
+        {
+            SERIAL_DEBUG.printf("switchHfSensor: Special board number %i found\n", i);
+            iOn = !iOn;
+            break;
+        }
+    SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
+    digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
 #endif
+}
+
+void Presence::startPowercycleHfSensor()
+{
+    switchHfSensor(false);
     mHfPowerCycleDelay = delayTimerInit();
 }
 
@@ -197,9 +222,7 @@ void Presence::processPowercycleHfSensor()
 {
     if (mHfPowerCycleDelay > 0 && delayCheck(mHfPowerCycleDelay, 5000))
     {
-#ifdef HF_POWER_PIN
-        digitalWrite(HF_POWER_PIN, HIGH);
-#endif
+        switchHfSensor(true);
         mHfPowerCycleDelay = 0;
     }
 }

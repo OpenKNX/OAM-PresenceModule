@@ -81,7 +81,7 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%032" Name="p%C%Phase3Scene" Offset="2" BitOffset="0" ParameterType="%AID%_PT-ValueSceneOut" Text="Szene Phase 3" Value="3" />
                 <Parameter Id="%AID%_UP-%T%%CCC%033" Name="p%C%Phase4Scene" Offset="3" BitOffset="0" ParameterType="%AID%_PT-ValueSceneOut" Text="Szene Phase 4" Value="4" />
               </Union>
-              <Union SizeInBit="120">
+              <Union SizeInBit="160">
                 <!-- Scene definitions-->
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%040" Name="p%C%Scene0" Offset="0" BitOffset="0" ParameterType="%AID%_PT-ValueSceneIn" Text="Szene0" Value="0" />
@@ -95,21 +95,21 @@
                 <Parameter Id="%AID%_UP-%T%%CCC%048" Name="p%C%Scene8" Offset="8" BitOffset="0" ParameterType="%AID%_PT-ValueSceneIn" Text="Szene8" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%049" Name="p%C%Scene9" Offset="9" BitOffset="0" ParameterType="%AID%_PT-ValueSceneIn" Text="Szene9" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%050" Name="p%C%SceneAction0" Offset="10" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction0" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%051" Name="p%C%SceneAction1" Offset="10" BitOffset="4" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction1" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%052" Name="p%C%SceneAction2" Offset="11" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction2" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%053" Name="p%C%SceneAction3" Offset="11" BitOffset="4" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction3" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%054" Name="p%C%SceneAction4" Offset="12" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction4" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%055" Name="p%C%SceneAction5" Offset="12" BitOffset="4" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction5" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%056" Name="p%C%SceneAction6" Offset="13" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction6" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%057" Name="p%C%SceneAction7" Offset="13" BitOffset="4" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction7" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%058" Name="p%C%SceneAction8" Offset="14" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction8" Value="0" />
-                <Parameter Id="%AID%_UP-%T%%CCC%059" Name="p%C%SceneAction9" Offset="14" BitOffset="4" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction9" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%051" Name="p%C%SceneAction1" Offset="11" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction1" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%052" Name="p%C%SceneAction2" Offset="12" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction2" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%053" Name="p%C%SceneAction3" Offset="13" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction3" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%054" Name="p%C%SceneAction4" Offset="14" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction4" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%055" Name="p%C%SceneAction5" Offset="15" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction5" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%056" Name="p%C%SceneAction6" Offset="16" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction6" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%057" Name="p%C%SceneAction7" Offset="17" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction7" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%058" Name="p%C%SceneAction8" Offset="18" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction8" Value="0" />
+                <Parameter Id="%AID%_UP-%T%%CCC%059" Name="p%C%SceneAction9" Offset="19" BitOffset="0" ParameterType="%AID%_PT-SceneAction" Text="SzeneAction9" Value="0" />
               </Union>
               <!-- Internal inputs -->
               <!-- there is a dependancy in the order of internal input parameters and KO enabled for internal input -->
               <!-- any changes here should be also included in coding!!!! -->
               <Union SizeInBit="160">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="33" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="38" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%064" Name="p%C%IntLux" ParameterType="%AID%_PT-KOInputTab" Offset="0" BitOffset="0" Text="Neues oder internes KO" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%065" Name="p%C%NumLux" ParameterType="%AID%_PT-KONumber" Offset="0" BitOffset="1" Text="Nummer vom internen KO" Value="%K0%" />
                 <Parameter Id="%AID%_UP-%T%%CCC%066" Name="p%C%IntPresence1" ParameterType="%AID%_PT-KOInputTab" Offset="2" BitOffset="0" Text="Neues oder internes KO" Value="0" />
@@ -147,7 +147,7 @@
               <!-- Phase 1 -->
               <!-- Bitfield settings (per day phase) -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="53" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="58" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%100" Name="pA%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%101" Name="pA%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%136" Name="pA%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -164,7 +164,7 @@
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="55" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="60" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%107" Name="pA%C%PresenceDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%108" Name="pA%C%PresenceDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
                 <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -182,13 +182,13 @@
               </Union>
               <Union SizeInBit="32">
                 <!-- Brightness (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="65" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="70" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%115" Name="pA%C%BrightnessOn" ParameterType="%AID%_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
                 <Parameter Id="%AID%_UP-%T%%CCC%116" Name="pA%C%BrightnessDelta" ParameterType="%AID%_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
               </Union>
               <Union SizeInBit="32">
                 <!-- OutputValue (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="69" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="74" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%117" Name="pA%C%Output1On" ParameterType="%AID%_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%118" Name="pA%C%Output1OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%119" Name="pA%C%Output1OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -210,7 +210,7 @@
               <!-- Phase 2 -->
               <!-- Bitfield settings (per day phase) -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="73" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="78" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%200" Name="pB%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%201" Name="pB%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%236" Name="pB%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -227,7 +227,7 @@
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="75" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="80" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%207" Name="pB%C%PresenceDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%208" Name="pB%C%PresenceDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
                 <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -245,13 +245,13 @@
               </Union>
               <Union SizeInBit="32">
                 <!-- Brightness (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="85" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="90" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%215" Name="pB%C%BrightnessOn" ParameterType="%AID%_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
                 <Parameter Id="%AID%_UP-%T%%CCC%216" Name="pB%C%BrightnessDelta" ParameterType="%AID%_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
               </Union>
               <Union SizeInBit="32">
                 <!-- OutputValue (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="89" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="94" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%217" Name="pB%C%Output1On" ParameterType="%AID%_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%218" Name="pB%C%Output1OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%219" Name="pB%C%Output1OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -273,7 +273,7 @@
               <!-- Phase 3 -->
               <!-- Bitfield settings (per day phase) -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="93" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="98" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%300" Name="pC%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%301" Name="pC%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%336" Name="pC%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -290,7 +290,7 @@
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="95" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="100" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%307" Name="pC%C%PresenceDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%308" Name="pC%C%PresenceDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
                 <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -308,13 +308,13 @@
               </Union>
               <Union SizeInBit="32">
                 <!-- Brightness (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="105" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="110" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%315" Name="pC%C%BrightnessOn" ParameterType="%AID%_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
                 <Parameter Id="%AID%_UP-%T%%CCC%316" Name="pC%C%BrightnessDelta" ParameterType="%AID%_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
               </Union>
               <Union SizeInBit="32">
                 <!-- OutputValue (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="109" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="114" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%317" Name="pC%C%Output1On" ParameterType="%AID%_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%318" Name="pC%C%Output1OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%319" Name="pC%C%Output1OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -336,7 +336,7 @@
               <!-- Phase 4 -->
               <!-- Bitfield settings (per day phase) -->
               <Union SizeInBit="16">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="113" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="118" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%400" Name="pD%C%BrightnessAuto" Offset="0" BitOffset="0" ParameterType="%AID%_PT-BrightnessAuto" Text="Ausschalten über Helligkeit" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%401" Name="pD%C%PresenceShort" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Kurze Anwesenheit erkennen?" Value="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%436" Name="pD%C%LockHardwareLEDs" Offset="0" BitOffset="3" ParameterType="%AID%_PT-OnOffYesNo" Text="Diese Tagesphase sperrt Hardware-LEDs" Value="0" />
@@ -353,7 +353,7 @@
               </Union>
               <Union SizeInBit="80">
                 <!-- Delay pattern: Presence Delay (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="115" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="120" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%407" Name="pD%C%PresenceDelayBase" ParameterType="%AID%_PT-DelayBase" Offset="0" BitOffset="0" Text="Zeitbasis" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%408" Name="pD%C%PresenceDelayTime" ParameterType="%AID%_PT-DelayTime" Offset="0" BitOffset="2" Text="Zeit" Value="1" />
                 <!-- Delay pattern: PresenceShort Duration (per day phase) -->
@@ -371,13 +371,13 @@
               </Union>
               <Union SizeInBit="32">
                 <!-- Brightness (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="125" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="130" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%415" Name="pD%C%BrightnessOn" ParameterType="%AID%_PT-ValueDpt7" Offset="0" BitOffset="0" Text="Einschalten: Unterhalb welcher Helligkeit" Value="50" SuffixText="Lux" />
                 <Parameter Id="%AID%_UP-%T%%CCC%416" Name="pD%C%BrightnessDelta" ParameterType="%AID%_PT-ValueDpt7" Offset="2" BitOffset="0" Text="Ausschalten: Wie viel heller darf es werden" Value="100" SuffixText="Lux" />
               </Union>
               <Union SizeInBit="32">
                 <!-- OutputValue (per day phase) -->
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="129" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="134" BitOffset="0" />
                 <Parameter Id="%AID%_UP-%T%%CCC%417" Name="pD%C%Output1On" ParameterType="%AID%_PT-ValueDpt1" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%418" Name="pD%C%Output1OnValue" ParameterType="%AID%_PT-ValueDpt5" Offset="0" BitOffset="0" Text="Wert für EIN" Value="1" />
                 <Parameter Id="%AID%_UP-%T%%CCC%419" Name="pD%C%Output1OnScene" ParameterType="%AID%_PT-ValueSceneOut" Offset="0" BitOffset="0" Text="Wert für EIN" Value="2" />
@@ -532,6 +532,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%115_R-%T%%CCC%11501" RefId="%AID%_UP-%T%%CCC%115" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11601" RefId="%AID%_UP-%T%%CCC%116" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11602" RefId="%AID%_UP-%T%%CCC%116" Value="20" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11603" RefId="%AID%_UP-%T%%CCC%116" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%117_R-%T%%CCC%11701" RefId="%AID%_UP-%T%%CCC%117" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%118_R-%T%%CCC%11801" RefId="%AID%_UP-%T%%CCC%118" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%119_R-%T%%CCC%11901" RefId="%AID%_UP-%T%%CCC%119" />
@@ -574,6 +575,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%215_R-%T%%CCC%21501" RefId="%AID%_UP-%T%%CCC%215" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21601" RefId="%AID%_UP-%T%%CCC%216" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21602" RefId="%AID%_UP-%T%%CCC%216" Value="20" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21603" RefId="%AID%_UP-%T%%CCC%216" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%217_R-%T%%CCC%21701" RefId="%AID%_UP-%T%%CCC%217" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%218_R-%T%%CCC%21801" RefId="%AID%_UP-%T%%CCC%218" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%219_R-%T%%CCC%21901" RefId="%AID%_UP-%T%%CCC%219" />
@@ -616,6 +618,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%315_R-%T%%CCC%31501" RefId="%AID%_UP-%T%%CCC%315" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31601" RefId="%AID%_UP-%T%%CCC%316" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31602" RefId="%AID%_UP-%T%%CCC%316" Value="20" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31603" RefId="%AID%_UP-%T%%CCC%316" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%317_R-%T%%CCC%31701" RefId="%AID%_UP-%T%%CCC%317" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%318_R-%T%%CCC%31801" RefId="%AID%_UP-%T%%CCC%318" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%319_R-%T%%CCC%31901" RefId="%AID%_UP-%T%%CCC%319" />
@@ -658,6 +661,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%415_R-%T%%CCC%41501" RefId="%AID%_UP-%T%%CCC%415" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41601" RefId="%AID%_UP-%T%%CCC%416" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41602" RefId="%AID%_UP-%T%%CCC%416" Value="20" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41603" RefId="%AID%_UP-%T%%CCC%416" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%417_R-%T%%CCC%41701" RefId="%AID%_UP-%T%%CCC%417" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%418_R-%T%%CCC%41801" RefId="%AID%_UP-%T%%CCC%418" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%419_R-%T%%CCC%41901" RefId="%AID%_UP-%T%%CCC%419" />
@@ -1791,11 +1795,25 @@
                               <choose ParamRefId="%AID%_UP-%T%%CCC%100_R-%T%%CCC%10001">
                                 <when test="1">
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11601" />
+                                  <choose ParamRefId="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901">
+                                    <when test="0">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11601" />
+                                    </when>
+                                    <when test="1">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11603" />
+                                    </when>
+                                  </choose>
                                 </when>
                                 <when test="2">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                  <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11602" />
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
+                                  <choose ParamRefId="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901">
+                                    <when test="0">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11602" />
+                                    </when>
+                                    <when test="1">
+                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11603" />
+                                    </when>
+                                  </choose>
                                 </when>
                                 <when test=">0">
                                   <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
@@ -2068,11 +2086,25 @@
                                   <choose ParamRefId="%AID%_UP-%T%%CCC%200_R-%T%%CCC%20001">
                                     <when test="1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21601" />
+                                      <choose ParamRefId="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901">
+                                        <when test="0">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21601" />
+                                        </when>
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21603" />
+                                        </when>
+                                      </choose>
                                     </when>
                                     <when test="2">
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21602" />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
+                                      <choose ParamRefId="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901">
+                                        <when test="0">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21602" />
+                                        </when>
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21603" />
+                                        </when>
+                                      </choose>
                                     </when>
                                     <when test=">0">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
@@ -2351,11 +2383,25 @@
                                   <choose ParamRefId="%AID%_UP-%T%%CCC%300_R-%T%%CCC%30001">
                                     <when test="1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31601" />
+                                      <choose ParamRefId="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901">
+                                        <when test="0">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31601" />
+                                        </when>
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31603" />
+                                        </when>
+                                      </choose>
                                     </when>
                                     <when test="2">
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31602" />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
+                                      <choose ParamRefId="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901">
+                                        <when test="0">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31602" />
+                                        </when>
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31603" />
+                                        </when>
+                                      </choose>
                                     </when>
                                     <when test=">0">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
@@ -2634,11 +2680,25 @@
                                   <choose ParamRefId="%AID%_UP-%T%%CCC%400_R-%T%%CCC%40001">
                                     <when test="1">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle sollte so gewählt werden, dass sie höher ist als die Gesamthelligkeit aller Lichtquellen, da sonst das Licht bei weiteren zugeschalteten Quellen ausgehen würde." />
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41601" />
+                                      <choose ParamRefId="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901">
+                                        <when test="0">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41601" />
+                                        </when>
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41603" />
+                                        </when>
+                                      </choose>
                                     </when>
                                     <when test="2">
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass der Wert 'Wieviel heller darf es werden' wesentlich geringer gewählt werden kann." />
-                                      <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41602" />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Die Ausschaltschwelle wird hier für jede zugeschaltete Lichtquelle neu berechnet, so dass dieser Wert wesentlich geringer gewählt werden kann." />
+                                      <choose ParamRefId="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901">
+                                        <when test="0">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41602" />
+                                        </when>
+                                        <when test="1">
+                                          <ParameterRefRef RefId="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41603" />
+                                        </when>
+                                      </choose>
                                     </when>
                                     <when test=">0">
                                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />

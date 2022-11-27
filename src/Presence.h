@@ -34,6 +34,8 @@ public:
   ~Presence();
 
   // static
+  static void switchHfSensor(bool iOn);
+  
   // instance
   bool PresenceTrigger = false;
   bool MoveTrigger = false;

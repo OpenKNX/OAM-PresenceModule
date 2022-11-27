@@ -25,6 +25,13 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+27.11.2022: Firmware 1.4, Applikaiton 1.4
+
+* FIX: Rückfallzeit für Sperre funktionierte nicht, ist jetzt korrigiert.
+* NEU: Tagesphasen kann man jetzt auch über die Szenensteuerung wechseln, Neuerungen hierzu sind im Kapitel [Szenensteuerung](#szenensteuerung) beschrieben.
+* NEU: Über die Szenensteuerung kann man jetzt auch den Manuellmodus aktivieren und deaktivieren (wie bei Eintastensteuerung). Siehe dazu Kapitel [Szenensteuerung](#szenensteuerung) 
+* NEU: Über die Szenensteuerung kann man jetzt alle Sperrmodi (unabhängig von der Konfiguration der Sperre) setzen und zurücksetzen. Siehe dazu Kapitel [Szenensteuerung](#szenensteuerung) 
+
 20.11.2022: Firmware 1.3.1, Applikation 1.3
 
 * FIX: Helligkeitsschwellen (zum Ein- und Ausschalten) und Nachlaufzeit werden beim Startup erst nach der Startverzögerung des Kanals gesendet 
@@ -1062,11 +1069,27 @@ Wird diese Funktion ausgeführt, wird der Automatikmodus gestartet und ein EIN-S
 
 ### **Manuell übersteuern mit AUS**
 
-Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein AUS-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern".
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein AUS-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Zweitastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Eintastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Zweitastenmodus"!
 
 ### **Manuell übersteuern mit EIN**
 
-Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein EIN-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern".
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein EIN-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Zweitastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Eintastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Zweitastenmodus"!
+
+### **Manuell aktivieren**
+
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und der aktuelle Schaltzustand beigehalten. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Eintastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Zweitastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Eintastenmodus"!
+
+### **Manuell deaktivieren**
+
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestoppt und aktuelle Schaltzustand beibehalten. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Eintastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Zweitastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Eintastenmodus"!
 
 ### **Sperren und AUS senden**
 
@@ -1086,15 +1109,27 @@ Wird diese Funktion ausgeführt, wird der Melder gesperrt und der aktuelle Zusta
 
 Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
 
-### **Sperre aufheben und Zustand senden**
-
-Wird diese Funktion ausgeführt, wird der Melder entsperrt und der aktuelle Zustand auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese den aktuellen Zustand beim Aufheben der Sperre senden soll.
-
-Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
-
 ### **Sperre aufheben und nichts senden**
 
 Wird diese Funktion ausgeführt, wird der Melder entsperrt und der aktuelle Zustand beibehalten (es wird nichts auf den Bus gesendet). Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese nichts beim Aufheben der Sperre senden soll.
+
+Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
+
+### **Sperre aufheben und EIN senden**
+
+Wird diese Funktion ausgeführt, wird der Melder entsperrt und ein EIN-Telegramm auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese ein EIN-Telegramm beim Aufheben der Sperre senden soll.
+
+Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
+
+### **Sperre aufheben und AUS senden**
+
+Wird diese Funktion ausgeführt, wird der Melder entsperrt und ein AUS-Telegramm auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese ein UAS-Telegramm beim Aufheben der Sperre senden soll.
+
+Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
+
+### **Sperre aufheben und Zustand senden**
+
+Wird diese Funktion ausgeführt, wird der Melder entsperrt und der aktuelle Zustand auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese den aktuellen Zustand beim Aufheben der Sperre senden soll.
 
 Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
 
@@ -1105,6 +1140,21 @@ Es wird die [Raum verlassen](#raum-verlassen) Funktion aufgerufen. Es ist identi
 ### **Reset auslösen**
 
 Es wird ein interner Reset des Melders durchgeführt. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Reset".
+
+### **Zur Tagesphase *n* wechseln**
+
+Für jede der Tagesphasen 1-4 gibt es die entsprechende Tagesphasen-funktion.
+Es passiert exakt das gleiche wie beim Senden der Tagesphase an das KO "Tagesphase". 
+
+Wird eine Tagesphase aufgerufen, die nicht definiert ist (z.B. Tagesphase 4, obwohl nur 3 definiert sind), wird die aktuelle Tagesphase beibehalten.
+
+Der Tagesphasenwechsel findet so statt, wie er unter [Neue Tagesphase übernehmen](#neue-tagesphase-übernehmen) definiert wurde.
+
+> Anmerkung: Tagesphasen sollten durch Telegramme an das KO "Tagesphase" gewechselt werden. Allerdings lässt sich dort pro Szene nur eine Tagesphase parametriere. Mithilfe der Szenensteuerung kann man auch einer Tagesphase mehrere Szenen zuordnen.
+
+### **Zur Tagesphase *n* sofort wechseln**
+
+Hier gilt alles für [Zur Tagesphase *n* wechseln](#zur-tagesphase-n-wechseln) gesagte, bis auf den Punkt, dass der Tagesphasenwechsel sofort stattfindet, selbst wenn die Parametrierung einen Wechsel bei Zustand AUS vorsieht.
 
 ## **Eingänge**
 
