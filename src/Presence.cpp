@@ -185,21 +185,55 @@ void Presence::startSensors()
     Sensor::beginSensors();
 }
 
-void Presence::startPowercycleHfSensor()
+void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-    digitalWrite(HF_POWER_PIN, LOW);
+    // we check für specific serial numbers, which have an inverted HF_POWER_PIN (hardware bug)
+    const uint8_t specialCount = 11;
+    const uint64_t special[specialCount] = {
+        0x1334842F,  // test - Devel Board Waldemar, where power pin has no function
+        // 0x47591F2E,  // Waldemar Wohnzimmer
+        0x23534121,
+        0x23364521,
+        0x23503321,
+        0x23464121,
+        0x23534821,
+        0x17493927,
+        0x17265A22,
+        0x173C1627,
+        0x175A3527,
+        0x173C1E27
+    };
+    
+    uint32_t lSerial = knx.platform().uniqueSerialNumber();
+    SERIAL_DEBUG.printf("\nswitchHfSensor: Turning Sensor on: %i\n", iOn);
+    SERIAL_DEBUG.printf("Serial HEX 32: %08lX\n", lSerial);
+    // if (0x2F843413 == lSerial) {
+    //     Serial.println("Match Waldemar");
+    // }
+    for (uint8_t i = 0; i < specialCount; i++)
+        if (lSerial == special[i])
+        {
+            SERIAL_DEBUG.printf("switchHfSensor: Special board number %i found\n", i);
+            iOn = !iOn;
+            break;
+        }
+    SERIAL_DEBUG.printf("switchHfSensor: HF_POWER_PIN will be set to: %i\n", iOn);
+    digitalWrite(HF_POWER_PIN, iOn ? HIGH : LOW);
 #endif
-    mHfPowerCycleDelay = millis();
+}
+
+void Presence::startPowercycleHfSensor()
+{
+    switchHfSensor(false);
+    mHfPowerCycleDelay = delayTimerInit();
 }
 
 void Presence::processPowercycleHfSensor()
 {
-    if (delayCheck(mHfPowerCycleDelay, 5000))
+    if (mHfPowerCycleDelay > 0 && delayCheck(mHfPowerCycleDelay, 5000))
     {
-#ifdef HF_POWER_PIN
-        digitalWrite(HF_POWER_PIN, HIGH);
-#endif
+        switchHfSensor(true);
         mHfPowerCycleDelay = 0;
     }
 }
@@ -441,6 +475,8 @@ void Presence::setup()
             mChannel[lIndex]->setup();
         }
         mDoPresenceHardwareCycle = ((knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) > 0) || ((knx.paramByte(PM_HWLux) & PM_HWLuxMask) > 0);
+        if (mDoPresenceHardwareCycle) 
+            startPowercycleHfSensor();
         startSensors();
     }
 }

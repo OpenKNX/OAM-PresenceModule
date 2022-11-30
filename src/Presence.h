@@ -1,6 +1,7 @@
 #pragma once
 #include "PresenceChannel.h"
-// #include "IncludeManager.h"
+#include "knxprod.h"
+#include "hardware.h"
 #include "Sensor.h"
 #include "SensorMR24xxB1.h"
 
@@ -33,6 +34,8 @@ public:
   ~Presence();
 
   // static
+  static void switchHfSensor(bool iOn);
+  
   // instance
   bool PresenceTrigger = false;
   bool MoveTrigger = false;

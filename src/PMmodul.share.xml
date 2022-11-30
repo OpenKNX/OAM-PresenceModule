@@ -166,23 +166,33 @@
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SceneAction" Name="SceneAction">
-                <TypeRestriction Base="Value" SizeInBit="4">
+                <TypeRestriction Base="Value" SizeInBit="8">
                   <Enumeration Text="keine Aktion" Value="0" Id="%AID%_PT-SceneAction_EN-0" />
                   <Enumeration Text="ändert Helligkeit im Raum" Value="1" Id="%AID%_PT-SceneAction_EN-1" />
                   <Enumeration Text="Automatik übersteuern mit AUS" Value="2" Id="%AID%_PT-SceneAction_EN-2" />
                   <Enumeration Text="Automatik übersteuern mit EIN" Value="3" Id="%AID%_PT-SceneAction_EN-3" />
                   <Enumeration Text="Manuell übersteuern mit AUS" Value="4" Id="%AID%_PT-SceneAction_EN-4" />
                   <Enumeration Text="Manuell übersteuern mit EIN" Value="5" Id="%AID%_PT-SceneAction_EN-5" />
+                  <Enumeration Text="Manuell aktivieren" Value="24" Id="%AID%_PT-SceneAction_EN-24" />
+                  <Enumeration Text="Manuell deaktivieren" Value="25" Id="%AID%_PT-SceneAction_EN-25" />
                   <Enumeration Text="Sperren und AUS senden" Value="6" Id="%AID%_PT-SceneAction_EN-6" />
                   <Enumeration Text="Sperren und EIN senden" Value="7" Id="%AID%_PT-SceneAction_EN-7" />
                   <Enumeration Text="Sperren und nichts senden" Value="8" Id="%AID%_PT-SceneAction_EN-8" />
-                  <Enumeration Text="Sperre aufheben und Zustand senden" Value="9" Id="%AID%_PT-SceneAction_EN-9" />
                   <Enumeration Text="Sperre aufheben und nichts senden" Value="10" Id="%AID%_PT-SceneAction_EN-10" />
-                  <!-- <Enumeration Text="" Value="11" Id="%AID%_PT-SceneAction_EN-11" /> -->
-                  <!-- <Enumeration Text="" Value="12" Id="%AID%_PT-SceneAction_EN-12" /> -->
+                  <Enumeration Text="Sperre aufheben und EIN senden" Value="11" Id="%AID%_PT-SceneAction_EN-11" />
+                  <Enumeration Text="Sperre aufheben und AUS senden" Value="12" Id="%AID%_PT-SceneAction_EN-12" />
+                  <Enumeration Text="Sperre aufheben und Zustand senden" Value="9" Id="%AID%_PT-SceneAction_EN-9" />
                   <!-- <Enumeration Text="" Value="13" Id="%AID%_PT-SceneAction_EN-13" /> -->
                   <Enumeration Text="Raum verlassen" Value="14" Id="%AID%_PT-SceneAction_EN-14" />
                   <Enumeration Text="Reset auslösen" Value="15" Id="%AID%_PT-SceneAction_EN-15" />
+                  <Enumeration Text="Zur Tagesphase 1 wechseln" Value="16" Id="%AID%_PT-SceneAction_EN-16" />
+                  <Enumeration Text="Zur Tagesphase 2 wechseln" Value="17" Id="%AID%_PT-SceneAction_EN-17" />
+                  <Enumeration Text="Zur Tagesphase 3 wechseln" Value="18" Id="%AID%_PT-SceneAction_EN-18" />
+                  <Enumeration Text="Zur Tagesphase 4 wechseln" Value="19" Id="%AID%_PT-SceneAction_EN-19" />
+                  <Enumeration Text="Zur Tagesphase 1 sofort wechseln" Value="20" Id="%AID%_PT-SceneAction_EN-20" />
+                  <Enumeration Text="Zur Tagesphase 2 sofort wechseln" Value="21" Id="%AID%_PT-SceneAction_EN-21" />
+                  <Enumeration Text="Zur Tagesphase 3 sofort wechseln" Value="22" Id="%AID%_PT-SceneAction_EN-22" />
+                  <Enumeration Text="Zur Tagesphase 4 sofort wechseln" Value="23" Id="%AID%_PT-SceneAction_EN-23" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-KeyCount" Name="KeyCount">

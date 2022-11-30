@@ -2,7 +2,7 @@
 #include <OpenKNX.h>
 // #include "PMmodul.h"
 #include <Logic.h>
-// #include "HardwareDevices.h"
+#include "hardware.h"
 #include "Sensor.h"
 
 uint8_t mSerial2Active = false;

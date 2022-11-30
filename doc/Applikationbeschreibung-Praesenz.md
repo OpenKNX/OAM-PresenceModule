@@ -25,6 +25,26 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+27.11.2022: Firmware 1.4, Applikation 1.4
+
+* FIX: Rückfallzeit für Sperre funktionierte nicht, ist jetzt korrigiert.
+* NEU: Tagesphasen kann man jetzt auch über die Szenensteuerung wechseln, Neuerungen hierzu sind im Kapitel [Szenensteuerung](#szenensteuerung) beschrieben.
+* NEU: Über die Szenensteuerung kann man jetzt auch den Manuellmodus aktivieren und deaktivieren (wie bei Eintastensteuerung). Siehe dazu Kapitel [Szenensteuerung](#szenensteuerung) 
+* NEU: Über die Szenensteuerung kann man jetzt alle Sperrmodi (unabhängig von der Konfiguration der Sperre) setzen und zurücksetzen. Siehe dazu Kapitel [Szenensteuerung](#szenensteuerung) 
+* FIX: Sperre hat jetzt auch ein Ü-Flag
+
+20.11.2022: Firmware 1.3.1, Applikation 1.3
+
+* FIX: Helligkeitsschwellen (zum Ein- und Ausschalten) und Nachlaufzeit werden beim Startup erst nach der Startverzögerung des Kanals gesendet 
+* NEU: Status Manuell und Status Sperre werden jetzt auch beim Startup (nach der Startverzögerung) des Kanals gesendet
+* FIX: Ein Aktorstatus EIN während der Totzeit von "Raum verlassen" konnte dazu führen, dass der Melder intern EIN blieb, obwohl der Ausgang AUS war. Symptom: Licht wurde nicht mehr automatisch eingeschaltet.
+* FIX: Ein AUS an einem schaltenden Präsenz- oder Bewegungseingang konnte dazu führen, dass die Nachlaufzeit erneut gestartet wurde.  
+* FIX: ETS-Applikation hat "Raum Verlassen" nicht immer angezeigt.
+* NEU: Kapitel [Wichtige Anmerkungen](#wichtige-anmerkungen), das Erkenntnisse aus Tests und User Feedback beschreibt, um andere User vor Fehlern zu bewahren.
+* NEU: Weitere Hardware verfügbar ([Siehe untestützte Hardware](#unterstützte-hardware))
+* Die enthaltene Logik hat den Firmware-Stand 0.13
+
+
 05.11.2022: Firmware 1.1.3, Applikation 1.1
 
 * NEU: Wenn ein externer PM zurückgesetzt werden kann, kann man jetzt wählen, ob dieser mit einem EIN- oder einem AUS-Signal zurückgesetzt wird
@@ -1050,11 +1070,27 @@ Wird diese Funktion ausgeführt, wird der Automatikmodus gestartet und ein EIN-S
 
 ### **Manuell übersteuern mit AUS**
 
-Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein AUS-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern".
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein AUS-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Zweitastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Eintastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Zweitastenmodus"!
 
 ### **Manuell übersteuern mit EIN**
 
-Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein EIN-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern".
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und ein EIN-Signal gesendet. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Zweitastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Eintastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Zweitastenmodus"!
+
+### **Manuell aktivieren**
+
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestartet und der aktuelle Schaltzustand beigehalten. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Eintastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Zweitastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Eintastenmodus"!
+
+### **Manuell deaktivieren**
+
+Wird diese Funktion ausgeführt, wird der Manuell-Modus gestoppt und aktuelle Schaltzustand beibehalten. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Manuell übersteuern", wenn "Manuell übersteuern" für den "Eintastenmodus" konfiguriert ist. 
+
+> Wichtig: Auch wenn bei "Manuell übersteuern" der "Zweitastenmodus" konfiguriert ist, verhält sich diese Szene wie beim "Eintastenmodus"!
 
 ### **Sperren und AUS senden**
 
@@ -1074,15 +1110,27 @@ Wird diese Funktion ausgeführt, wird der Melder gesperrt und der aktuelle Zusta
 
 Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
 
-### **Sperre aufheben und Zustand senden**
-
-Wird diese Funktion ausgeführt, wird der Melder entsperrt und der aktuelle Zustand auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese den aktuellen Zustand beim Aufheben der Sperre senden soll.
-
-Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
-
 ### **Sperre aufheben und nichts senden**
 
 Wird diese Funktion ausgeführt, wird der Melder entsperrt und der aktuelle Zustand beibehalten (es wird nichts auf den Bus gesendet). Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese nichts beim Aufheben der Sperre senden soll.
+
+Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
+
+### **Sperre aufheben und EIN senden**
+
+Wird diese Funktion ausgeführt, wird der Melder entsperrt und ein EIN-Telegramm auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese ein EIN-Telegramm beim Aufheben der Sperre senden soll.
+
+Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
+
+### **Sperre aufheben und AUS senden**
+
+Wird diese Funktion ausgeführt, wird der Melder entsperrt und ein AUS-Telegramm auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese ein UAS-Telegramm beim Aufheben der Sperre senden soll.
+
+Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
+
+### **Sperre aufheben und Zustand senden**
+
+Wird diese Funktion ausgeführt, wird der Melder entsperrt und der aktuelle Zustand auf den Bus gesendet. Die Funktion ist identisch mit dem Empfang eines AUS-Telegramms auf dem Kommunikationsobjekt "Sperren", wenn die Sperre parametrisiert ist und diese den aktuellen Zustand beim Aufheben der Sperre senden soll.
 
 Diese Funktion ist auch aufrufbar, wenn keine Sperre parametriert ist.
 
@@ -1093,6 +1141,21 @@ Es wird die [Raum verlassen](#raum-verlassen) Funktion aufgerufen. Es ist identi
 ### **Reset auslösen**
 
 Es wird ein interner Reset des Melders durchgeführt. Die Funktion ist identisch mit dem Empfang eines EIN-Telegramms auf dem Kommunikationsobjekt "Reset".
+
+### **Zur Tagesphase *n* wechseln**
+
+Für jede der Tagesphasen 1-4 gibt es die entsprechende Tagesphasen-funktion.
+Es passiert exakt das gleiche wie beim Senden der Tagesphase an das KO "Tagesphase". 
+
+Wird eine Tagesphase aufgerufen, die nicht definiert ist (z.B. Tagesphase 4, obwohl nur 3 definiert sind), wird die aktuelle Tagesphase beibehalten.
+
+Der Tagesphasenwechsel findet so statt, wie er unter [Neue Tagesphase übernehmen](#neue-tagesphase-übernehmen) definiert wurde.
+
+> Anmerkung: Tagesphasen sollten durch Telegramme an das KO "Tagesphase" gewechselt werden. Allerdings lässt sich dort pro Szene nur eine Tagesphase parametriere. Mithilfe der Szenensteuerung kann man auch einer Tagesphase mehrere Szenen zuordnen.
+
+### **Zur Tagesphase *n* sofort wechseln**
+
+Hier gilt alles für [Zur Tagesphase *n* wechseln](#zur-tagesphase-n-wechseln) gesagte, bis auf den Punkt, dass der Tagesphasenwechsel sofort stattfindet, selbst wenn die Parametrierung einen Wechsel bei Zustand AUS vorsieht.
 
 ## **Eingänge**
 
@@ -1513,6 +1576,19 @@ Diese 3 KO sind für die korrekte Funktion der adaptiven Helligkeits-Ausschaltsc
 
 Damit eine Neuberechnung passieren kann, muss jede GA, die die Helligkeit beeinflusst (sei es eine Schalt-, Absolut-Dimm- oder Relativ-Dimm-GA) jeweils Typgerecht mit einem der 3 Eingänge verbunden werden. Mit diesen KO können beliebig viele GA verbunden werden. Jedes Telegramm, dass hier eingeht, führt zu einer Neuberechnung der Ausschalt-Helligkeitsschwelle.
 
+## **Wichtige Anmerkungen**
+
+Im folgenden werden in loser Folge Erkenntnisse "aus dem Feld" und aus Tests aufgeführt, die hoffentlich helfen, fehlerhafte Parametrisierungen zu vermeiden.
+
+### **externer Präsenz- und Bewegungseingang, kein Bewegungssignal und Kurzzeitpräsenz**
+
+Wird externe Präsenz- und Bewegung parametrisiert, dann müssen auch beide Eingänge mit GA verbunden werden und es müssen passende Signale ankommen. Es wird davon ausgegangen, dass das Präsenzsignal länger anliegt als das Bewegungssignal. Vor allem wenn Kurzzeitpräsenz parametriert wurde, die das Bewegungssignal nutzt, kann es sonst zu folgendem Verhalten kommen:
+
+* Präsenz EIN (schaltend)
+* Bewegung liefert kein Signal
+* Kurzzeitpräsenz läuft an, wartet auf Bewegung
+* Nach der Kurzzeitpräsenz wird abgeschaltet, obwohl Präsenz noch EIN ist, da während der Nachlaufzeit der Kurzzeitpräsenz kein Bewegungssignal eingegangen ist.
+
 ## **Beispiele**
 
 In diesem Kapitel werden nach und nach mehrere Beispielparametrisierungen aufgeführt, sobald welche verfügbar sind.
@@ -1523,8 +1599,8 @@ Die Software für dieses Release wurde auf folgender Hardware getestet und läuf
 
 * **Smart-MF Sensormodul** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder, um die Applikationen von alten oder unzuverlässigen Präsenzmeldern zu verbessern
 * **PiPico-BCU-Connector** [OpenKNX-Wiki](https://github.com/OpenKNX/OpenKNX/wiki/PiPico-BCU-Connector), als virtueller Präsenzmelder
-
-In Entwicklung:
+* **1TE-RP2040-Smart-MF** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder auf allen Varianten lauffähig
+* **OpenKNX-UP1-System** [OpenKNX-Wiki](https://github.com/OpenKNX/OpenKNX/wiki/OpenKNX-UP1), als virtueller Präsenzmelder auf allen Varianten lauffähig
 * **Smart-MF RealPresence** [www.smart-mf.de](https://www.smart-mf.de), als vollständiger Präsenzmelder, der auch Personen ohne Bewegung zuverlässig erkennt.
 
 Andere Hardware kann genutzt werden, jedoch muss das Projekt dann neu compiliert werden. Alle notwendigen Teile für ein Aufsetzen der Build-Umgebung inclusive aller notwendigen Projekte finden sich im [OpenKNX-Projekt](https://github.com/OpenKNX)
