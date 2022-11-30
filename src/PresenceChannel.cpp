@@ -515,7 +515,7 @@ void PresenceChannel::startDayPhase(uint8_t iPhase /* = 255 */, bool iForce /* =
     int8_t lPhaseCount = paramByte(PM_pPhaseCount, PM_pPhaseCountMask, PM_pPhaseCountShift);
 
     // first check, if day phase is valid and if it really changed
-    if (mNextDayPhase < 0 || mCurrentDayPhase == mNextDayPhase || mNextDayPhase >= lPhaseCount)
+    if (mNextDayPhase < 0 || mCurrentDayPhase == mNextDayPhase || mNextDayPhase > lPhaseCount)
         return;
 
     // check if delayed day phase execution is requested
@@ -1133,6 +1133,7 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     uint8_t lLockType = paramByte(PM_pLockType, PM_pLockTypeMask, PM_pLockTypeShift);
     uint8_t lLockValue = (iLockOn << 1);
     uint8_t lLockSend = lLockValue ? iLockOnSend : iLockOffSend;
+    uint8_t lDpt = 255;
     switch (lLockType)
     {
         case VAL_PM_LockTypePriority:
@@ -1140,14 +1141,25 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
                 lLockValue |= ((pCurrentValue & PM_BIT_OUTPUT_SET) > 0);
             else
                 lLockValue |= (lLockSend == VAL_PM_LockOutputOn);
-            getKo(PM_KoKOpLock)->valueNoSend(lLockValue, getDPT(VAL_DPT_5));
+            lDpt = VAL_DPT_5;
             break;
         case VAL_PM_LockTypeLock:
-            getKo(PM_KoKOpLock)->valueNoSend(iLockOn, getDPT(VAL_DPT_1));
+            lLockValue = iLockOn;
+            lDpt = VAL_DPT_1;
             break;
         default:
             // do nothing
             break;
+    }
+    if (lDpt < 255)
+    {
+        // send new state only if lock state changed
+        uint8_t lCurrent = getKo(PM_KoKOpLock)->value(getDPT(lDpt));
+        if (lLockValue != pLastLockState)
+        {
+            getKo(PM_KoKOpLock)->value(lLockValue, getDPT(lDpt));
+            pLastLockState = lLockValue;
+        }
     }
 }
 
@@ -1477,6 +1489,8 @@ void PresenceChannel::loop()
             processLeaveRoom();
         if (pCurrentState & (STATE_DOWNTIME))
             processDowntime();
+        if (pCurrentState & (STATE_LOCK))
+            processLock();
         // brightness is always evaluated
         processBrightness();
         // output is always evaluated

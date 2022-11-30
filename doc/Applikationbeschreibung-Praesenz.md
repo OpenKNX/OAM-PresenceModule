@@ -25,12 +25,13 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
-27.11.2022: Firmware 1.4, Applikaiton 1.4
+27.11.2022: Firmware 1.4, Applikation 1.4
 
 * FIX: Rückfallzeit für Sperre funktionierte nicht, ist jetzt korrigiert.
 * NEU: Tagesphasen kann man jetzt auch über die Szenensteuerung wechseln, Neuerungen hierzu sind im Kapitel [Szenensteuerung](#szenensteuerung) beschrieben.
 * NEU: Über die Szenensteuerung kann man jetzt auch den Manuellmodus aktivieren und deaktivieren (wie bei Eintastensteuerung). Siehe dazu Kapitel [Szenensteuerung](#szenensteuerung) 
 * NEU: Über die Szenensteuerung kann man jetzt alle Sperrmodi (unabhängig von der Konfiguration der Sperre) setzen und zurücksetzen. Siehe dazu Kapitel [Szenensteuerung](#szenensteuerung) 
+* FIX: Sperre hat jetzt auch ein Ü-Flag
 
 20.11.2022: Firmware 1.3.1, Applikation 1.3
 

@@ -189,9 +189,20 @@ void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
     // we check für specific serial numbers, which have an inverted HF_POWER_PIN (hardware bug)
-    const uint8_t specialCount = 1;
+    const uint8_t specialCount = 11;
     const uint64_t special[specialCount] = {
-        0x1334842F  // test - Devel Board Waldemar, where power pin has no function
+        0x1334842F,  // test - Devel Board Waldemar, where power pin has no function
+        // 0x47591F2E,  // Waldemar Wohnzimmer
+        0x23534121,
+        0x23364521,
+        0x23503321,
+        0x23464121,
+        0x23534821,
+        0x17493927,
+        0x17265A22,
+        0x173C1627,
+        0x175A3527,
+        0x173C1E27
     };
     
     uint32_t lSerial = knx.platform().uniqueSerialNumber();

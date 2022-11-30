@@ -234,7 +234,8 @@ class PresenceChannel
     uint32_t pAdaptiveDelayTime = 0;  // adaptive brightness calculation delay
     uint32_t pBrightnessOffDelayTime = 0;  // brightness off delay
     uint8_t pLeaveRoomMode = 0; // used for leave room SM
-
+    uint8_t pLastLockState = 255; // ensures sending just changed Lock states
+     
   public:
     PresenceChannel(uint8_t iChannelNumber);
     ~PresenceChannel();
