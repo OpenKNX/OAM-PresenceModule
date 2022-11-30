@@ -1154,7 +1154,6 @@ void PresenceChannel::onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOff
     if (lDpt < 255)
     {
         // send new state only if lock state changed
-        uint8_t lCurrent = getKo(PM_KoKOpLock)->value(getDPT(lDpt));
         if (lLockValue != pLastLockState)
         {
             getKo(PM_KoKOpLock)->value(lLockValue, getDPT(lDpt));
