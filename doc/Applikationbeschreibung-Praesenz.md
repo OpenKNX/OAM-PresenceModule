@@ -25,6 +25,11 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+06.12.2022: Firmware 1.4.1, Applikation 1.4
+
+* FIX: Der Schalter "Automatik übersteuern = AUS heißt Raum verlassen" wurde nicht ausgewertet. Sobald "Raum verlassen" konfiguriert ist, wurde es immer genutzt. Das ist jetzt korrigiert.
+* FIX: Die Diagnose für "Raum verlassen" gab nicht den Modus aus, der eingestellt war.
+
 27.11.2022: Firmware 1.4, Applikation 1.4
 
 * FIX: Rückfallzeit für Sperre funktionierte nicht, ist jetzt korrigiert.
@@ -41,7 +46,7 @@ Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer d
 * FIX: Ein AUS an einem schaltenden Präsenz- oder Bewegungseingang konnte dazu führen, dass die Nachlaufzeit erneut gestartet wurde.  
 * FIX: ETS-Applikation hat "Raum Verlassen" nicht immer angezeigt.
 * NEU: Kapitel [Wichtige Anmerkungen](#wichtige-anmerkungen), das Erkenntnisse aus Tests und User Feedback beschreibt, um andere User vor Fehlern zu bewahren.
-* NEU: Weitere Hardware verfügbar ([Siehe untestützte Hardware](#unterstützte-hardware))
+* NEU: Weitere Hardware verfügbar ([Siehe unterstützte Hardware](#unterstützte-hardware))
 * Die enthaltene Logik hat den Firmware-Stand 0.13
 
 
@@ -346,12 +351,12 @@ Der Melder bietet gleichartige Präsenzkanäle, die ein bestimmtes Verhalten imp
 
 Der Melder hat intern 4 Modi, die das gesamte Verhalten steuern. Folgende Tabelle erlaubt eine Übersicht über die Modi:
 
-| Modus | Präsenz | Helligkeit | Zeit | Anmerkugn |
+| Modus | Präsenz | Helligkeit | Zeit | Anmerkungen |
 |---|---|---|---|---|
 | Normal | wird beachtet | wird beachtet | Nachlaufzeit | Betrieb ohne externen Eingriff
 | Auto | wird beachtet | wird ignoriert | Nachlaufzeit | Halbautomatischer Betrieb
 | Manuell | wird ignoriert | wird ignoriert | Rückfallzeit * | Manueller Betrieb
-| Sperre | wird ingoriert | wird ignoriert | Rückfallzeit | Langzeitsperre
+| Sperre | wird ignoriert | wird ignoriert | Rückfallzeit | Langzeitsperre
 
 *) Rückfallzeit kann auch präsenzabhängig parametriert werden
 

@@ -880,7 +880,7 @@
 #define PM_ChannelCount 40
 
 // Parameter per channel
-#define PM_ParamBlockOffset 2615
+#define PM_ParamBlockOffset 8549
 #define PM_ParamBlockSize 138
 #define PM_pPresenceInputs            0      // 3 Bits, Bit 7-5
 #define     PM_pPresenceInputsMask 0xE0
@@ -1350,6 +1350,6 @@
 #define PM_KoKOpResetExternalPM 19
 
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 107
-#define MAIN_OrderNumber "OpenKnxPresence"
+#define MAIN_ApplicationNumber 2
+#define MAIN_ApplicationVersion 20
+#define MAIN_OrderNumber "OpenKnxPresenceBig"

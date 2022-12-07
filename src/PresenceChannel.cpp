@@ -173,8 +173,9 @@ bool PresenceChannel::processDiagnoseCommand(char *iBuffer)
             // we present leave room mode
             iBuffer[lIndex++] = 'L';
             iBuffer[lIndex++] = ' ';
+            uint8_t lLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
             for (uint8_t lCount = 0; lCount < 3; lCount++)
-                iBuffer[lIndex++] = lModes[(pLeaveRoomMode * 3 + lCount)];
+                iBuffer[lIndex++] = lModes[(lLeaveRoomMode * 3 + lCount)];
             iBuffer[lIndex++] = ' ';
             iBuffer[lIndex] = 0; // do not increment lIndex here
             if (pDowntimeDelayTime > 0)
@@ -963,8 +964,10 @@ void PresenceChannel::startAuto(bool iOn, bool iSuppressOutput)
     // ensure auto mode
     onManualChange(false);
     // check if we have to go to leave room
+    bool lAutoOffIsLeave = paramBit(PM_pAutoOffIsLeave, PM_pAutoOffIsLeaveMask);
+    // here we have to use a local variable, not pLeaveRoomMode!
     uint8_t lLeaveRoomMode = paramByte(PM_pLeaveRoomModeAll, PM_pLeaveRoomModeAllMask, PM_pLeaveRoomModeAllShift);
-    if (!iOn && lLeaveRoomMode > VAL_PM_LRM_None)
+    if (!iOn && lAutoOffIsLeave && lLeaveRoomMode > VAL_PM_LRM_None)
         startLeaveRoom(iSuppressOutput);
     else
     {
