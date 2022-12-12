@@ -7,6 +7,7 @@
 #include "PresenceChannel.h"
 #include "Logic.h"
 #include "KnxHelper.h"
+#include "FlashUserData.h"
 
 struct sRuntimeInfo
 {
@@ -16,6 +17,7 @@ struct sRuntimeInfo
 
 sRuntimeInfo gRuntimeData;
 
+FlashUserData gFlash;
 Presence gPresence;
 Logic gLogic;
 
@@ -44,10 +46,10 @@ void ProcessReadRequests() {
     gLogic.processReadRequests();
 }
 
-// true solgange der Start des gesamten Moduls verzögert werden soll
+// true solange der Start des gesamten Moduls verzögert werden soll
 bool startupDelay()
 {
-    return !delayCheck(gRuntimeData.startupDelay, getDelayPattern(LOG_StartupDelayBase, true));
+    return !delayCheck(gRuntimeData.startupDelay, getDelayPattern(LOG_StartupDelayBase));
 }
 
 bool processDiagnoseCommand()
@@ -146,6 +148,11 @@ void appSetup(bool iSaveSupported)
         gRuntimeData.heartbeatDelay = 0;
         gPresence.setup();  // presence has to be setup BEFORE logic
         gLogic.setup(iSaveSupported);
+        // we do flash handling after setup of according module
+        gFlash.addFlashUserDataClass(&gLogic);
+        gFlash.writeFlash();
+        gFlash.readFlash();
+
     }
 }
 #endif
