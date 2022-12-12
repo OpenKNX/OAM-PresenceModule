@@ -44,10 +44,10 @@ void ProcessReadRequests() {
     gLogic.processReadRequests();
 }
 
-// true solgange der Start des gesamten Moduls verzögert werden soll
+// true solange der Start des gesamten Moduls verzögert werden soll
 bool startupDelay()
 {
-    return !delayCheck(gRuntimeData.startupDelay, getDelayPattern(LOG_StartupDelayBase, true));
+    return !delayCheck(gRuntimeData.startupDelay, getDelayPattern(LOG_StartupDelayBase));
 }
 
 bool processDiagnoseCommand()
