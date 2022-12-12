@@ -1060,6 +1060,9 @@ void PresenceChannel::startLock()
     } else if (lLockType == VAL_PM_LockTypeLock) {
         // simple lock
         bool lValue = getKo(PM_KoKOpLock)->value(getDPT(VAL_DPT_1));
+        bool lInvert = paramBit(PM_pLockActive, PM_pLockActiveMask);
+        if (lInvert) 
+            lValue = !lValue;
         uint8_t lLockOnSend = paramByte(PM_pLockOn, PM_pLockOnMask, PM_pLockOnShift);
         uint8_t lLockOffSend = paramByte(PM_pLockOff, PM_pLockOffMask, PM_pLockOffShift);
         onLock(lValue, lLockOnSend, lLockOffSend);

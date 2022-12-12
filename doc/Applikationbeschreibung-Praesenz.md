@@ -25,6 +25,11 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+09.12.2022: Firmware 1.4.4, Applikation 1.4
+
+FIX: Option "gesperrt (0) / nicht gesperrt (1)" bei Sperreinstellungen wurde nicht ausgewertet.
+FIX: Option "Zeit bis das Gerät nach einem Neustart aktiv wird" wurde mit einer falschen Zeitbasis ausgeführt (Millisekunden statt Sekunden)
+
 06.12.2022: Firmware 1.4.1, Applikation 1.4
 
 * FIX: Der Schalter "Automatik übersteuern = AUS heißt Raum verlassen" wurde nicht ausgewertet. Sobald "Raum verlassen" konfiguriert ist, wurde es immer genutzt. Das ist jetzt korrigiert.

@@ -289,8 +289,10 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
             lLedPresence = iOn;
             break;
     }
-#ifdef SERIAL_HF
+#ifdef MOVE_LED_PIN
     digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (lLedMove && sLedsLocked == 0));
+#endif
+#ifdef PRESENCE_LED_PIN
     digitalWrite(PRESENCE_LED_PIN, PRESENCE_LED_PIN_ACTIVE_ON == (lLedPresence && sLedsLocked == 0));
 #endif
     // store the current values in memory
@@ -300,7 +302,7 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
 
 void Presence::processHardwarePresence()
 {
-#ifdef SERIAL_HF
+  #ifdef HF_POWER_PIN
     if (mPresenceSensor != 0) 
     {
         float lValue = 0;
