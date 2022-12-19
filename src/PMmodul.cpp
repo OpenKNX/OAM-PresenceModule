@@ -1,13 +1,11 @@
 #ifdef PMMODULE
 #include "Helper.h"
 
-// #include "IncludeManager.h"
-
 #include "Presence.h"
 #include "PresenceChannel.h"
 #include "Logic.h"
 #include "KnxHelper.h"
-#include "FlashUserData.h"
+#include "oknx.h"
 
 struct sRuntimeInfo
 {
@@ -17,7 +15,6 @@ struct sRuntimeInfo
 
 sRuntimeInfo gRuntimeData;
 
-FlashUserData gFlash;
 Presence gPresence;
 Logic gLogic;
 
@@ -58,7 +55,7 @@ bool processDiagnoseCommand()
     bool lOutput = false;
     if (lBuffer[0] == 'v')
     {
-        // Command v: retrun fimware version, do not forward this to logic,
+        // Command v: return firmware version, do not forward this to logic,
         // because it means firmware version of the outermost module
         // sprintf(lBuffer, "VER [%d] %d.%d", cFirmwareMajor, cFirmwareMinor, cFirmwareRevision);
         lOutput = true;
@@ -101,7 +98,7 @@ void ProcessKoCallback(GroupObject &iKo)
     else
     {
         gPresence.processInputKo(iKo);
-        // else dispatch to logicmodule
+        // else dispatch to logic module
         gLogic.processInputKo(iKo);
     }
 }
@@ -148,11 +145,7 @@ void appSetup(bool iSaveSupported)
         gRuntimeData.heartbeatDelay = 0;
         gPresence.setup();  // presence has to be setup BEFORE logic
         gLogic.setup(iSaveSupported);
-        // we do flash handling after setup of according module
-        gFlash.addFlashUserDataClass(&gLogic);
-        gFlash.writeFlash();
-        gFlash.readFlash();
-
+        openknx.flashUserData()->readFlash();
     }
 }
 #endif

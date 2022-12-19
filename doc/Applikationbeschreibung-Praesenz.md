@@ -25,6 +25,10 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+18.12.2022: Firmware 1.5, Applikation 1.5
+
+* Die enthaltene Logik hat den Firmware-Stand 1.0 und ermöglicht damit das Speichern der Logikeingänge im nichtflüchtigen Speicher.
+
 09.12.2022: Firmware 1.4.4, Applikation 1.4
 
 FIX: Option "gesperrt (0) / nicht gesperrt (1)" bei Sperreinstellungen wurde nicht ausgewertet.
