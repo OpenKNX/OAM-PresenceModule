@@ -31,8 +31,8 @@ Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer d
 
 09.12.2022: Firmware 1.4.4, Applikation 1.4 (nicht released)
 
-FIX: Option "gesperrt (0) / nicht gesperrt (1)" bei Sperreinstellungen wurde nicht ausgewertet.
-FIX: Option "Zeit bis das Gerät nach einem Neustart aktiv wird" wurde mit einer falschen Zeitbasis ausgeführt (Millisekunden statt Sekunden)
+* FIX: Option "gesperrt (0) / nicht gesperrt (1)" bei Sperreinstellungen wurde nicht ausgewertet.
+* FIX: Option "Zeit bis das Gerät nach einem Neustart aktiv wird" wurde mit einer falschen Zeitbasis ausgeführt (Millisekunden statt Sekunden)
 
 06.12.2022: Firmware 1.4.1, Applikation 1.4 (nicht released)
 
