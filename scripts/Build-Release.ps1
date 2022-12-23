@@ -31,7 +31,7 @@ lib/OGM-Common/scripts/setup/reusable/Build-Release-Preprocess.ps1 $args[0]
 if (!$?) { exit 1 }
 
 # build firmware based on generated headerfile for RP2040
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2
+lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2 DeveloperBoard-JustForTesters
 if (!$?) { exit 1 }
 
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
@@ -48,16 +48,16 @@ if (!$?) { exit 1 }
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
 if (!$?) { exit 1 }
 
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_RP2040 firmware-Sensormodul-RP2040 uf2
+lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v40_RP2040 firmware-Sensormodul-v40-RP2040 uf2
 if (!$?) { exit 1 }
 
 if ($releaseIndication -ne "Big")
 {
     # build firmware based on generated headerfile for SAMD
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v31 firmware-Sensormodul-v31 bin
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v31_SAMD firmware-Sensormodul-v31-SAMD bin
     if (!$?) { exit 1 }
 
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v30 firmware-Sensormodul-v30 bin
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v30_SAMD firmware-Sensormodul-v30-SAMD bin
     if (!$?) { exit 1 }
 }
 # execute generic post-build steps

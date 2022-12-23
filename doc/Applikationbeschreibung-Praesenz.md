@@ -17,7 +17,7 @@ Sie ist in die Bereiche
 * PM-Kanäle
 * Logikkanäle
 
-gegliedert, wobei die Präsenzkanäle wiederum in bis zu 20 Kanäle untergliedert sind.
+gegliedert, wobei die Präsenzkanäle wiederum in bis zu 40 Kanäle untergliedert sind.
 
 Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM-LogicModule/blob/main/doc/Applikationsbeschreibung-Logik.md) beschrieben.
 
@@ -25,17 +25,21 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
-09.12.2022: Firmware 1.4.4, Applikation 1.4
+23.12.2022: Firmware 1.5.3, Applikation 1.5
+
+* Die enthaltene Logik hat den Firmware-Stand 1.0.3 und ermöglicht damit das Speichern der Logikeingänge im nichtflüchtigen Speicher.
+
+09.12.2022: Firmware 1.4.4, Applikation 1.4 (nicht released)
 
 FIX: Option "gesperrt (0) / nicht gesperrt (1)" bei Sperreinstellungen wurde nicht ausgewertet.
 FIX: Option "Zeit bis das Gerät nach einem Neustart aktiv wird" wurde mit einer falschen Zeitbasis ausgeführt (Millisekunden statt Sekunden)
 
-06.12.2022: Firmware 1.4.1, Applikation 1.4
+06.12.2022: Firmware 1.4.1, Applikation 1.4 (nicht released)
 
 * FIX: Der Schalter "Automatik übersteuern = AUS heißt Raum verlassen" wurde nicht ausgewertet. Sobald "Raum verlassen" konfiguriert ist, wurde es immer genutzt. Das ist jetzt korrigiert.
 * FIX: Die Diagnose für "Raum verlassen" gab nicht den Modus aus, der eingestellt war.
 
-27.11.2022: Firmware 1.4, Applikation 1.4
+27.11.2022: Firmware 1.4, Applikation 1.4 (nicht released)
 
 * FIX: Rückfallzeit für Sperre funktionierte nicht, ist jetzt korrigiert.
 * NEU: Tagesphasen kann man jetzt auch über die Szenensteuerung wechseln, Neuerungen hierzu sind im Kapitel [Szenensteuerung](#szenensteuerung) beschrieben.
