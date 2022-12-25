@@ -133,6 +133,29 @@
 #define I2C_RGBLED_DEVICE_ADDRESS 0x60  // Address of PCA9632 RBGW-LED-Driver
 #endif
 
+// Sensormodul-Breakout-Board
+#ifdef BOARD_MASIFI_SENSOR_BREAKOUT
+#define PROG_LED_PIN 1
+#define PROG_LED_PIN_ACTIVE_ON HIGH
+#define PROG_BUTTON_PIN 0
+#define PROG_BUTTON_PIN_INTERRUPT_ON FALLING
+#define SAVE_INTERRUPT_PIN 22
+// #define INFO_LED_PIN 38
+// #define INFO_LED_PIN_ACTIVE_ON HIGH
+#define KNX_UART_RX_PIN 17
+#define KNX_UART_TX_PIN 16
+#define KNX_I2C_SDA_PIN 20
+#define KNX_I2C_SCL_PIN 21
+// Buzzer
+#define BUZZER_PIN 9
+// #define I2C_1WIRE_DEVICE_ADDRESSS 0x18  // Address of DS2484 1-Wire-Busmaster chip
+#define I2C_RGBLED_DEVICE_ADDRESS 0x60  // Address of PCA9632 RBGW-LED-Driver
+#define HW_ANALOG_ID 26 
+#define HW_REVISION_ID1 10
+#define HW_REVISION_ID2 11
+#define HW_REVISION_ID3 12
+#endif
+
 #ifdef BOARD_MASIFI_AUSSEN_V13
 #define PROG_LED_PIN 13
 #define PROG_LED_PIN_ACTIVE_ON HIGH
