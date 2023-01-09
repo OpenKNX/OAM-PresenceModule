@@ -746,8 +746,8 @@
           <Dynamic>
             <ChannelIndependentBlock> 
               <!-- START INCLUDE HERE -->
-              <ParameterBlock Id="%AID%_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
-                <Channel Id="%AID%_CH-PM%CC%" Name="f%CC%PM" Number="PM%CC%" Text="PM %CC%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+              <ParameterBlock Id="%AID%_PB-%C%1" Name="PM%C%Page" Text="PM %C%: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
+                <Channel Id="%AID%_CH-PM%CC%" Name="f%CC%PM" Number="PM%CC%" Text="PM %CC%: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%000_R-%T%%CCC%00001">
                   <ParameterBlock Id="%AID%_PB-%T%%CCC%01" Name="PM%C%Wrapper" Inline="true">
                     <!-- hidden, but necessary -->
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%084_R-%T%%CCC%08401" />
@@ -1777,7 +1777,7 @@
                       </ParameterBlock>
                     </ParameterBlock>
                     <!-- Phase 1 -->
-                    <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%026_R-%T%%CCC%02601">
+                    <ParameterBlock Id="%AID%_PB-%C%11" Name="PM%C%Phase1" Text="Phase 1: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%026_R-%T%%CCC%02601">
                       <!-- Phase function -->
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
                       <ParameterRefRef RefId="%AID%_UP-%T%%CCC%139_R-%T%%CCC%13901" />
@@ -2068,7 +2068,7 @@
                     <choose ParamRefId="%AID%_UP-%T%%CCC%005_R-%T%%CCC%00501">
                       <!-- Phase 2 -->
                       <when test=">0">
-                        <ParameterBlock Id="%AID%_PB-%C%12" Name="PM%C%Phase2" Text="Phase 2: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%027_R-%T%%CCC%02701">
+                        <ParameterBlock Id="%AID%_PB-%C%12" Name="PM%C%Phase2" Text="Phase 2: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%027_R-%T%%CCC%02701">
                           <!-- Phase function -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%239_R-%T%%CCC%23901" />
@@ -2365,7 +2365,7 @@
                       </when>
                       <!-- Phase 3 -->
                       <when test=">1">
-                        <ParameterBlock Id="%AID%_PB-%C%13" Name="PM%C%Phase3" Text="Phase 3: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%028_R-%T%%CCC%02801">
+                        <ParameterBlock Id="%AID%_PB-%C%13" Name="PM%C%Phase3" Text="Phase 3: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%028_R-%T%%CCC%02801">
                           <!-- Phase function -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%339_R-%T%%CCC%33901" />
@@ -2662,7 +2662,7 @@
                       </when>
                       <!-- Phase 4 -->
                       <when test=">2">
-                        <ParameterBlock Id="%AID%_PB-%C%14" Name="PM%C%Phase4" Text="Phase 4: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%029_R-%T%%CCC%02901">
+                        <ParameterBlock Id="%AID%_PB-%C%14" Name="PM%C%Phase4" Text="Phase 4: {{0: ...}}" TextParameterRefId="%AID%_P-%T%%CCC%029_R-%T%%CCC%02901">
                           <!-- Phase function -->
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="Funktion" UIHint="Headline" />
                           <ParameterRefRef RefId="%AID%_UP-%T%%CCC%439_R-%T%%CCC%43901" />
