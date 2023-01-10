@@ -25,7 +25,7 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
-10.01.2023: Firmware 1.7, Applikation 1.7.1
+10.01.2023: Firmware 1.7.1, Applikation 1.7
 
 * Die enthaltene Logik hat den Firmware-Stand 1.4.1
 
