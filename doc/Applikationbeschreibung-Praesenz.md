@@ -75,7 +75,7 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
       * [Präsenzeinstellungen](#präsenzeinstellungen)
       * [Ausgang 1/2](#ausgang-12)
       * [Manuelle Bedienung](#manuelle-bedienung)
-* **+ Logikkanäle** (Dokumentation im Logikmodul)
+* **+ Logikkanäle** (siehe [Dokumentation zum Logikmodul](https://github.com/OpenKNX/OAM-LogicModule/blob/main/doc/Applikationsbeschreibung-Logik.md); Achtung: Version beachten!)
 
 
 
