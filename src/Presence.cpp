@@ -56,12 +56,19 @@ void Presence::processReadRequests()
     if (!sCalledProcessReadRequests)
     {
         // we go through all IO devices defined as outputs and check for initial read requests
-        if (knx.paramByte(PM_ReadLed) & PM_ReadLedMask)
+        // if (knx.paramByte(PM_ReadLed) & PM_ReadLedMask)
+        // {
+        //     if ((knx.paramByte(PM_LEDPresence) & PM_LEDPresenceMask) >> PM_LEDPresenceShift == VAL_PM_LedKnx)
+        //         knx.getGroupObject(PM_KoLEDPresence).requestObjectRead();
+        //     if ((knx.paramByte(PM_LEDMove) & PM_LEDMoveMask) >> PM_LEDMoveShift == VAL_PM_LedKnx)
+        //         knx.getGroupObject(PM_KoLEDMove).requestObjectRead();
+        // }
+        if (ParamPM_ReadLed)
         {
-            if ((knx.paramByte(PM_LEDPresence) & PM_LEDPresenceMask) >> PM_LEDPresenceShift == VAL_PM_LedKnx)
-                knx.getGroupObject(PM_KoLEDPresence).requestObjectRead();
-            if ((knx.paramByte(PM_LEDMove) & PM_LEDMoveMask) >> PM_LEDMoveShift == VAL_PM_LedKnx)
-                knx.getGroupObject(PM_KoLEDMove).requestObjectRead();
+            if (ParamPM_LEDPresence == VAL_PM_LedKnx)
+                KoPM_LEDPresence.requestObjectRead();
+            if (ParamPM_LEDMove == VAL_PM_LedKnx)
+                KoPM_LEDMove.requestObjectRead();
         }
         sCalledProcessReadRequests = true;
     }
@@ -115,15 +122,27 @@ void Presence::processInputKo(GroupObject &iKo)
     switch (lAsap)
     {
         case PM_KoSensitivity:
+        {
+            int8_t lSensitivity = iKo.value(getDPT(VAL_DPT_5));
+            if (mSensitivity != lSensitivity) 
+            {
 #ifdef HF_POWER_PIN
-            mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, iKo.value(getDPT(VAL_DPT_5)));
+                mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, lSensitivity);
 #endif
+            }
             break;
-        case PM_KoScenario:
+        }
+        case PM_KoScenario: 
+        {
+            int8_t lScenario = iKo.value(getDPT(VAL_DPT_5));
+            if (mScenario != lScenario)
+            {
 #ifdef HF_POWER_PIN
-            mPresenceSensor->sendCommand(RadarCmd_WriteScene, iKo.value(getDPT(VAL_DPT_5)));
+                mPresenceSensor->sendCommand(RadarCmd_WriteScene, lScenario);
 #endif
+            }
             break;
+        }
         case PM_KoHfReset:
             // mPresenceSensor->sendCommand(RadarCmd_ResetSensor);
             startPowercycleHfSensor();
@@ -159,18 +178,15 @@ bool Presence::getHardwareMove()
 // Starting all required sensors, this call may be blocking (with delay)
 void Presence::startSensors()
 {
-    uint8_t lHardwarePM = (knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) >> PM_HWPresenceShift;
-    uint8_t lHardwareLux = (knx.paramByte(PM_HWLux) & PM_HWLuxMask) >> PM_HWLuxShift;
-
-    if (lHardwarePM == VAL_PM_PS_Hf)
+    if (ParamPM_HWPresence == VAL_PM_PS_Hf)
     {
 #ifdef HF_POWER_PIN
         mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
-        mPresenceSensor->defaultSensorParameters(((knx.paramByte(PM_HfScenario) & PM_HfScenarioMask) >> PM_HfScenarioShift) - 1, (knx.paramByte(PM_HfSensitivity) & PM_HfSensitivityMask) >> PM_HfSensitivityShift );
+        mPresenceSensor->defaultSensorParameters((ParamPM_HfScenario) - 1, ParamPM_HfSensitivity);
 #endif
     }
     
-    switch (lHardwareLux)
+    switch (ParamPM_HWLux)
     {
         case VAL_PM_LUX_VEML:
             mBrightnessSensor = Sensor::factory(SENS_VEML7700, Lux);
@@ -252,8 +268,8 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
 
     bool lLedMove = sLedMove;
     bool lLedPresence = sLedPresence;
-    uint8_t lMoveLedParam = (knx.paramByte(PM_LEDMove) & PM_LEDMoveMask) >> PM_LEDMoveShift;
-    uint8_t lPresenceLedParam = (knx.paramByte(PM_LEDPresence) & PM_LEDPresenceMask) >> PM_LEDPresenceShift;
+    uint8_t lMoveLedParam = ParamPM_LEDMove;
+    uint8_t lPresenceLedParam = ParamPM_LEDPresence;
     // we implement all led cases in one method
     switch (iCaller)
     {
@@ -398,9 +414,9 @@ void Presence::processHardwareLux()
             mBrightnessProcess = delayTimerInit();
             bool lSend = false;
             mLux = lValue;
-            knx.getGroupObject(PM_KoLuxOut).valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
+            KoPM_LuxOut.valueNoSend(getHardwareBrightness(), getDPT(VAL_DPT_9));
             uint32_t lTimeDelta = getDelayPattern(PM_LuxSendCycleDelayBase);
-            bool lDeltaAbsRel = knx.paramByte(PM_LuxSendDeltaAbsRel) & PM_LuxSendDeltaAbsRelMask;
+            bool lDeltaAbsRel = ParamPM_LuxSendDeltaAbsRel;
             lSend = lTimeDelta > 0 && delayCheck(mBrightnessDelay, lTimeDelta);
             uint16_t lDelta = knx.paramWord(PM_LuxSendDelta) & 0x7FFF; // just 15 bits
             if (lDelta > 0)
