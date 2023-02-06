@@ -125,10 +125,11 @@
             "group": "test"
         },
         {
-            "label": "Build-Big",
+            "label": "Build-Release-Package",
             "type": "shell",
-            "command": "scripts/Build-Release.ps1 Big",
-            "args": [],
+            "command": "scripts/Build-Release-Package.ps1",
+            "args": [
+            ],
             "problemMatcher": [],
             "group": "test"
         },

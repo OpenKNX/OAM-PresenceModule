@@ -6,4 +6,5 @@
 **/*.knxprod
 **/*.debug.xml
 release/*
+release-package/*
 doc/TP_Radar_Sensor/*
