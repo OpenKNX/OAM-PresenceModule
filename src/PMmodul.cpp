@@ -123,15 +123,15 @@ void appLoop()
 void appSetup(bool iSaveSupported)
 {
     // try to get rid of occasional I2C lock...
-    savePower();
-    ledProg(true);
-    ledInfo(true);
-    // delay(500);
-    restorePower();
-    // check hardware availability
-    boardCheck();
-    ledInfo(false);
-    ledProg(false);
+    // savePower();
+    // ledProg(true);
+    // ledInfo(true);
+    // // delay(500);
+    // restorePower();
+    // // check hardware availability
+    // boardCheck();
+    // ledInfo(false);
+    // ledProg(false);
 
     if (knx.configured())
     {

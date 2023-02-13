@@ -247,7 +247,7 @@ void Presence::startPowercycleHfSensor()
 
 void Presence::processPowercycleHfSensor()
 {
-    if (mHfPowerCycleDelay > 0 && delayCheck(mHfPowerCycleDelay, 5000))
+    if (mHfPowerCycleDelay > 0 && delayCheck(mHfPowerCycleDelay, 15000))
     {
         switchHfSensor(true);
         mHfPowerCycleDelay = 0;

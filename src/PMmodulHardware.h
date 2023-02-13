@@ -146,8 +146,8 @@
 #define KNX_UART_TX_PIN 16
 #define KNX_I2C_SDA_PIN 20
 #define KNX_I2C_SCL_PIN 21
-#define KNX_I2C1_SDA_PIN 14
-#define KNX_I2C1_SCL_PIN 15
+#define I2C_SDA_PIN 14
+#define I2C_SCL_PIN 15
 // #define COUNT_1WIRE_BUSMASTER 1
 // #define COUNT_1WIRE_CHANNEL 30
 #define I2C_1WIRE_DEVICE_ADDRESSS 0x18  // Address of DS2484 1-Wire-Busmaster chip

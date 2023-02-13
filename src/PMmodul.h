@@ -1,7 +1,13 @@
 #pragma once
 
-#define paramDelay(time) (uint32_t)((time & 0xC000) == 0xC000 ? (time & 0x3FFF) * 100 : (time & 0xC000) == 0x0000 ? (time & 0x3FFF) * 1000 : (time & 0xC000) = 0x4000 ? (time & 0x3FFF) * 60000 : (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : (time & 0x3FFF) * 3600000 ) : 0 )
 
+#define paramDelay(time) (uint32_t)( \
+            (time & 0xC000) == 0xC000 ? (time & 0x3FFF) * 100 : \
+            (time & 0xC000) == 0x0000 ? (time & 0x3FFF) * 1000 : \
+            (time & 0xC000) == 0x4000 ? (time & 0x3FFF) * 60000 : \
+            (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : \
+                                         (time & 0x3FFF) * 3600000 ) : 0 )
+                                             
 // Parameter with single occurrence
 
 
@@ -194,6 +200,8 @@
 #define ParamLOG_BuzzerInstalled           ((bool)(knx.paramByte(LOG_BuzzerInstalled) & LOG_BuzzerInstalledMask))
 // Optischer Signalgeber vorhanden (RGB-LED)?
 #define ParamLOG_LedInstalled              ((bool)(knx.paramByte(LOG_LedInstalled) & LOG_LedInstalledMask))
+// Uhrzeit und Datum empfangen über
+#define ParamLOG_CombinedTimeDate          ((bool)(knx.paramByte(LOG_CombinedTimeDate) & LOG_CombinedTimeDateMask))
 // Urlaubsbehandlung aktivieren?
 #define ParamLOG_VacationKo                ((bool)(knx.paramByte(LOG_VacationKo) & LOG_VacationKoMask))
 // Feiertage auf dem Bus verfügbar machen?
@@ -202,10 +210,14 @@
 #define ParamLOG_VacationRead              ((bool)(knx.paramByte(LOG_VacationRead) & LOG_VacationReadMask))
 // Nach Neuberechnung Feiertagsinfo senden?
 #define ParamLOG_HolidaySend               ((bool)(knx.paramByte(LOG_HolidaySend) & LOG_HolidaySendMask))
-// Zeitzone
-#define ParamLOG_Timezone                  ((knx.paramByte(LOG_Timezone) & LOG_TimezoneMask) >> LOG_TimezoneShift)
-// Sommerzeit berücksichtigen
-#define ParamLOG_UseSummertime             ((bool)(knx.paramByte(LOG_UseSummertime) & LOG_UseSummertimeMask))
+// Sommerzeit ermitteln durch
+#define ParamLOG_SummertimeAll             ((knx.paramByte(LOG_SummertimeAll) & LOG_SummertimeAllMask) >> LOG_SummertimeAllShift)
+// Sommerzeit ermitteln durch
+#define ParamLOG_SummertimeDE              ((knx.paramByte(LOG_SummertimeDE) & LOG_SummertimeDEMask) >> LOG_SummertimeDEShift)
+// Sommerzeit ermitteln durch
+#define ParamLOG_SummertimeWorld           ((knx.paramByte(LOG_SummertimeWorld) & LOG_SummertimeWorldMask) >> LOG_SummertimeWorldShift)
+// Sommerzeit ermitteln durch
+#define ParamLOG_SummertimeKO              ((knx.paramByte(LOG_SummertimeKO) & LOG_SummertimeKOMask) >> LOG_SummertimeKOShift)
 // Diagnoseobjekt anzeigen
 #define ParamLOG_Diagnose                  ((bool)(knx.paramByte(LOG_Diagnose) & LOG_DiagnoseMask))
 // Watchdog aktivieren
@@ -286,6 +298,12 @@
 #define ParamLOG_BuzzerLoud                (knx.paramWord(LOG_BuzzerLoud))
 // Lötpad A / B / C entspicht
 #define ParamLOG_LedMapping                ((knx.paramByte(LOG_LedMapping) & LOG_LedMappingMask) >> LOG_LedMappingShift)
+// Zeitzone
+#define ParamLOG_Timezone                  (knx.paramByte(LOG_Timezone) & LOG_TimezoneMask)
+// Zeitzone-Vorzeichen
+#define ParamLOG_TimezoneSign              ((bool)(knx.paramByte(LOG_TimezoneSign) & LOG_TimezoneSignMask))
+// Zeitzone-Wert
+#define ParamLOG_TimezoneValue             (knx.paramByte(LOG_TimezoneValue) & LOG_TimezoneValueMask)
 
 #define LOG_KoHeartbeat 1
 #define LOG_KoTime 2
@@ -300,7 +318,7 @@
 
 // In Betrieb
 #define KoLOG_Heartbeat                 (knx.getGroupObject(LOG_KoHeartbeat))
-// Uhrzeit
+// Uhrzeit/Datum
 #define KoLOG_Time                      (knx.getGroupObject(LOG_KoTime))
 // Datum
 #define KoLOG_Date                      (knx.getGroupObject(LOG_KoDate))
@@ -316,6 +334,8 @@
 #define KoLOG_LedLock                   (knx.getGroupObject(LOG_KoLedLock))
 // Buzzer sperren
 #define KoLOG_BuzzerLock                (knx.getGroupObject(LOG_KoBuzzerLock))
+// Sommerzeit aktiv
+#define KoLOG_IsSummertime              (knx.getGroupObject(LOG_KoIsSummertime))
 
 #define PM_PMChannels                26      // uint8_t
 #define PM_SendRAW                   27      // 1 Bit, Bit 7
@@ -396,6 +416,25 @@
 #define PM_KoScenario 26
 #define PM_KoSensitivity 27
 #define PM_KoHfReset 28
+
+// Ausgang Helligkeitssensor
+#define KoPM_LuxOut                    (knx.getGroupObject(PM_KoLuxOut))
+// Präsenz
+#define KoPM_PresenceOut               (knx.getGroupObject(PM_KoPresenceOut))
+// Bewegung (0=keine, 1=radial, 2=nähern, 3=entf.)
+#define KoPM_MoveOut                   (knx.getGroupObject(PM_KoMoveOut))
+// Bewegungsmoment
+#define KoPM_MoveSpeedOut              (knx.getGroupObject(PM_KoMoveSpeedOut))
+// Eingang LED Präsenz
+#define KoPM_LEDPresence               (knx.getGroupObject(PM_KoLEDPresence))
+// Eingang LED Bewegung
+#define KoPM_LEDMove                   (knx.getGroupObject(PM_KoLEDMove))
+// Eingang Szenario
+#define KoPM_Scenario                  (knx.getGroupObject(PM_KoScenario))
+// Eingang Empfindlichkeit
+#define KoPM_Sensitivity               (knx.getGroupObject(PM_KoSensitivity))
+// Reset HF-Sensor
+#define KoPM_HfReset                   (knx.getGroupObject(PM_KoHfReset))
 
 #define LOG_ChannelCount 99
 
@@ -1267,6 +1306,10 @@
 #define ParamLOG_fE1LowDeltaFloat          (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1LowDeltaFloat), Float_Enc_IEEE754Single))
 // Bis-Wert
 #define ParamLOG_fE1HighDeltaFloat         (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1HighDeltaFloat), Float_Enc_IEEE754Single))
+// Von-Wert
+#define ParamLOG_fE1LowDeltaDouble         (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1LowDeltaDouble), Float_Enc_IEEE754Single))
+// Bis-Wert
+#define ParamLOG_fE1HighDeltaDouble        (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1HighDeltaDouble), Float_Enc_IEEE754Single))
 // Nächste Zeile auswerten?
 #define ParamLOG_fE1Low0Valid              ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fE1Low0Valid)) & LOG_fE1Low0ValidMask))
 // Nächste Zeile auswerten?
@@ -1383,6 +1426,24 @@
 #define ParamLOG_fE1HighDpt9               (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1HighDpt9), Float_Enc_IEEE754Single))
 // Eingang 1 ist konstant
 #define ParamLOG_fE1LowDpt9Fix             (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1LowDpt9Fix), Float_Enc_IEEE754Single))
+// Von-Wert
+#define ParamLOG_fE1LowDpt12               (knx.paramLong(LOG_ParamCalcIndex(LOG_fE1LowDpt12)))
+// Bis-Wert
+#define ParamLOG_fE1HighDpt12              (knx.paramLong(LOG_ParamCalcIndex(LOG_fE1HighDpt12)))
+// Eingang 1 ist konstant
+#define ParamLOG_fE1LowDpt12Fix            (knx.paramLong(LOG_ParamCalcIndex(LOG_fE1LowDpt12Fix)))
+// Von-Wert
+#define ParamLOG_fE1LowDpt13               ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE1LowDpt13)))
+// Bis-Wert
+#define ParamLOG_fE1HighDpt13              ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE1HighDpt13)))
+// Eingang 1 ist konstant
+#define ParamLOG_fE1LowDpt13Fix            ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE1LowDpt13Fix)))
+// Von-Wert
+#define ParamLOG_fE1LowDpt14               (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1LowDpt14), Float_Enc_IEEE754Single))
+// Bis-Wert
+#define ParamLOG_fE1HighDpt14              (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1HighDpt14), Float_Enc_IEEE754Single))
+// Eingang 1 ist konstant
+#define ParamLOG_fE1LowDpt14Fix            (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE1LowDpt14Fix), Float_Enc_IEEE754Single))
 // Eingang 1 ist EIN bei Szene
 #define ParamLOG_fE1Low0Dpt17              (knx.paramByte(LOG_ParamCalcIndex(LOG_fE1Low0Dpt17)))
 // ... oder bei Szene
@@ -1415,6 +1476,10 @@
 #define ParamLOG_fE2LowDeltaFloat          (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2LowDeltaFloat), Float_Enc_IEEE754Single))
 // Bis-Wert
 #define ParamLOG_fE2HighDeltaFloat         (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2HighDeltaFloat), Float_Enc_IEEE754Single))
+// Von-Wert
+#define ParamLOG_fE2LowDeltaDouble         (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2LowDeltaDouble), Float_Enc_IEEE754Single))
+// Bis-Wert
+#define ParamLOG_fE2HighDeltaDouble        (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2HighDeltaDouble), Float_Enc_IEEE754Single))
 // Nächste Zeile auswerten?
 #define ParamLOG_fE2Low0Valid              ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fE2Low0Valid)) & LOG_fE2Low0ValidMask))
 // Nächste Zeile auswerten?
@@ -1531,6 +1596,24 @@
 #define ParamLOG_fE2HighDpt9               (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2HighDpt9), Float_Enc_IEEE754Single))
 // Eingang 2 ist konstant
 #define ParamLOG_fE2LowDpt9Fix             (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2LowDpt9Fix), Float_Enc_IEEE754Single))
+// Von-Wert
+#define ParamLOG_fE2LowDpt12               (knx.paramLong(LOG_ParamCalcIndex(LOG_fE2LowDpt12)))
+// Bis-Wert
+#define ParamLOG_fE2HighDpt12              (knx.paramLong(LOG_ParamCalcIndex(LOG_fE2HighDpt12)))
+// Eingang 2 ist konstant
+#define ParamLOG_fE2LowDpt12Fix            (knx.paramLong(LOG_ParamCalcIndex(LOG_fE2LowDpt12Fix)))
+// Von-Wert
+#define ParamLOG_fE2LowDpt13               ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE2LowDpt13)))
+// Bis-Wert
+#define ParamLOG_fE2HighDpt13              ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE2HighDpt13)))
+// Eingang 2 ist konstant
+#define ParamLOG_fE2LowDpt13Fix            ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE2LowDpt13Fix)))
+// Von-Wert
+#define ParamLOG_fE2LowDpt14               (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2LowDpt14), Float_Enc_IEEE754Single))
+// Bis-Wert
+#define ParamLOG_fE2HighDpt14              (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2HighDpt14), Float_Enc_IEEE754Single))
+// Eingang 2 ist konstant
+#define ParamLOG_fE2LowDpt14Fix            (knx.paramFloat(LOG_ParamCalcIndex(LOG_fE2LowDpt14Fix), Float_Enc_IEEE754Single))
 // Eingang 2 ist EIN bei Szene
 #define ParamLOG_fE2Low0Dpt17              (knx.paramByte(LOG_ParamCalcIndex(LOG_fE2Low0Dpt17)))
 // ... oder bei Szene
@@ -1557,6 +1640,8 @@
 #define ParamLOG_fE2LowDptRGBFix           ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fE2LowDptRGBFix)))
 // Schaltwert
 #define ParamLOG_fTd1Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd1Value)) & LOG_fTd1ValueMask))
+// Grad
+#define ParamLOG_fTd1Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd1Degree)) & LOG_fTd1DegreeMask) >> LOG_fTd1DegreeShift)
 // Stunde
 #define ParamLOG_fTd1HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd1HourAbs)) & LOG_fTd1HourAbsMask) >> LOG_fTd1HourAbsShift)
 // Sonnen auf-/untergang
@@ -1569,6 +1654,8 @@
 #define ParamLOG_fTd1Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd1Weekday)) & LOG_fTd1WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd2Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd2Value)) & LOG_fTd2ValueMask))
+// Grad
+#define ParamLOG_fTd2Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd2Degree)) & LOG_fTd2DegreeMask) >> LOG_fTd2DegreeShift)
 // Stunde
 #define ParamLOG_fTd2HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd2HourAbs)) & LOG_fTd2HourAbsMask) >> LOG_fTd2HourAbsShift)
 // Sonnen auf-/untergang
@@ -1581,6 +1668,8 @@
 #define ParamLOG_fTd2Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd2Weekday)) & LOG_fTd2WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd3Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd3Value)) & LOG_fTd3ValueMask))
+// Grad
+#define ParamLOG_fTd3Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd3Degree)) & LOG_fTd3DegreeMask) >> LOG_fTd3DegreeShift)
 // Stunde
 #define ParamLOG_fTd3HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd3HourAbs)) & LOG_fTd3HourAbsMask) >> LOG_fTd3HourAbsShift)
 // Sonnen auf-/untergang
@@ -1593,6 +1682,8 @@
 #define ParamLOG_fTd3Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd3Weekday)) & LOG_fTd3WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd4Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd4Value)) & LOG_fTd4ValueMask))
+// Grad
+#define ParamLOG_fTd4Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd4Degree)) & LOG_fTd4DegreeMask) >> LOG_fTd4DegreeShift)
 // Stunde
 #define ParamLOG_fTd4HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd4HourAbs)) & LOG_fTd4HourAbsMask) >> LOG_fTd4HourAbsShift)
 // Sonnen auf-/untergang
@@ -1605,6 +1696,8 @@
 #define ParamLOG_fTd4Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd4Weekday)) & LOG_fTd4WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd5Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd5Value)) & LOG_fTd5ValueMask))
+// Grad
+#define ParamLOG_fTd5Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd5Degree)) & LOG_fTd5DegreeMask) >> LOG_fTd5DegreeShift)
 // Stunde
 #define ParamLOG_fTd5HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd5HourAbs)) & LOG_fTd5HourAbsMask) >> LOG_fTd5HourAbsShift)
 // Sonnen auf-/untergang
@@ -1617,6 +1710,8 @@
 #define ParamLOG_fTd5Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd5Weekday)) & LOG_fTd5WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd6Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd6Value)) & LOG_fTd6ValueMask))
+// Grad
+#define ParamLOG_fTd6Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd6Degree)) & LOG_fTd6DegreeMask) >> LOG_fTd6DegreeShift)
 // Stunde
 #define ParamLOG_fTd6HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd6HourAbs)) & LOG_fTd6HourAbsMask) >> LOG_fTd6HourAbsShift)
 // Sonnen auf-/untergang
@@ -1629,6 +1724,8 @@
 #define ParamLOG_fTd6Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd6Weekday)) & LOG_fTd6WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd7Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd7Value)) & LOG_fTd7ValueMask))
+// Grad
+#define ParamLOG_fTd7Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd7Degree)) & LOG_fTd7DegreeMask) >> LOG_fTd7DegreeShift)
 // Stunde
 #define ParamLOG_fTd7HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd7HourAbs)) & LOG_fTd7HourAbsMask) >> LOG_fTd7HourAbsShift)
 // Sonnen auf-/untergang
@@ -1641,6 +1738,8 @@
 #define ParamLOG_fTd7Weekday               (knx.paramByte(LOG_ParamCalcIndex(LOG_fTd7Weekday)) & LOG_fTd7WeekdayMask)
 // Schaltwert
 #define ParamLOG_fTd8Value                 ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTd8Value)) & LOG_fTd8ValueMask))
+// Grad
+#define ParamLOG_fTd8Degree                ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd8Degree)) & LOG_fTd8DegreeMask) >> LOG_fTd8DegreeShift)
 // Stunde
 #define ParamLOG_fTd8HourAbs               ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTd8HourAbs)) & LOG_fTd8HourAbsMask) >> LOG_fTd8HourAbsShift)
 // Sonnen auf-/untergang
@@ -1823,6 +1922,12 @@
 #define ParamLOG_fOOnDpt8                  ((int16_t)knx.paramWord(LOG_ParamCalcIndex(LOG_fOOnDpt8)))
 //     Wert für EIN senden als
 #define ParamLOG_fOOnDpt9                  (knx.paramFloat(LOG_ParamCalcIndex(LOG_fOOnDpt9), Float_Enc_IEEE754Single))
+//     Wert für EIN senden als
+#define ParamLOG_fOOnDpt12                 (knx.paramLong(LOG_ParamCalcIndex(LOG_fOOnDpt12)))
+//     Wert für EIN senden als
+#define ParamLOG_fOOnDpt13                 ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fOOnDpt13)))
+//     Wert für EIN senden als
+#define ParamLOG_fOOnDpt14                 (knx.paramFloat(LOG_ParamCalcIndex(LOG_fOOnDpt14), Float_Enc_IEEE754Single))
 //     Wert für EIN senden als 
 #define ParamLOG_fOOnDpt16                 (knx.paramData(LOG_ParamCalcIndex(LOG_fOOnDpt16)))
 //     Wert für EIN senden als 
@@ -1864,6 +1969,12 @@
 //     Wert für AUS senden als
 #define ParamLOG_fOOffDpt9                 (knx.paramFloat(LOG_ParamCalcIndex(LOG_fOOffDpt9), Float_Enc_IEEE754Single))
 //     Wert für AUS senden als
+#define ParamLOG_fOOffDpt12                (knx.paramLong(LOG_ParamCalcIndex(LOG_fOOffDpt12)))
+//     Wert für AUS senden als
+#define ParamLOG_fOOffDpt13                ((int32_t)knx.paramLong(LOG_ParamCalcIndex(LOG_fOOffDpt13)))
+//     Wert für AUS senden als
+#define ParamLOG_fOOffDpt14                (knx.paramFloat(LOG_ParamCalcIndex(LOG_fOOffDpt14), Float_Enc_IEEE754Single))
+//     Wert für AUS senden als
 #define ParamLOG_fOOffDpt16                (knx.paramData(LOG_ParamCalcIndex(LOG_fOOffDpt16)))
 //     Wert für AUS senden als 
 #define ParamLOG_fOOffDpt17                (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffDpt17)))
@@ -1887,18 +1998,25 @@
 #define ParamLOG_fE2OtherKO                (knx.paramWord(LOG_ParamCalcIndex(LOG_fE2OtherKO)) & LOG_fE2OtherKOMask)
 
 // deprecated
-#define LOG_KoOffset 450
+#define LOG_KoOffset 850
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoOffset 850
+#define LOG_KoBlockOffset 850
 #define LOG_KoBlockSize 3
 
 #define LOG_KoCalcNumber(index) (index + LOG_KoBlockOffset + _channelIndex * LOG_KoBlockSize)
-#define LOG_KoCalcIndex(number) (((number - LOG_KoBlockOffset) >= 0) ? (number - LOG_KoOffset) % LOG_KoBlockSize : -1)
+#define LOG_KoCalcIndex(number) ((number >= LOG_KoCalcNumber(0) && number < LOG_KoCalcNumber(LOG_KoBlockSize)) ? (number - LOG_KoOffset) % LOG_KoBlockSize : -1)
 
 #define LOG_KoKOfE1 0
 #define LOG_KoKOfE2 1
 #define LOG_KoKOfO 2
+
+// Eingang 1
+#define KoLOG_KOfE1                     (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfE1)))
+// Eingang 2
+#define KoLOG_KOfE2                     (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfE2)))
+// Ausgang
+#define KoLOG_KOfO                      (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfO)))
 
 #define PM_ChannelCount 40
 
@@ -2943,7 +3061,7 @@
 #define PM_KoBlockSize 20
 
 #define PM_KoCalcNumber(index) (index + PM_KoBlockOffset + _channelIndex * PM_KoBlockSize)
-#define PM_KoCalcIndex(number) (((number - PM_KoBlockOffset) >= 0) ? (number - PM_KoOffset) % PM_KoBlockSize : -1)
+#define PM_KoCalcIndex(number) ((number >= PM_KoCalcNumber(0) && number < PM_KoCalcNumber(PM_KoBlockSize)) ? (number - PM_KoOffset) % PM_KoBlockSize : -1)
 
 #define PM_KoKOpLux 0
 #define PM_KoKOpPresence1 1
