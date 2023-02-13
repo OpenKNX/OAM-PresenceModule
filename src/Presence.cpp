@@ -207,7 +207,7 @@ void Presence::switchHfSensor(bool iOn)
     // we check für specific serial numbers, which have an inverted HF_POWER_PIN (hardware bug)
     const uint8_t specialCount = 11;
     const uint64_t special[specialCount] = {
-        0x1334842F,  // test - Devel Board Waldemar, where power pin has no function
+        // 0x1334842F,  // test - Devel Board Waldemar, where power pin has no function
         // 0x47591F2E,  // Waldemar Wohnzimmer
         0x23534121,
         0x23364521,

@@ -4,6 +4,15 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Pre-Build-Step",
+            "type": "shell",
+            "command": "lib/OGM-Common/scripts/Build/OpenKNX-Pre-Build.ps1",
+            "args": [
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Build SAMD",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",

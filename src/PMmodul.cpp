@@ -126,7 +126,7 @@ void appSetup(bool iSaveSupported)
     savePower();
     ledProg(true);
     ledInfo(true);
-    delay(500);
+    // delay(500);
     restorePower();
     // check hardware availability
     boardCheck();
