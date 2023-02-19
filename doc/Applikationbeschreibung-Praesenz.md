@@ -21,6 +21,64 @@ gegliedert, wobei die Präsenzkanäle wiederum in bis zu 40 Kanäle unterglieder
 
 Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM-LogicModule/blob/main/doc/Applikationsbeschreibung-Logik.md) beschrieben.
 
+
+## Inhalte
+> Achtung: Nachfolgende Auflistung teilweise abweichend von Reihenfolge im Dokument
+* [Änderungshistorie](#änderungshistorie)
+* [Einleitung](#einleitung)
+  * [Tagesphasen](#tagesphasen)
+  * [Adaptive Ausschaltschwelle über Helligkeit](#adaptive-ausschaltschwelle-%C3%BCber-helligkeit)
+  * [Automatik-, Manuell- und Sperrmodus](#automatik--manuell--und-sperrmodus)
+* [Grundsätzliche Funktion eines Präsenzkanals](#grundsätzliche-funktion-eines-präsenzkanals)
+  * [Interne Modi](#interne-modi)
+    <!-- * [Normalmodus](#normalmodus)
+    * [Automodus](#automodus)
+    * [Manuellmodus](#manuellmodus-1) -->
+* [ETS Konfiguration](#ets-konfiguration) (Übersicht aller Konfigurationsseiten und Links zu Detailbeschreibung)
+  * [Kommunikationsobjekte](#kommunikationsobjekte)
+* [Wichtige Anmerkungen](#wichtige-anmerkungen)
+  * [externer Präsenz- und Bewegungseingang, kein Bewegungssignal und Kurzzeitpräsenz](#externer-pr%C3%A4senz--und-bewegungseingang-kein-bewegungssignal-und-kurzzeitpr%C3%A4senz)
+* [Beispiele](#beispiele) (noch leer)
+  <!-- * [Update der Applikation](#update-der-applikation) -->
+* [Unterstützte Hardware](#unterstützte-hardware)
+<!-- * Fortgeschrittene Funktionen
+  * [Diagnoseobjekt](#diagnoseobjekt)
+-->
+
+### ETS Konfiguration
+
+* **+ [ Allgemeine Parameter](#allgemeine-parameter)**
+  * [Gerätestart](#gerätestart)
+  <!-- * [Installierte Hardware](#installierte-hardware) -->
+  * [**Experteneinstellungen**](#experteneinstellungen)
+* [**+ PM-Kanäle**](#pm-kan%C3%A4le)
+  * [**PM-Hardware**](#pm-hardware)
+    * [Einstellungen Präsenz-Hardware](#einstellungen-pr%C3%A4senz-hardware)
+    * [Helligkeit](#helligkeit)
+    * [LED](#led)
+  * [**+ PM n: unbekannt**](#pmx-unbekannt)
+    * [Kanaldefinitionen](#kanaldefinition)
+    * [Helligkeit](#helligkeit-1)
+    * [Präsenzeingänge](#präsenz--und-bewegungseingänge)
+    * [Ausgänge](#ausgänge)
+    * [Sperre](#sperre)
+    * [Tagesphasen](#tagesphasen-1)
+      * [Spezialfall Tag-/Nacht-Objekt](#spezialfall-tag-nacht-objekt)
+    * [Raum verlassen](#raum-verlassen) (Experimentelle Sonderfunktion!)
+    * [Manuell übersteuern](#manuell-übersteuern)
+    * [**Eingänge**](#eingänge) <!-- TODO Reihenfolge in App und Dokument -->
+    * [**Szenensteuerung**](#szenensteuerung) <!-- TODO Reihenfolge in App und Dokument -->
+    * [**Phase 1-4: Tag/Nacht/Morgen/Abend/...**](#phase-n-phasenname)
+      * [Funktion](#funktion)
+      * [Helligkeit](#helligkeit-2)
+        * [adaptive Schwelle](#adaptive-schwelle)
+      * [Präsenzeinstellungen](#präsenzeinstellungen)
+      * [Ausgang 1/2](#ausgang-12)
+      * [Manuelle Bedienung](#manuelle-bedienung)
+* **+ Logikkanäle** (siehe [Dokumentation zum Logikmodul](https://github.com/OpenKNX/OAM-LogicModule/blob/main/doc/Applikationsbeschreibung-Logik.md); Achtung: Version beachten!)
+
+
+
 ## Änderungshistorie
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
