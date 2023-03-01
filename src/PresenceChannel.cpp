@@ -577,6 +577,9 @@ void PresenceChannel::onDayPhase(uint8_t iPhase, bool iIsStartup /* = false */)
     // day phase change should resend except on startup
     if (!iIsStartup)
         forceOutput(true);
+
+    // day phase change should also trigger presence processing
+    startPresence(false, false);
 }
 
 bool PresenceChannel::getRawPresence(bool iJustMove /* false */)
@@ -812,7 +815,7 @@ void PresenceChannel::onPresenceBrightnessChange(bool iOn)
     if (iOn && !paramBit(PM_pBrightnessIndependent, PM_pBrightnessIndependentMask)) 
     {
         // check brightness in case of turning on
-        if ((uint32_t)getRawBrightness() <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        if ((uint32_t)getRawBrightness() < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
             onPresenceChange(iOn);
     }
     else // turn off if brightness independent
@@ -1265,7 +1268,7 @@ void PresenceChannel::startBrightness()
             pBrightnessOffDelayTime = 0;
         }
         // now check lower value, if below, turn light on
-        if (lBrightness <= (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
+        if (lBrightness < (uint32_t)getKo(PM_KoKOpLuxOn)->value(getDPT(VAL_DPT_9)))
         {
             // its getting dark, if we are in presence state, we turn light on
             // except we are in auto state (technically here it is Auto-Off), we should not turn on
