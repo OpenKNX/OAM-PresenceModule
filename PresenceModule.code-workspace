@@ -4,7 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../OAM-LogicModule"
+			"path": "../OFM-PresenceModule"
+		},
+		{
+			"path": "../OFM-LogicModule"
 		},
 		{
 			"path": "../OGM-SensorDevices"

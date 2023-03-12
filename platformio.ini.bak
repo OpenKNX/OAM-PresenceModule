@@ -1,0 +1,249 @@
+;PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; https://docs.platformio.org/page/projectconf.html
+
+[platformio]
+; default_envs = build
+libdeps_dir = /tmp/libdeps
+
+[env]
+framework = arduino
+build_flags = 
+  ; -include "src/PMmodulHardware.h"
+  # put preprocessor output into object file directory
+  ; -save-temps=obj
+  ; -fverbose-asm
+  -D PMMODULE
+  ; optimize knx stack
+  -D SMALL_GROUPOBJECT
+  -D USE_BINSEARCH
+  ; -D KNX_AUTO_ADAPT
+  ; -D KNX_WAIT_FOR_ADDR
+  -D MASK_VERSION=0x07B0
+  ; use flash directly
+  -D KNX_FLASH_SIZE=0x8000 ; be careful, has to be large enough for ETS data and data stored by IFlashUserData
+  ;-D DEBUG_TIMING
+  ;-D LOGIC_TRACE
+  -Wno-unknown-pragmas 
+  -Wno-switch
+  ; debug timing in knx stack
+monitor_speed = 115200
+lib_ldf_mode = deep+
+; lib_extra_dirs = 
+;   ${PROJECT_DIR}\..
+debug_tool = jlink
+debug_extra_cmds = 
+  set output-radix 16
+upload_protocol = jlink
+
+[RP2040]
+platform = https://github.com/maxgerhardt/platform-raspberrypi.git
+board = pico
+board_build.core = earlephilhower
+platform_packages = framework-arduinopico @ https://github.com/earlephilhower/arduino-pico/releases/download/2.7.3/rp2040-2.7.3.zip
+; board_build.filesystem_size = 0.1m
+; platform_packages = 
+;   ; framework-arduinopico@https://github.com/earlephilhower/arduino-pico.git#2.3.2
+;   framework-arduinopico@https://github.com/earlephilhower/arduino-pico.git
+
+build_flags =
+  ${env.build_flags}
+  -D SERIAL_DEBUG=Serial
+  ;flash start at 1.5MiB
+  -D KNX_FLASH_OFFSET=0x180000 
+  ; -D USE_RP2040_EEPROM_EMULATION
+  ; -D USE_RP2040_LARGE_EEPROM_EMULATION
+  -D PIO_FRAMEWORK_ARDUINO_ENABLE_RTTI
+  -D LWIP_DONT_PROVIDE_BYTEORDER_FUNCTIONS
+  -O0
+
+build_unflags = -Os
+
+lib_deps = 
+  adafruit/Adafruit VEML7700 Library @ 2.1.0
+;   adafruit/Adafruit SleepyDog Library @ ^1.4.0
+; ;   Wire
+; ;   SPI
+; build_type = debug
+debug_build_flags = -O0 -ggdb3
+; debug_build_flags = -ggdb3
+
+[SAMD]
+platform = atmelsam
+board = zeroUSB
+build_flags = 
+  ${env.build_flags}
+  -D SERIAL_DEBUG=SerialUSB
+  ; -D KNX_FLASH_SIZE=0x8000
+  ; use EEPROM emulation
+  ; -D USE_SAMD_EEPROM_EMULATION
+  ; -D CRYSTALLESS
+  ; -D WATCHDOG
+lib_deps = 
+  adafruit/Adafruit SleepyDog Library @ 1.4.0
+  adafruit/Adafruit VEML7700 Library @ 2.1.0
+;   Wire
+;   SPI
+
+[RP2040_develop]
+build_flags =
+  -D DEBUG_DELAY=10000
+  ; -D BOARD_MASIFI_PICO
+  ; -D BOARD_MASIFI_V40
+  ;-D BOARD_MASIFI_HFPM_DEVEL
+  ; -D BOARD_SMARTMF_1TE_RP2040
+  ; -D BOARD_SIRSYDOM_PIPICO_BCU_CONNECTOR
+  -D BOARD_MASIFI_SENSOR_BREAKOUT
+  -D SERIAL_HF=Serial2
+
+[SAMD_develop]
+build_flags =
+  -D DEBUG_DELAY=10000
+  -D BOARD_MASIFI_V2
+
+
+
+[env:build_RP2040]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  ${RP2040_develop.build_flags}
+
+[env:build_SAMD]
+extends = SAMD
+build_flags =
+  ${SAMD.build_flags}
+  ${SAMD_develop.build_flags}
+
+
+
+[env:upload_USB_RP2040]
+extends = RP2040
+build_flags = 
+  ${RP2040.build_flags} 
+  ${RP2040_develop.build_flags}
+upload_protocol = picotool
+
+[env:upload_USB_SAMD]
+extends = SAMD
+build_flags = 
+  ${SAMD.build_flags} 
+  ${SAMD_develop.build_flags}
+upload_protocol = sam-ba
+
+[env:upload_JLINK_RP2040]
+extends = RP2040
+build_flags = 
+  ${RP2040.build_flags} 
+  ${RP2040_develop.build_flags}
+upload_protocol = jlink
+
+[env:upload_Release_JLINK_RP2040]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_HFPM_DEVEL2
+  -D SERIAL_HF=Serial2
+upload_protocol = jlink
+
+[env:upload_JLINK_SAMD]
+extends = SAMD
+build_flags = 
+  ${SAMD.build_flags} 
+  ${SAMD_develop.build_flags}
+upload_protocol = jlink
+
+[env:upload_Release_JLINK_SAMD]
+extends = SAMD
+build_flags =
+  ${SAMD.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_V3
+upload_protocol = jlink
+
+
+#### Release Environments
+[env:release_Sensormodul_v31_SAMD]
+extends = SAMD
+build_flags =
+  ${SAMD.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_V31
+
+[env:release_Sensormodul_v30_SAMD]
+extends = SAMD
+build_flags =
+  ${SAMD.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_V3
+
+[env:release_Sensormodul_v40_RP2040]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_V40
+
+[env:release_PiPico_BCU_Connector]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_SIRSYDOM_PIPICO_BCU_CONNECTOR
+
+[env:release_1TE_RP2040_SmartMF]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_SMARTMF_1TE_RP2040
+
+[env:release_OpenKNX_REG1_Base]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_OPENKNX_REG1_BASE
+
+[env:release_RP2040_devel]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_HFPM_DEVEL
+  -D SERIAL_HF=Serial2
+
+[env:release_RealPresence]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_HFPM_DEVEL2
+  -D SERIAL_HF=Serial2
+
+[env:release_RealPresence_v20]
+extends = RP2040
+build_flags =
+  ${RP2040.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_MASIFI_HFPM_V20
+  -D SERIAL_HF=Serial2
+
+### This is an example for enduser compiled environment
+[env:enduser]
+extends = SAMD
+;extends = RP2040
+upload_protocol = sam-ba
+;upload_protocol = picotool
+build_flags =
+  ${SAMD.build_flags}
+  -D DEBUG_DELAY=100
+  -D BOARD_ENDUSER
+;  -D BOARD_MASIFI_HFPM_DEVEL
