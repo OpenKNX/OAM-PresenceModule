@@ -14,6 +14,8 @@ uint8_t mSerial2Active = false;
 
 void setup()
 {
+    const uint8_t firmwareRevision = 8;
+
 #ifdef HF_POWER_PIN
     pinMode(HF_POWER_PIN, OUTPUT);
     // at startup, we turn HF-Sensor off
@@ -29,7 +31,6 @@ void setup()
     pinMode(HF_S2_PIN, INPUT);    
 #endif
 
-    const uint8_t firmwareRevision = 0;
     openknx.init(firmwareRevision);
     openknx.addModule(1, new Logic());
     openknx.addModule(2, new Presence());
