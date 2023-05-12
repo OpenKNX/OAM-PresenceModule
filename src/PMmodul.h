@@ -8,6 +8,12 @@
             (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : \
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
+#define MAIN_OpenKnxId 0xA0
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 23
+#define MAIN_ParameterSize 5375
+#define MAIN_MaxKoNumber 539
+#define MAIN_OrderNumber "OpenKnxPresence"
 // Parameter with single occurrence
 
 
@@ -3125,7 +3131,3 @@
 // Externen PM zurücksetzen
 #define KoPM_KOpResetExternalPM        (knx.getGroupObject(PM_KoCalcNumber(PM_KoKOpResetExternalPM)))
 
-#define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 23
-#define MAIN_OrderNumber "OpenKnxPresence"
