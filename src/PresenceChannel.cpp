@@ -1055,7 +1055,7 @@ void PresenceChannel::startManualPrepare()
 void PresenceChannel::processManualPrepare()
 {
     // Manual mode
-    bool lValue = getKo(PM_KoKOpSetAuto)->value(getDPT(VAL_DPT_1));
+    bool lValue = getKo(PM_KoKOpSetManual)->value(getDPT(VAL_DPT_1));
     pCurrentState &= ~STATE_KO_SET_MANUAL;
     // check for two button mode
     if (paramBit(PM_pManualModeKeyCount, PM_pManualModeKeyCountMask))
