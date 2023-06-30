@@ -315,6 +315,11 @@ void PresenceChannel::processInputKo(GroupObject &iKo, int8_t iKoIndex)
 
 void PresenceChannel::startSceneCommand() 
 {
+    if (pCurrentState & STATE_KO_SCENE) {
+        uint8_t lValue = getKo(PM_KoKOpScene)->value(getDPT(VAL_DPT_1));
+        printDebug("CH %i: Zu viele Szenen direkt aufeinanderfolgend!\n", mChannelId + 1);
+        printDebug("   Die Szene %i wurde per KO gesetzt, ohne dass die vorhergehende Szene ausgeführt werden konnte!\n", lValue + 1);
+    }
     pCurrentState |= STATE_KO_SCENE;
 }
 
@@ -493,11 +498,11 @@ int8_t PresenceChannel::getDayPhaseFromKO()
 
 void PresenceChannel::startDayPhasePrepare()
 {
-    if (pCurrentState & STATE_KO_DAY_PHASE) {
-        uint8_t lValue = getKo(PM_KoKOpScene)->value(getDPT(VAL_DPT_1));
-        printDebug("Zu viele Szenen direkt aufeinanderfolgend!\n");
-        printDebug("Die Szene %i wurde per KO gesetzt, ohne dass die vorhergehende Szene ausgeführt werden konnte!\n", lValue);
-    }
+    // if (pCurrentState & STATE_KO_DAY_PHASE) {
+    //     uint8_t lValue = getKo(PM_KoKOpDayPhase)->value(getDPT(VAL_DPT_1));
+    //     printDebug("CH %i: Zu viele Tagesphasen direkt aufeinanderfolgend!\n", mChannelId + 1);
+    //     printDebug("   Die Tagesphase %i wurde per KO gesetzt, ohne dass die vorhergehende Tagesphase ausgeführt werden konnte!\n", lValue + 1);
+    // }
     pCurrentState |= STATE_KO_DAY_PHASE;
 }
 
@@ -1605,26 +1610,26 @@ void PresenceChannel::loop()
         // we process now ko states to decouple processing from KO callbacks
         if (pCurrentState & (STATE_KO_LUX_ON))
             processBrightnessOff();
-        else if (pCurrentState & (STATE_KO_LUX))
+        if (pCurrentState & (STATE_KO_LUX))
             processBrightnessPrepare();
-        else if (pCurrentState & (STATE_KO_PRESENCE1))
+        if (pCurrentState & (STATE_KO_PRESENCE1))
             processPresencePrepare(STATE_KO_PRESENCE1);
-        else if (pCurrentState & (STATE_KO_PRESENCE2))
+        if (pCurrentState & (STATE_KO_PRESENCE2))
             processPresencePrepare(STATE_KO_PRESENCE2);
-        else if (pCurrentState & (STATE_KO_SET_AUTO))
+        if (pCurrentState & (STATE_KO_SET_AUTO))
             processAutoPrepare();
-        else if (pCurrentState & (STATE_KO_SET_MANUAL))
+        if (pCurrentState & (STATE_KO_SET_MANUAL))
             processManualPrepare();
-        else if (pCurrentState & (STATE_KO_SET_ACTOR_STATE))
+        if (pCurrentState & (STATE_KO_SET_ACTOR_STATE))
             processActorState();
-        else if (pCurrentState & (STATE_KO_LOCK))
+        if (pCurrentState & (STATE_KO_LOCK))
             processLockPrepare();
-        else if (pCurrentState & (STATE_KO_RESET))
+        if (pCurrentState & (STATE_KO_RESET))
             processReset();
 
-        else if (pCurrentState & (STATE_KO_DAY_PHASE))
+        if (pCurrentState & (STATE_KO_DAY_PHASE))
             processDayPhasePrepare();
-        else if (pCurrentState & (STATE_KO_SCENE))
+        if (pCurrentState & (STATE_KO_SCENE))
             processSceneCommand();
 
         // brightness is always evaluated
