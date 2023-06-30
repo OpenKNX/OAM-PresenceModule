@@ -456,6 +456,9 @@ void Presence::loop()
 {
     if (!knx.configured())
         return;
+    // if(!openknx.afterStartupDelay())
+    //     return;
+    uint32_t lLoopTime = millis();
 
     if (mDoPresenceHardwareCycle)
     {
@@ -464,16 +467,28 @@ void Presence::loop()
         processPowercycleHfSensor();
         Sensor::sensorLoop();
     }
-
-    // we loop on all channels and execute state logic
-    for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
+    knx.loop();
+    uint8_t lChannelsProcessed = 0;
+    // for (uint8_t lIndex = 0; lIndex < mNumChannels; lIndex++)
+    while (lChannelsProcessed < mNumChannels) // && openknx.freeLoopTime())
     {
-        PresenceChannel *lChannel = mChannel[lIndex];
+        PresenceChannel *lChannel = mChannel[mChannelIterator++];
         lChannel->loop();
-        // loopSubmodules();
+        lChannelsProcessed++;
+        knx.loop();
+        // the following operations are done only once after iteration of all channels
+        if (mChannelIterator >= mNumChannels)
+        {
+            mChannelIterator = 0;
+            // here we do actions which happen after all channels are iterated
+            PresenceTrigger = false;
+            MoveTrigger = false;
+        }
     }
-    PresenceTrigger = false;
-    MoveTrigger = false;
+    if (lChannelsProcessed < mNumChannels)
+        printDebug("PM did not process all channels during loop, just %i channels", lChannelsProcessed);
+    if (millis()-lLoopTime > 1)
+        printDebug("PM LoopTime: %i", millis()-lLoopTime);
 }
 
 void Presence::setup()

@@ -3,18 +3,31 @@
 #include "HardwareDevices.h"
 
 // State marker (BITFIELD !!!)
-#define STATE_STARTUP 1            // startup delay for each channel
-#define STATE_RUNNING 2            // this channel is running
-#define STATE_MANUAL 4             // manual mode on
-#define STATE_AUTO 8               // manual mode on
-#define STATE_PRESENCE 16          // there is presence
-#define STATE_PRESENCE_SHORT 32    // short presence evaluation
-#define STATE_LOCK 64              // lock state
-#define STATE_DAY_PHASE_CHANGE 128 // change day phase at desired point of time
-#define STATE_DOWNTIME 256         // Downtime after leave room
-#define STATE_ADAPTIVE 512         // adaptive brightness calculation
-#define STATE_ADAPTIVE_READ 1024   // adaptive brightness calculation
-#define STATE_LEAVE_ROOM 2048      // During leave room we ignore any presence signal
+#define STATE_STARTUP 0x00000001            // startup delay for each channel
+#define STATE_RUNNING 0x00000002            // this channel is running
+#define STATE_MANUAL 0x00000004             // manual mode on
+#define STATE_AUTO 0x00000008               // manual mode on
+#define STATE_PRESENCE 0x00000010          // there is presence
+#define STATE_PRESENCE_SHORT 0x00000020    // short presence evaluation
+#define STATE_LOCK 0x00000040              // lock state
+#define STATE_DAY_PHASE_CHANGE 0x00000080 // change day phase at desired point of time
+#define STATE_DOWNTIME 0x00000100         // Downtime after leave room
+#define STATE_ADAPTIVE 0x00000200         // adaptive brightness calculation
+#define STATE_ADAPTIVE_READ 0x00000400   // adaptive brightness calculation
+#define STATE_LEAVE_ROOM 0x00000800      // During leave room we ignore any presence signal
+#define STATE_KO_LUX_ON 0x00001000
+#define STATE_KO_LUX 0x00002000
+#define STATE_KO_PRESENCE1 0x00004000
+#define STATE_KO_PRESENCE2 0x00008000
+#define STATE_KO_SET_AUTO 0x00010000
+#define STATE_KO_SET_MANUAL 0x00020000
+#define STATE_KO_SET_ACTOR_STATE 0x00040000
+#define STATE_KO_LOCK 0x00080000
+#define STATE_KO_RESET 0x00100000
+#define STATE_KO_DAY_PHASE 0x00200000
+#define STATE_KO_SCENE 0x00400000
+#define STATE_KO_CHANGE_STATE 0x00800000
+
 
 // Value marker (BITFIELD)
 #define PM_BIT_OUTPUT_SET 1             // output value to send
@@ -162,8 +175,10 @@ class PresenceChannel
     bool getRawPresence(bool iJustMove = false);
     bool getHardwarePresence(bool iJustMove = false);
     void startHardwarePresence();
+    void startPresencePrepare(uint32_t iState);
+    void processPresencePrepare(uint32_t iState);
     void startPresenceTrigger(bool iManual);
-    void startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObject &iKo);
+    void startPresence(bool iIsTrigger, bool iIsKeepAlive, GroupObject *iKo);
     void startPresence(bool iForce, bool iManual);
     void processPresence();
     void endPresence(bool iSend = true);
@@ -173,37 +188,50 @@ class PresenceChannel
     void onPresenceBrightnessChange(bool iOn);
     void onPresenceChange(bool iOn);
 
-    void startSceneCommand(GroupObject &iKo);
+    void startSceneCommand();
+    void processSceneCommand();
     void startLeaveRoom(bool iSuppressOutput);
     void processLeaveRoom();
     void endLeaveRoom();
     bool isLeaveRoom();
     void startDowntime();
     void processDowntime();
+    void startAutoPrepare();
+    void processAutoPrepare();
     void startAuto(bool iOn, bool iSuppressOutput);
     void processAuto();
+    void startManualPrepare();
+    void processManualPrepare();
     void startManual(bool iOn, bool iSuppressOutput);
     void processManual();
     void onManualChange(bool iOn);
     void startLock();
+    void processLockPrepare();
     void processLock();
     void onLock(bool iLockOn, uint8_t iLockOnSend, uint8_t iLockOffSend);
     void startReset();
+    void processReset();
+    void onReset();
     
-    void startActorState(GroupObject &iKo);
+    void startActorState();
     void processActorState();
 
     float getRawBrightness();
     void startHardwareBrightness();
+    void startBrightnessPrepare();
+    void processBrightnessPrepare();
     void startBrightness();
     void processBrightness();
     void disableBrightness(bool iOn);
     void startAdaptiveBrightness();
     void processAdaptiveBrightness();
-    void calculateBrightnessOff();
+    void startBrightnessOff();
+    void processBrightnessOff();
 
     int8_t getDayPhaseFromKO();
-    void startDayPhase(uint8_t iPhase = 255, bool iForce = false);
+    void startDayPhasePrepare();
+    void processDayPhasePrepare();
+    void startDayPhase(uint8_t iPhase, bool iForce = false);
     void processDayPhase();
     void onDayPhase(uint8_t iPhase, bool iIsStartup = false);
 
