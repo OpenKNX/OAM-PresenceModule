@@ -1,5 +1,6 @@
 #include "Presence.h"
 #include "Logic.h"
+#include "UpdaterModule.h"
 #include "OpenKNX.h"
 
 #ifdef ARDUINO_ARCH_RP2040
@@ -34,6 +35,9 @@ void setup()
     openknx.init(firmwareRevision);
     openknx.addModule(1, new Logic());
     openknx.addModule(2, new Presence());
+#ifdef ARDUINO_ARCH_RP2040
+    openknx.addModule(3, new UpdaterModule());
+#endif
     openknx.setup();
 }
 
