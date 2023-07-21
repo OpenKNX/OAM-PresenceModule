@@ -1,23 +1,22 @@
-#include "Presence.h"
 #include "Logic.h"
+#include "Presence.h"
 #ifdef ARDUINO_ARCH_RP2040
-#include "UpdaterModule.h"
+    #include "UpdaterModule.h"
 #endif
 #include "OpenKNX.h"
 
 #ifdef ARDUINO_ARCH_RP2040
-#pragma message "Pico Core Version: " ARDUINO_PICO_VERSION_STR 
+    #pragma message "Pico Core Version: " ARDUINO_PICO_VERSION_STR
 #endif
-
 #include "hardware.h"
+
 #include "Sensor.h"
 
 uint8_t mSerial2Active = false;
 
-
 void setup()
 {
-    const uint8_t firmwareRevision = 0;
+    const uint8_t firmwareRevision = 1;
 
 #ifdef HF_POWER_PIN
     pinMode(HF_POWER_PIN, OUTPUT);
@@ -31,7 +30,7 @@ void setup()
     pinMode(PRESENCE_LED_PIN, OUTPUT);
     pinMode(MOVE_LED_PIN, OUTPUT);
     pinMode(HF_S1_PIN, INPUT);
-    pinMode(HF_S2_PIN, INPUT);    
+    pinMode(HF_S2_PIN, INPUT);
 #endif
 
     openknx.init(firmwareRevision);
@@ -47,25 +46,25 @@ void loop()
 {
 
 #ifdef HF_POWER_PIN
-  // only run the application code if the device was configured with ETS
-  if (knx.configured()) 
-  {
-    if (!mSerial2Active)
+    // only run the application code if the device was configured with ETS
+    if (knx.configured())
     {
-      // we start HF communication as late as possible
-      mSerial2Active = true;
-      Serial2.begin(9600);
+        if (!mSerial2Active)
+        {
+            // we start HF communication as late as possible
+            mSerial2Active = true;
+            Serial2.begin(9600);
+        }
     }
-  }
-  else
-  {
-    if (mSerial2Active) 
+    else
     {
-        // during ETS programming, we stop HF communication
-        mSerial2Active = false;
-        Serial2.end();
+        if (mSerial2Active)
+        {
+            // during ETS programming, we stop HF communication
+            mSerial2Active = false;
+            Serial2.end();
+        }
     }
-  }
 #endif
-  openknx.loop();
+    openknx.loop();
 }
