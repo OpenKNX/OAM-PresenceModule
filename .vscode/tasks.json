@@ -6,7 +6,7 @@
         {
             "label": "Pre-Build-Step",
             "type": "shell",
-            "command": "lib/OGM-Common/scripts/Build/OpenKNX-Pre-Build.ps1",
+            "command": "lib/OGM-Common/scripts/build/OpenKNX-Pre-Build.ps1",
             "args": [
             ],
             "group": "build",
