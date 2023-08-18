@@ -7,27 +7,26 @@
             "label": "Pre-Build-Step",
             "type": "shell",
             "command": "lib/OGM-Common/scripts/Build/OpenKNX-Pre-Build.ps1",
+            "args": [],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Develop SAMD",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
             "args": [
+                "develop_SAMD"
             ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "Build SAMD",
+            "label": "Develop RP2040",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "build_SAMD"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Build RP2040",
-            "type": "shell",
-            "command": "scripts/OpenKNX-Build.ps1",
-            "args": [
-                "build_RP2040"
+                "develop_RP2040"
             ],
             "group": "build",
             "problemMatcher": []
@@ -43,17 +42,17 @@
             "group": "build",
             "problemMatcher": []
         },
-        {
-            "label": "Upload Release JLINK SAMD",
-            "type": "shell",
-            "command": "scripts/OpenKNX-Build.ps1",
-            "args": [
-                "upload_Release_JLINK_SAMD",
-                "upload"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
+        // {
+        //     "label": "Upload Release JLINK SAMD",
+        //     "type": "shell",
+        //     "command": "scripts/OpenKNX-Build.ps1",
+        //     "args": [
+        //         "upload_Release_JLINK_SAMD",
+        //         "upload"
+        //     ],
+        //     "group": "build",
+        //     "problemMatcher": []
+        // },
         {
             "label": "Upload JLINK RP2040",
             "type": "shell",
@@ -65,17 +64,17 @@
             "group": "build",
             "problemMatcher": []
         },
-        {
-            "label": "Upload Release JLINK RP2040",
-            "type": "shell",
-            "command": "scripts/OpenKNX-Build.ps1",
-            "args": [
-                "upload_Release_JLINK_RP2040",
-                "upload"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
+        // {
+        //     "label": "Upload Release JLINK RP2040",
+        //     "type": "shell",
+        //     "command": "scripts/OpenKNX-Build.ps1",
+        //     "args": [
+        //         "upload_Release_JLINK_RP2040",
+        //         "upload"
+        //     ],
+        //     "group": "build",
+        //     "problemMatcher": []
+        // },
         {
             "label": "Upload USB SAMD",
             "type": "shell",
@@ -101,23 +100,21 @@
         {
             "label": "Create Dependencies",
             "type": "shell",
-            "command": "lib/OGM-Common/scripts/setup/reusable/Build-Dependencies.ps1", 
-            "args": [
-            ],
+            "command": "lib/OGM-Common/scripts/setup/reusable/Build-Dependencies.ps1",
+            "args": [],
             "problemMatcher": [],
             "group": "build"
         },
         {
             "label": "OpenKNXproducer",
             "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
             "command": "~/bin/OpenKNXproducer.exe",
             "args": [
                 "create",
                 "--Debug",
-                "PMmodul.xml"
+                "--HeaderFileName",
+                "include/knxprod.h",
+                "src/PMmodul.xml"
             ],
             "problemMatcher": [],
             "group": "test"
@@ -146,8 +143,7 @@
             "label": "Build-Release-Package",
             "type": "shell",
             "command": "scripts/Build-Release-Package.ps1",
-            "args": [
-            ],
+            "args": [],
             "problemMatcher": [],
             "group": "test"
         },

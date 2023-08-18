@@ -1,0 +1,16 @@
+{
+    "name": "OAM-PresenceModule",
+    "version": "5.0.0",
+    "description": "Virtual Presence application for the knx stack, can be parametrized with ETS",
+    "homepage": "https://openknx.de",
+    "authors": {
+        "name": "OpenKNX",
+        "email": "info@openknx.de",
+        "url": "https://openknx.de",
+        "maintainer": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OpenKNX/OAM-PresenceModule"
+    }
+}

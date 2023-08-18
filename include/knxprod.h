@@ -9,11 +9,11 @@
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 2
-#define MAIN_ApplicationVersion 24
-#define MAIN_ParameterSize 14069
-#define MAIN_MaxKoNumber 1146
-#define MAIN_OrderNumber "OpenKnxPresenceBig"
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 130
+#define MAIN_ParameterSize 5375
+#define MAIN_MaxKoNumber 539
+#define MAIN_OrderNumber "OpenKnxPresence"
 // Parameter with single occurrence
 
 
@@ -442,7 +442,7 @@
 // Reset HF-Sensor
 #define KoPM_HfReset                   (knx.getGroupObject(PM_KoHfReset))
 
-#define LOG_ChannelCount 99
+#define LOG_ChannelCount 30
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 35
@@ -1154,6 +1154,10 @@
 #define     LOG_fOOnPALineShift 0
 #define LOG_fOOnPADevice              54      // uint8_t
 #define LOG_fOOnFunction              53      // 8 Bits, Bit 7-0
+#define LOG_fOOnKONumber              53      // 15 Bits, Bit 15-1
+#define     LOG_fOOnKONumberMask 0xFFFE
+#define     LOG_fOOnKONumberShift 1
+#define LOG_fOOnKODpt                 53      // 8 Bits, Bit 7-0
 #define LOG_fOOff                     67      // 8 Bits, Bit 7-0
 #define LOG_fOOffBuzzer               67      // 8 Bits, Bit 7-0
 #define LOG_fOOffLed                  67      // 8 Bits, Bit 7-0
@@ -1183,6 +1187,10 @@
 #define     LOG_fOOffPALineShift 0
 #define LOG_fOOffPADevice             69      // uint8_t
 #define LOG_fOOffFunction             68      // 8 Bits, Bit 7-0
+#define LOG_fOOffKONumber             68      // 15 Bits, Bit 15-1
+#define     LOG_fOOffKONumberMask 0xFFFE
+#define     LOG_fOOffKONumberShift 1
+#define LOG_fOOffKODpt                68      // 8 Bits, Bit 7-0
 #define LOG_fE1UseOtherKO             82      // 1 Bit, Bit 7
 #define     LOG_fE1UseOtherKOMask 0x80
 #define     LOG_fE1UseOtherKOShift 7
@@ -1948,6 +1956,10 @@
 #define ParamLOG_fOOnPADevice              (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOnPADevice)))
 //     Wert für EIN ermitteln als
 #define ParamLOG_fOOnFunction              (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOnFunction)))
+//     Nummer des Kommunikationsobjekts
+#define ParamLOG_fOOnKONumber              ((knx.paramWord(LOG_ParamCalcIndex(LOG_fOOnKONumber)) & LOG_fOOnKONumberMask) >> LOG_fOOnKONumberShift)
+//     DPT des Kommunikationsobjekts
+#define ParamLOG_fOOnKODpt                 (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOnKODpt)))
 // Wert für AUS senden?
 #define ParamLOG_fOOff                     (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOff)))
 // Wert für AUS senden?
@@ -1994,6 +2006,10 @@
 #define ParamLOG_fOOffPADevice             (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffPADevice)))
 //     Wert für AUS ermitteln als
 #define ParamLOG_fOOffFunction             (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffFunction)))
+//     Nummer des Kommunikationsobjekts
+#define ParamLOG_fOOffKONumber             ((knx.paramWord(LOG_ParamCalcIndex(LOG_fOOffKONumber)) & LOG_fOOffKONumberMask) >> LOG_fOOffKONumberShift)
+//     DPT des Kommunikationsobjekts
+#define ParamLOG_fOOffKODpt                (knx.paramByte(LOG_ParamCalcIndex(LOG_fOOffKODpt)))
 // Kommunikationsobjekt für Eingang 1
 #define ParamLOG_fE1UseOtherKO             ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fE1UseOtherKO)) & LOG_fE1UseOtherKOMask))
 //     Nummer des Kommunikationsobjekts
@@ -2004,10 +2020,10 @@
 #define ParamLOG_fE2OtherKO                (knx.paramWord(LOG_ParamCalcIndex(LOG_fE2OtherKO)) & LOG_fE2OtherKOMask)
 
 // deprecated
-#define LOG_KoOffset 850
+#define LOG_KoOffset 450
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoBlockOffset 850
+#define LOG_KoBlockOffset 450
 #define LOG_KoBlockSize 3
 
 #define LOG_KoCalcNumber(index) (index + LOG_KoBlockOffset + _channelIndex * LOG_KoBlockSize)
@@ -2024,10 +2040,10 @@
 // Ausgang
 #define KoLOG_KOfO                      (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfO)))
 
-#define PM_ChannelCount 40
+#define PM_ChannelCount 20
 
 // Parameter per channel
-#define PM_ParamBlockOffset 8549
+#define PM_ParamBlockOffset 2615
 #define PM_ParamBlockSize 138
 #define PM_ParamCalcIndex(index) (index + PM_ParamBlockOffset + _channelIndex * PM_ParamBlockSize)
 

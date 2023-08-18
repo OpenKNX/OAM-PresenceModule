@@ -1,6 +1,9 @@
 #pragma once
 
 #ifndef BOARD_ENDUSER
+
+    #include <OpenKNXHardware.h>
+
     // // Board specific definietions
     // // #define BOARD_MASIFI
     // // ################################################
