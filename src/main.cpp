@@ -16,7 +16,7 @@ uint8_t mSerial2Active = false;
 
 void setup()
 {
-    const uint8_t firmwareRevision = 2;
+    const uint8_t firmwareRevision = 0;
 
 #ifdef HF_POWER_PIN
     pinMode(HF_POWER_PIN, OUTPUT);

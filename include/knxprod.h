@@ -9,11 +9,13 @@
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 130
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 25
 #define MAIN_ParameterSize 5375
 #define MAIN_MaxKoNumber 539
 #define MAIN_OrderNumber "OpenKnxPresence"
+#define LOG_ModuleVersion 21
+#define PM_ModuleVersion 25
 // Parameter with single occurrence
 
 
@@ -1157,7 +1159,7 @@
 #define LOG_fOOnKONumber              53      // 15 Bits, Bit 15-1
 #define     LOG_fOOnKONumberMask 0xFFFE
 #define     LOG_fOOnKONumberShift 1
-#define LOG_fOOnKODpt                 53      // 8 Bits, Bit 7-0
+#define LOG_fOOnKODpt                 55      // 8 Bits, Bit 7-0
 #define LOG_fOOff                     67      // 8 Bits, Bit 7-0
 #define LOG_fOOffBuzzer               67      // 8 Bits, Bit 7-0
 #define LOG_fOOffLed                  67      // 8 Bits, Bit 7-0
@@ -1190,7 +1192,7 @@
 #define LOG_fOOffKONumber             68      // 15 Bits, Bit 15-1
 #define     LOG_fOOffKONumberMask 0xFFFE
 #define     LOG_fOOffKONumberShift 1
-#define LOG_fOOffKODpt                68      // 8 Bits, Bit 7-0
+#define LOG_fOOffKODpt                70      // 8 Bits, Bit 7-0
 #define LOG_fE1UseOtherKO             82      // 1 Bit, Bit 7
 #define     LOG_fE1UseOtherKOMask 0x80
 #define     LOG_fE1UseOtherKOShift 7
@@ -1230,9 +1232,9 @@
 #define ParamLOG_fTriggerE1                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerE1)) & LOG_fTriggerE1Mask))
 //           Eingang 2
 #define ParamLOG_fTriggerE2                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerE2)) & LOG_fTriggerE2Mask))
-//           Kanalausgang X
+//           Interner Eingang 3
 #define ParamLOG_fTriggerI1                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerI1)) & LOG_fTriggerI1Mask))
-//           Kanalausgang Y
+//           Interner Eingang 4
 #define ParamLOG_fTriggerI2                ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerI2)) & LOG_fTriggerI2Mask))
 // Logik sendet ihren Wert weiter
 #define ParamLOG_fTriggerTime              (knx.paramByte(LOG_ParamCalcIndex(LOG_fTriggerTime)))
@@ -1844,13 +1846,13 @@
 #define ParamLOG_fTy4IsWeekday             ((bool)(knx.paramByte(LOG_ParamCalcIndex(LOG_fTy4IsWeekday)) & LOG_fTy4IsWeekdayMask))
 // Monat
 #define ParamLOG_fTy4Month                 ((knx.paramByte(LOG_ParamCalcIndex(LOG_fTy4Month)) & LOG_fTy4MonthMask) >> LOG_fTy4MonthShift)
-// Kanalausgang X
+// Interner Eingang 3
 #define ParamLOG_fI1                       ((knx.paramByte(LOG_ParamCalcIndex(LOG_fI1)) & LOG_fI1Mask) >> LOG_fI1Shift)
-// Kanalausgang Y
+// Interner Eingang 4
 #define ParamLOG_fI2                       (knx.paramByte(LOG_ParamCalcIndex(LOG_fI2)) & LOG_fI2Mask)
-// Kanalausgang X als interner Eingang 1, X =
+// Internen Eingang 3 verbinden mit Kanalausgang Nr.:
 #define ParamLOG_fI1Function               (knx.paramByte(LOG_ParamCalcIndex(LOG_fI1Function)))
-// Kanalausgang Y als interner Eingang 2, Y =
+// Internen Eingang 4 verbinden mit Kanalausgang Nr.:
 #define ParamLOG_fI2Function               (knx.paramByte(LOG_ParamCalcIndex(LOG_fI2Function)))
 // Zeitbasis
 #define ParamLOG_fOStairtimeBase           ((knx.paramByte(LOG_ParamCalcIndex(LOG_fOStairtimeBase)) & LOG_fOStairtimeBaseMask) >> LOG_fOStairtimeBaseShift)
