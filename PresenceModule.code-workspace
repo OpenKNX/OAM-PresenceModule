@@ -36,6 +36,15 @@
 			"initializer_list": "cpp"
 		},
 		"cSpell.language": "en,de-DE",
-		"powershell.cwd": "c:\\Users\\waldemar.porscha@sap.com\\PlatformIO\\OpenKNX\\OAM-PresenceModule"
+		"powershell.cwd": "c:\\Users\\waldemar.porscha@sap.com\\PlatformIO\\OpenKNX\\OAM-PresenceModule",
+		"workbench.colorCustomizations": {
+			"activityBar.background": "#f7ca17",
+			"activityBar.foreground": "#000000",
+			"activityBar.activeBackground": "#baa701",
+			"statusBar.foreground": "#000000",
+			"statusBar.background": "#f7ca17",
+			"titleBar.activeBackground": "#f7ca17",
+			"titleBar.activeForeground": "#000000"
+		}
 	}
 }

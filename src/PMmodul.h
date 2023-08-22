@@ -9,11 +9,11 @@
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 2
-#define MAIN_ApplicationVersion 23
-#define MAIN_ParameterSize 14069
-#define MAIN_MaxKoNumber 1146
-#define MAIN_OrderNumber "OpenKnxPresenceBig"
+#define MAIN_ApplicationNumber 0
+#define MAIN_ApplicationVersion 25
+#define MAIN_ParameterSize 5375
+#define MAIN_MaxKoNumber 539
+#define MAIN_OrderNumber "OpenKnxPresence"
 // Parameter with single occurrence
 
 
@@ -442,7 +442,7 @@
 // Reset HF-Sensor
 #define KoPM_HfReset                   (knx.getGroupObject(PM_KoHfReset))
 
-#define LOG_ChannelCount 99
+#define LOG_ChannelCount 30
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 35
@@ -2004,10 +2004,10 @@
 #define ParamLOG_fE2OtherKO                (knx.paramWord(LOG_ParamCalcIndex(LOG_fE2OtherKO)) & LOG_fE2OtherKOMask)
 
 // deprecated
-#define LOG_KoOffset 850
+#define LOG_KoOffset 450
 
 // Communication objects per channel (multiple occurrence)
-#define LOG_KoBlockOffset 850
+#define LOG_KoBlockOffset 450
 #define LOG_KoBlockSize 3
 
 #define LOG_KoCalcNumber(index) (index + LOG_KoBlockOffset + _channelIndex * LOG_KoBlockSize)
@@ -2024,10 +2024,10 @@
 // Ausgang
 #define KoLOG_KOfO                      (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfO)))
 
-#define PM_ChannelCount 40
+#define PM_ChannelCount 20
 
 // Parameter per channel
-#define PM_ParamBlockOffset 8549
+#define PM_ParamBlockOffset 2615
 #define PM_ParamBlockSize 138
 #define PM_ParamCalcIndex(index) (index + PM_ParamBlockOffset + _channelIndex * PM_ParamBlockSize)
 

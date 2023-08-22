@@ -83,6 +83,15 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+22.08.2023: Firmware 1.9, Applikation 1.9
+
+* Die enthaltene Logik hat den Firmware-Stand 1.5
+* FIX: Tagesphasenwechsel wertet jetzt erneut Präsenz aus, da sonst bei einem Wechsel von einer Tagesphase, die nicht selbst einschaltet in eine Phase, die selbst einschaltet nicht eingeschaltet worden ist.
+* FIX: Man kann beim Ausschalten über Helligkeit als Ausschaltschwelle jetzt auch 0 Lux angeben und es wird bei 0 Lux ausgeschaltet. Bisher musste die Helligkeit > als die Ausschaltschwelle, also größer als 0 sein.
+* FIX: Der KNX-Stack ist jetzt wesentlich robuster bei hoch ausgelastetem KNX-Bus. Das hat direkte Auswirkungen auf die Logik, die früher bei Hochlast Telegramme ausgelassen wurden, die dann als Trigger für Logiken fehlten.
+* FIX: Einige wenige DPT9-Werte ungleich 0 wurden vom KNX-Stack als 0 gesendet. Das ist gelöst. Es waren Werte der Form &pm;(2<sup>n</sup>)/100 für n>10, also z.B. &pm;20.48, &pm;40.96, &pm;81.92, &pm;163.84, &pm;327.68, &pm;655.36 usw. 
+* Dieses Release profitiert primär von den Stabilitätsverbesserungen des KNX-Stack 
+
 18.02.2023: Firmware 1.7.6, Applikation 1.7
 
 * Die enthaltene Logik hat den Firmware-Stand 1.4.2

@@ -532,7 +532,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%115_R-%T%%CCC%11501" RefId="%AID%_UP-%T%%CCC%115" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11601" RefId="%AID%_UP-%T%%CCC%116" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11602" RefId="%AID%_UP-%T%%CCC%116" Value="20" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11603" RefId="%AID%_UP-%T%%CCC%116" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%116_R-%T%%CCC%11603" RefId="%AID%_UP-%T%%CCC%116" Value="150" Text="Ausschalten: Ab welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%117_R-%T%%CCC%11701" RefId="%AID%_UP-%T%%CCC%117" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%118_R-%T%%CCC%11801" RefId="%AID%_UP-%T%%CCC%118" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%119_R-%T%%CCC%11901" RefId="%AID%_UP-%T%%CCC%119" />
@@ -575,7 +575,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%215_R-%T%%CCC%21501" RefId="%AID%_UP-%T%%CCC%215" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21601" RefId="%AID%_UP-%T%%CCC%216" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21602" RefId="%AID%_UP-%T%%CCC%216" Value="20" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21603" RefId="%AID%_UP-%T%%CCC%216" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%216_R-%T%%CCC%21603" RefId="%AID%_UP-%T%%CCC%216" Value="150" Text="Ausschalten: Ab welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%217_R-%T%%CCC%21701" RefId="%AID%_UP-%T%%CCC%217" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%218_R-%T%%CCC%21801" RefId="%AID%_UP-%T%%CCC%218" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%219_R-%T%%CCC%21901" RefId="%AID%_UP-%T%%CCC%219" />
@@ -618,7 +618,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%315_R-%T%%CCC%31501" RefId="%AID%_UP-%T%%CCC%315" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31601" RefId="%AID%_UP-%T%%CCC%316" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31602" RefId="%AID%_UP-%T%%CCC%316" Value="20" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31603" RefId="%AID%_UP-%T%%CCC%316" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%316_R-%T%%CCC%31603" RefId="%AID%_UP-%T%%CCC%316" Value="150" Text="Ausschalten: Ab welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%317_R-%T%%CCC%31701" RefId="%AID%_UP-%T%%CCC%317" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%318_R-%T%%CCC%31801" RefId="%AID%_UP-%T%%CCC%318" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%319_R-%T%%CCC%31901" RefId="%AID%_UP-%T%%CCC%319" />
@@ -661,7 +661,7 @@
               <ParameterRef Id="%AID%_UP-%T%%CCC%415_R-%T%%CCC%41501" RefId="%AID%_UP-%T%%CCC%415" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41601" RefId="%AID%_UP-%T%%CCC%416" Value="100" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41602" RefId="%AID%_UP-%T%%CCC%416" Value="20" />
-              <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41603" RefId="%AID%_UP-%T%%CCC%416" Value="150" Text="Ausschalten: Oberhalb welcher Helligkeit" />
+              <ParameterRef Id="%AID%_UP-%T%%CCC%416_R-%T%%CCC%41603" RefId="%AID%_UP-%T%%CCC%416" Value="150" Text="Ausschalten: Ab welcher Helligkeit" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%417_R-%T%%CCC%41701" RefId="%AID%_UP-%T%%CCC%417" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%418_R-%T%%CCC%41801" RefId="%AID%_UP-%T%%CCC%418" />
               <ParameterRef Id="%AID%_UP-%T%%CCC%419_R-%T%%CCC%41901" RefId="%AID%_UP-%T%%CCC%419" />
@@ -1816,7 +1816,7 @@
                                   </choose>
                                 </when>
                                 <when test=">0">
-                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kurzfrisitge Sonnenereignisse zu überbrücken." />
+                                  <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kurzfristige Sonnenereignisse zu überbrücken." />
                                   <!-- Delay pattern brightness off -->
                                   <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay1" Inline="true" Layout="Grid">
                                     <Rows>
