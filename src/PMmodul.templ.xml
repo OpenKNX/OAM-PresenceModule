@@ -2107,7 +2107,7 @@
                                       </choose>
                                     </when>
                                     <when test=">0">
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kurzfristige Sonnenereignisse zu überbrücken." />
                                       <!-- Delay pattern brightness off  -->
                                       <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay2" Inline="true" Layout="Grid">
                                         <Rows>
@@ -2404,7 +2404,7 @@
                                       </choose>
                                     </when>
                                     <when test=">0">
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kurzfristige Sonnenereignisse zu überbrücken." />
                                       <!-- Delay pattern brightness off  -->
                                       <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay3" Inline="true" Layout="Grid">
                                         <Rows>
@@ -2701,7 +2701,7 @@
                                       </choose>
                                     </when>
                                     <when test=">0">
-                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kuzfrisitge Sonnenereignisse zu überbrücken." />
+                                      <ParameterSeparator Id="%AID%_PS-nnn" Text="Es wird nicht sofort abgeschaltet, sobald die Ausschaltschwelle überschritten wird. Man kann eine Verzögerung angeben, um kurzfristige Sonnenereignisse zu überbrücken." />
                                       <!-- Delay pattern brightness off  -->
                                       <ParameterBlock Id="%AID%_PB-nnn" Name="p%C%BrightnessOffDelay4" Inline="true" Layout="Grid">
                                         <Rows>

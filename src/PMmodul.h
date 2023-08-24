@@ -10,7 +10,7 @@
                                              
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 25
+#define MAIN_ApplicationVersion 26
 #define MAIN_ParameterSize 5375
 #define MAIN_MaxKoNumber 539
 #define MAIN_OrderNumber "OpenKnxPresence"
