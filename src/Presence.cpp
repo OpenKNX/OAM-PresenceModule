@@ -16,7 +16,8 @@ Presence::Presence()
 {
 }
 
-Presence::~Presence() {}
+Presence::~Presence()
+{}
 
 void Presence::addKoMap(uint16_t iKoNumber, uint8_t iChannelId, uint8_t iKoIndex)
 {
@@ -81,7 +82,7 @@ bool Presence::processDiagnoseCommand(char *iBuffer)
     if (iBuffer[0] == 'p')
     {
         uint8_t lIndex = (iBuffer[1] - '0') * 10 + iBuffer[2] - '0' - 1;
-        if (lIndex >= 0 && lIndex < mNumChannels) 
+        if (lIndex >= 0 && lIndex < mNumChannels)
         {
             // this is a channel request
             lOutput = mChannel[lIndex]->processDiagnoseCommand(iBuffer);
@@ -112,7 +113,7 @@ void Presence::processInputKo(GroupObject &iKo)
     {
         uint16_t lKoIndex = lKoMap->koIndex;
         // here we check the range of internal KO per channel (KoIndex, not KoNumber)
-        if ((lKoIndex >= PM_KoKOpLux && lKoIndex <= PM_KoKOpDayPhase) || lKoIndex == PM_KoKOpScene )
+        if ((lKoIndex >= PM_KoKOpLux && lKoIndex <= PM_KoKOpDayPhase) || lKoIndex == PM_KoKOpScene)
         {
             // we are in the Range of presence KOs
             uint8_t lChannelIndex = lKoMap->channelIndex;
@@ -122,10 +123,9 @@ void Presence::processInputKo(GroupObject &iKo)
     }
     switch (lAsap)
     {
-        case PM_KoSensitivity:
-        {
+        case PM_KoSensitivity: {
             int8_t lSensitivity = iKo.value(getDPT(VAL_DPT_5));
-            if (mSensitivity != lSensitivity) 
+            if (mSensitivity != lSensitivity)
             {
 #ifdef HF_POWER_PIN
                 mPresenceSensor->sendCommand(RadarCmd_WriteSensitivity, lSensitivity);
@@ -133,8 +133,7 @@ void Presence::processInputKo(GroupObject &iKo)
             }
             break;
         }
-        case PM_KoScenario: 
-        {
+        case PM_KoScenario: {
             int8_t lScenario = iKo.value(getDPT(VAL_DPT_5));
             if (mScenario != lScenario)
             {
@@ -183,10 +182,10 @@ void Presence::startSensors()
     {
 #ifdef HF_POWER_PIN
         mPresenceSensor = (SensorMR24xxB1 *)Sensor::factory(SENS_MR24xxB1, MeasureType::Pres);
-        mPresenceSensor->defaultSensorParameters((ParamPM_HfScenario) - 1, ParamPM_HfSensitivity);
+        mPresenceSensor->defaultSensorParameters((ParamPM_HfScenario)-1, ParamPM_HfSensitivity);
 #endif
     }
-    
+
     switch (ParamPM_HWLux)
     {
         case VAL_PM_LUX_VEML:
@@ -205,7 +204,8 @@ void Presence::startSensors()
 void Presence::switchHfSensor(bool iOn)
 {
 #ifdef HF_POWER_PIN
-    if (smartMF.hardwareRevision() == 1) {
+    if (smartMF.hardwareRevision() == 1)
+    {
         iOn = !iOn;
     }
     else
@@ -224,9 +224,8 @@ void Presence::switchHfSensor(bool iOn)
             0x17265A22,
             0x173C1627,
             0x175A3527,
-            0x173C1E27
-        };
-        
+            0x173C1E27};
+
         uint32_t lSerial = knx.platform().uniqueSerialNumber();
         SERIAL_DEBUG.printf("\nswitchHfSensor: Turning Sensor on: %i\n", iOn);
         SERIAL_DEBUG.printf("Serial HEX 32: %08lX\n", lSerial);
@@ -265,7 +264,7 @@ void Presence::processPowercycleHfSensor()
 // - turn on and off by hardware if selected in settings
 // - turn off on lock through day phase
 // - be aware of multiple channels creating led locks
-// - turn on and off by knx 
+// - turn on and off by knx
 // - restore old led state on lock removal
 void Presence::processLED(bool iOn, LedCaller iCaller)
 {
@@ -283,7 +282,7 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
         case CallerLock:
             sLedsLocked += (iOn) ? 1 : -1;
             // LEDs will keep the old values
-            if (sLedsLocked <= 0) 
+            if (sLedsLocked <= 0)
                 sLedsLocked = 0;
             break;
         case CallerMove:
@@ -325,8 +324,8 @@ void Presence::processLED(bool iOn, LedCaller iCaller)
 
 void Presence::processHardwarePresence()
 {
-  #ifdef HF_POWER_PIN
-    if (mPresenceSensor != 0) 
+#ifdef HF_POWER_PIN
+    if (mPresenceSensor != 0)
     {
         float lValue = 0;
         if (Sensor::measureValue(MeasureType::Pres, lValue) && lValue != mPresenceCombined)
@@ -336,7 +335,7 @@ void Presence::processHardwarePresence()
             uint8_t lMove;
             uint8_t lFall;
             uint8_t lAlarm;
-            if (SensorMR24xxB1::decodePresenceResult((uint8_t)lValue, lPresence, lMove, lFall, lAlarm)) 
+            if (SensorMR24xxB1::decodePresenceResult((uint8_t)lValue, lPresence, lMove, lFall, lAlarm))
             {
                 if (lPresence != mPresence)
                 {
@@ -347,7 +346,7 @@ void Presence::processHardwarePresence()
                     if (mPresence)
                         PresenceTrigger = true;
                 }
-                if (lMove != mMove) 
+                if (lMove != mMove)
                 {
                     mMove = lMove;
                     // digitalWrite(MOVE_LED_PIN, MOVE_LED_PIN_ACTIVE_ON == (mMove > 0));
@@ -367,7 +366,8 @@ void Presence::processHardwarePresence()
         if (Sensor::measureValue(MeasureType::Scenario, lValue))
         {
             GroupObject &lKo = knx.getGroupObject(PM_KoScenario);
-            if (mScenario != (int8_t)lValue) {
+            if (mScenario != (int8_t)lValue)
+            {
                 mScenario = (int8_t)lValue;
                 lKo.value(mScenario, getDPT(VAL_DPT_5));
             }
@@ -486,8 +486,8 @@ void Presence::loop()
     }
     // if (lChannelsProcessed < mNumChannels)
     //     printDebug("PM did not process all channels during loop, just %i channels\n", lChannelsProcessed);
-    if (millis()-lLoopTime > 1)
-        printDebug("PM LoopTime: %i\n", millis()-lLoopTime);
+    if (millis() - lLoopTime > 10)
+        printDebug("PM LoopTime: %i\n", millis() - lLoopTime);
 }
 
 void Presence::setup()
@@ -514,7 +514,7 @@ void Presence::setup()
             mChannel[lIndex]->setup();
         }
         mDoPresenceHardwareCycle = ((knx.paramByte(PM_HWPresence) & PM_HWPresenceMask) > 0) || ((knx.paramByte(PM_HWLux) & PM_HWLuxMask) > 0);
-        if (mDoPresenceHardwareCycle) 
+        if (mDoPresenceHardwareCycle)
             startPowercycleHfSensor();
         startSensors();
     }
