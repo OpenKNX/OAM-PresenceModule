@@ -83,7 +83,7 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
-24.08.2023: Firmware 1.10, Applikation 1.10
+24.08.2023: Firmware 1.11, Applikation 1.11
 
 * Die enthaltene Logik hat den Firmware-Stand 1.5
 * FIX: Tagesphasenwechsel wertet jetzt erneut Präsenz aus, da sonst bei einem Wechsel von einer Tagesphase, die nicht selbst einschaltet in eine Phase, die selbst einschaltet nicht eingeschaltet worden ist.
