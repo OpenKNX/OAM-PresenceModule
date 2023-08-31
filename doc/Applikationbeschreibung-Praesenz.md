@@ -85,7 +85,7 @@ Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer d
 
 24.08.2023: Firmware 1.11.1, Applikation 1.11
 
-* Die enthaltene Logik hat den Firmware-Stand 1.5
+* Die enthaltene Logik hat den Firmware-Stand 1.5.1
 * FIX: Tagesphasenwechsel wertet jetzt erneut Präsenz aus, da sonst bei einem Wechsel von einer Tagesphase, die nicht selbst einschaltet in eine Phase, die selbst einschaltet nicht eingeschaltet worden ist.
 * FIX: Man kann beim Ausschalten über Helligkeit als Ausschaltschwelle jetzt auch 0 Lux angeben und es wird bei 0 Lux ausgeschaltet. Bisher musste die Helligkeit > als die Ausschaltschwelle, also größer als 0 sein.
 * FIX: Der KNX-Stack ist jetzt wesentlich robuster bei hoch ausgelastetem KNX-Bus. Das hat direkte Auswirkungen auf die Logik, die früher bei Hochlast Telegramme ausgelassen wurden, die dann als Trigger für Logiken fehlten.
