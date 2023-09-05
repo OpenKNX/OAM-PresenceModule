@@ -83,6 +83,10 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+05.09.2023: Firmware 1.11.2, Applikation 1.11
+
+* Die enthaltene Logik hat den Firmware-Stand 1.5.2, siehe dortige Änderungshistorie
+
 24.08.2023: Firmware 1.11.1, Applikation 1.11
 
 * Die enthaltene Logik hat den Firmware-Stand 1.5.1
