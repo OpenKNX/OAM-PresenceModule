@@ -9,12 +9,12 @@
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 0
-#define MAIN_ApplicationVersion 25
+#define MAIN_ApplicationNumber 1
+#define MAIN_ApplicationVersion 130
 #define MAIN_ParameterSize 5375
 #define MAIN_MaxKoNumber 539
 #define MAIN_OrderNumber "OpenKnxPresence"
-#define LOG_ModuleVersion 21
+#define LOG_ModuleVersion 32
 #define PM_ModuleVersion 25
 // Parameter with single occurrence
 
