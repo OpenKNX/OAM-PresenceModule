@@ -45,6 +45,10 @@ if (!$?) { exit 1 }
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
 if (!$?) { exit 1 }
 
+# build firmware for OpenKNX-REG1-Base
+lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_UP1 firmware-OpenKNX-UP1 uf2
+if (!$?) { exit 1 }
+
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
 if (!$?) { exit 1 }
 
@@ -54,8 +58,7 @@ if (!$?) { exit 1 }
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v40_RP2040 firmware-Sensormodul-v40-RP2040 uf2
 if (!$?) { exit 1 }
 
-if ($releaseIndication -ne "Big")
-{
+if ($releaseIndication -ne "Big") {
     # build firmware based on generated headerfile for SAMD
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v31_SAMD firmware-Sensormodul-v31-SAMD bin
     if (!$?) { exit 1 }
