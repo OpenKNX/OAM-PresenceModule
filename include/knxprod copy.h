@@ -14,8 +14,8 @@
 #define MAIN_ParameterSize 5375
 #define MAIN_MaxKoNumber 539
 #define MAIN_OrderNumber "OpenKnxPresence"
-#define LOG_ModuleVersion 32
-#define PM_ModuleVersion 32
+#define LOG_ModuleVersion 5.0
+#define PM_ModuleVersion 25
 // Parameter with single occurrence
 
 
