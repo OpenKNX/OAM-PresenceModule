@@ -8,9 +8,19 @@
             (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : \
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
+#pragma once
+
+
+#define paramDelay(time) (uint32_t)( \
+            (time & 0xC000) == 0xC000 ? (time & 0x3FFF) * 100 : \
+            (time & 0xC000) == 0x0000 ? (time & 0x3FFF) * 1000 : \
+            (time & 0xC000) == 0x4000 ? (time & 0x3FFF) * 60000 : \
+            (time & 0xC000) == 0x8000 ? ((time & 0x3FFF) > 1000 ? 3600000 : \
+                                         (time & 0x3FFF) * 3600000 ) : 0 )
+                                             
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 130
+#define MAIN_ApplicationVersion 131
 #define MAIN_ParameterSize 5375
 #define MAIN_MaxKoNumber 539
 #define MAIN_OrderNumber "OpenKnxPresence"
@@ -2628,29 +2638,29 @@
 #define ParamPM_pPresenceKeepAlive        ((bool)(knx.paramByte(PM_ParamCalcIndex(PM_pPresenceKeepAlive)) & PM_pPresenceKeepAliveMask))
 //     Eingang kann nicht einschalten,    aber bestehende Präsenz verlängern
 #define ParamPM_pMoveKeepAlive            ((bool)(knx.paramByte(PM_ParamCalcIndex(PM_pMoveKeepAlive)) & PM_pMoveKeepAliveMask))
-// Zeitbasis
+// Startverzögerung für diesen Kanal
 #define ParamPM_pChannelDelayBase         ((knx.paramByte(PM_ParamCalcIndex(PM_pChannelDelayBase)) & PM_pChannelDelayBaseMask) >> PM_pChannelDelayBaseShift)
-// Zeit
+// Startverzögerung für diesen Kanal
 #define ParamPM_pChannelDelayTime         (knx.paramWord(PM_ParamCalcIndex(PM_pChannelDelayTime)) & PM_pChannelDelayTimeMask)
-// Zeit (in Millisekunden)
+// Startverzögerung für diesen Kanal (in Millisekunden)
 #define ParamPM_pChannelDelayTimeMS       (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pChannelDelayTime))))
-// Zeitbasis
+// Rückfall nach
 #define ParamPM_pLockFallbackBase         ((knx.paramByte(PM_ParamCalcIndex(PM_pLockFallbackBase)) & PM_pLockFallbackBaseMask) >> PM_pLockFallbackBaseShift)
-// Zeit
+// Rückfall nach
 #define ParamPM_pLockFallbackTime         (knx.paramWord(PM_ParamCalcIndex(PM_pLockFallbackTime)) & PM_pLockFallbackTimeMask)
-// Zeit (in Millisekunden)
+// Rückfall nach (in Millisekunden)
 #define ParamPM_pLockFallbackTimeMS       (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pLockFallbackTime))))
-// Zeitbasis
+// Totzeit nach Raum verlassen
 #define ParamPM_pDowntimeOffBase          ((knx.paramByte(PM_ParamCalcIndex(PM_pDowntimeOffBase)) & PM_pDowntimeOffBaseMask) >> PM_pDowntimeOffBaseShift)
-// Zeit
+// Totzeit nach Raum verlassen
 #define ParamPM_pDowntimeOffTime          (knx.paramWord(PM_ParamCalcIndex(PM_pDowntimeOffTime)) & PM_pDowntimeOffTimeMask)
-// Zeit (in Millisekunden)
+// Totzeit nach Raum verlassen (in Millisekunden)
 #define ParamPM_pDowntimeOffTimeMS        (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pDowntimeOffTime))))
-// Zeitbasis
+// Totzeit bis zur Helligkeitsanpassung
 #define ParamPM_pAdaptiveDelayBase        ((knx.paramByte(PM_ParamCalcIndex(PM_pAdaptiveDelayBase)) & PM_pAdaptiveDelayBaseMask) >> PM_pAdaptiveDelayBaseShift)
-// Zeit
+// Totzeit bis zur Helligkeitsanpassung
 #define ParamPM_pAdaptiveDelayTime        (knx.paramWord(PM_ParamCalcIndex(PM_pAdaptiveDelayTime)) & PM_pAdaptiveDelayTimeMask)
-// Zeit (in Millisekunden)
+// Totzeit bis zur Helligkeitsanpassung (in Millisekunden)
 #define ParamPM_pAdaptiveDelayTimeMS      (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pAdaptiveDelayTime))))
 // Szene Phase 1
 #define ParamPM_pPhase1Scene              (knx.paramByte(PM_ParamCalcIndex(PM_pPhase1Scene)))
@@ -2758,35 +2768,35 @@
 #define ParamPM_pAPresenceShortCalculation ((bool)(knx.paramByte(PM_ParamCalcIndex(PM_pAPresenceShortCalculation)) & PM_pAPresenceShortCalculationMask))
 // Funktion der Tagesphase
 #define ParamPM_pADayPhaseFunction        ((knx.paramByte(PM_ParamCalcIndex(PM_pADayPhaseFunction)) & PM_pADayPhaseFunctionMask) >> PM_pADayPhaseFunctionShift)
-// Zeitbasis
+// Nachlaufzeit
 #define ParamPM_pAPresenceDelayBase       ((knx.paramByte(PM_ParamCalcIndex(PM_pAPresenceDelayBase)) & PM_pAPresenceDelayBaseMask) >> PM_pAPresenceDelayBaseShift)
-// Zeit
+// Nachlaufzeit
 #define ParamPM_pAPresenceDelayTime       (knx.paramWord(PM_ParamCalcIndex(PM_pAPresenceDelayTime)) & PM_pAPresenceDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit (in Millisekunden)
 #define ParamPM_pAPresenceDelayTimeMS     (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pAPresenceDelayTime))))
-// Zeitbasis
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pAPresenceShortDurationBase ((knx.paramByte(PM_ParamCalcIndex(PM_pAPresenceShortDurationBase)) & PM_pAPresenceShortDurationBaseMask) >> PM_pAPresenceShortDurationBaseShift)
-// Zeit
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pAPresenceShortDurationTime (knx.paramWord(PM_ParamCalcIndex(PM_pAPresenceShortDurationTime)) & PM_pAPresenceShortDurationTimeMask)
-// Zeit (in Millisekunden)
+// Dauer-der-kurzen-Anwesenheit (in Millisekunden)
 #define ParamPM_pAPresenceShortDurationTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pAPresenceShortDurationTime))))
-// Zeitbasis
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pAPresenceShortDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pAPresenceShortDelayBase)) & PM_pAPresenceShortDelayBaseMask) >> PM_pAPresenceShortDelayBaseShift)
-// Zeit
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pAPresenceShortDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pAPresenceShortDelayTime)) & PM_pAPresenceShortDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit-bei-kurzer-Anwesenheit (in Millisekunden)
 #define ParamPM_pAPresenceShortDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pAPresenceShortDelayTime))))
-// Zeitbasis
+// Ausschalten-verzoegern-um
 #define ParamPM_pABrightnessOffDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pABrightnessOffDelayBase)) & PM_pABrightnessOffDelayBaseMask) >> PM_pABrightnessOffDelayBaseShift)
-// Zeit
+// Ausschalten-verzoegern-um
 #define ParamPM_pABrightnessOffDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pABrightnessOffDelayTime)) & PM_pABrightnessOffDelayTimeMask)
-// Zeit (in Millisekunden)
+// Ausschalten-verzoegern-um (in Millisekunden)
 #define ParamPM_pABrightnessOffDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pABrightnessOffDelayTime))))
-// Zeitbasis
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pAManualFallbackDelayBase ((knx.paramByte(PM_ParamCalcIndex(PM_pAManualFallbackDelayBase)) & PM_pAManualFallbackDelayBaseMask) >> PM_pAManualFallbackDelayBaseShift)
-// Zeit
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pAManualFallbackDelayTime (knx.paramWord(PM_ParamCalcIndex(PM_pAManualFallbackDelayTime)) & PM_pAManualFallbackDelayTimeMask)
-// Zeit (in Millisekunden)
+// Manuellen-Modus-beenden-nach (in Millisekunden)
 #define ParamPM_pAManualFallbackDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pAManualFallbackDelayTime))))
 // Einschalten: Unterhalb welcher Helligkeit
 #define ParamPM_pABrightnessOn            (knx.paramWord(PM_ParamCalcIndex(PM_pABrightnessOn)))
@@ -2842,35 +2852,35 @@
 #define ParamPM_pBPresenceShortCalculation ((bool)(knx.paramByte(PM_ParamCalcIndex(PM_pBPresenceShortCalculation)) & PM_pBPresenceShortCalculationMask))
 // Funktion der Tagesphase
 #define ParamPM_pBDayPhaseFunction        ((knx.paramByte(PM_ParamCalcIndex(PM_pBDayPhaseFunction)) & PM_pBDayPhaseFunctionMask) >> PM_pBDayPhaseFunctionShift)
-// Zeitbasis
+// Nachlaufzeit
 #define ParamPM_pBPresenceDelayBase       ((knx.paramByte(PM_ParamCalcIndex(PM_pBPresenceDelayBase)) & PM_pBPresenceDelayBaseMask) >> PM_pBPresenceDelayBaseShift)
-// Zeit
+// Nachlaufzeit
 #define ParamPM_pBPresenceDelayTime       (knx.paramWord(PM_ParamCalcIndex(PM_pBPresenceDelayTime)) & PM_pBPresenceDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit (in Millisekunden)
 #define ParamPM_pBPresenceDelayTimeMS     (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pBPresenceDelayTime))))
-// Zeitbasis
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pBPresenceShortDurationBase ((knx.paramByte(PM_ParamCalcIndex(PM_pBPresenceShortDurationBase)) & PM_pBPresenceShortDurationBaseMask) >> PM_pBPresenceShortDurationBaseShift)
-// Zeit
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pBPresenceShortDurationTime (knx.paramWord(PM_ParamCalcIndex(PM_pBPresenceShortDurationTime)) & PM_pBPresenceShortDurationTimeMask)
-// Zeit (in Millisekunden)
+// Dauer-der-kurzen-Anwesenheit (in Millisekunden)
 #define ParamPM_pBPresenceShortDurationTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pBPresenceShortDurationTime))))
-// Zeitbasis
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pBPresenceShortDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pBPresenceShortDelayBase)) & PM_pBPresenceShortDelayBaseMask) >> PM_pBPresenceShortDelayBaseShift)
-// Zeit
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pBPresenceShortDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pBPresenceShortDelayTime)) & PM_pBPresenceShortDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit-bei-kurzer-Anwesenheit (in Millisekunden)
 #define ParamPM_pBPresenceShortDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pBPresenceShortDelayTime))))
-// Zeitbasis
+// Ausschalten-verzoegern-um
 #define ParamPM_pBBrightnessOffDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pBBrightnessOffDelayBase)) & PM_pBBrightnessOffDelayBaseMask) >> PM_pBBrightnessOffDelayBaseShift)
-// Zeit
+// Ausschalten-verzoegern-um
 #define ParamPM_pBBrightnessOffDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pBBrightnessOffDelayTime)) & PM_pBBrightnessOffDelayTimeMask)
-// Zeit (in Millisekunden)
+// Ausschalten-verzoegern-um (in Millisekunden)
 #define ParamPM_pBBrightnessOffDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pBBrightnessOffDelayTime))))
-// Zeitbasis
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pBManualFallbackDelayBase ((knx.paramByte(PM_ParamCalcIndex(PM_pBManualFallbackDelayBase)) & PM_pBManualFallbackDelayBaseMask) >> PM_pBManualFallbackDelayBaseShift)
-// Zeit
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pBManualFallbackDelayTime (knx.paramWord(PM_ParamCalcIndex(PM_pBManualFallbackDelayTime)) & PM_pBManualFallbackDelayTimeMask)
-// Zeit (in Millisekunden)
+// Manuellen-Modus-beenden-nach (in Millisekunden)
 #define ParamPM_pBManualFallbackDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pBManualFallbackDelayTime))))
 // Einschalten: Unterhalb welcher Helligkeit
 #define ParamPM_pBBrightnessOn            (knx.paramWord(PM_ParamCalcIndex(PM_pBBrightnessOn)))
@@ -2926,35 +2936,35 @@
 #define ParamPM_pCPresenceShortCalculation ((bool)(knx.paramByte(PM_ParamCalcIndex(PM_pCPresenceShortCalculation)) & PM_pCPresenceShortCalculationMask))
 // Funktion der Tagesphase
 #define ParamPM_pCDayPhaseFunction        ((knx.paramByte(PM_ParamCalcIndex(PM_pCDayPhaseFunction)) & PM_pCDayPhaseFunctionMask) >> PM_pCDayPhaseFunctionShift)
-// Zeitbasis
+// Nachlaufzeit
 #define ParamPM_pCPresenceDelayBase       ((knx.paramByte(PM_ParamCalcIndex(PM_pCPresenceDelayBase)) & PM_pCPresenceDelayBaseMask) >> PM_pCPresenceDelayBaseShift)
-// Zeit
+// Nachlaufzeit
 #define ParamPM_pCPresenceDelayTime       (knx.paramWord(PM_ParamCalcIndex(PM_pCPresenceDelayTime)) & PM_pCPresenceDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit (in Millisekunden)
 #define ParamPM_pCPresenceDelayTimeMS     (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pCPresenceDelayTime))))
-// Zeitbasis
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pCPresenceShortDurationBase ((knx.paramByte(PM_ParamCalcIndex(PM_pCPresenceShortDurationBase)) & PM_pCPresenceShortDurationBaseMask) >> PM_pCPresenceShortDurationBaseShift)
-// Zeit
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pCPresenceShortDurationTime (knx.paramWord(PM_ParamCalcIndex(PM_pCPresenceShortDurationTime)) & PM_pCPresenceShortDurationTimeMask)
-// Zeit (in Millisekunden)
+// Dauer-der-kurzen-Anwesenheit (in Millisekunden)
 #define ParamPM_pCPresenceShortDurationTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pCPresenceShortDurationTime))))
-// Zeitbasis
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pCPresenceShortDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pCPresenceShortDelayBase)) & PM_pCPresenceShortDelayBaseMask) >> PM_pCPresenceShortDelayBaseShift)
-// Zeit
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pCPresenceShortDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pCPresenceShortDelayTime)) & PM_pCPresenceShortDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit-bei-kurzer-Anwesenheit (in Millisekunden)
 #define ParamPM_pCPresenceShortDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pCPresenceShortDelayTime))))
-// Zeitbasis
+// Ausschalten-verzoegern-um
 #define ParamPM_pCBrightnessOffDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pCBrightnessOffDelayBase)) & PM_pCBrightnessOffDelayBaseMask) >> PM_pCBrightnessOffDelayBaseShift)
-// Zeit
+// Ausschalten-verzoegern-um
 #define ParamPM_pCBrightnessOffDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pCBrightnessOffDelayTime)) & PM_pCBrightnessOffDelayTimeMask)
-// Zeit (in Millisekunden)
+// Ausschalten-verzoegern-um (in Millisekunden)
 #define ParamPM_pCBrightnessOffDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pCBrightnessOffDelayTime))))
-// Zeitbasis
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pCManualFallbackDelayBase ((knx.paramByte(PM_ParamCalcIndex(PM_pCManualFallbackDelayBase)) & PM_pCManualFallbackDelayBaseMask) >> PM_pCManualFallbackDelayBaseShift)
-// Zeit
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pCManualFallbackDelayTime (knx.paramWord(PM_ParamCalcIndex(PM_pCManualFallbackDelayTime)) & PM_pCManualFallbackDelayTimeMask)
-// Zeit (in Millisekunden)
+// Manuellen-Modus-beenden-nach (in Millisekunden)
 #define ParamPM_pCManualFallbackDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pCManualFallbackDelayTime))))
 // Einschalten: Unterhalb welcher Helligkeit
 #define ParamPM_pCBrightnessOn            (knx.paramWord(PM_ParamCalcIndex(PM_pCBrightnessOn)))
@@ -3010,35 +3020,35 @@
 #define ParamPM_pDPresenceShortCalculation ((bool)(knx.paramByte(PM_ParamCalcIndex(PM_pDPresenceShortCalculation)) & PM_pDPresenceShortCalculationMask))
 // Funktion der Tagesphase
 #define ParamPM_pDDayPhaseFunction        ((knx.paramByte(PM_ParamCalcIndex(PM_pDDayPhaseFunction)) & PM_pDDayPhaseFunctionMask) >> PM_pDDayPhaseFunctionShift)
-// Zeitbasis
+// Nachlaufzeit
 #define ParamPM_pDPresenceDelayBase       ((knx.paramByte(PM_ParamCalcIndex(PM_pDPresenceDelayBase)) & PM_pDPresenceDelayBaseMask) >> PM_pDPresenceDelayBaseShift)
-// Zeit
+// Nachlaufzeit
 #define ParamPM_pDPresenceDelayTime       (knx.paramWord(PM_ParamCalcIndex(PM_pDPresenceDelayTime)) & PM_pDPresenceDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit (in Millisekunden)
 #define ParamPM_pDPresenceDelayTimeMS     (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pDPresenceDelayTime))))
-// Zeitbasis
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pDPresenceShortDurationBase ((knx.paramByte(PM_ParamCalcIndex(PM_pDPresenceShortDurationBase)) & PM_pDPresenceShortDurationBaseMask) >> PM_pDPresenceShortDurationBaseShift)
-// Zeit
+// Dauer-der-kurzen-Anwesenheit
 #define ParamPM_pDPresenceShortDurationTime (knx.paramWord(PM_ParamCalcIndex(PM_pDPresenceShortDurationTime)) & PM_pDPresenceShortDurationTimeMask)
-// Zeit (in Millisekunden)
+// Dauer-der-kurzen-Anwesenheit (in Millisekunden)
 #define ParamPM_pDPresenceShortDurationTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pDPresenceShortDurationTime))))
-// Zeitbasis
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pDPresenceShortDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pDPresenceShortDelayBase)) & PM_pDPresenceShortDelayBaseMask) >> PM_pDPresenceShortDelayBaseShift)
-// Zeit
+// Nachlaufzeit-bei-kurzer-Anwesenheit
 #define ParamPM_pDPresenceShortDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pDPresenceShortDelayTime)) & PM_pDPresenceShortDelayTimeMask)
-// Zeit (in Millisekunden)
+// Nachlaufzeit-bei-kurzer-Anwesenheit (in Millisekunden)
 #define ParamPM_pDPresenceShortDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pDPresenceShortDelayTime))))
-// Zeitbasis
+// Ausschalten-verzoegern-um
 #define ParamPM_pDBrightnessOffDelayBase  ((knx.paramByte(PM_ParamCalcIndex(PM_pDBrightnessOffDelayBase)) & PM_pDBrightnessOffDelayBaseMask) >> PM_pDBrightnessOffDelayBaseShift)
-// Zeit
+// Ausschalten-verzoegern-um
 #define ParamPM_pDBrightnessOffDelayTime  (knx.paramWord(PM_ParamCalcIndex(PM_pDBrightnessOffDelayTime)) & PM_pDBrightnessOffDelayTimeMask)
-// Zeit (in Millisekunden)
+// Ausschalten-verzoegern-um (in Millisekunden)
 #define ParamPM_pDBrightnessOffDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pDBrightnessOffDelayTime))))
-// Zeitbasis
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pDManualFallbackDelayBase ((knx.paramByte(PM_ParamCalcIndex(PM_pDManualFallbackDelayBase)) & PM_pDManualFallbackDelayBaseMask) >> PM_pDManualFallbackDelayBaseShift)
-// Zeit
+// Manuellen-Modus-beenden-nach
 #define ParamPM_pDManualFallbackDelayTime (knx.paramWord(PM_ParamCalcIndex(PM_pDManualFallbackDelayTime)) & PM_pDManualFallbackDelayTimeMask)
-// Zeit (in Millisekunden)
+// Manuellen-Modus-beenden-nach (in Millisekunden)
 #define ParamPM_pDManualFallbackDelayTimeMS (paramDelay(knx.paramWord(PM_ParamCalcIndex(PM_pDManualFallbackDelayTime))))
 // Einschalten: Unterhalb welcher Helligkeit
 #define ParamPM_pDBrightnessOn            (knx.paramWord(PM_ParamCalcIndex(PM_pDBrightnessOn)))
