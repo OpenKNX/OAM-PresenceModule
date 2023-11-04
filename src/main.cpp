@@ -1,7 +1,7 @@
 #include "Logic.h"
 #include "Presence.h"
 #ifdef ARDUINO_ARCH_RP2040
-    #include "UpdaterModule.h"
+    #include "FileTransferModule.h"
 #endif
 #include "OpenKNX.h"
 
@@ -16,7 +16,7 @@ uint8_t mSerial2Active = false;
 
 void setup()
 {
-    const uint8_t firmwareRevision = 0;
+    const uint8_t firmwareRevision = 1;
 
 #ifdef HF_POWER_PIN
     pinMode(HF_POWER_PIN, OUTPUT);
@@ -37,7 +37,7 @@ void setup()
     openknx.addModule(1, new Logic());
     openknx.addModule(2, new Presence());
 #ifdef ARDUINO_ARCH_RP2040
-    openknx.addModule(3, new UpdaterModule());
+    openknx.addModule(3, new FileTransferModule());
 #endif
     openknx.setup();
 }
