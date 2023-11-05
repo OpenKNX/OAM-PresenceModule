@@ -45,7 +45,11 @@ if (!$?) { exit 1 }
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
 if (!$?) { exit 1 }
 
-# build firmware for OpenKNX-REG1-Base
+# build firmware for OpenKNX-REG1-Base-V1
+lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base_V1 firmware-OpenKNX-REG1-Base-V1 uf2
+if (!$?) { exit 1 }
+
+# build firmware for OpenKNX-UP1
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_UP1 firmware-OpenKNX-UP1 uf2
 if (!$?) { exit 1 }
 
