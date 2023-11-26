@@ -11,7 +11,7 @@
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 1
 #define MAIN_ApplicationVersion 130
-#define MAIN_ParameterSize 5375
+#define MAIN_ParameterSize 5378
 #define MAIN_MaxKoNumber 539
 #define MAIN_OrderNumber "OpenKnxPresence"
 #define LOG_ModuleVersion 32
@@ -383,6 +383,13 @@
 #define PM_HfSensitivity             34      // 4 Bits, Bit 4-1
 #define     PM_HfSensitivityMask 0x1E
 #define     PM_HfSensitivityShift 1
+#define PM_HfDelayTime               35      // uint16_t
+#define PM_HfRangeGateMin            37      // 4 Bits, Bit 7-4
+#define     PM_HfRangeGateMinMask 0xF0
+#define     PM_HfRangeGateMinShift 4
+#define PM_HfRangeGateMax            37      // 4 Bits, Bit 3-0
+#define     PM_HfRangeGateMaxMask 0x0F
+#define     PM_HfRangeGateMaxShift 0
 
 // PM-Kanäle
 #define ParamPM_PMChannels                (knx.paramByte(PM_PMChannels))
@@ -414,11 +421,18 @@
 #define ParamPM_HfScenario                ((knx.paramByte(PM_HfScenario) & PM_HfScenarioMask) >> PM_HfScenarioShift)
 // Sensor-Empfindlichkeit
 #define ParamPM_HfSensitivity             ((knx.paramByte(PM_HfSensitivity) & PM_HfSensitivityMask) >> PM_HfSensitivityShift)
+// Verzögerung
+#define ParamPM_HfDelayTime               (knx.paramWord(PM_HfDelayTime))
+// Mindestentfernung
+#define ParamPM_HfRangeGateMin            ((knx.paramByte(PM_HfRangeGateMin) & PM_HfRangeGateMinMask) >> PM_HfRangeGateMinShift)
+// Maximalentfernung
+#define ParamPM_HfRangeGateMax            (knx.paramByte(PM_HfRangeGateMax) & PM_HfRangeGateMaxMask)
 
 #define PM_KoLuxOut 20
 #define PM_KoPresenceOut 21
 #define PM_KoMoveOut 22
 #define PM_KoMoveSpeedOut 23
+#define PM_KoDistanceOut 29
 #define PM_KoLEDPresence 24
 #define PM_KoLEDMove 25
 #define PM_KoScenario 26
@@ -433,6 +447,8 @@
 #define KoPM_MoveOut                   (knx.getGroupObject(PM_KoMoveOut))
 // Bewegungsmoment
 #define KoPM_MoveSpeedOut              (knx.getGroupObject(PM_KoMoveSpeedOut))
+// Entfernung
+#define KoPM_DistanceOut               (knx.getGroupObject(PM_KoDistanceOut))
 // Eingang LED Präsenz
 #define KoPM_LEDPresence               (knx.getGroupObject(PM_KoLEDPresence))
 // Eingang LED Bewegung
@@ -447,7 +463,7 @@
 #define LOG_ChannelCount 30
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 35
+#define LOG_ParamBlockOffset 38
 #define LOG_ParamBlockSize 86
 #define LOG_ParamCalcIndex(index) (index + LOG_ParamBlockOffset + _channelIndex * LOG_ParamBlockSize)
 
@@ -2045,7 +2061,7 @@
 #define PM_ChannelCount 20
 
 // Parameter per channel
-#define PM_ParamBlockOffset 2615
+#define PM_ParamBlockOffset 2618
 #define PM_ParamBlockSize 138
 #define PM_ParamCalcIndex(index) (index + PM_ParamBlockOffset + _channelIndex * PM_ParamBlockSize)
 
