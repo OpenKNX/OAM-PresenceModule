@@ -20,8 +20,15 @@ void setup()
 
 #ifdef HF_POWER_PIN
     pinMode(HF_POWER_PIN, OUTPUT);
+#if BOARD_AB_HFPM_HLKLD2420
+    digitalWrite(HF_POWER_PIN, HIGH);
+    // ensure no data lost even for sensor raw data
+    // up to 1288 bytes are send by the sensor at once
+    Serial2.setFIFOSize(1300);
+#else
     // at startup, we turn HF-Sensor off
     digitalWrite(HF_POWER_PIN, LOW);
+#endif
     Serial2.setRX(HF_UART_RX_PIN);
     Serial2.setTX(HF_UART_TX_PIN);
     Wire1.setSDA(I2C_SDA_PIN);
@@ -31,6 +38,10 @@ void setup()
     pinMode(MOVE_LED_PIN, OUTPUT);
     pinMode(HF_S1_PIN, INPUT);
     pinMode(HF_S2_PIN, INPUT);
+#endif
+
+#ifdef PIR_PIN
+    pinMode(PIR_PIN, INPUT_PULLDOWN);
 #endif
 
     openknx.init(firmwareRevision);
@@ -53,7 +64,7 @@ void loop()
         {
             // we start HF communication as late as possible
             mSerial2Active = true;
-            Serial2.begin(9600);
+            Serial2.begin(HF_SERIAL_SPEED);
         }
     }
     else
