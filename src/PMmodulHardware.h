@@ -4,6 +4,32 @@
 
 #include <OpenKNXHardware.h>
 
+// REG1-Base
+// https://github.com/OpenKNX/OpenKNX/wiki/REG1-Base
+#ifdef OKNXHW_REG1_BASE_V1
+
+#define INFO1_LED_PIN 6
+#define INFO1_LED_PIN_ACTIVE_ON HIGH
+
+#define INFO2_LED_PIN 24
+#define INFO2_LED_PIN_ACTIVE_ON HIGH
+
+#define INFO3_LED_PIN 22
+#define INFO3_LED_PIN_ACTIVE_ON HIGH
+
+#define FUNC1_BUTTON_PIN 7
+
+#define PROG_LED_PIN 25
+#define PROG_LED_PIN_ACTIVE_ON HIGH
+#define PROG_BUTTON_PIN 23
+#define PROG_BUTTON_PIN_INTERRUPT_ON FALLING
+#define SAVE_INTERRUPT_PIN 3
+#define KNX_SERIAL Serial1
+#define KNX_UART_RX_PIN 1
+#define KNX_UART_TX_PIN 0
+
+#endif
+
 // // Board specific definietions
 // // #define BOARD_MASIFI
 // // ################################################

@@ -83,6 +83,15 @@ Alle Logikkanäle sind in der [Applikation Logik](https://github.com/OpenKNX/OAM
 
 Im folgenden werden Änderungen an dem Dokument erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren.
 
+15.02.2024: Firmware 1.15, Applikation 1.15
+
+* Hardware support for REG1-Base-V1 
+* Aktualisierung auf die neuste Logikmodul-Version 1.7, siehe dortige Änderungshistorie
+
+11.12.2023: Firmware 1.13, Applikation 1.13
+
+* FIX: Das wiedereinschalten über ein Helligkeitstelegramm wird verhindert, wenn als Ausschaltschwelle 0 Lux angegeben wurden.
+
 09.10.2023: Firmware 1.12, Applikation 1.12
 
 * Aktualisierung auf die neuste Logikmodul-Version 1.6, siehe dortige Änderungshistorie

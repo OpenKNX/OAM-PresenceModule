@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns="http://knx.org/xml/project/14" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
+  <op:nowarn id="1" regex="%MID%" />
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
       <Catalog>
