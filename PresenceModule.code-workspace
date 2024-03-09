@@ -16,7 +16,7 @@
 			"path": "../OGM-Common"
 		},
 		{
-			"path": "../OFM-Updater"
+			"path": "../OFM-FileTransferModule"
 		},
 		{
 			"path": "../OFM-SmartMF"
