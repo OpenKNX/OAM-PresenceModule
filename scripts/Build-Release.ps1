@@ -42,8 +42,13 @@ lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_1TE_RP2040_SmartMF 
 if (!$?) { exit 1 }
 
 # build firmware for OpenKNX-REG1-Base
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Controller2040 firmware-OpenKNX-REG1-Controller-RP2040 uf2
+lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Controller2040 firmware-OpenKNX-REG1-BASE-V0 uf2
 if (!$?) { exit 1 }
+
+# build firmware for OpenKNX-REG1-Base
+lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_BASE_V1 firmware-OpenKNX-REG1-BASE-V1 uf2
+if (!$?) { exit 1 }
+
 
 lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
 if (!$?) { exit 1 }

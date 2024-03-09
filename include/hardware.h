@@ -311,8 +311,11 @@
         #define MOVE_LED_PIN_ACTIVE_ON HIGH
         #define KNX_UART_TX_PIN 12
         #define KNX_UART_RX_PIN 13
+        #define I2C_WIRE Wire1
         #define I2C_SDA_PIN 2
         #define I2C_SCL_PIN 3
+        #define HF_SERIAL Serial2
+        #define HF_SERIAL_SPEED 9600
         #define HF_UART_TX_PIN 4
         #define HF_UART_RX_PIN 5
         #define HF_S1_PIN 6
@@ -341,8 +344,11 @@
         #define MOVE_LED_PIN_ACTIVE_ON HIGH
         #define KNX_UART_TX_PIN 12
         #define KNX_UART_RX_PIN 13
+        #define I2C_WIRE Wire1
         #define I2C_SDA_PIN 26 // I2C1
         #define I2C_SCL_PIN 27 // I2C1
+        #define HF_SERIAL Serial2
+        #define HF_SERIAL_SPEED 9600
         #define HF_UART_TX_PIN 4
         #define HF_UART_RX_PIN 5
         #define HF_S1_PIN 2
@@ -366,8 +372,11 @@
         #define MOVE_LED_PIN_ACTIVE_ON HIGH
         #define KNX_UART_TX_PIN 12
         #define KNX_UART_RX_PIN 13
+        #define I2C_WIRE Wire1
         #define I2C_SDA_PIN 26 // I2C1
         #define I2C_SCL_PIN 27 // I2C1
+        #define HF_SERIAL Serial2
+        #define HF_SERIAL_SPEED 9600
         #define HF_UART_TX_PIN 4
         #define HF_UART_RX_PIN 5
         #define HF_S1_PIN 2
