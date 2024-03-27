@@ -10,3 +10,5 @@ release-package/*
 doc/TP_Radar_Sensor/*
 src/PMmodul.baggages/*
 platformio.ini.full.txt
+release-collection/*
+

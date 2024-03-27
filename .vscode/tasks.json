@@ -156,7 +156,7 @@
             "group": "test"
         },
         {
-            "label": "resolve platformio.ini",
+            "label": "Resolve platformio.ini",
             "type": "shell",
             "command": "~/.platformio/penv/Scripts/pio",
             "args": [
