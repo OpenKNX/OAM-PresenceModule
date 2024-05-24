@@ -18,7 +18,7 @@ param(
   [string]$DependenciesFile = "dependencies.txt", # Default is "dependencies.txt"
 
   # Check for privileges (Windows only)
-  [switch]$CheckForDeveloperMode = $true, # Default is $true
+  [switch]$CheckForDeveloperMode = $true,  # Default is $true
   [switch]$CheckForSymbolicLinkPermissions = $true, # Default is $true
   [switch]$CheckForAdminOnly = $false, # Default is $false
 
@@ -29,13 +29,14 @@ param(
 
 # Construct the command to invoke Restore-Dependencies.ps1
 $command = ".\Restore-Dependencies.ps1" +
-" -GitCheckoutMode $GitCheckoutMode" +
-" -ForceRecreateSymLinks $ForceRecreateSymLinks" +
-" -DependenciesFile $DependenciesFile" +
-" -CheckForDeveloperMode $CheckForDeveloperMode" +
-" -CheckForSymbolicLinkPermissions $CheckForSymbolicLinkPermissions" +
-" -Verbose:$Verbose" +
-" -DebugMsg:$DebugMsg"
+           " -GitCheckoutMode $GitCheckoutMode" +
+           " -ForceRecreateSymLinks:`$$ForceRecreateSymLinks" +
+           " -DependenciesFile $DependenciesFile" +
+           " -CheckForDeveloperMode:`$$CheckForDeveloperMode" +
+           " -CheckForSymbolicLinkPermissions:`$$CheckForSymbolicLinkPermissions" +
+           " -CheckForAdminOnly:`$$CheckForAdminOnly" +
+           " -Verbose:`$$Verbose" +
+           " -DebugMsg:`$$DebugMsg"
 
 # Execute the command
 Invoke-Expression $command

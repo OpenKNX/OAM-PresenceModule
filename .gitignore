@@ -8,7 +8,7 @@
 release/*
 release-package/*
 doc/TP_Radar_Sensor/*
-src/PMmodul.baggages/*
+**/*.baggages/*
 platformio.ini.full.txt
 release-collection/*
 
