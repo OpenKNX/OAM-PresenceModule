@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "../knx"
+		},
+		{
+			"path": "../OFM-ConfigTransfer"
 		}
 	],
 	"settings": {

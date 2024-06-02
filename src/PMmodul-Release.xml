@@ -15,7 +15,14 @@
   />
   <op:define prefix="BASE" ModuleType="1"
              share="../lib/OGM-Common/src/Common.share.xml">
-    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="1.1" />
+    <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="%BASE_VerifyVersion%" />
+  </op:define>
+
+  <op:define prefix="UCT"
+    share="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml"
+    noConfigTransfer="true"
+    ModuleType="99">
+    <op:verify File="../../OFM-ConfigTransfer/library.json" ModuleVersion="%UCT_VerifyVersion%" />
   </op:define>
 
   <op:define prefix="PM" 
@@ -24,7 +31,7 @@
              NumChannels="20" 
              KoOffset="50" 
              ModuleType="2">
-    <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="3.0" />
+    <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="%PM_VerifyVersion%" />
   </op:define>
 
   <op:define prefix="LOG" 
@@ -33,7 +40,7 @@
              NumChannels="30" 
              KoOffset="450" 
              ModuleType="1" >
-    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="3.2" />
+    <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />
   </op:define>
   <generate />
 </KNX>

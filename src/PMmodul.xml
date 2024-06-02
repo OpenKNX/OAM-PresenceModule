@@ -20,6 +20,14 @@
   <op:define prefix="BASE" ModuleType="1"
              share="../lib/OGM-Common/src/Common.share.xml"
   />
+
+  <op:define prefix="UCT"
+    share="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml"
+    noConfigTransfer="true"
+    ModuleType="99">
+    <op:verify File="../../OFM-ConfigTransfer/library.json" ModuleVersion="0.1" />
+  </op:define>
+
   <op:define prefix="PM"
     share="../lib/OFM-PresenceModule/src/PMmodul.share.xml"
     template="../lib/OFM-PresenceModule/src/PMmodul.templ.xml"

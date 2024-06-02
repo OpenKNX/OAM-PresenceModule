@@ -358,7 +358,7 @@ function CloneRepository($projectFilesGitInfo, $dependedProjects, $CloneDir, $Cl
           }
         }
         if($DoClone) {
-          Invoke-RestMethod -Uri $GitClone -Method Head -ErrorAction Stop;
+          #Invoke-RestMethod -Uri $GitClone -Method Head -ErrorAction Stop;
           if($Verbose) { $GitCmd= "git clone '$($GitClone)' '$($CloneTarget.ToString())'" 
           } else { $GitCmd= "git clone -q '$($GitClone)' '$($CloneTarget.ToString())'" }
           Invoke-Expression $($GitCmd)
@@ -409,8 +409,10 @@ function CloneRepository($projectFilesGitInfo, $dependedProjects, $CloneDir, $Cl
 
         # Let's do the git checkout
         if($Verbose) { 
+          Invoke-Expression "$GitCmd fetch --all"
           Invoke-Expression "$GitCmd $CheckOutMethod $($CheckOutTarget)"
         } else { 
+          Invoke-Expression "$GitCmd fetch --all -q" | Out-Null
           Invoke-Expression "$GitCmd $CheckOutMethod $($CheckOutTarget) -q" | Out-Null
         }
 
@@ -424,6 +426,35 @@ function CloneRepository($projectFilesGitInfo, $dependedProjects, $CloneDir, $Cl
         if($Verbose) {
           $checkoutTarget = if ($CloneModeHash) {  "Hash '$($dependedProject.Hash)'" } else { "Branch '$($dependedProject.Branch)'" }
           Write-Host "- CloneRepository - $($dependedProject.ProjectName) - Checkout Error! Cannot checkout $($checkoutTarget) Checked out."([Char]0x2717) -ForegroundColor Red }
+      }
+    }
+
+    # Repository exists and the correct branch or hash is already checked out
+    # if freshly cloned or checkout, no action needed but when switched or correct branch was set, we need to pull last changes
+    # if CloneMode Branch, check if the branch is up-to-date
+    if (-not $CloneModeHash)
+    {
+      if($Verbose) { Write-Host "- CloneRepository - Pull: "$dependedProject.ProjectName" - "$dependedProject.URL -ForegroundColor Green }
+      try{
+        if($IsWinEnv){
+          $CloneTarget = Join-Path $CloneDir $dependedProject.ProjectName
+          $GitDir = Join-Path $CloneTarget ".git"
+        } else {
+          $CloneTarget = Join-Path -Path $CloneDir -ChildPath $dependedProject.ProjectName
+          $GitDir = Join-Path -Path $CloneTarget -ChildPath ".git"
+        }
+        
+        $GitCmd = "git --git-dir=""$($GitDir)"" --work-tree=""$($CloneTarget.ToString())"""
+
+        if($Verbose) { 
+          Invoke-Expression "$GitCmd pull --ff-only"
+        } else { 
+          Invoke-Expression "$GitCmd pull --ff-only -q" | Out-Null
+        }
+      }
+      catch {
+        if($Verbose) {
+          Write-Host "- CloneRepository - $($dependedProject.ProjectName) - Pull Error!"([Char]0x2717) -ForegroundColor Red }
       }
     }
   }
