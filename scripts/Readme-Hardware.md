@@ -2,7 +2,7 @@
 
 Die Software für dieses Release wurde auf folgender Hardware getestet und läuft damit "out-of-the-box":
 
-* **Smart-MF Sensormodul** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder, um die Applikationen von alten oder unzuverlässigen Präsenzmeldern zu verbessern
+* **Smart-MF Sensormodul 4.x** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder, um die Applikationen von alten oder unzuverlässigen Präsenzmeldern zu verbessern
 * **PiPico-BCU-Connector** [OpenKNX-Wiki](https://github.com/OpenKNX/OpenKNX/wiki/PiPico-BCU-Connector), als virtueller Präsenzmelder
 * **1TE-RP2040-Smart-MF** [www.smart-mf.de](https://www.smart-mf.de), als virtueller Präsenzmelder auf allen Varianten lauffähig
 * **OpenKNX-UP1-System** [OpenKNX-Wiki](https://github.com/OpenKNX/OpenKNX/wiki/OpenKNX-UP1), als virtueller Präsenzmelder auf allen Varianten lauffähig

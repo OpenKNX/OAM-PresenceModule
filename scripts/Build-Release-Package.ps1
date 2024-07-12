@@ -22,7 +22,11 @@ scripts/Build-Release.ps1 Big
 if (!$?) { exit 1 }
 Copy-Item release/* release-package
 
-scripts/Build-Release.ps1 Release
+# scripts/Build-Release.ps1 Release
+# if (!$?) { exit 1 }
+# Copy-Item release/* release-package
+
+scripts/Build-Release.ps1 IP
 if (!$?) { exit 1 }
 Copy-Item release/* release-package
 

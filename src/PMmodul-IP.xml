@@ -3,25 +3,29 @@
 <KNX xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
 
   <op:config href="PMmodul.conf.xml" />
-
-  <op:nowarn id="1" regex="NET_VerifyVersion" />
-
-  <op:ETS OpenKnxId="0xA0"
-    ApplicationNumber="0x02"
-    ApplicationVersion="%PM_ApplicationVersion%"
-    ReplacesVersions="%PM_ReplacesVersions%"
-    ApplicationRevision="0"
-    BuildSuffix="-Big"
-    BuildSuffixText=" (groß)"
-    ProductName="Präsenzmelder"
-    ApplicationName="Presence-Logic"
-    OrderNumber="OpenKnxPresenceBig"
+  
+  <op:ETS OpenKnxId="0xA0" 
+          ApplicationNumber="0x03" 
+          ApplicationVersion="%PM_ApplicationVersion%"
+          ReplacesVersions="%PM_ReplacesVersions%" 
+          ApplicationRevision="0" 
+          BuildSuffix="-IP"
+          BuildSuffixText=" IP"
+          ProductName="Präsenzmelder"
+          ApplicationName="Presence-Logic-Net"
+          OrderNumber="OpenKnxPresenceIP"         
   />
-  <op:define prefix="BASE" ModuleType="1"
+  <op:define prefix="BASE" ModuleType="10"
              share="../lib/OGM-Common/src/Common.share.xml">
     <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="%BASE_VerifyVersion%" />
   </op:define>
 
+  <op:define prefix="NET" 
+            share="../lib/OFM-Network/src/Network.share.xml"
+            ModuleType="11">
+    <op:verify File="../lib/OFM-Network/library.json" ModuleVersion="%NET_VerifyVersion%" /> 
+  </op:define>
+ 
   <op:define prefix="UCT"
     share="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml"
     noConfigTransfer="true"
@@ -34,7 +38,7 @@
              template="../lib/OFM-PresenceModule/src/PMmodul.templ.xml"
              NumChannels="40" 
              KoOffset="50" 
-             ModuleType="2">
+             ModuleType="20">
     <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="%PM_VerifyVersion%" />
   </op:define>
 
@@ -43,7 +47,7 @@
              template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" 
              NumChannels="99" 
              KoOffset="850" 
-             ModuleType="1" >
+             ModuleType="10" >
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />
   </op:define>
   <generate />

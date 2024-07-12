@@ -140,6 +140,16 @@
             "group": "test"
         },
         {
+            "label": "Build-IP",
+            "type": "shell",
+            "command": "scripts/Build-IP.ps1",
+            "args": [
+                "IP"
+            ],
+            "problemMatcher": [],
+            "group": "test"
+        },
+        {
             "label": "Build-Release-Package",
             "type": "shell",
             "command": "scripts/Build-Release-Package.ps1",

@@ -49,7 +49,7 @@ param(
   [string]$DependenciesFile= "dependencies.txt", # Default is "dependencies.txt"
 
   # Check for privileges (Windows only)
-  [switch]$CheckForDeveloperMode= $true,  # Default is $true
+  [switch]$CheckForDeveloperMode= $false,  # Default is $false
   [switch]$CheckForSymbolicLinkPermissions= $true, # Default is $true
   [switch]$CheckForAdminOnly= $false, # Default is $false
 
