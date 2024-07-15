@@ -30,29 +30,29 @@ $releaseIndication = $args[0]
 lib/OGM-Common/scripts/setup/reusable/Build-Release-Preprocess.ps1 $args[0]
 if (!$?) { exit 1 }
 
-# build firmware based on generated headerfile for RP2040
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2 DeveloperBoard-JustForTesters
-if (!$?) { exit 1 }
-
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
-if (!$?) { exit 1 }
-
-# build firmware for 1TE-RP2040-SmartMF
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_1TE_RP2040_SmartMF firmware-1TE-RP2040-SmartMF uf2
-if (!$?) { exit 1 }
-
-# build firmware for OpenKNX-REG1-Base
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
-if (!$?) { exit 1 }
-
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
-if (!$?) { exit 1 }
-
-# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence_v20 firmware-RealPresence_v2.0 uf2
+# # build firmware based on generated headerfile for RP2040
+# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2 DeveloperBoard-JustForTesters
 # if (!$?) { exit 1 }
 
-lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v40_RP2040 firmware-Sensormodul-v40-RP2040 uf2
-if (!$?) { exit 1 }
+# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
+# if (!$?) { exit 1 }
+
+# # build firmware for 1TE-RP2040-SmartMF
+# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_1TE_RP2040_SmartMF firmware-1TE-RP2040-SmartMF uf2
+# if (!$?) { exit 1 }
+
+# # build firmware for OpenKNX-REG1-Base
+# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_OpenKNX_REG1_Base firmware-OpenKNX-REG1-Base uf2
+# if (!$?) { exit 1 }
+
+# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
+# if (!$?) { exit 1 }
+
+# # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence_v20 firmware-RealPresence_v2.0 uf2
+# # if (!$?) { exit 1 }
+
+# lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_v40_RP2040 firmware-Sensormodul-v40-RP2040 uf2
+# if (!$?) { exit 1 }
 
 if ($releaseIndication -ne "Big")
 {
