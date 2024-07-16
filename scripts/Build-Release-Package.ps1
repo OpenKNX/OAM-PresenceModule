@@ -26,7 +26,7 @@ Copy-Item release/* release-package
 # if (!$?) { exit 1 }
 # Copy-Item release/* release-package
 
-scripts/Build-Release.ps1 IP
+scripts/Build-IP.ps1 IP
 if (!$?) { exit 1 }
 Copy-Item release/* release-package
 

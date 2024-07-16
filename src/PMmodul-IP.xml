@@ -4,16 +4,20 @@
 
   <op:config href="PMmodul.conf.xml" />
   
-  <op:ETS OpenKnxId="0xA0" 
-          ApplicationNumber="0x03" 
-          ApplicationVersion="%PM_ApplicationVersion%"
-          ReplacesVersions="%PM_ReplacesVersions%" 
-          ApplicationRevision="0" 
-          BuildSuffix="-IP"
-          BuildSuffixText=" IP"
-          ProductName="Präsenzmelder"
-          ApplicationName="Presence-Logic-Net"
-          OrderNumber="OpenKnxPresenceIP"         
+  <op:ETS OpenKnxId="0xA0"
+    ApplicationNumber="0x03"
+    ApplicationVersion="%PM_ApplicationVersion%"
+    ReplacesVersions="%PM_ReplacesVersions%"
+    ApplicationRevision="0"
+    BuildSuffix="-IP"
+    BuildSuffixText=" IP"
+    ProductName="Präsenzmelder"
+    ApplicationName="Presence-Logic-Net"
+    OrderNumber="OpenKnxPresenceIP"
+    IsRailMounted="true"
+    BaggagesRootDir="A0/02"
+    MaskVersion="MV-57B0"
+    MediumTypes="MT-5"
   />
   <op:define prefix="BASE" ModuleType="10"
              share="../lib/OGM-Common/src/Common.share.xml">
