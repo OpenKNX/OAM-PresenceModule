@@ -14,5 +14,5 @@
 
   <op:config name="%PM_ApplicationVersion%" value="3.0" />
   <op:config name="%PM_ReplacesVersions%" value="2.15" />
-  <op:config name="%BTN_HideInputSelector%" value="1" />
+  <op:config name="%BTN_ShowInputSelector%" value="0" />
 </KNX>

@@ -355,6 +355,10 @@
         #define HF_S2_PIN 3
         #define HF_POWER_PIN 10
         #define SAVE_INTERRUPT_PIN 11
+        #define SmartMF_HardwareVariant_PIN 29
+        #define SmartMF_HardwareRevision_ID1 22
+        #define SmartMF_HardwareRevision_ID2 23
+        #define SmartMF_HardwareRevision_ID3 24
     // #define SENSOR_I2C_OPT300x Wire1
     // #define SENSOR_I2C_VEML7700 Wire1
     #endif
@@ -383,6 +387,10 @@
         #define HF_S2_PIN 3
         #define HF_POWER_PIN 28
         #define SAVE_INTERRUPT_PIN 11
+        #define SmartMF_HardwareVariant_PIN 29
+        #define SmartMF_HardwareRevision_ID1 22
+        #define SmartMF_HardwareRevision_ID2 23
+        #define SmartMF_HardwareRevision_ID3 24
     // #define SENSOR_I2C_OPT300x Wire1
     // #define SENSOR_I2C_VEML7700 Wire1
     #endif
