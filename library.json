@@ -1,6 +1,6 @@
 {
     "name": "OAM-PresenceModule",
-    "version": "3.0.0",
+    "version": "3.1.0",
     "description": "Virtual Presence application for the knx stack, can be parametrized with ETS",
     "homepage": "https://openknx.de",
     "authors": {

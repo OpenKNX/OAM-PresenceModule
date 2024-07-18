@@ -9,16 +9,17 @@
                                          (time & 0x3FFF) * 3600000 ) : 0 )
                                              
 #define MAIN_OpenKnxId 0xA0
-#define MAIN_ApplicationNumber 2
-#define MAIN_ApplicationVersion 48
-#define MAIN_ParameterSize 18501
+#define MAIN_ApplicationNumber 3
+#define MAIN_ApplicationVersion 49
+#define MAIN_ParameterSize 18577
 #define MAIN_MaxKoNumber 1509
-#define MAIN_OrderNumber "OpenKnxPresenceBig"
+#define MAIN_OrderNumber "OpenKnxPresenceIP"
 #define BASE_ModuleVersion 18
+#define NET_ModuleVersion 3
 #define UCT_ModuleVersion 1
-#define PM_ModuleVersion 48
-#define LOG_ModuleVersion 51
+#define PM_ModuleVersion 49
 #define BTN_ModuleVersion 5
+#define LOG_ModuleVersion 51
 // Parameter with single occurrence
 
 
@@ -145,57 +146,107 @@
 // Speichern
 #define KoBASE_ManualSave                          (knx.getGroupObject(BASE_KoManualSave))
 
+#define NET_HostAddress                         46      // IP address, 4 Byte
+#define NET_SubnetMask                          50      // IP address, 4 Byte
+#define NET_GatewayAddress                      54      // IP address, 4 Byte
+#define NET_NameserverAddress                   58      // IP address, 4 Byte
+#define NET_CustomHostname                      62      // 1 Bit, Bit 7
+#define     NET_CustomHostnameMask 0x80
+#define     NET_CustomHostnameShift 7
+#define NET_StaticIP                            62      // 1 Bit, Bit 6
+#define     NET_StaticIPMask 0x40
+#define     NET_StaticIPShift 6
+#define NET_mDNS                                63      // 1 Bit, Bit 7
+#define     NET_mDNSMask 0x80
+#define     NET_mDNSShift 7
+#define NET_HTTP                                63      // 1 Bit, Bit 6
+#define     NET_HTTPMask 0x40
+#define     NET_HTTPShift 6
+#define NET_NTP                                 63      // 1 Bit, Bit 5
+#define     NET_NTPMask 0x20
+#define     NET_NTPShift 5
+#define NET_HostName                            64      // char*, 24 Byte
+#define NET_LanMode                             105      // 4 Bits, Bit 7-4
+#define     NET_LanModeMask 0xF0
+#define     NET_LanModeShift 4
+#define NET_Dummy                               121      // uint8_t
+
+// IP-Adresse
+#define ParamNET_HostAddress                         (knx.paramInt(NET_HostAddress))
+// Subnetzsmaske
+#define ParamNET_SubnetMask                          (knx.paramInt(NET_SubnetMask))
+// Standardgateway
+#define ParamNET_GatewayAddress                      (knx.paramInt(NET_GatewayAddress))
+// Nameserver
+#define ParamNET_NameserverAddress                   (knx.paramInt(NET_NameserverAddress))
+// Hostname anpassen
+#define ParamNET_CustomHostname                      ((bool)(knx.paramByte(NET_CustomHostname) & NET_CustomHostnameMask))
+// DHCP
+#define ParamNET_StaticIP                            ((bool)(knx.paramByte(NET_StaticIP) & NET_StaticIPMask))
+// mDNS
+#define ParamNET_mDNS                                ((bool)(knx.paramByte(NET_mDNS) & NET_mDNSMask))
+// Weberver
+#define ParamNET_HTTP                                ((bool)(knx.paramByte(NET_HTTP) & NET_HTTPMask))
+// Zeitgeber (NTP)
+#define ParamNET_NTP                                 ((bool)(knx.paramByte(NET_NTP) & NET_NTPMask))
+// Hostname
+#define ParamNET_HostName                            (knx.paramData(NET_HostName))
+// LAN-Modus
+#define ParamNET_LanMode                             ((knx.paramByte(NET_LanMode) & NET_LanModeMask) >> NET_LanModeShift)
+// 
+#define ParamNET_Dummy                               (knx.paramByte(NET_Dummy))
 
 
-#define PM_VisibleChannels                     46      // uint8_t
-#define PM_LEDPresence                         47      // 2 Bits, Bit 7-6
+
+#define PM_VisibleChannels                     122      // uint8_t
+#define PM_LEDPresence                         123      // 2 Bits, Bit 7-6
 #define     PM_LEDPresenceMask 0xC0
 #define     PM_LEDPresenceShift 6
-#define PM_LEDMove                             47      // 2 Bits, Bit 5-4
+#define PM_LEDMove                             123      // 2 Bits, Bit 5-4
 #define     PM_LEDMoveMask 0x30
 #define     PM_LEDMoveShift 4
-#define PM_PirSensitivity                      47      // 4 Bits, Bit 3-0
+#define PM_PirSensitivity                      123      // 4 Bits, Bit 3-0
 #define     PM_PirSensitivityMask 0x0F
 #define     PM_PirSensitivityShift 0
-#define PM_HfPresence                          48      // 3 Bits, Bit 7-5
+#define PM_HfPresence                          124      // 3 Bits, Bit 7-5
 #define     PM_HfPresenceMask 0xE0
 #define     PM_HfPresenceShift 5
-#define PM_HfScenario                          48      // 3 Bits, Bit 4-2
+#define PM_HfScenario                          124      // 3 Bits, Bit 4-2
 #define     PM_HfScenarioMask 0x1C
 #define     PM_HfScenarioShift 2
-#define PM_HWLux                               48      // 2 Bits, Bit 1-0
+#define PM_HWLux                               124      // 2 Bits, Bit 1-0
 #define     PM_HWLuxMask 0x03
 #define     PM_HWLuxShift 0
-#define PM_HfSensitivity                       49      // 4 Bits, Bit 7-4
+#define PM_HfSensitivity                       125      // 4 Bits, Bit 7-4
 #define     PM_HfSensitivityMask 0xF0
 #define     PM_HfSensitivityShift 4
-#define PM_SendRAW                             49      // 1 Bit, Bit 3
+#define PM_SendRAW                             125      // 1 Bit, Bit 3
 #define     PM_SendRAWMask 0x08
 #define     PM_SendRAWShift 3
-#define PM_ReadLed                             49      // 1 Bit, Bit 2
+#define PM_ReadLed                             125      // 1 Bit, Bit 2
 #define     PM_ReadLedMask 0x04
 #define     PM_ReadLedShift 2
-#define PM_PirPresence                         49      // 2 Bits, Bit 1-0
+#define PM_PirPresence                         125      // 2 Bits, Bit 1-0
 #define     PM_PirPresenceMask 0x03
 #define     PM_PirPresenceShift 0
-#define PM_HfDelayTime                         50      // uint16_t
-#define PM_HfRangeGateMin                      52      // 4 Bits, Bit 7-4
+#define PM_HfDelayTime                         126      // uint16_t
+#define PM_HfRangeGateMin                      128      // 4 Bits, Bit 7-4
 #define     PM_HfRangeGateMinMask 0xF0
 #define     PM_HfRangeGateMinShift 4
-#define PM_HfRangeGateMax                      52      // 4 Bits, Bit 3-0
+#define PM_HfRangeGateMax                      128      // 4 Bits, Bit 3-0
 #define     PM_HfRangeGateMaxMask 0x0F
 #define     PM_HfRangeGateMaxShift 0
-#define PM_LuxOffsetPM                         53      // int8_t
-#define PM_LuxSendDeltaAbsRel                  54      // 1 Bit, Bit 7
+#define PM_LuxOffsetPM                         129      // int8_t
+#define PM_LuxSendDeltaAbsRel                  130      // 1 Bit, Bit 7
 #define     PM_LuxSendDeltaAbsRelMask 0x80
 #define     PM_LuxSendDeltaAbsRelShift 7
-#define PM_LuxSendDelta                        54      // 15 Bits, Bit 14-0
+#define PM_LuxSendDelta                        130      // 15 Bits, Bit 14-0
 #define     PM_LuxSendDeltaMask 0x7FFF
 #define     PM_LuxSendDeltaShift 0
-#define PM_LuxSendCycleDelayBase               56      // 2 Bits, Bit 7-6
+#define PM_LuxSendCycleDelayBase               132      // 2 Bits, Bit 7-6
 #define     PM_LuxSendCycleDelayBaseMask 0xC0
 #define     PM_LuxSendCycleDelayBaseShift 6
-#define PM_LuxSendCycleDelayTime               56      // 14 Bits, Bit 13-0
+#define PM_LuxSendCycleDelayTime               132      // 14 Bits, Bit 13-0
 #define     PM_LuxSendCycleDelayTimeMask 0x3FFF
 #define     PM_LuxSendCycleDelayTimeShift 0
 
@@ -275,7 +326,7 @@
 #define PM_ChannelCount 40
 
 // Parameter per channel
-#define PM_ParamBlockOffset 58
+#define PM_ParamBlockOffset 134
 #define PM_ParamBlockSize 138
 #define PM_ParamCalcIndex(index) (index + PM_ParamBlockOffset + _channelIndex * PM_ParamBlockSize)
 
@@ -1380,245 +1431,778 @@
 // Externen PM zurücksetzen
 #define KoPM_KOpResetExternalPM                  (knx.getGroupObject(PM_KoCalcNumber(PM_KoKOpResetExternalPM)))
 
-#define LOG_BuzzerInstalled                     5578      // 1 Bit, Bit 7
+#define BTN_ReactionTimeMultiClick              5654      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeLong                    5655      // 8 Bits, Bit 7-0
+#define BTN_ReactionTimeExtraLong               5656      // 8 Bits, Bit 7-0
+#define BTN_VisibleChannels                     5657      // uint8_t
+
+// Mehrfach-Klick
+#define ParamBTN_ReactionTimeMultiClick              (knx.paramByte(BTN_ReactionTimeMultiClick))
+// Langer Tastendruck
+#define ParamBTN_ReactionTimeLong                    (knx.paramByte(BTN_ReactionTimeLong))
+// Extra langer Tastendruck
+#define ParamBTN_ReactionTimeExtraLong               (knx.paramByte(BTN_ReactionTimeExtraLong))
+// Verfügbare Kanäle
+#define ParamBTN_VisibleChannels                     (knx.paramByte(BTN_VisibleChannels))
+
+#define BTN_ChannelCount 30
+
+// Parameter per channel
+#define BTN_ParamBlockOffset 5658
+#define BTN_ParamBlockSize 53
+#define BTN_ParamCalcIndex(index) (index + BTN_ParamBlockOffset + _channelIndex * BTN_ParamBlockSize)
+
+#define BTN_bMode                                0      // 7 Bits, Bit 7-1
+#define     BTN_bModeMask 0xFE
+#define     BTN_bModeShift 1
+#define BTN_bLock                                1      // 2 Bits, Bit 7-6
+#define     BTN_bLockMask 0xC0
+#define     BTN_bLockShift 6
+#define BTN_bMultiClickCount                     1      // 1 Bit, Bit 7
+#define     BTN_bMultiClickCountMask 0x80
+#define     BTN_bMultiClickCountShift 7
+#define BTN_bDynamicStatus                       1      // 1 Bit, Bit 2
+#define     BTN_bDynamicStatusMask 0x04
+#define     BTN_bDynamicStatusShift 2
+#define BTN_bInA                                 2      // 16 Bits, Bit 15-0
+#define BTN_bInB                                 4      // 16 Bits, Bit 15-0
+#define BTN_bReactionTimeMultiClick              6      // 8 Bits, Bit 7-0
+#define BTN_bReactionTimeLong                    7      // 8 Bits, Bit 7-0
+#define BTN_bReactionTimeExtraLong               8      // 8 Bits, Bit 7-0
+#define BTN_bOutShort_DPT                        9      // 8 Bits, Bit 7-0
+#define BTN_bOutLong_DPT                        10      // 8 Bits, Bit 7-0
+#define BTN_bOutExtraLong_DPT                   11      // 8 Bits, Bit 7-0
+#define BTN_bOutMulti_DPT                       12      // 8 Bits, Bit 7-0
+#define BTN_bOutMulti_Click1_Active             13      // 1 Bit, Bit 7
+#define     BTN_bOutMulti_Click1_ActiveMask 0x80
+#define     BTN_bOutMulti_Click1_ActiveShift 7
+#define BTN_bOutMulti_Click2_Active             13      // 1 Bit, Bit 6
+#define     BTN_bOutMulti_Click2_ActiveMask 0x40
+#define     BTN_bOutMulti_Click2_ActiveShift 6
+#define BTN_bOutMulti_Click3_Active             13      // 1 Bit, Bit 5
+#define     BTN_bOutMulti_Click3_ActiveMask 0x20
+#define     BTN_bOutMulti_Click3_ActiveShift 5
+#define BTN_bOutShort_T1_Active_Press           14      // 1 Bit, Bit 7
+#define     BTN_bOutShort_T1_Active_PressMask 0x80
+#define     BTN_bOutShort_T1_Active_PressShift 7
+#define BTN_bOutShort_T1_Active_Release         14      // 1 Bit, Bit 6
+#define     BTN_bOutShort_T1_Active_ReleaseMask 0x40
+#define     BTN_bOutShort_T1_Active_ReleaseShift 6
+#define BTN_bOutShort_T2_Active_Press           14      // 1 Bit, Bit 5
+#define     BTN_bOutShort_T2_Active_PressMask 0x20
+#define     BTN_bOutShort_T2_Active_PressShift 5
+#define BTN_bOutShort_T2_Active_Release         14      // 1 Bit, Bit 4
+#define     BTN_bOutShort_T2_Active_ReleaseMask 0x10
+#define     BTN_bOutShort_T2_Active_ReleaseShift 4
+#define BTN_bOutLong_T1_Active_Press            15      // 1 Bit, Bit 7
+#define     BTN_bOutLong_T1_Active_PressMask 0x80
+#define     BTN_bOutLong_T1_Active_PressShift 7
+#define BTN_bOutLong_T1_Active_Release          15      // 1 Bit, Bit 6
+#define     BTN_bOutLong_T1_Active_ReleaseMask 0x40
+#define     BTN_bOutLong_T1_Active_ReleaseShift 6
+#define BTN_bOutLong_T2_Active_Press            15      // 1 Bit, Bit 5
+#define     BTN_bOutLong_T2_Active_PressMask 0x20
+#define     BTN_bOutLong_T2_Active_PressShift 5
+#define BTN_bOutLong_T2_Active_Release          15      // 1 Bit, Bit 4
+#define     BTN_bOutLong_T2_Active_ReleaseMask 0x10
+#define     BTN_bOutLong_T2_Active_ReleaseShift 4
+#define BTN_bOutExtraLong_T1_Active_Press       16      // 1 Bit, Bit 7
+#define     BTN_bOutExtraLong_T1_Active_PressMask 0x80
+#define     BTN_bOutExtraLong_T1_Active_PressShift 7
+#define BTN_bOutExtraLong_T1_Active_Release     16      // 1 Bit, Bit 6
+#define     BTN_bOutExtraLong_T1_Active_ReleaseMask 0x40
+#define     BTN_bOutExtraLong_T1_Active_ReleaseShift 6
+#define BTN_bOutExtraLong_T2_Active_Press       16      // 1 Bit, Bit 5
+#define     BTN_bOutExtraLong_T2_Active_PressMask 0x20
+#define     BTN_bOutExtraLong_T2_Active_PressShift 5
+#define BTN_bOutExtraLong_T2_Active_Release     16      // 1 Bit, Bit 4
+#define     BTN_bOutExtraLong_T2_Active_ReleaseMask 0x10
+#define     BTN_bOutExtraLong_T2_Active_ReleaseShift 4
+#define BTN_bOutShort_T1_Dpt1_Press             17      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T1_Dpt1_Release           19      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T2_Dpt1_Press             21      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T2_Dpt1_Release           23      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt1_Press              25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt1_Release            27      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt1_Press              29      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt1_Release            31      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T1_Dpt1_Press         33      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T1_Dpt1_Release       35      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T2_Dpt1_Press         37      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T2_Dpt1_Release       39      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click1_Dpt1               41      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click2_Dpt1               43      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click3_Dpt1               45      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T1_Dpt2_Press             17      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T1_Dpt2_Release           19      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T2_Dpt2_Press             21      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T2_Dpt2_Release           23      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt2_Press              25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt2_Release            27      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt2_Press              29      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt2_Release            31      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T1_Dpt2_Press         33      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T1_Dpt2_Release       35      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T2_Dpt2_Press         37      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T2_Dpt2_Release       39      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click1_Dpt2               41      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click2_Dpt2               43      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click3_Dpt2               45      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T1_Dpt5_Press             17      // uint16_t
+#define BTN_bOutShort_T1_Dpt5_Release           19      // uint16_t
+#define BTN_bOutShort_T2_Dpt5_Press             21      // uint16_t
+#define BTN_bOutShort_T2_Dpt5_Release           23      // uint16_t
+#define BTN_bOutLong_T1_Dpt5_Press              25      // uint16_t
+#define BTN_bOutLong_T1_Dpt5_Release            27      // uint16_t
+#define BTN_bOutLong_T2_Dpt5_Press              29      // uint16_t
+#define BTN_bOutLong_T2_Dpt5_Release            31      // uint16_t
+#define BTN_bOutExtraLong_T1_Dpt5_Press         33      // uint16_t
+#define BTN_bOutExtraLong_T1_Dpt5_Release       35      // uint16_t
+#define BTN_bOutExtraLong_T2_Dpt5_Press         37      // uint16_t
+#define BTN_bOutExtraLong_T2_Dpt5_Release       39      // uint16_t
+#define BTN_bOutMulti_Click1_Dpt5               41      // uint16_t
+#define BTN_bOutMulti_Click2_Dpt5               43      // uint16_t
+#define BTN_bOutMulti_Click3_Dpt5               45      // uint16_t
+#define BTN_bOutShort_T1_Dpt5001_Press          17      // uint16_t
+#define BTN_bOutShort_T1_Dpt5001_Release        19      // uint16_t
+#define BTN_bOutShort_T2_Dpt5001_Press          21      // uint16_t
+#define BTN_bOutShort_T2_Dpt5001_Release        23      // uint16_t
+#define BTN_bOutLong_T1_Dpt5001_Press           25      // uint16_t
+#define BTN_bOutLong_T1_Dpt5001_Release         27      // uint16_t
+#define BTN_bOutLong_T2_Dpt5001_Press           29      // uint16_t
+#define BTN_bOutLong_T2_Dpt5001_Release         31      // uint16_t
+#define BTN_bOutExtraLong_T1_Dpt5001_Press      33      // uint16_t
+#define BTN_bOutExtraLong_T1_Dpt5001_Release    35      // uint16_t
+#define BTN_bOutExtraLong_T2_Dpt5001_Press      37      // uint16_t
+#define BTN_bOutExtraLong_T2_Dpt5001_Release    39      // uint16_t
+#define BTN_bOutMulti_Click1_Dpt5001            41      // uint16_t
+#define BTN_bOutMulti_Click2_Dpt5001            43      // uint16_t
+#define BTN_bOutMulti_Click3_Dpt5001            45      // uint16_t
+#define BTN_bOutShort_T1_Dpt7_Press             17      // uint16_t
+#define BTN_bOutShort_T1_Dpt7_Release           19      // uint16_t
+#define BTN_bOutShort_T2_Dpt7_Press             21      // uint16_t
+#define BTN_bOutShort_T2_Dpt7_Release           23      // uint16_t
+#define BTN_bOutLong_T1_Dpt7_Press              25      // uint16_t
+#define BTN_bOutLong_T1_Dpt7_Release            27      // uint16_t
+#define BTN_bOutLong_T2_Dpt7_Press              29      // uint16_t
+#define BTN_bOutLong_T2_Dpt7_Release            31      // uint16_t
+#define BTN_bOutExtraLong_T1_Dpt7_Press         33      // uint16_t
+#define BTN_bOutExtraLong_T1_Dpt7_Release       35      // uint16_t
+#define BTN_bOutExtraLong_T2_Dpt7_Press         37      // uint16_t
+#define BTN_bOutExtraLong_T2_Dpt7_Release       39      // uint16_t
+#define BTN_bOutMulti_Click1_Dpt7               41      // uint16_t
+#define BTN_bOutMulti_Click2_Dpt7               43      // uint16_t
+#define BTN_bOutMulti_Click3_Dpt7               45      // uint16_t
+#define BTN_bOutShort_T1_Dpt18_Press            17      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T1_Dpt18_Release          19      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T2_Dpt18_Press            21      // 16 Bits, Bit 15-0
+#define BTN_bOutShort_T2_Dpt18_Release          23      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt18_Press             25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt18_Release           27      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt18_Press             29      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt18_Release           31      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T1_Dpt18_Press        33      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T1_Dpt18_Release      35      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T2_Dpt18_Press        37      // 16 Bits, Bit 15-0
+#define BTN_bOutExtraLong_T2_Dpt18_Release      39      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click1_Dpt18              41      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click2_Dpt18              43      // 16 Bits, Bit 15-0
+#define BTN_bOutMulti_Click3_Dpt18              45      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt3007_Press           25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt3007_PressSingle     25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt3007_Release         27      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt3007_Press           29      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt3007_Release         31      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt3008_Press           25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt3008_PressSingle     25      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T1_Dpt3008_Release         27      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt3008_Press           29      // 16 Bits, Bit 15-0
+#define BTN_bOutLong_T2_Dpt3008_Release         31      // 16 Bits, Bit 15-0
+#define BTN_bOut2Short_T1                       47      // 2 Bits, Bit 7-6
+#define     BTN_bOut2Short_T1Mask 0xC0
+#define     BTN_bOut2Short_T1Shift 6
+#define BTN_bOut2Short_T2                       47      // 2 Bits, Bit 5-4
+#define     BTN_bOut2Short_T2Mask 0x30
+#define     BTN_bOut2Short_T2Shift 4
+#define BTN_bOut2Long_T1                        47      // 2 Bits, Bit 3-2
+#define     BTN_bOut2Long_T1Mask 0x0C
+#define     BTN_bOut2Long_T1Shift 2
+#define BTN_bOut2Long_T2                        47      // 2 Bits, Bit 1-0
+#define     BTN_bOut2Long_T2Mask 0x03
+#define     BTN_bOut2Long_T2Shift 0
+#define BTN_bOut2ExtraLong_T1                   48      // 2 Bits, Bit 7-6
+#define     BTN_bOut2ExtraLong_T1Mask 0xC0
+#define     BTN_bOut2ExtraLong_T1Shift 6
+#define BTN_bOut2ExtraLong_T2                   48      // 2 Bits, Bit 5-4
+#define     BTN_bOut2ExtraLong_T2Mask 0x30
+#define     BTN_bOut2ExtraLong_T2Shift 4
+#define BTN_bStatusFallbackTime                 49      // uint16_t
+#define BTN_bStatusThresholdHigh                51      // uint8_t
+#define BTN_bStatusThresholdLow                 52      // uint8_t
+
+// Modus
+#define ParamBTN_bMode                               ((knx.paramByte(BTN_ParamCalcIndex(BTN_bMode)) & BTN_bModeMask) >> BTN_bModeShift)
+// Sperre
+#define ParamBTN_bLock                               ((knx.paramByte(BTN_ParamCalcIndex(BTN_bLock)) & BTN_bLockMask) >> BTN_bLockShift)
+// Ausgabe der Klickanzahl
+#define ParamBTN_bMultiClickCount                    ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bMultiClickCount)) & BTN_bMultiClickCountMask))
+// Dynamische Richtung
+#define ParamBTN_bDynamicStatus                      ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bDynamicStatus)) & BTN_bDynamicStatusMask))
+//    1. Taster
+#define ParamBTN_bInA                                (knx.paramWord(BTN_ParamCalcIndex(BTN_bInA)))
+//    2. Taster
+#define ParamBTN_bInB                                (knx.paramWord(BTN_ParamCalcIndex(BTN_bInB)))
+// Mehrfach-Klick
+#define ParamBTN_bReactionTimeMultiClick             (knx.paramByte(BTN_ParamCalcIndex(BTN_bReactionTimeMultiClick)))
+// Langer Tastendruck
+#define ParamBTN_bReactionTimeLong                   (knx.paramByte(BTN_ParamCalcIndex(BTN_bReactionTimeLong)))
+// Extra langer Tastendruck
+#define ParamBTN_bReactionTimeExtraLong              (knx.paramByte(BTN_ParamCalcIndex(BTN_bReactionTimeExtraLong)))
+// Datentyp
+#define ParamBTN_bOutShort_DPT                       (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_DPT)))
+// Datentyp
+#define ParamBTN_bOutLong_DPT                        (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_DPT)))
+// Datentyp
+#define ParamBTN_bOutExtraLong_DPT                   (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_DPT)))
+// Datentyp
+#define ParamBTN_bOutMulti_DPT                       (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_DPT)))
+// 1. Klick
+#define ParamBTN_bOutMulti_Click1_Active             ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Active)) & BTN_bOutMulti_Click1_ActiveMask))
+// 2. Klick
+#define ParamBTN_bOutMulti_Click2_Active             ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Active)) & BTN_bOutMulti_Click2_ActiveMask))
+// 3. Klick
+#define ParamBTN_bOutMulti_Click3_Active             ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Active)) & BTN_bOutMulti_Click3_ActiveMask))
+// Wert beim Drücken
+#define ParamBTN_bOutShort_T1_Active_Press           ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T1_Active_Press)) & BTN_bOutShort_T1_Active_PressMask))
+// Wert beim Loslassen
+#define ParamBTN_bOutShort_T1_Active_Release         ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T1_Active_Release)) & BTN_bOutShort_T1_Active_ReleaseMask))
+// Wert beim Drücken
+#define ParamBTN_bOutShort_T2_Active_Press           ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T2_Active_Press)) & BTN_bOutShort_T2_Active_PressMask))
+// Wert beim Loslassen
+#define ParamBTN_bOutShort_T2_Active_Release         ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T2_Active_Release)) & BTN_bOutShort_T2_Active_ReleaseMask))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T1_Active_Press            ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T1_Active_Press)) & BTN_bOutLong_T1_Active_PressMask))
+// Wert beim Loslassen
+#define ParamBTN_bOutLong_T1_Active_Release          ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T1_Active_Release)) & BTN_bOutLong_T1_Active_ReleaseMask))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T2_Active_Press            ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T2_Active_Press)) & BTN_bOutLong_T2_Active_PressMask))
+// Wert beim Loslassen
+#define ParamBTN_bOutLong_T2_Active_Release          ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T2_Active_Release)) & BTN_bOutLong_T2_Active_ReleaseMask))
+// Wert beim Drücken
+#define ParamBTN_bOutExtraLong_T1_Active_Press       ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Active_Press)) & BTN_bOutExtraLong_T1_Active_PressMask))
+// Wert beim Loslassen
+#define ParamBTN_bOutExtraLong_T1_Active_Release     ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Active_Release)) & BTN_bOutExtraLong_T1_Active_ReleaseMask))
+// Wert beim Drücken
+#define ParamBTN_bOutExtraLong_T2_Active_Press       ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Active_Press)) & BTN_bOutExtraLong_T2_Active_PressMask))
+// Wert beim Loslassen
+#define ParamBTN_bOutExtraLong_T2_Active_Release     ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Active_Release)) & BTN_bOutExtraLong_T2_Active_ReleaseMask))
+// 
+#define ParamBTN_bOutShort_T1_Dpt1_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt1_Press)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt1_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt1_Release)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt1_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt1_Press)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt1_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt1_Release)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt1_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt1_Press)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt1_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt1_Release)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt1_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt1_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt1_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt1_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt1_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt1_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt1_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt1_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt1_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt1_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt1_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt1_Release)))
+// 
+#define ParamBTN_bOutMulti_Click1_Dpt1               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt1)))
+// 
+#define ParamBTN_bOutMulti_Click2_Dpt1               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt1)))
+// 
+#define ParamBTN_bOutMulti_Click3_Dpt1               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt1)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt2_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt2_Press)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt2_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt2_Release)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt2_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt2_Press)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt2_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt2_Release)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt2_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt2_Press)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt2_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt2_Release)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt2_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt2_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt2_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt2_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt2_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt2_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt2_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt2_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt2_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt2_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt2_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt2_Release)))
+// 
+#define ParamBTN_bOutMulti_Click1_Dpt2               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt2)))
+// 
+#define ParamBTN_bOutMulti_Click2_Dpt2               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt2)))
+// 
+#define ParamBTN_bOutMulti_Click3_Dpt2               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt2)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt5_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5_Press)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt5_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5_Release)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt5_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5_Press)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt5_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5_Release)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt5_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5_Press)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt5_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5_Release)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt5_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt5_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt5_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt5_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt5_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt5_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5_Release)))
+// 
+#define ParamBTN_bOutMulti_Click1_Dpt5               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt5)))
+// 
+#define ParamBTN_bOutMulti_Click2_Dpt5               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt5)))
+// 
+#define ParamBTN_bOutMulti_Click3_Dpt5               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt5)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt5001_Press          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5001_Press)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt5001_Release        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5001_Release)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt5001_Press          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5001_Press)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt5001_Release        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5001_Release)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt5001_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5001_Press)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt5001_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5001_Release)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt5001_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5001_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt5001_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5001_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt5001_Press      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5001_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt5001_Release    (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5001_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt5001_Press      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5001_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt5001_Release    (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5001_Release)))
+// 
+#define ParamBTN_bOutMulti_Click1_Dpt5001            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt5001)))
+// 
+#define ParamBTN_bOutMulti_Click2_Dpt5001            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt5001)))
+// 
+#define ParamBTN_bOutMulti_Click3_Dpt5001            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt5001)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt7_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt7_Press)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt7_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt7_Release)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt7_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt7_Press)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt7_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt7_Release)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt7_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt7_Press)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt7_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt7_Release)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt7_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt7_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt7_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt7_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt7_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt7_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt7_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt7_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt7_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt7_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt7_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt7_Release)))
+// 
+#define ParamBTN_bOutMulti_Click1_Dpt7               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt7)))
+// 
+#define ParamBTN_bOutMulti_Click2_Dpt7               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt7)))
+// 
+#define ParamBTN_bOutMulti_Click3_Dpt7               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt7)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt18_Press            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt18_Press)))
+// 
+#define ParamBTN_bOutShort_T1_Dpt18_Release          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt18_Release)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt18_Press            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt18_Press)))
+// 
+#define ParamBTN_bOutShort_T2_Dpt18_Release          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt18_Release)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt18_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt18_Press)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt18_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt18_Release)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt18_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt18_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt18_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt18_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt18_Press        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt18_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T1_Dpt18_Release      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt18_Release)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt18_Press        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt18_Press)))
+// 
+#define ParamBTN_bOutExtraLong_T2_Dpt18_Release      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt18_Release)))
+// 
+#define ParamBTN_bOutMulti_Click1_Dpt18              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt18)))
+// 
+#define ParamBTN_bOutMulti_Click2_Dpt18              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt18)))
+// 
+#define ParamBTN_bOutMulti_Click3_Dpt18              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt18)))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T1_Dpt3007_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3007_Press)))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T1_Dpt3007_PressSingle     (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3007_PressSingle)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt3007_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3007_Release)))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T2_Dpt3007_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3007_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt3007_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3007_Release)))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T1_Dpt3008_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3008_Press)))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T1_Dpt3008_PressSingle     (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3008_PressSingle)))
+// 
+#define ParamBTN_bOutLong_T1_Dpt3008_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3008_Release)))
+// Wert beim Drücken
+#define ParamBTN_bOutLong_T2_Dpt3008_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3008_Press)))
+// 
+#define ParamBTN_bOutLong_T2_Dpt3008_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3008_Release)))
+// Zusatzausgang (DPT1 beim Loslassen)
+#define ParamBTN_bOut2Short_T1                       ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Short_T1)) & BTN_bOut2Short_T1Mask) >> BTN_bOut2Short_T1Shift)
+// Zusatzausgang (DPT1 beim Loslassen)
+#define ParamBTN_bOut2Short_T2                       ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Short_T2)) & BTN_bOut2Short_T2Mask) >> BTN_bOut2Short_T2Shift)
+// Zusatzausgang (DPT1 beim Loslassen)
+#define ParamBTN_bOut2Long_T1                        ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Long_T1)) & BTN_bOut2Long_T1Mask) >> BTN_bOut2Long_T1Shift)
+// Zusatzausgang (DPT1 beim Loslassen)
+#define ParamBTN_bOut2Long_T2                        (knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Long_T2)) & BTN_bOut2Long_T2Mask)
+// Zusatzausgang (DPT1 beim Loslassen)
+#define ParamBTN_bOut2ExtraLong_T1                   ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2ExtraLong_T1)) & BTN_bOut2ExtraLong_T1Mask) >> BTN_bOut2ExtraLong_T1Shift)
+// Zusatzausgang (DPT1 beim Loslassen)
+#define ParamBTN_bOut2ExtraLong_T2                   ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2ExtraLong_T2)) & BTN_bOut2ExtraLong_T2Mask) >> BTN_bOut2ExtraLong_T2Shift)
+// Verzögerung
+#define ParamBTN_bStatusFallbackTime                 (knx.paramWord(BTN_ParamCalcIndex(BTN_bStatusFallbackTime)))
+// Oberer Schwellwert
+#define ParamBTN_bStatusThresholdHigh                (knx.paramByte(BTN_ParamCalcIndex(BTN_bStatusThresholdHigh)))
+// Unterer Schwellwert
+#define ParamBTN_bStatusThresholdLow                 (knx.paramByte(BTN_ParamCalcIndex(BTN_bStatusThresholdLow)))
+
+// deprecated
+#define BTN_KoOffset 1150
+
+// Communication objects per channel (multiple occurrence)
+#define BTN_KoBlockOffset 1150
+#define BTN_KoBlockSize 12
+
+#define BTN_KoCalcNumber(index) (index + BTN_KoBlockOffset + _channelIndex * BTN_KoBlockSize)
+#define BTN_KoCalcIndex(number) ((number >= BTN_KoCalcNumber(0) && number < BTN_KoCalcNumber(BTN_KoBlockSize)) ? (number - BTN_KoBlockOffset) % BTN_KoBlockSize : -1)
+#define BTN_KoCalcChannel(number) ((number >= BTN_KoBlockOffset && number < BTN_KoBlockOffset + BTN_ChannelCount * BTN_KoBlockSize) ? (number - BTN_KoBlockOffset) / BTN_KoBlockSize : -1)
+
+#define BTN_KoLock 0
+#define BTN_KoIn1 1
+#define BTN_KoIn2 2
+#define BTN_KoOut1Status 3
+#define BTN_KoOut2Status 4
+#define BTN_KoOut3Status 5
+#define BTN_KoOut1 6
+#define BTN_KoOut2 7
+#define BTN_KoOut3 8
+#define BTN_KoOut4 9
+#define BTN_KoOut5 10
+#define BTN_KoOut6 11
+
+// 
+#define KoBTN_Lock                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoLock)))
+// 
+#define KoBTN_In1                                 (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoIn1)))
+// 
+#define KoBTN_In2                                 (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoIn2)))
+// 
+#define KoBTN_Out1Status                          (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut1Status)))
+// 
+#define KoBTN_Out2Status                          (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut2Status)))
+// 
+#define KoBTN_Out3Status                          (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut3Status)))
+// 
+#define KoBTN_Out1                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut1)))
+// 
+#define KoBTN_Out2                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut2)))
+// 
+#define KoBTN_Out3                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut3)))
+// 
+#define KoBTN_Out4                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut4)))
+// 
+#define KoBTN_Out5                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut5)))
+// 
+#define KoBTN_Out6                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut6)))
+
+#define LOG_BuzzerInstalled                     7248      // 1 Bit, Bit 7
 #define     LOG_BuzzerInstalledMask 0x80
 #define     LOG_BuzzerInstalledShift 7
-#define LOG_LedInstalled                        5578      // 1 Bit, Bit 6
+#define LOG_LedInstalled                        7248      // 1 Bit, Bit 6
 #define     LOG_LedInstalledMask 0x40
 #define     LOG_LedInstalledShift 6
-#define LOG_VacationKo                          5578      // 1 Bit, Bit 5
+#define LOG_VacationKo                          7248      // 1 Bit, Bit 5
 #define     LOG_VacationKoMask 0x20
 #define     LOG_VacationKoShift 5
-#define LOG_HolidayKo                           5578      // 1 Bit, Bit 4
+#define LOG_HolidayKo                           7248      // 1 Bit, Bit 4
 #define     LOG_HolidayKoMask 0x10
 #define     LOG_HolidayKoShift 4
-#define LOG_VacationRead                        5578      // 1 Bit, Bit 3
+#define LOG_VacationRead                        7248      // 1 Bit, Bit 3
 #define     LOG_VacationReadMask 0x08
 #define     LOG_VacationReadShift 3
-#define LOG_HolidaySend                         5578      // 1 Bit, Bit 2
+#define LOG_HolidaySend                         7248      // 1 Bit, Bit 2
 #define     LOG_HolidaySendMask 0x04
 #define     LOG_HolidaySendShift 2
-#define LOG_Neujahr                             5579      // 1 Bit, Bit 7
+#define LOG_Neujahr                             7249      // 1 Bit, Bit 7
 #define     LOG_NeujahrMask 0x80
 #define     LOG_NeujahrShift 7
-#define LOG_DreiKoenige                         5579      // 1 Bit, Bit 6
+#define LOG_DreiKoenige                         7249      // 1 Bit, Bit 6
 #define     LOG_DreiKoenigeMask 0x40
 #define     LOG_DreiKoenigeShift 6
-#define LOG_Weiberfastnacht                     5579      // 1 Bit, Bit 5
+#define LOG_Weiberfastnacht                     7249      // 1 Bit, Bit 5
 #define     LOG_WeiberfastnachtMask 0x20
 #define     LOG_WeiberfastnachtShift 5
-#define LOG_Rosenmontag                         5579      // 1 Bit, Bit 4
+#define LOG_Rosenmontag                         7249      // 1 Bit, Bit 4
 #define     LOG_RosenmontagMask 0x10
 #define     LOG_RosenmontagShift 4
-#define LOG_Fastnachtsdienstag                  5579      // 1 Bit, Bit 3
+#define LOG_Fastnachtsdienstag                  7249      // 1 Bit, Bit 3
 #define     LOG_FastnachtsdienstagMask 0x08
 #define     LOG_FastnachtsdienstagShift 3
-#define LOG_Aschermittwoch                      5579      // 1 Bit, Bit 2
+#define LOG_Aschermittwoch                      7249      // 1 Bit, Bit 2
 #define     LOG_AschermittwochMask 0x04
 #define     LOG_AschermittwochShift 2
-#define LOG_Frauentag                           5579      // 1 Bit, Bit 1
+#define LOG_Frauentag                           7249      // 1 Bit, Bit 1
 #define     LOG_FrauentagMask 0x02
 #define     LOG_FrauentagShift 1
-#define LOG_Gruendonnerstag                     5579      // 1 Bit, Bit 0
+#define LOG_Gruendonnerstag                     7249      // 1 Bit, Bit 0
 #define     LOG_GruendonnerstagMask 0x01
 #define     LOG_GruendonnerstagShift 0
-#define LOG_Karfreitag                          5580      // 1 Bit, Bit 7
+#define LOG_Karfreitag                          7250      // 1 Bit, Bit 7
 #define     LOG_KarfreitagMask 0x80
 #define     LOG_KarfreitagShift 7
-#define LOG_Ostersonntag                        5580      // 1 Bit, Bit 6
+#define LOG_Ostersonntag                        7250      // 1 Bit, Bit 6
 #define     LOG_OstersonntagMask 0x40
 #define     LOG_OstersonntagShift 6
-#define LOG_Ostermontag                         5580      // 1 Bit, Bit 5
+#define LOG_Ostermontag                         7250      // 1 Bit, Bit 5
 #define     LOG_OstermontagMask 0x20
 #define     LOG_OstermontagShift 5
-#define LOG_TagDerArbeit                        5580      // 1 Bit, Bit 4
+#define LOG_TagDerArbeit                        7250      // 1 Bit, Bit 4
 #define     LOG_TagDerArbeitMask 0x10
 #define     LOG_TagDerArbeitShift 4
-#define LOG_Himmelfahrt                         5580      // 1 Bit, Bit 3
+#define LOG_Himmelfahrt                         7250      // 1 Bit, Bit 3
 #define     LOG_HimmelfahrtMask 0x08
 #define     LOG_HimmelfahrtShift 3
-#define LOG_Pfingstsonntag                      5580      // 1 Bit, Bit 2
+#define LOG_Pfingstsonntag                      7250      // 1 Bit, Bit 2
 #define     LOG_PfingstsonntagMask 0x04
 #define     LOG_PfingstsonntagShift 2
-#define LOG_Pfingstmontag                       5580      // 1 Bit, Bit 1
+#define LOG_Pfingstmontag                       7250      // 1 Bit, Bit 1
 #define     LOG_PfingstmontagMask 0x02
 #define     LOG_PfingstmontagShift 1
-#define LOG_Fronleichnam                        5580      // 1 Bit, Bit 0
+#define LOG_Fronleichnam                        7250      // 1 Bit, Bit 0
 #define     LOG_FronleichnamMask 0x01
 #define     LOG_FronleichnamShift 0
-#define LOG_Friedensfest                        5581      // 1 Bit, Bit 7
+#define LOG_Friedensfest                        7251      // 1 Bit, Bit 7
 #define     LOG_FriedensfestMask 0x80
 #define     LOG_FriedensfestShift 7
-#define LOG_MariaHimmelfahrt                    5581      // 1 Bit, Bit 6
+#define LOG_MariaHimmelfahrt                    7251      // 1 Bit, Bit 6
 #define     LOG_MariaHimmelfahrtMask 0x40
 #define     LOG_MariaHimmelfahrtShift 6
-#define LOG_DeutscheEinheit                     5581      // 1 Bit, Bit 5
+#define LOG_DeutscheEinheit                     7251      // 1 Bit, Bit 5
 #define     LOG_DeutscheEinheitMask 0x20
 #define     LOG_DeutscheEinheitShift 5
-#define LOG_Nationalfeiertag                    5582      // 1 Bit, Bit 1
+#define LOG_Nationalfeiertag                    7252      // 1 Bit, Bit 1
 #define     LOG_NationalfeiertagMask 0x02
 #define     LOG_NationalfeiertagShift 1
-#define LOG_Reformationstag                     5581      // 1 Bit, Bit 4
+#define LOG_Reformationstag                     7251      // 1 Bit, Bit 4
 #define     LOG_ReformationstagMask 0x10
 #define     LOG_ReformationstagShift 4
-#define LOG_Allerheiligen                       5581      // 1 Bit, Bit 3
+#define LOG_Allerheiligen                       7251      // 1 Bit, Bit 3
 #define     LOG_AllerheiligenMask 0x08
 #define     LOG_AllerheiligenShift 3
-#define LOG_BussBettag                          5581      // 1 Bit, Bit 2
+#define LOG_BussBettag                          7251      // 1 Bit, Bit 2
 #define     LOG_BussBettagMask 0x04
 #define     LOG_BussBettagShift 2
-#define LOG_MariaEmpfaengnis                    5582      // 1 Bit, Bit 0
+#define LOG_MariaEmpfaengnis                    7252      // 1 Bit, Bit 0
 #define     LOG_MariaEmpfaengnisMask 0x01
 #define     LOG_MariaEmpfaengnisShift 0
-#define LOG_Advent1                             5581      // 1 Bit, Bit 1
+#define LOG_Advent1                             7251      // 1 Bit, Bit 1
 #define     LOG_Advent1Mask 0x02
 #define     LOG_Advent1Shift 1
-#define LOG_Advent2                             5581      // 1 Bit, Bit 0
+#define LOG_Advent2                             7251      // 1 Bit, Bit 0
 #define     LOG_Advent2Mask 0x01
 #define     LOG_Advent2Shift 0
-#define LOG_Advent3                             5582      // 1 Bit, Bit 7
+#define LOG_Advent3                             7252      // 1 Bit, Bit 7
 #define     LOG_Advent3Mask 0x80
 #define     LOG_Advent3Shift 7
-#define LOG_Advent4                             5582      // 1 Bit, Bit 6
+#define LOG_Advent4                             7252      // 1 Bit, Bit 6
 #define     LOG_Advent4Mask 0x40
 #define     LOG_Advent4Shift 6
-#define LOG_Heiligabend                         5582      // 1 Bit, Bit 5
+#define LOG_Heiligabend                         7252      // 1 Bit, Bit 5
 #define     LOG_HeiligabendMask 0x20
 #define     LOG_HeiligabendShift 5
-#define LOG_Weihnachtstag1                      5582      // 1 Bit, Bit 4
+#define LOG_Weihnachtstag1                      7252      // 1 Bit, Bit 4
 #define     LOG_Weihnachtstag1Mask 0x10
 #define     LOG_Weihnachtstag1Shift 4
-#define LOG_Weihnachtstag2                      5582      // 1 Bit, Bit 3
+#define LOG_Weihnachtstag2                      7252      // 1 Bit, Bit 3
 #define     LOG_Weihnachtstag2Mask 0x08
 #define     LOG_Weihnachtstag2Shift 3
-#define LOG_Silvester                           5582      // 1 Bit, Bit 2
+#define LOG_Silvester                           7252      // 1 Bit, Bit 2
 #define     LOG_SilvesterMask 0x04
 #define     LOG_SilvesterShift 2
-#define LOG_BuzzerSilent                        5583      // uint16_t
-#define LOG_BuzzerNormal                        5585      // uint16_t
-#define LOG_BuzzerLoud                          5587      // uint16_t
-#define LOG_VisibleChannels                     5589      // uint8_t
-#define LOG_LedMapping                          5590      // 3 Bits, Bit 7-5
+#define LOG_BuzzerSilent                        7253      // uint16_t
+#define LOG_BuzzerNormal                        7255      // uint16_t
+#define LOG_BuzzerLoud                          7257      // uint16_t
+#define LOG_VisibleChannels                     7259      // uint8_t
+#define LOG_LedMapping                          7260      // 3 Bits, Bit 7-5
 #define     LOG_LedMappingMask 0xE0
 #define     LOG_LedMappingShift 5
-#define LOG_UserFormula1                        5591      // char*, 99 Byte
-#define LOG_UserFormula1Active                  5690      // 1 Bit, Bit 7
+#define LOG_UserFormula1                        7261      // char*, 99 Byte
+#define LOG_UserFormula1Active                  7360      // 1 Bit, Bit 7
 #define     LOG_UserFormula1ActiveMask 0x80
 #define     LOG_UserFormula1ActiveShift 7
-#define LOG_UserFormula2                        5691      // char*, 99 Byte
-#define LOG_UserFormula2Active                  5790      // 1 Bit, Bit 7
+#define LOG_UserFormula2                        7361      // char*, 99 Byte
+#define LOG_UserFormula2Active                  7460      // 1 Bit, Bit 7
 #define     LOG_UserFormula2ActiveMask 0x80
 #define     LOG_UserFormula2ActiveShift 7
-#define LOG_UserFormula3                        5791      // char*, 99 Byte
-#define LOG_UserFormula3Active                  5890      // 1 Bit, Bit 7
+#define LOG_UserFormula3                        7461      // char*, 99 Byte
+#define LOG_UserFormula3Active                  7560      // 1 Bit, Bit 7
 #define     LOG_UserFormula3ActiveMask 0x80
 #define     LOG_UserFormula3ActiveShift 7
-#define LOG_UserFormula4                        5891      // char*, 99 Byte
-#define LOG_UserFormula4Active                  5990      // 1 Bit, Bit 7
+#define LOG_UserFormula4                        7561      // char*, 99 Byte
+#define LOG_UserFormula4Active                  7660      // 1 Bit, Bit 7
 #define     LOG_UserFormula4ActiveMask 0x80
 #define     LOG_UserFormula4ActiveShift 7
-#define LOG_UserFormula5                        5991      // char*, 99 Byte
-#define LOG_UserFormula5Active                  6090      // 1 Bit, Bit 7
+#define LOG_UserFormula5                        7661      // char*, 99 Byte
+#define LOG_UserFormula5Active                  7760      // 1 Bit, Bit 7
 #define     LOG_UserFormula5ActiveMask 0x80
 #define     LOG_UserFormula5ActiveShift 7
-#define LOG_UserFormula6                        6091      // char*, 99 Byte
-#define LOG_UserFormula6Active                  6190      // 1 Bit, Bit 7
+#define LOG_UserFormula6                        7761      // char*, 99 Byte
+#define LOG_UserFormula6Active                  7860      // 1 Bit, Bit 7
 #define     LOG_UserFormula6ActiveMask 0x80
 #define     LOG_UserFormula6ActiveShift 7
-#define LOG_UserFormula7                        6191      // char*, 99 Byte
-#define LOG_UserFormula7Active                  6290      // 1 Bit, Bit 7
+#define LOG_UserFormula7                        7861      // char*, 99 Byte
+#define LOG_UserFormula7Active                  7960      // 1 Bit, Bit 7
 #define     LOG_UserFormula7ActiveMask 0x80
 #define     LOG_UserFormula7ActiveShift 7
-#define LOG_UserFormula8                        6291      // char*, 99 Byte
-#define LOG_UserFormula8Active                  6390      // 1 Bit, Bit 7
+#define LOG_UserFormula8                        7961      // char*, 99 Byte
+#define LOG_UserFormula8Active                  8060      // 1 Bit, Bit 7
 #define     LOG_UserFormula8ActiveMask 0x80
 #define     LOG_UserFormula8ActiveShift 7
-#define LOG_UserFormula9                        6391      // char*, 99 Byte
-#define LOG_UserFormula9Active                  6490      // 1 Bit, Bit 7
+#define LOG_UserFormula9                        8061      // char*, 99 Byte
+#define LOG_UserFormula9Active                  8160      // 1 Bit, Bit 7
 #define     LOG_UserFormula9ActiveMask 0x80
 #define     LOG_UserFormula9ActiveShift 7
-#define LOG_UserFormula10                       6491      // char*, 99 Byte
-#define LOG_UserFormula10Active                 6590      // 1 Bit, Bit 7
+#define LOG_UserFormula10                       8161      // char*, 99 Byte
+#define LOG_UserFormula10Active                 8260      // 1 Bit, Bit 7
 #define     LOG_UserFormula10ActiveMask 0x80
 #define     LOG_UserFormula10ActiveShift 7
-#define LOG_UserFormula11                       6591      // char*, 99 Byte
-#define LOG_UserFormula11Active                 6690      // 1 Bit, Bit 7
+#define LOG_UserFormula11                       8261      // char*, 99 Byte
+#define LOG_UserFormula11Active                 8360      // 1 Bit, Bit 7
 #define     LOG_UserFormula11ActiveMask 0x80
 #define     LOG_UserFormula11ActiveShift 7
-#define LOG_UserFormula12                       6691      // char*, 99 Byte
-#define LOG_UserFormula12Active                 6790      // 1 Bit, Bit 7
+#define LOG_UserFormula12                       8361      // char*, 99 Byte
+#define LOG_UserFormula12Active                 8460      // 1 Bit, Bit 7
 #define     LOG_UserFormula12ActiveMask 0x80
 #define     LOG_UserFormula12ActiveShift 7
-#define LOG_UserFormula13                       6791      // char*, 99 Byte
-#define LOG_UserFormula13Active                 6890      // 1 Bit, Bit 7
+#define LOG_UserFormula13                       8461      // char*, 99 Byte
+#define LOG_UserFormula13Active                 8560      // 1 Bit, Bit 7
 #define     LOG_UserFormula13ActiveMask 0x80
 #define     LOG_UserFormula13ActiveShift 7
-#define LOG_UserFormula14                       6891      // char*, 99 Byte
-#define LOG_UserFormula14Active                 6990      // 1 Bit, Bit 7
+#define LOG_UserFormula14                       8561      // char*, 99 Byte
+#define LOG_UserFormula14Active                 8660      // 1 Bit, Bit 7
 #define     LOG_UserFormula14ActiveMask 0x80
 #define     LOG_UserFormula14ActiveShift 7
-#define LOG_UserFormula15                       6991      // char*, 99 Byte
-#define LOG_UserFormula15Active                 7090      // 1 Bit, Bit 7
+#define LOG_UserFormula15                       8661      // char*, 99 Byte
+#define LOG_UserFormula15Active                 8760      // 1 Bit, Bit 7
 #define     LOG_UserFormula15ActiveMask 0x80
 #define     LOG_UserFormula15ActiveShift 7
-#define LOG_UserFormula16                       7091      // char*, 99 Byte
-#define LOG_UserFormula16Active                 7190      // 1 Bit, Bit 7
+#define LOG_UserFormula16                       8761      // char*, 99 Byte
+#define LOG_UserFormula16Active                 8860      // 1 Bit, Bit 7
 #define     LOG_UserFormula16ActiveMask 0x80
 #define     LOG_UserFormula16ActiveShift 7
-#define LOG_UserFormula17                       7191      // char*, 99 Byte
-#define LOG_UserFormula17Active                 7290      // 1 Bit, Bit 7
+#define LOG_UserFormula17                       8861      // char*, 99 Byte
+#define LOG_UserFormula17Active                 8960      // 1 Bit, Bit 7
 #define     LOG_UserFormula17ActiveMask 0x80
 #define     LOG_UserFormula17ActiveShift 7
-#define LOG_UserFormula18                       7291      // char*, 99 Byte
-#define LOG_UserFormula18Active                 7390      // 1 Bit, Bit 7
+#define LOG_UserFormula18                       8961      // char*, 99 Byte
+#define LOG_UserFormula18Active                 9060      // 1 Bit, Bit 7
 #define     LOG_UserFormula18ActiveMask 0x80
 #define     LOG_UserFormula18ActiveShift 7
-#define LOG_UserFormula19                       7391      // char*, 99 Byte
-#define LOG_UserFormula19Active                 7490      // 1 Bit, Bit 7
+#define LOG_UserFormula19                       9061      // char*, 99 Byte
+#define LOG_UserFormula19Active                 9160      // 1 Bit, Bit 7
 #define     LOG_UserFormula19ActiveMask 0x80
 #define     LOG_UserFormula19ActiveShift 7
-#define LOG_UserFormula20                       7491      // char*, 99 Byte
-#define LOG_UserFormula20Active                 7590      // 1 Bit, Bit 7
+#define LOG_UserFormula20                       9161      // char*, 99 Byte
+#define LOG_UserFormula20Active                 9260      // 1 Bit, Bit 7
 #define     LOG_UserFormula20ActiveMask 0x80
 #define     LOG_UserFormula20ActiveShift 7
-#define LOG_UserFormula21                       7591      // char*, 99 Byte
-#define LOG_UserFormula21Active                 7690      // 1 Bit, Bit 7
+#define LOG_UserFormula21                       9261      // char*, 99 Byte
+#define LOG_UserFormula21Active                 9360      // 1 Bit, Bit 7
 #define     LOG_UserFormula21ActiveMask 0x80
 #define     LOG_UserFormula21ActiveShift 7
-#define LOG_UserFormula22                       7691      // char*, 99 Byte
-#define LOG_UserFormula22Active                 7790      // 1 Bit, Bit 7
+#define LOG_UserFormula22                       9361      // char*, 99 Byte
+#define LOG_UserFormula22Active                 9460      // 1 Bit, Bit 7
 #define     LOG_UserFormula22ActiveMask 0x80
 #define     LOG_UserFormula22ActiveShift 7
-#define LOG_UserFormula23                       7791      // char*, 99 Byte
-#define LOG_UserFormula23Active                 7890      // 1 Bit, Bit 7
+#define LOG_UserFormula23                       9461      // char*, 99 Byte
+#define LOG_UserFormula23Active                 9560      // 1 Bit, Bit 7
 #define     LOG_UserFormula23ActiveMask 0x80
 #define     LOG_UserFormula23ActiveShift 7
-#define LOG_UserFormula24                       7891      // char*, 99 Byte
-#define LOG_UserFormula24Active                 7990      // 1 Bit, Bit 7
+#define LOG_UserFormula24                       9561      // char*, 99 Byte
+#define LOG_UserFormula24Active                 9660      // 1 Bit, Bit 7
 #define     LOG_UserFormula24ActiveMask 0x80
 #define     LOG_UserFormula24ActiveShift 7
-#define LOG_UserFormula25                       7991      // char*, 99 Byte
-#define LOG_UserFormula25Active                 8090      // 1 Bit, Bit 7
+#define LOG_UserFormula25                       9661      // char*, 99 Byte
+#define LOG_UserFormula25Active                 9760      // 1 Bit, Bit 7
 #define     LOG_UserFormula25ActiveMask 0x80
 #define     LOG_UserFormula25ActiveShift 7
-#define LOG_UserFormula26                       8091      // char*, 99 Byte
-#define LOG_UserFormula26Active                 8190      // 1 Bit, Bit 7
+#define LOG_UserFormula26                       9761      // char*, 99 Byte
+#define LOG_UserFormula26Active                 9860      // 1 Bit, Bit 7
 #define     LOG_UserFormula26ActiveMask 0x80
 #define     LOG_UserFormula26ActiveShift 7
-#define LOG_UserFormula27                       8191      // char*, 99 Byte
-#define LOG_UserFormula27Active                 8290      // 1 Bit, Bit 7
+#define LOG_UserFormula27                       9861      // char*, 99 Byte
+#define LOG_UserFormula27Active                 9960      // 1 Bit, Bit 7
 #define     LOG_UserFormula27ActiveMask 0x80
 #define     LOG_UserFormula27ActiveShift 7
-#define LOG_UserFormula28                       8291      // char*, 99 Byte
-#define LOG_UserFormula28Active                 8390      // 1 Bit, Bit 7
+#define LOG_UserFormula28                       9961      // char*, 99 Byte
+#define LOG_UserFormula28Active                 10060      // 1 Bit, Bit 7
 #define     LOG_UserFormula28ActiveMask 0x80
 #define     LOG_UserFormula28ActiveShift 7
-#define LOG_UserFormula29                       8391      // char*, 99 Byte
-#define LOG_UserFormula29Active                 8490      // 1 Bit, Bit 7
+#define LOG_UserFormula29                       10061      // char*, 99 Byte
+#define LOG_UserFormula29Active                 10160      // 1 Bit, Bit 7
 #define     LOG_UserFormula29ActiveMask 0x80
 #define     LOG_UserFormula29ActiveShift 7
-#define LOG_UserFormula30                       8491      // char*, 99 Byte
-#define LOG_UserFormula30Active                 8590      // 1 Bit, Bit 7
+#define LOG_UserFormula30                       10161      // char*, 99 Byte
+#define LOG_UserFormula30Active                 10260      // 1 Bit, Bit 7
 #define     LOG_UserFormula30ActiveMask 0x80
 #define     LOG_UserFormula30ActiveShift 7
 
@@ -1849,7 +2433,7 @@
 #define LOG_ChannelCount 99
 
 // Parameter per channel
-#define LOG_ParamBlockOffset 8591
+#define LOG_ParamBlockOffset 10261
 #define LOG_ParamBlockSize 84
 #define LOG_ParamCalcIndex(index) (index + LOG_ParamBlockOffset + _channelIndex * LOG_ParamBlockSize)
 
@@ -3515,539 +4099,6 @@
 // Ausgang
 #define KoLOG_KOfO                                (knx.getGroupObject(LOG_KoCalcNumber(LOG_KoKOfO)))
 
-#define BTN_ReactionTimeMultiClick              16907      // 8 Bits, Bit 7-0
-#define BTN_ReactionTimeLong                    16908      // 8 Bits, Bit 7-0
-#define BTN_ReactionTimeExtraLong               16909      // 8 Bits, Bit 7-0
-#define BTN_VisibleChannels                     16910      // uint8_t
-
-// Mehrfach-Klick
-#define ParamBTN_ReactionTimeMultiClick              (knx.paramByte(BTN_ReactionTimeMultiClick))
-// Langer Tastendruck
-#define ParamBTN_ReactionTimeLong                    (knx.paramByte(BTN_ReactionTimeLong))
-// Extra langer Tastendruck
-#define ParamBTN_ReactionTimeExtraLong               (knx.paramByte(BTN_ReactionTimeExtraLong))
-// Verfügbare Kanäle
-#define ParamBTN_VisibleChannels                     (knx.paramByte(BTN_VisibleChannels))
-
-#define BTN_ChannelCount 30
-
-// Parameter per channel
-#define BTN_ParamBlockOffset 16911
-#define BTN_ParamBlockSize 53
-#define BTN_ParamCalcIndex(index) (index + BTN_ParamBlockOffset + _channelIndex * BTN_ParamBlockSize)
-
-#define BTN_bMode                                0      // 7 Bits, Bit 7-1
-#define     BTN_bModeMask 0xFE
-#define     BTN_bModeShift 1
-#define BTN_bLock                                1      // 2 Bits, Bit 7-6
-#define     BTN_bLockMask 0xC0
-#define     BTN_bLockShift 6
-#define BTN_bMultiClickCount                     1      // 1 Bit, Bit 7
-#define     BTN_bMultiClickCountMask 0x80
-#define     BTN_bMultiClickCountShift 7
-#define BTN_bDynamicStatus                       1      // 1 Bit, Bit 2
-#define     BTN_bDynamicStatusMask 0x04
-#define     BTN_bDynamicStatusShift 2
-#define BTN_bInA                                 2      // 16 Bits, Bit 15-0
-#define BTN_bInB                                 4      // 16 Bits, Bit 15-0
-#define BTN_bReactionTimeMultiClick              6      // 8 Bits, Bit 7-0
-#define BTN_bReactionTimeLong                    7      // 8 Bits, Bit 7-0
-#define BTN_bReactionTimeExtraLong               8      // 8 Bits, Bit 7-0
-#define BTN_bOutShort_DPT                        9      // 8 Bits, Bit 7-0
-#define BTN_bOutLong_DPT                        10      // 8 Bits, Bit 7-0
-#define BTN_bOutExtraLong_DPT                   11      // 8 Bits, Bit 7-0
-#define BTN_bOutMulti_DPT                       12      // 8 Bits, Bit 7-0
-#define BTN_bOutMulti_Click1_Active             13      // 1 Bit, Bit 7
-#define     BTN_bOutMulti_Click1_ActiveMask 0x80
-#define     BTN_bOutMulti_Click1_ActiveShift 7
-#define BTN_bOutMulti_Click2_Active             13      // 1 Bit, Bit 6
-#define     BTN_bOutMulti_Click2_ActiveMask 0x40
-#define     BTN_bOutMulti_Click2_ActiveShift 6
-#define BTN_bOutMulti_Click3_Active             13      // 1 Bit, Bit 5
-#define     BTN_bOutMulti_Click3_ActiveMask 0x20
-#define     BTN_bOutMulti_Click3_ActiveShift 5
-#define BTN_bOutShort_T1_Active_Press           14      // 1 Bit, Bit 7
-#define     BTN_bOutShort_T1_Active_PressMask 0x80
-#define     BTN_bOutShort_T1_Active_PressShift 7
-#define BTN_bOutShort_T1_Active_Release         14      // 1 Bit, Bit 6
-#define     BTN_bOutShort_T1_Active_ReleaseMask 0x40
-#define     BTN_bOutShort_T1_Active_ReleaseShift 6
-#define BTN_bOutShort_T2_Active_Press           14      // 1 Bit, Bit 5
-#define     BTN_bOutShort_T2_Active_PressMask 0x20
-#define     BTN_bOutShort_T2_Active_PressShift 5
-#define BTN_bOutShort_T2_Active_Release         14      // 1 Bit, Bit 4
-#define     BTN_bOutShort_T2_Active_ReleaseMask 0x10
-#define     BTN_bOutShort_T2_Active_ReleaseShift 4
-#define BTN_bOutLong_T1_Active_Press            15      // 1 Bit, Bit 7
-#define     BTN_bOutLong_T1_Active_PressMask 0x80
-#define     BTN_bOutLong_T1_Active_PressShift 7
-#define BTN_bOutLong_T1_Active_Release          15      // 1 Bit, Bit 6
-#define     BTN_bOutLong_T1_Active_ReleaseMask 0x40
-#define     BTN_bOutLong_T1_Active_ReleaseShift 6
-#define BTN_bOutLong_T2_Active_Press            15      // 1 Bit, Bit 5
-#define     BTN_bOutLong_T2_Active_PressMask 0x20
-#define     BTN_bOutLong_T2_Active_PressShift 5
-#define BTN_bOutLong_T2_Active_Release          15      // 1 Bit, Bit 4
-#define     BTN_bOutLong_T2_Active_ReleaseMask 0x10
-#define     BTN_bOutLong_T2_Active_ReleaseShift 4
-#define BTN_bOutExtraLong_T1_Active_Press       16      // 1 Bit, Bit 7
-#define     BTN_bOutExtraLong_T1_Active_PressMask 0x80
-#define     BTN_bOutExtraLong_T1_Active_PressShift 7
-#define BTN_bOutExtraLong_T1_Active_Release     16      // 1 Bit, Bit 6
-#define     BTN_bOutExtraLong_T1_Active_ReleaseMask 0x40
-#define     BTN_bOutExtraLong_T1_Active_ReleaseShift 6
-#define BTN_bOutExtraLong_T2_Active_Press       16      // 1 Bit, Bit 5
-#define     BTN_bOutExtraLong_T2_Active_PressMask 0x20
-#define     BTN_bOutExtraLong_T2_Active_PressShift 5
-#define BTN_bOutExtraLong_T2_Active_Release     16      // 1 Bit, Bit 4
-#define     BTN_bOutExtraLong_T2_Active_ReleaseMask 0x10
-#define     BTN_bOutExtraLong_T2_Active_ReleaseShift 4
-#define BTN_bOutShort_T1_Dpt1_Press             17      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T1_Dpt1_Release           19      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T2_Dpt1_Press             21      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T2_Dpt1_Release           23      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt1_Press              25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt1_Release            27      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt1_Press              29      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt1_Release            31      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T1_Dpt1_Press         33      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T1_Dpt1_Release       35      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T2_Dpt1_Press         37      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T2_Dpt1_Release       39      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click1_Dpt1               41      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click2_Dpt1               43      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click3_Dpt1               45      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T1_Dpt2_Press             17      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T1_Dpt2_Release           19      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T2_Dpt2_Press             21      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T2_Dpt2_Release           23      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt2_Press              25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt2_Release            27      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt2_Press              29      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt2_Release            31      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T1_Dpt2_Press         33      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T1_Dpt2_Release       35      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T2_Dpt2_Press         37      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T2_Dpt2_Release       39      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click1_Dpt2               41      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click2_Dpt2               43      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click3_Dpt2               45      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T1_Dpt5_Press             17      // uint16_t
-#define BTN_bOutShort_T1_Dpt5_Release           19      // uint16_t
-#define BTN_bOutShort_T2_Dpt5_Press             21      // uint16_t
-#define BTN_bOutShort_T2_Dpt5_Release           23      // uint16_t
-#define BTN_bOutLong_T1_Dpt5_Press              25      // uint16_t
-#define BTN_bOutLong_T1_Dpt5_Release            27      // uint16_t
-#define BTN_bOutLong_T2_Dpt5_Press              29      // uint16_t
-#define BTN_bOutLong_T2_Dpt5_Release            31      // uint16_t
-#define BTN_bOutExtraLong_T1_Dpt5_Press         33      // uint16_t
-#define BTN_bOutExtraLong_T1_Dpt5_Release       35      // uint16_t
-#define BTN_bOutExtraLong_T2_Dpt5_Press         37      // uint16_t
-#define BTN_bOutExtraLong_T2_Dpt5_Release       39      // uint16_t
-#define BTN_bOutMulti_Click1_Dpt5               41      // uint16_t
-#define BTN_bOutMulti_Click2_Dpt5               43      // uint16_t
-#define BTN_bOutMulti_Click3_Dpt5               45      // uint16_t
-#define BTN_bOutShort_T1_Dpt5001_Press          17      // uint16_t
-#define BTN_bOutShort_T1_Dpt5001_Release        19      // uint16_t
-#define BTN_bOutShort_T2_Dpt5001_Press          21      // uint16_t
-#define BTN_bOutShort_T2_Dpt5001_Release        23      // uint16_t
-#define BTN_bOutLong_T1_Dpt5001_Press           25      // uint16_t
-#define BTN_bOutLong_T1_Dpt5001_Release         27      // uint16_t
-#define BTN_bOutLong_T2_Dpt5001_Press           29      // uint16_t
-#define BTN_bOutLong_T2_Dpt5001_Release         31      // uint16_t
-#define BTN_bOutExtraLong_T1_Dpt5001_Press      33      // uint16_t
-#define BTN_bOutExtraLong_T1_Dpt5001_Release    35      // uint16_t
-#define BTN_bOutExtraLong_T2_Dpt5001_Press      37      // uint16_t
-#define BTN_bOutExtraLong_T2_Dpt5001_Release    39      // uint16_t
-#define BTN_bOutMulti_Click1_Dpt5001            41      // uint16_t
-#define BTN_bOutMulti_Click2_Dpt5001            43      // uint16_t
-#define BTN_bOutMulti_Click3_Dpt5001            45      // uint16_t
-#define BTN_bOutShort_T1_Dpt7_Press             17      // uint16_t
-#define BTN_bOutShort_T1_Dpt7_Release           19      // uint16_t
-#define BTN_bOutShort_T2_Dpt7_Press             21      // uint16_t
-#define BTN_bOutShort_T2_Dpt7_Release           23      // uint16_t
-#define BTN_bOutLong_T1_Dpt7_Press              25      // uint16_t
-#define BTN_bOutLong_T1_Dpt7_Release            27      // uint16_t
-#define BTN_bOutLong_T2_Dpt7_Press              29      // uint16_t
-#define BTN_bOutLong_T2_Dpt7_Release            31      // uint16_t
-#define BTN_bOutExtraLong_T1_Dpt7_Press         33      // uint16_t
-#define BTN_bOutExtraLong_T1_Dpt7_Release       35      // uint16_t
-#define BTN_bOutExtraLong_T2_Dpt7_Press         37      // uint16_t
-#define BTN_bOutExtraLong_T2_Dpt7_Release       39      // uint16_t
-#define BTN_bOutMulti_Click1_Dpt7               41      // uint16_t
-#define BTN_bOutMulti_Click2_Dpt7               43      // uint16_t
-#define BTN_bOutMulti_Click3_Dpt7               45      // uint16_t
-#define BTN_bOutShort_T1_Dpt18_Press            17      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T1_Dpt18_Release          19      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T2_Dpt18_Press            21      // 16 Bits, Bit 15-0
-#define BTN_bOutShort_T2_Dpt18_Release          23      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt18_Press             25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt18_Release           27      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt18_Press             29      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt18_Release           31      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T1_Dpt18_Press        33      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T1_Dpt18_Release      35      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T2_Dpt18_Press        37      // 16 Bits, Bit 15-0
-#define BTN_bOutExtraLong_T2_Dpt18_Release      39      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click1_Dpt18              41      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click2_Dpt18              43      // 16 Bits, Bit 15-0
-#define BTN_bOutMulti_Click3_Dpt18              45      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt3007_Press           25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt3007_PressSingle     25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt3007_Release         27      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt3007_Press           29      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt3007_Release         31      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt3008_Press           25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt3008_PressSingle     25      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T1_Dpt3008_Release         27      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt3008_Press           29      // 16 Bits, Bit 15-0
-#define BTN_bOutLong_T2_Dpt3008_Release         31      // 16 Bits, Bit 15-0
-#define BTN_bOut2Short_T1                       47      // 2 Bits, Bit 7-6
-#define     BTN_bOut2Short_T1Mask 0xC0
-#define     BTN_bOut2Short_T1Shift 6
-#define BTN_bOut2Short_T2                       47      // 2 Bits, Bit 5-4
-#define     BTN_bOut2Short_T2Mask 0x30
-#define     BTN_bOut2Short_T2Shift 4
-#define BTN_bOut2Long_T1                        47      // 2 Bits, Bit 3-2
-#define     BTN_bOut2Long_T1Mask 0x0C
-#define     BTN_bOut2Long_T1Shift 2
-#define BTN_bOut2Long_T2                        47      // 2 Bits, Bit 1-0
-#define     BTN_bOut2Long_T2Mask 0x03
-#define     BTN_bOut2Long_T2Shift 0
-#define BTN_bOut2ExtraLong_T1                   48      // 2 Bits, Bit 7-6
-#define     BTN_bOut2ExtraLong_T1Mask 0xC0
-#define     BTN_bOut2ExtraLong_T1Shift 6
-#define BTN_bOut2ExtraLong_T2                   48      // 2 Bits, Bit 5-4
-#define     BTN_bOut2ExtraLong_T2Mask 0x30
-#define     BTN_bOut2ExtraLong_T2Shift 4
-#define BTN_bStatusFallbackTime                 49      // uint16_t
-#define BTN_bStatusThresholdHigh                51      // uint8_t
-#define BTN_bStatusThresholdLow                 52      // uint8_t
-
-// Modus
-#define ParamBTN_bMode                               ((knx.paramByte(BTN_ParamCalcIndex(BTN_bMode)) & BTN_bModeMask) >> BTN_bModeShift)
-// Sperre
-#define ParamBTN_bLock                               ((knx.paramByte(BTN_ParamCalcIndex(BTN_bLock)) & BTN_bLockMask) >> BTN_bLockShift)
-// Ausgabe der Klickanzahl
-#define ParamBTN_bMultiClickCount                    ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bMultiClickCount)) & BTN_bMultiClickCountMask))
-// Dynamische Richtung
-#define ParamBTN_bDynamicStatus                      ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bDynamicStatus)) & BTN_bDynamicStatusMask))
-//    1. Taster
-#define ParamBTN_bInA                                (knx.paramWord(BTN_ParamCalcIndex(BTN_bInA)))
-//    2. Taster
-#define ParamBTN_bInB                                (knx.paramWord(BTN_ParamCalcIndex(BTN_bInB)))
-// Mehrfach-Klick
-#define ParamBTN_bReactionTimeMultiClick             (knx.paramByte(BTN_ParamCalcIndex(BTN_bReactionTimeMultiClick)))
-// Langer Tastendruck
-#define ParamBTN_bReactionTimeLong                   (knx.paramByte(BTN_ParamCalcIndex(BTN_bReactionTimeLong)))
-// Extra langer Tastendruck
-#define ParamBTN_bReactionTimeExtraLong              (knx.paramByte(BTN_ParamCalcIndex(BTN_bReactionTimeExtraLong)))
-// Datentyp
-#define ParamBTN_bOutShort_DPT                       (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_DPT)))
-// Datentyp
-#define ParamBTN_bOutLong_DPT                        (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_DPT)))
-// Datentyp
-#define ParamBTN_bOutExtraLong_DPT                   (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_DPT)))
-// Datentyp
-#define ParamBTN_bOutMulti_DPT                       (knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_DPT)))
-// 1. Klick
-#define ParamBTN_bOutMulti_Click1_Active             ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Active)) & BTN_bOutMulti_Click1_ActiveMask))
-// 2. Klick
-#define ParamBTN_bOutMulti_Click2_Active             ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Active)) & BTN_bOutMulti_Click2_ActiveMask))
-// 3. Klick
-#define ParamBTN_bOutMulti_Click3_Active             ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Active)) & BTN_bOutMulti_Click3_ActiveMask))
-// Wert beim Drücken
-#define ParamBTN_bOutShort_T1_Active_Press           ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T1_Active_Press)) & BTN_bOutShort_T1_Active_PressMask))
-// Wert beim Loslassen
-#define ParamBTN_bOutShort_T1_Active_Release         ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T1_Active_Release)) & BTN_bOutShort_T1_Active_ReleaseMask))
-// Wert beim Drücken
-#define ParamBTN_bOutShort_T2_Active_Press           ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T2_Active_Press)) & BTN_bOutShort_T2_Active_PressMask))
-// Wert beim Loslassen
-#define ParamBTN_bOutShort_T2_Active_Release         ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutShort_T2_Active_Release)) & BTN_bOutShort_T2_Active_ReleaseMask))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T1_Active_Press            ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T1_Active_Press)) & BTN_bOutLong_T1_Active_PressMask))
-// Wert beim Loslassen
-#define ParamBTN_bOutLong_T1_Active_Release          ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T1_Active_Release)) & BTN_bOutLong_T1_Active_ReleaseMask))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T2_Active_Press            ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T2_Active_Press)) & BTN_bOutLong_T2_Active_PressMask))
-// Wert beim Loslassen
-#define ParamBTN_bOutLong_T2_Active_Release          ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutLong_T2_Active_Release)) & BTN_bOutLong_T2_Active_ReleaseMask))
-// Wert beim Drücken
-#define ParamBTN_bOutExtraLong_T1_Active_Press       ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Active_Press)) & BTN_bOutExtraLong_T1_Active_PressMask))
-// Wert beim Loslassen
-#define ParamBTN_bOutExtraLong_T1_Active_Release     ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Active_Release)) & BTN_bOutExtraLong_T1_Active_ReleaseMask))
-// Wert beim Drücken
-#define ParamBTN_bOutExtraLong_T2_Active_Press       ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Active_Press)) & BTN_bOutExtraLong_T2_Active_PressMask))
-// Wert beim Loslassen
-#define ParamBTN_bOutExtraLong_T2_Active_Release     ((bool)(knx.paramByte(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Active_Release)) & BTN_bOutExtraLong_T2_Active_ReleaseMask))
-// 
-#define ParamBTN_bOutShort_T1_Dpt1_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt1_Press)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt1_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt1_Release)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt1_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt1_Press)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt1_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt1_Release)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt1_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt1_Press)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt1_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt1_Release)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt1_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt1_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt1_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt1_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt1_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt1_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt1_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt1_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt1_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt1_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt1_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt1_Release)))
-// 
-#define ParamBTN_bOutMulti_Click1_Dpt1               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt1)))
-// 
-#define ParamBTN_bOutMulti_Click2_Dpt1               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt1)))
-// 
-#define ParamBTN_bOutMulti_Click3_Dpt1               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt1)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt2_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt2_Press)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt2_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt2_Release)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt2_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt2_Press)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt2_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt2_Release)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt2_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt2_Press)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt2_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt2_Release)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt2_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt2_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt2_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt2_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt2_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt2_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt2_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt2_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt2_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt2_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt2_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt2_Release)))
-// 
-#define ParamBTN_bOutMulti_Click1_Dpt2               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt2)))
-// 
-#define ParamBTN_bOutMulti_Click2_Dpt2               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt2)))
-// 
-#define ParamBTN_bOutMulti_Click3_Dpt2               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt2)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt5_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5_Press)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt5_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5_Release)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt5_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5_Press)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt5_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5_Release)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt5_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5_Press)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt5_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5_Release)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt5_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt5_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt5_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt5_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt5_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt5_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5_Release)))
-// 
-#define ParamBTN_bOutMulti_Click1_Dpt5               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt5)))
-// 
-#define ParamBTN_bOutMulti_Click2_Dpt5               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt5)))
-// 
-#define ParamBTN_bOutMulti_Click3_Dpt5               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt5)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt5001_Press          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5001_Press)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt5001_Release        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt5001_Release)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt5001_Press          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5001_Press)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt5001_Release        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt5001_Release)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt5001_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5001_Press)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt5001_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt5001_Release)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt5001_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5001_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt5001_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt5001_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt5001_Press      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5001_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt5001_Release    (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt5001_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt5001_Press      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5001_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt5001_Release    (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt5001_Release)))
-// 
-#define ParamBTN_bOutMulti_Click1_Dpt5001            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt5001)))
-// 
-#define ParamBTN_bOutMulti_Click2_Dpt5001            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt5001)))
-// 
-#define ParamBTN_bOutMulti_Click3_Dpt5001            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt5001)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt7_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt7_Press)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt7_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt7_Release)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt7_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt7_Press)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt7_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt7_Release)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt7_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt7_Press)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt7_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt7_Release)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt7_Press              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt7_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt7_Release            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt7_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt7_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt7_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt7_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt7_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt7_Press         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt7_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt7_Release       (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt7_Release)))
-// 
-#define ParamBTN_bOutMulti_Click1_Dpt7               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt7)))
-// 
-#define ParamBTN_bOutMulti_Click2_Dpt7               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt7)))
-// 
-#define ParamBTN_bOutMulti_Click3_Dpt7               (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt7)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt18_Press            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt18_Press)))
-// 
-#define ParamBTN_bOutShort_T1_Dpt18_Release          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T1_Dpt18_Release)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt18_Press            (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt18_Press)))
-// 
-#define ParamBTN_bOutShort_T2_Dpt18_Release          (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutShort_T2_Dpt18_Release)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt18_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt18_Press)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt18_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt18_Release)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt18_Press             (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt18_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt18_Release           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt18_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt18_Press        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt18_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T1_Dpt18_Release      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T1_Dpt18_Release)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt18_Press        (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt18_Press)))
-// 
-#define ParamBTN_bOutExtraLong_T2_Dpt18_Release      (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutExtraLong_T2_Dpt18_Release)))
-// 
-#define ParamBTN_bOutMulti_Click1_Dpt18              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click1_Dpt18)))
-// 
-#define ParamBTN_bOutMulti_Click2_Dpt18              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click2_Dpt18)))
-// 
-#define ParamBTN_bOutMulti_Click3_Dpt18              (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutMulti_Click3_Dpt18)))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T1_Dpt3007_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3007_Press)))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T1_Dpt3007_PressSingle     (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3007_PressSingle)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt3007_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3007_Release)))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T2_Dpt3007_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3007_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt3007_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3007_Release)))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T1_Dpt3008_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3008_Press)))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T1_Dpt3008_PressSingle     (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3008_PressSingle)))
-// 
-#define ParamBTN_bOutLong_T1_Dpt3008_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T1_Dpt3008_Release)))
-// Wert beim Drücken
-#define ParamBTN_bOutLong_T2_Dpt3008_Press           (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3008_Press)))
-// 
-#define ParamBTN_bOutLong_T2_Dpt3008_Release         (knx.paramWord(BTN_ParamCalcIndex(BTN_bOutLong_T2_Dpt3008_Release)))
-// Zusatzausgang (DPT1 beim Loslassen)
-#define ParamBTN_bOut2Short_T1                       ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Short_T1)) & BTN_bOut2Short_T1Mask) >> BTN_bOut2Short_T1Shift)
-// Zusatzausgang (DPT1 beim Loslassen)
-#define ParamBTN_bOut2Short_T2                       ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Short_T2)) & BTN_bOut2Short_T2Mask) >> BTN_bOut2Short_T2Shift)
-// Zusatzausgang (DPT1 beim Loslassen)
-#define ParamBTN_bOut2Long_T1                        ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Long_T1)) & BTN_bOut2Long_T1Mask) >> BTN_bOut2Long_T1Shift)
-// Zusatzausgang (DPT1 beim Loslassen)
-#define ParamBTN_bOut2Long_T2                        (knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2Long_T2)) & BTN_bOut2Long_T2Mask)
-// Zusatzausgang (DPT1 beim Loslassen)
-#define ParamBTN_bOut2ExtraLong_T1                   ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2ExtraLong_T1)) & BTN_bOut2ExtraLong_T1Mask) >> BTN_bOut2ExtraLong_T1Shift)
-// Zusatzausgang (DPT1 beim Loslassen)
-#define ParamBTN_bOut2ExtraLong_T2                   ((knx.paramByte(BTN_ParamCalcIndex(BTN_bOut2ExtraLong_T2)) & BTN_bOut2ExtraLong_T2Mask) >> BTN_bOut2ExtraLong_T2Shift)
-// Verzögerung
-#define ParamBTN_bStatusFallbackTime                 (knx.paramWord(BTN_ParamCalcIndex(BTN_bStatusFallbackTime)))
-// Oberer Schwellwert
-#define ParamBTN_bStatusThresholdHigh                (knx.paramByte(BTN_ParamCalcIndex(BTN_bStatusThresholdHigh)))
-// Unterer Schwellwert
-#define ParamBTN_bStatusThresholdLow                 (knx.paramByte(BTN_ParamCalcIndex(BTN_bStatusThresholdLow)))
-
-// deprecated
-#define BTN_KoOffset 1150
-
-// Communication objects per channel (multiple occurrence)
-#define BTN_KoBlockOffset 1150
-#define BTN_KoBlockSize 12
-
-#define BTN_KoCalcNumber(index) (index + BTN_KoBlockOffset + _channelIndex * BTN_KoBlockSize)
-#define BTN_KoCalcIndex(number) ((number >= BTN_KoCalcNumber(0) && number < BTN_KoCalcNumber(BTN_KoBlockSize)) ? (number - BTN_KoBlockOffset) % BTN_KoBlockSize : -1)
-#define BTN_KoCalcChannel(number) ((number >= BTN_KoBlockOffset && number < BTN_KoBlockOffset + BTN_ChannelCount * BTN_KoBlockSize) ? (number - BTN_KoBlockOffset) / BTN_KoBlockSize : -1)
-
-#define BTN_KoLock 0
-#define BTN_KoIn1 1
-#define BTN_KoIn2 2
-#define BTN_KoOut1Status 3
-#define BTN_KoOut2Status 4
-#define BTN_KoOut3Status 5
-#define BTN_KoOut1 6
-#define BTN_KoOut2 7
-#define BTN_KoOut3 8
-#define BTN_KoOut4 9
-#define BTN_KoOut5 10
-#define BTN_KoOut6 11
-
-// 
-#define KoBTN_Lock                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoLock)))
-// 
-#define KoBTN_In1                                 (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoIn1)))
-// 
-#define KoBTN_In2                                 (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoIn2)))
-// 
-#define KoBTN_Out1Status                          (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut1Status)))
-// 
-#define KoBTN_Out2Status                          (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut2Status)))
-// 
-#define KoBTN_Out3Status                          (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut3Status)))
-// 
-#define KoBTN_Out1                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut1)))
-// 
-#define KoBTN_Out2                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut2)))
-// 
-#define KoBTN_Out3                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut3)))
-// 
-#define KoBTN_Out4                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut4)))
-// 
-#define KoBTN_Out5                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut5)))
-// 
-#define KoBTN_Out6                                (knx.getGroupObject(BTN_KoCalcNumber(BTN_KoOut6)))
-
 
 
 // Header generation for Module 'BASE_KommentarModule'
@@ -4056,7 +4107,7 @@
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 18501
+#define BASE_KommentarModuleParamOffset 18577
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 

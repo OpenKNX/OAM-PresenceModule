@@ -52,6 +52,15 @@
     <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="%PM_VerifyVersion%" />
   </op:define>
 
+  <op:define prefix="BTN"
+    share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
+    template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
+    NumChannels="30"
+    KoOffset="1150"
+    ModuleType="50">
+    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="%BTN_VerifyVersion%" />
+  </op:define>
+
   <op:define prefix="LOG" 
              share="../lib/OFM-LogicModule/src/Logikmodul.share.xml" 
              template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" 
@@ -61,13 +70,5 @@
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />
   </op:define>
 
-  <op:define prefix="BTN"
-    share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
-    template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="30"
-    KoOffset="1150"
-    ModuleType="50">
-    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="%BTN_VerifyVersion%" />
-  </op:define>
   <generate />
 </KNX>
