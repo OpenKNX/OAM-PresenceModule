@@ -17,15 +17,23 @@
     ApplicationName="Presence-Logic"
     OrderNumber="OpenKnxPresenceBig"
   />
+
+  <op:define prefix="BUTTONLINK"
+             share="PMmodul-VirtualButton.link.xml"
+             noConfigTransfer="true"
+             ModuleType="99" >
+  </op:define>
+
+
   <op:define prefix="BASE" ModuleType="1"
-             share="../lib/OGM-Common/src/Common.share.xml">
+    share="../lib/OGM-Common/src/Common.share.xml">
     <op:verify File="../lib/OGM-Common/library.json" ModuleVersion="%BASE_VerifyVersion%" />
   </op:define>
 
   <op:define prefix="UCT"
     share="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml"
     noConfigTransfer="true"
-    ModuleType="99">
+    ModuleType="98">
     <op:verify File="../../OFM-ConfigTransfer/library.json" ModuleVersion="%UCT_VerifyVersion%" />
   </op:define>
 
@@ -45,6 +53,15 @@
              KoOffset="850" 
              ModuleType="1" >
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />
+  </op:define>
+
+  <op:define prefix="BTN"
+    share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
+    template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
+    NumChannels="30"
+    KoOffset="1150"
+    ModuleType="50">
+    <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="%BTN_VerifyVersion%" />
   </op:define>
   <generate />
 </KNX>

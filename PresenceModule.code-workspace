@@ -10,6 +10,9 @@
 			"path": "../OFM-LogicModule"
 		},
 		{
+			"path": "../OFM-VirtualButton"
+		},
+		{
 			"path": "../OGM-SensorDevices"
 		},
 		{
