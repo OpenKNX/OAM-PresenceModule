@@ -10,14 +10,14 @@
                                              
 #define MAIN_OpenKnxId 0xA0
 #define MAIN_ApplicationNumber 3
-#define MAIN_ApplicationVersion 49
+#define MAIN_ApplicationVersion 50
 #define MAIN_ParameterSize 18577
 #define MAIN_MaxKoNumber 1509
 #define MAIN_OrderNumber "OpenKnxPresenceIP"
 #define BASE_ModuleVersion 18
 #define NET_ModuleVersion 3
 #define UCT_ModuleVersion 1
-#define PM_ModuleVersion 49
+#define PM_ModuleVersion 50
 #define BTN_ModuleVersion 5
 #define LOG_ModuleVersion 51
 // Parameter with single occurrence
